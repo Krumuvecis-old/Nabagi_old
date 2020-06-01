@@ -1,0 +1,58 @@
+versija X (planned)
+	switch coordinates (and maybe angles and such) to integers/float for faster computing
+	divide map into cells for bigger map support
+	map wrapping around edges
+	add savefiles for settings presets
+	add grid for map cells, add changing terrain and trees
+	improve user interface
+	add buildings
+	add more resources and crafting
+	improve trading
+	improve AI and add pathfinding
+	implement ranks
+	add territories for teams
+	add savefiles for singleplayer instances
+	add sounds (upon death and actions, volume depending on distance) and background music (like: Windows96-Transient Feeling)
+	add sprites for graphics
+	add natural disasters and global terrain
+	web support
+		webpage with singleplayer in free domain
+		server/client for multiplayer
+		buy domain
+		advertising?
+		patreon support? microtransactions? membership?
+	smartphone support (downloadable app?)
+	implement sleeping or similar while offline
+	convert to 3D
+	add height
+
+versija 0.11 (planned)
+	singleplayer character control
+	add minimap (bigMap?) to playerView window
+
+versija 0.10 (stable, unfinished) - may/june 2020
+	added key/mouse listener
+	multithreading (gotta finish this one)
+		separate windows for setup and player view
+		option to set pause
+		framerate calculator added to each thread (planned)
+		fix playerview window layout and graphics (merogs & focus (shifting view depending on location)) (planned)
+		add "merogs" to playerView window
+	minimap in setup/diagnostics window
+
+versija 0.9 (stable) - may 2020
+	massive structural overhaul
+		methods separated in classes
+		classes separated in packets
+		doesn't crash anymore!
+	many bugfixes (most fixed by structural overhaul)
+	many graphics improvements
+		team colors generated in such a way that they don't seem that similar (by hue wheel)
+		player and loot visual improvements (black contour, adjustable color saturation and brightness)
+		adjusted background color for "laukums" (darker, less saturation and brightness)
+		improved maximum framerate calculation
+	framerate calculation added
+
+versija 0.8 (buggy) - may 2020
+	crashes after 5-15 minutes due to many bugs
+	basic design and structure
