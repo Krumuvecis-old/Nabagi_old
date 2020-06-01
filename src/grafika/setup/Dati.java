@@ -1,0 +1,115 @@
+package grafika.setup;
+
+import java.awt.Color;
+import java.util.ArrayList;
+
+class Dati {
+	
+	protected String windowTitle=konstantes.Parametri.ekranaNosaukums+", SetupWindow";
+	protected Color fonaKrasa=Color.black, nosaukumaKrasa=Color.gray;
+	protected int ekranaPlatums=1000, ekranaAugstums=700;
+	
+	protected int nosaukumsX=5, nosaukumsY=15;
+	
+	protected ArrayList<Button> buttonList;
+	
+	// --------------------
+	//zemâk par input testa paneli
+	
+	protected boolean inputPanelDraw=true;
+	protected Color inputPanelColor=Color.red;
+	protected int inputPanelX=5, inputPanelY=30;
+	
+	// --------------------
+	//zemâk par galvenâ informâcijas tablo Parametriem (tablo1)
+	
+	protected boolean tablo1Draw=true; //tablo zîmçðana vispâr
+	protected Color tablo1krasa=Color.white;
+	protected int tablo1x0=120, tablo1y0=30;
+	protected int tablo1tekstaPlatums=15;
+	protected boolean drawFPS=false;
+	
+	
+	// --------------------
+	//zemâk par centrâlâ cilvçku tablo Parametriem
+	
+	protected boolean tablo2Draw=false;
+	
+	protected int tablo2x0=280, tablo2y0=tablo1y0, tablo2rindasPlatums=14;
+	
+	protected int tablo2platums1=200; //platums1
+	protected int tablo2platums2=130; //platums2
+	protected int tablo2platumsN=80; //platumsN
+	
+	protected Color tablo2krasaDefault, tablo2krasaCritical; //paðas krâsas nosaka initialize() ciklâ
+	
+	
+	// --------------------
+	//zemâk par atïauto krâsu paneli
+	
+	protected boolean colorPanelDraw=true;
+	protected Color colorPanelColor=Color.lightGray; //krâsu apïa kontûras krâsa
+	protected int colorPanelX0=10, colorPanelY0=380, colorPanelRadiuss=50;
+	
+	
+	// --------------------
+	//zemâk par atïauto krâsu paneli
+	
+	protected boolean miniMapDraw=true, miniMapDrawInfo=true;
+	protected int miniMapX=tablo2x0, miniMapY=tablo2y0-15, miniMapPlatums=ekranaPlatums-miniMapX-50, miniMapAugstums=ekranaAugstums-miniMapY-50;
+	
+	
+	protected void initialize() {
+		
+		// --------------------
+		//par pogâm
+		
+		buttonList = new ArrayList<Button>();
+		
+		int pogasX0=5, pogasY0=20, pogasPlatums=100, pogasAugstums=30, pogasSprauga=5, w=0;
+		
+		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Pauze",0); w++;
+		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"PlayerView (0)",10); w++;
+		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Tablo1",0); w++;
+		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Tablo2",0); w++;
+		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"MiniMap",0); w++;
+		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"InputPanel",3); w++;
+		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"ColorPanel",2); w++;
+		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"GenRate +0.001",2); w++;
+		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"GenRate -0.001",2); w++;
+		
+		inputPanelY+=(pogasAugstums+pogasSprauga)*w;
+		colorPanelY0=inputPanelY+120;
+		
+		
+		// --------------------
+		//par cilvçku tablo (tablo2) zîmçðanas krâsâm
+		
+		boolean tablo2Transparent=false; //caurspîdîgs teksts
+		int tablo2alfa=255;
+		if(tablo2Transparent) tablo2alfa=100; //max caurspîdîgums
+		
+		tablo2krasaDefault=new Color(255,255,0,tablo2alfa); //dzeltens
+		tablo2krasaCritical=new Color(255,0,0,tablo2alfa); //sarkans
+		
+		
+	}
+	
+	private void addButton(int x, int y, int wx, int wy, String title, int correction) {
+		
+		int i = buttonList.size();
+		buttonList.add(new Button());
+		buttonList.get(i).x=x;
+		buttonList.get(i).y=y;
+		buttonList.get(i).wx=wx;
+		buttonList.get(i).wy=wy;
+		buttonList.get(i).title=title;
+		buttonList.get(i).correction=correction;
+		buttonList.get(i).active=false;
+		buttonList.get(i).pressed=false;
+		buttonList.get(i).result=false;
+		
+	}
+	
+	
+}
