@@ -50,7 +50,7 @@ public class Main {
 	}
 	
 	private static void initialize(){
-		Parametri.initialize();
+		initializeKonstantes();
 		
 		cilvekiList = new ArrayList<Cilveks>();
 		komandasList = new ArrayList<Komanda>();
@@ -61,5 +61,10 @@ public class Main {
 		grafika.main.SetupThread setupThread = new grafika.main.SetupThread(); //palaiþ grafisko daïu
 		setupThread.start();
 		
+	}
+
+	private static void initializeKonstantes() {
+		KonstantesUniversal.initialize();
+		Parametri.initialize();
 	}
 }

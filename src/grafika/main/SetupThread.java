@@ -3,7 +3,6 @@ package grafika.main;
 import calculations.konstantes.Parametri;
 
 public class SetupThread implements Runnable{
-	
 	private static Thread thread;
 	private static String threadName;
 	public boolean running, minimized, windowActive;

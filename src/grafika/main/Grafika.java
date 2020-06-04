@@ -18,7 +18,6 @@ import calculations.CalculationTimeCalculator;
 
 @SuppressWarnings("serial")
 class Grafika extends JPanel {
-	
 	protected JFrame ekrans;
 	private Grafika grafika;
 	
