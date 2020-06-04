@@ -157,26 +157,30 @@ class CilvekuDarbibas {
 				ommax=Formulas.novirzeRandom(cilveks.ommax, Cilveku.dommaxDzimstot);
 		double hpmax=Cilveku.hpmax, hp=hpmax;
 		double paika=Cilveku.paikaMax;
-		double R2=Formulas.novirzeRandom(cilveks.R2, Parametri.dRDzimstot),
-				R1=Formulas.novirzeRandom(cilveks.R1, Parametri.dRDzimstot);
-		double brunas = Formulas.novirzeRandom(cilveks.brunas, Parametri.dBrunasDzimstot);;
-		double stiprums = Formulas.novirzeRandom(cilveks.stiprums, Parametri.dStiprumsDzimstot);
-		double gataviba=Parametri.maxGataviba, drosme=cilveks.drosme;
+		double R2=Formulas.novirzeRandom(cilveks.R2, Cilveku.dRDzimstot),
+				R1=Formulas.novirzeRandom(cilveks.R1, Cilveku.dRDzimstot);
+		double brunas = Formulas.novirzeRandom(cilveks.brunas, Cilveku.dBrunasDzimstot);;
+		double stiprums = Formulas.novirzeRandom(cilveks.stiprums, Cilveku.dStiprumsDzimstot);
+		double gataviba=Cilveku.maxGataviba, drosme=cilveks.drosme;
 		
-		for(int i=0;i<cilveks.inventory.size();i++) {
+		for(int i=0; i<cilveks.inventory.size(); i++) {
 			if (cilveks.inventory.get(i).nosaukums=="Zelts") {
-				cilveks.inventory.get(i).daudzums-=(Parametri.cenaCilvekam+Parametri.mantojumsCilvekam)/cilveks.inventory.get(i).zelts;
+				cilveks.inventory.get(i).daudzums-=
+						(Cilveku.cenaCilvekam + Cilveku.mantojumsCilvekamZelts) / cilveks.inventory.get(i).zelts;
 			}
 			if (cilveks.inventory.get(i).nosaukums=="Paika") {
-				cilveks.inventory.get(i).daudzums-=Parametri.mantojumsCilvekamPaika/cilveks.inventory.get(i).paika;
+				cilveks.inventory.get(i).daudzums-=
+						Cilveku.mantojumsCilvekamPaika / cilveks.inventory.get(i).paika;
 			}
 		}
 		
 		
 		String komanda;
 		int[] rangs= new int[2];
-		if ((r.nextDouble()<Parametri.dzimstotDefectionChance && cilveks.rangs[1]==0 )|| cilveks.komanda=="Anarhija") { //izveido savu komandu
-			KomanduApskats.jaunaKomanda(cilveks.vards);//nosauks tçva vârdâ, tçvs bûs karalis
+		if ((r.nextDouble()<Cilveku.dzimstotDefectionChance && cilveks.rangs[1]==0 ) ||
+				cilveks.komanda=="Anarhija") { //izveido savu komandu
+
+			KomanduApskats.jaunaKomanda(cilveks.vards);//nosauc tçva vârdâ, tçvs bûs karalis
 			komanda=Main.komandasList.get(Main.komandasList.size()-1).nosaukums;
 			System.out.println("izveidota komanda "+komanda);
 			cilveks.komanda = komanda;
@@ -250,7 +254,7 @@ class CilvekuDarbibas {
 		if(cilveks.drosme<0) cilveks.drosme=0;
 		
 		double dGataviba=1;
-		if(cilveks.gataviba<=Parametri.maxGataviba-dGataviba) cilveks.gataviba+=dGataviba;
+		if(cilveks.gataviba<=Cilveku.maxGataviba-dGataviba) cilveks.gataviba+=dGataviba;
 	}
 	
 	protected static void komanduMaina(int numurs, double paikaMaina, double zeltsMaina, double anarchyChance, double orderChance) {
@@ -298,8 +302,8 @@ class CilvekuDarbibas {
 		Main.cilvekiList.get(i).hp=hp;
 		Main.cilvekiList.get(i).hpmax=hpmax;
 		Main.cilvekiList.get(i).paika=paika;
-		Main.cilvekiList.get(i).paikaMax=Parametri.paikaMax;
-		Main.cilvekiList.get(i).paikaMin=Parametri.paikaMin;
+		Main.cilvekiList.get(i).paikaMax=Cilveku.paikaMax;
+		Main.cilvekiList.get(i).paikaMin=Cilveku.paikaMin;
 		
 		Main.cilvekiList.get(i).R1=R1;					//redzesloks
 		Main.cilvekiList.get(i).R2=R2;
@@ -309,7 +313,7 @@ class CilvekuDarbibas {
 		mantojumsZelts.x=Main.cilvekiList.get(i).xyz.x;
 		mantojumsZelts.y=Main.cilvekiList.get(i).xyz.y;
 		mantojumsZelts.nosaukums="Zelts";
-		mantojumsZelts.daudzums=Parametri.mantojumsCilvekam;
+		mantojumsZelts.daudzums=Cilveku.mantojumsCilvekamZelts;
 		mantojumsZelts.zelts=1;
 		mantojumsZelts.paika=0;
 		mantojumsZelts.masa=1;
@@ -322,7 +326,7 @@ class CilvekuDarbibas {
 		mantojumsPaika.x=Main.cilvekiList.get(i).xyz.x;
 		mantojumsPaika.y=Main.cilvekiList.get(i).xyz.y;
 		mantojumsPaika.nosaukums="Paika";
-		mantojumsPaika.daudzums=Parametri.mantojumsCilvekamPaika;
+		mantojumsPaika.daudzums=Cilveku.mantojumsCilvekamPaika;
 		mantojumsPaika.zelts=0;
 		mantojumsPaika.paika=1;
 		mantojumsPaika.masa=1;

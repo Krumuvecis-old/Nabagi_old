@@ -4,11 +4,13 @@ import java.awt.Color;
 import java.util.Arrays;
 import java.util.Random;
 
+import calculations.konstantes.Cilveku;
 import calculations.konstantes.Formulas;
-import calculations.konstantes.Parametri;
 import calculations.Main;
 import calculations.cilveki.Cilveks;
 import calculations.cilveki.CilvekuApskats;
+import calculations.konstantes.Grafiskie;
+import calculations.konstantes.Komandu;
 
 
 public class KomanduApskats {
@@ -110,7 +112,7 @@ public class KomanduApskats {
 		int karalis=-1;
 		Random r=new Random();
 		
-		if(r.nextDouble()<Parametri.komandaIzjuktChance) { //iespçja, ka mirstot karalim, izjuks komanda
+		if(r.nextDouble()< Komandu.komandaIzjuktChance) { //iespçja, ka mirstot karalim, izjuks komanda
 			
 			for (int i=0;i<Main.cilvekiList.size();i++) { //visus komandasbiedrus pârliek 0.komandâ
 				if(Main.cilvekiList.get(i).komanda==komanda.nosaukums) {
@@ -142,7 +144,7 @@ public class KomanduApskats {
 		
 		Komanda jaunaKomanda=new Komanda();
 		
-		jaunaKomanda.nosaukums=new String(Parametri.komandaNosaukumsDefault+Komanda.maxKomanda);
+		jaunaKomanda.nosaukums=new String(Komandu.komandaNosaukumsDefault+Komanda.maxKomanda);
 		jaunaKomanda.galvenais=galvenais;
 		
 		jaunaKomanda.krasa=assignColor();
@@ -156,9 +158,9 @@ public class KomanduApskats {
 		//pârbauda kuras krâsas komandâm ir nepieejamas
 		
 		double[] bannedList; //komandâm pavisam aizliegtâs krâsas
-		if (Parametri.komandasBannedColors) {
+		if (Grafiskie.komandasBannedColors) {
 			Random rand=new Random();
-			bannedList = Parametri.komandasBannedColorList;
+			bannedList = Grafiskie.komandasBannedColorList;
 			bannedList[0]=rand.nextDouble(); //lai èakarçtu visu sadalîjumu
 			bannedList[1]=rand.nextDouble(); //lai èakarçtu visu sadalîjumu
 			bannedList[2]=rand.nextDouble(); //lai èakarçtu visu sadalîjumu

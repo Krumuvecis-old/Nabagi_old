@@ -2,16 +2,18 @@ package calculations.lietas;
 
 import java.util.Random;
 
+import calculations.KonstantesUniversal;
 import calculations.Main;
-import calculations.konstantes.Parametri;
+import calculations.konstantes.Fizikas;
+import calculations.konstantes.Lietu;
 
 public class LietuApskats {
 	
 	public static void main() {
 		Random r=new Random();
 		
-		if (r.nextDouble()<Parametri.goldGenRate) lootGenerator("Zelts", Parametri.goldGenMin, Parametri.goldGenMax); //random zelta ìenerators
-		if (r.nextDouble()<Parametri.paikaGenRate) lootGenerator("Paika", Parametri.paikaGenMin, Parametri.paikaGenMax); //random paikas ìenerators
+		if (r.nextDouble() < Lietu.goldGenRate) lootGenerator("Zelts", Lietu.goldGenMin, Lietu.goldGenMax); //random zelta ìenerators
+		if (r.nextDouble() < Lietu.paikaGenRate) lootGenerator("Paika", Lietu.paikaGenMin, Lietu.paikaGenMax); //random paikas ìenerators
 		
 		//te arî vajadzçtu uztaisît lietu apskates ciklu, piemçram lai izdzçstu degradçtâs lietas
 		
@@ -20,14 +22,14 @@ public class LietuApskats {
 	private static void lootGenerator(String nosaukums, double minimums, double maksimums) {
 		Random r=new Random();
 		
-		int mala = Parametri.mala; //laukuma izmçriem
-		int platums = Parametri.platums;
-		int augstums = Parametri.augstums;
+		int mala = KonstantesUniversal.mala; //laukuma izmçriem
+		int platums = KonstantesUniversal.platums;
+		int augstums = KonstantesUniversal.augstums;
 		
 		int i=Main.lietas.size();
 		Main.lietas.add(new Lieta());
 		
-		int resnums;
+		double resnums;
 		
 		double zelts;
 		double paika;
@@ -38,7 +40,7 @@ public class LietuApskats {
 		
 		
 		if(nosaukums=="Zelts") {
-			resnums=Parametri.zeltaResnums;
+			resnums=Fizikas.zeltaResnums;
 			
 			zelts=1;
 			paika=0;
@@ -48,7 +50,7 @@ public class LietuApskats {
 			condition=1;
 			
 		} else if (nosaukums=="Paika") {
-			resnums=Parametri.paikasResnums;
+			resnums=Fizikas.paikasResnums;
 			
 			zelts=0;
 			paika=1;
@@ -58,7 +60,7 @@ public class LietuApskats {
 			condition=1;
 			
 		} else { //pavisam neklasificçtas lietas
-			resnums=Parametri.lietasResnums;
+			resnums= Fizikas.lietasResnums;
 			
 			zelts=0;
 			paika=0;

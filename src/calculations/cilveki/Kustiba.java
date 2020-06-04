@@ -1,7 +1,8 @@
 package calculations.cilveki;
 
+import calculations.KonstantesUniversal;
 import calculations.Main;
-import calculations.konstantes.Parametri;
+import calculations.konstantes.Fizikas;
 
 class Kustiba {
 	
@@ -22,8 +23,8 @@ class Kustiba {
 	
 	private static void maluParbaude() { //situâcijas pie laukuma malâm
 		
-		int augstums=Parametri.augstums, platums=Parametri.platums, mala=Parametri.mala;
-		double resnums=Parametri.resnumaKoefic*cilveks.hpmax;
+		int augstums= KonstantesUniversal.augstums, platums=KonstantesUniversal.platums, mala=KonstantesUniversal.mala;
+		double resnums= Fizikas.resnumaKoefic*cilveks.hpmax;
 		
 		if(cilveks.xyz.x<=mala+resnums/2) { //kreisâ mala
 			cilveks.xyz.x=mala+resnums/2;
