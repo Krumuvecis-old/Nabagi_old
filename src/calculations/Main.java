@@ -1,7 +1,7 @@
 package calculations;
 
 import calculations.CalculationTimeCalculator;
-import calculations.konstantes.Parametri;
+import calculations.konstantes.*;
 import calculations.lietas.Lieta;
 import calculations.lietas.LietuApskats;
 import calculations.komandas.Komanda;
@@ -64,7 +64,19 @@ public class Main {
 	}
 
 	private static void initializeKonstantes() {
+
 		KonstantesUniversal.initialize();
-		Parametri.initialize();
+
+		Lietu.initialize();
+
+		Komandu.initialize();
+		Cilveku.initialize();
+
+		Fizikas.initialize();
+		Grafiskie.initialize();
+
+
+
+
 	}
 }

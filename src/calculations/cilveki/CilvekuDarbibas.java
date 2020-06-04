@@ -2,7 +2,7 @@ package calculations.cilveki;
 
 import java.util.Random;
 
-import calculations.konstantes.Parametri;
+import calculations.konstantes.Cilveku;
 import calculations.konstantes.Formulas;
 import calculations.komandas.KomanduApskats;
 import calculations.lietas.Lieta;
@@ -23,10 +23,10 @@ class CilvekuDarbibas {
 			
 			if ( paikaSum>0 && (paikaJ>=0 && cilveks.inventory.size()>0) ) { //otro daïu ifâ pec OR var izòemt
 				if(paikaJ>=cilveks.inventory.size()||paikaJ<0) System.out.println(cilveks.vards+"Error5! "+paikaJ+"/"+cilveks.inventory.size());
-				double apests=Double.valueOf(Math.min(Parametri.esanasDaudzums, cilveks.inventory.get(paikaJ).daudzums));
+				double apests=Double.valueOf(Math.min(Cilveku.esanasDaudzums, cilveks.inventory.get(paikaJ).daudzums));
 				cilveks.inventory.get(paikaJ).daudzums-=Double.valueOf(apests);
 				
-				cilveks.paika+=Double.valueOf(Math.min((apests/Parametri.esanasDaudzums)*cilveks.paikaMax, cilveks.paikaMax-cilveks.paika));
+				cilveks.paika+=Double.valueOf(Math.min((apests/Cilveku.esanasDaudzums)*cilveks.paikaMax, cilveks.paikaMax-cilveks.paika));
 				
 			} else { navKoEst = true; }
 		}
@@ -38,7 +38,7 @@ class CilvekuDarbibas {
 		
 		Cilveks cilveks=Main.cilvekiList.get(numurs);
 		
-		double defaultCena=Parametri.paikaPriceDefault; //cenas apskats no atmiòas vçl nav ieviests
+		double defaultCena=Cilveku.paikaPriceDefault; //cenas apskats no atmiòas vçl nav ieviests
 		//double apjomsMin=0.01;
 		
 		
@@ -51,11 +51,11 @@ class CilvekuDarbibas {
 			if(nosaukums=="Zelts") continue; //zeltu nevar pârdot un nevar arî nopirkt
 			
 			if(nosaukums=="Paika") {
-				sellLimit=Parametri.sellLimitPaika;
-				buyLimit=Parametri.buyLimitPaika;
+				sellLimit=Cilveku.sellLimitPaika;
+				buyLimit=Cilveku.buyLimitPaika;
 			} else { //neklasificçtiem objektiem
-				sellLimit=Parametri.sellLimitDefault;
-				buyLimit=Parametri.buyLimitDefault;
+				sellLimit=Cilveku.sellLimitDefault;
+				buyLimit=Cilveku.buyLimitDefault;
 			}
 			
 			//System.out.println("buy/sell-Limit: "+buyLimit+"/"+sellLimit+" "+nosaukums);
@@ -116,9 +116,9 @@ class CilvekuDarbibas {
 	protected static void healingAndHunger(int numurs) {
 		Cilveks cilveks=Main.cilvekiList.get(numurs);
 		
-		double dHpRegen=Parametri.healingRateDefault,
-				dHpHungry=Parametri.healthReductionRate,
-				paikaD=Parametri.paikaReductionDefault;
+		double dHpRegen=Cilveku.healingRateDefault,
+				dHpHungry=Cilveku.healthReductionRate,
+				paikaD=Cilveku.paikaReductionDefault;
 		
 		if (cilveks.paika>=cilveks.paikaMin) { //ja pietiek pârtika, veseïojas
 			if(cilveks.hp<cilveks.hpmax) cilveks.hp+=dHpRegen;
@@ -149,14 +149,14 @@ class CilvekuDarbibas {
 		
 		//System.out.println(Main.cilvekiList.indexOf(this)+" vairosanas cikls");
 		Cilveks.maxCilveks++;
-		String vards=Parametri.vardsDefault+Cilveks.maxCilveks;
+		String vards=Cilveku.vardsDefault+Cilveks.maxCilveks;
 		double x=cilveks.xyz.x, y=cilveks.xyz.y; //x un y
 		double v=1, fi=360*r.nextDouble();
 		
-		double vmax=Formulas.novirzeRandom(cilveks.vmax, Parametri.dvMaxDzimstot),
-				ommax=Formulas.novirzeRandom(cilveks.ommax, Parametri.dommaxDzimstot);
-		double hpmax=Parametri.hpmax, hp=hpmax;
-		double paika=Parametri.paikaMax;
+		double vmax=Formulas.novirzeRandom(cilveks.vmax, Cilveku.dvMaxDzimstot),
+				ommax=Formulas.novirzeRandom(cilveks.ommax, Cilveku.dommaxDzimstot);
+		double hpmax=Cilveku.hpmax, hp=hpmax;
+		double paika=Cilveku.paikaMax;
 		double R2=Formulas.novirzeRandom(cilveks.R2, Parametri.dRDzimstot),
 				R1=Formulas.novirzeRandom(cilveks.R1, Parametri.dRDzimstot);
 		double brunas = Formulas.novirzeRandom(cilveks.brunas, Parametri.dBrunasDzimstot);;

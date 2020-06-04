@@ -3,7 +3,9 @@ package calculations.cilveki;
 import java.awt.Color;
 import java.util.Random;
 
-import calculations.konstantes.Parametri;
+import calculations.KonstantesUniversal;
+import calculations.konstantes.Cilveku;
+import calculations.konstantes.Fizikas;
 import calculations.konstantes.Formulas;
 import calculations.Main;
 import calculations.komandas.Komanda;
@@ -22,7 +24,8 @@ public class CilvekuApskats {
 	
 	static double resnumaKoefic; //HpMax attiecîbai pret resnumu
 	static int maxGataviba;
-	static int RMax, R1koefic; //maksimâlais redzesloks un minimâlâ daïas koefic
+	static double RMax;
+	static double R2koefic; //maksimâlais redzesloks un minimâlâ daïas koefic
 	static double dRDzimstot; //redzesloka procentuâla izmaiòa vairojoties
 	static double dvMaxDzimstot, dommaxDzimstot; //procentuâlâs izmaiòas dzimstot
 	
@@ -31,11 +34,13 @@ public class CilvekuApskats {
 	static boolean navKoEstTemp; //funkcijai 
 	
 	
-	static int paikaNepiec; //daudzums lîdz  kuram mçìinâs savâkt  paiku,  tad  skraidît apkârt
+	static double paikaNepiec; //daudzums lîdz  kuram mçìinâs savâkt  paiku,  tad  skraidît apkârt
 	
 	static double brunasMax, brunasMin, dBrunasDzimstot, stiprumsMax, stiprumsMin, dStiprumsDzimstot;
 	static String vardsDefault;
-	static int cenaCilvekam, mantojumsCilvekam, mantojumsCilvekamPaika;
+	static double cenaCilvekam;
+	static double mantojumsCilvekamZelts;
+	static double mantojumsCilvekamPaika;
 	
 	
 	static double dCenaProc;
@@ -98,7 +103,7 @@ public class CilvekuApskats {
 		int pardodNr=-1, orderisPardodNr=-1;
 		String preceTirgo=" ";
 		double apjomsTirgo=0;
-		double cenaTirgo=Parametri.paikaPriceDefault;// temporary default  value
+		double cenaTirgo= Cilveku.paikaPriceDefault;// temporary default  value
 		double[] jTirgoXY=new double[2];
 		
 		for(int j=0;j<Main.cilvekiList.size();j++) {
@@ -333,7 +338,7 @@ public class CilvekuApskats {
 		if (paikaNr>=0) paikaSum=cilveks.inventory.get(paikaNr).daudzums;
 		
 		
-		if (zeltsSum>=(cenaCilvekam+mantojumsCilvekam) &&
+		if (zeltsSum>=(cenaCilvekam+mantojumsCilvekamZelts) &&
 				paikaSum>=mantojumsCilvekamPaika*2 &&
 				savejoSkaitsR1<=2 && savejoSkaitsR2<=5) { //vairoðanâs, bet privâti
 			
@@ -556,9 +561,9 @@ public class CilvekuApskats {
 			
 			double resnumsJ; //nosaka lietas resnumu
 			
-			if (Main.lietas.get(j).nosaukums=="Zelts") { resnumsJ = Parametri.zeltaResnums;
-			} else if (Main.lietas.get(j).nosaukums=="Paika") { resnumsJ = Parametri.paikasResnums;
-			} else resnumsJ = Parametri.lietasResnums; // default neklasificçtai lietai
+			if (Main.lietas.get(j).nosaukums=="Zelts") { resnumsJ = Fizikas.zeltaResnums;
+			} else if (Main.lietas.get(j).nosaukums=="Paika") { resnumsJ = Fizikas.paikasResnums;
+			} else resnumsJ = Fizikas.lietasResnums; // default neklasificçtai lietai
 			
 			if(distance<=(resnums+resnumsJ)/2) { //paòem jebkâdu lietu, ja  saskaras
 				cilveks.inventory.add(Main.lietas.get(j));
@@ -639,59 +644,58 @@ public class CilvekuApskats {
 	
 	private static void initialize() {
 		
-		mala = Parametri.mala; //laukuma izmçriem
-		platums=Parametri.platums;
-		augstums=Parametri.augstums;
-		System.out.println("platums: "+platums+" augstums: "+augstums);
+		mala = KonstantesUniversal.mala; //laukuma izmçriem
+		platums = KonstantesUniversal.platums;
+		augstums = KonstantesUniversal.augstums;
 		
-		vmax=Parametri.vmax;
-		ommax=Parametri.ommax;
-		resnumaKoefic=Parametri.resnumaKoefic; //HpMax attiecîbai pret resnumu
-		maxGataviba=Parametri.maxGataviba;
-		RMax=Parametri.RMax; //maksimâlais redzesloks
-		R1koefic=Parametri.R1koefic; //minimâlâ redzesloka daïas koefic
-		dRDzimstot=Parametri.dRDzimstot; //redzesloka procentuâla izmaiòa vairojoties
-		dvMaxDzimstot=Parametri.dvMaxDzimstot; //procentuâlâs izmaiòas dzimstot
-		dommaxDzimstot=Parametri.dommaxDzimstot; //procentuâlâs izmaiòas dzimstot
+		vmax=Cilveku.vmax;
+		ommax=Cilveku.ommax;
+		resnumaKoefic=Fizikas.resnumaKoefic; //HpMax attiecîbai pret resnumu
+		maxGataviba=Cilveku.maxGataviba;
+		RMax=Cilveku.RMax; //maksimâlais redzesloks
+		R2koefic=Cilveku.R2koefic; //minimâlâ redzesloka daïas koefic
+		dRDzimstot=Cilveku.dRDzimstot; //redzesloka procentuâla izmaiòa vairojoties
+		dvMaxDzimstot=Cilveku.dvMaxDzimstot; //procentuâlâs izmaiòas dzimstot
+		dommaxDzimstot=Cilveku.dommaxDzimstot; //procentuâlâs izmaiòas dzimstot
 		
-		paikaMax=Parametri.paikaMax;
-		paikaMin=Parametri.paikaMin;
-		esanasDaudzums=Parametri.esanasDaudzums; //par vienu pilnu paikaMax
+		paikaMax=Cilveku.paikaMax;
+		paikaMin=Cilveku.paikaMin;
+		esanasDaudzums=Cilveku.esanasDaudzums; //par vienu pilnu paikaMax
 		navKoEstTemp = false; //funkcijai 
 		
 		
-		paikaNepiec = Parametri.paikaNepiec; //daudzums lîdz  kuram mçìinâs savâkt  paiku,  tad  skraidît apkârt
+		paikaNepiec = Cilveku.paikaNepiec; //daudzums lîdz  kuram mçìinâs savâkt  paiku,  tad  skraidît apkârt
 		
-		brunasMax=Parametri.brunasMax;
-		brunasMin=Parametri.brunasMin;
-		dBrunasDzimstot=Parametri.dBrunasDzimstot;
-		stiprumsMax=Parametri.stiprumsMax;
-		stiprumsMin=Parametri.stiprumsMin;
-		dStiprumsDzimstot=Parametri.dStiprumsDzimstot;
+		brunasMax=Cilveku.brunasMax;
+		brunasMin=Cilveku.brunasMin;
+		dBrunasDzimstot=Cilveku.dBrunasDzimstot;
+		stiprumsMax=Cilveku.stiprumsMax;
+		stiprumsMin=Cilveku.stiprumsMin;
+		dStiprumsDzimstot=Cilveku.dStiprumsDzimstot;
 		
-		vardsDefault=Parametri.vardsDefault;
-		cenaCilvekam=Parametri.cenaCilvekam;
-		mantojumsCilvekam=Parametri.mantojumsCilvekam;
-		mantojumsCilvekamPaika=Parametri.mantojumsCilvekamPaika;
+		vardsDefault=Cilveku.vardsDefault;
+		cenaCilvekam=Cilveku.cenaCilvekam;
+		mantojumsCilvekamZelts=Cilveku.mantojumsCilvekamZelts;
+		mantojumsCilvekamPaika=Cilveku.mantojumsCilvekamPaika;
 		
 		
-		dCenaProc=Parametri.dCenaProc;
+		dCenaProc=Cilveku.dCenaProc;
 		
 		
 	}
 	
 	private static void pirmieSpeletaji() {
-		boolean randomKomandas=Parametri.randomKomandas;
+		boolean randomKomandas=Cilveku.randomKomandas;
 		
 		Random r = new Random();
-		int skaits=Parametri.sakumaCilveki;
+		int skaits=Cilveku.sakumaCilveki;
 		
 		if(Main.komandasList.size()==0) { //pati pirmâ komanda
 			
 			Komanda pirmaKomanda=new Komanda();
 			pirmaKomanda.nosaukums="Anarhija";
 			pirmaKomanda.galvenais="Nulle";
-			pirmaKomanda.krasa=new Color(255,0,0);
+			pirmaKomanda.krasa=new Color(255, 0, 0);
 			
 			pirmaKomanda.skaits=skaits;
 			
@@ -706,10 +710,10 @@ public class CilvekuApskats {
 			int atstatums=30; //atstatums no laukuma paðas malas
 			double x=atstatums+(platums-atstatums*2)*r.nextDouble(), y=atstatums+(augstums-atstatums*2)*r.nextDouble(); //x un y
 			double v=1, fi=360*r.nextDouble();
-			double vmax=Parametri.vmax, ommax=Parametri.ommax;
-			double hpmax=Parametri.hpmax, hp=hpmax*(0.5+0.5*r.nextDouble());
+			double vmax=Cilveku.vmax, ommax=Cilveku.ommax;
+			double hpmax=Cilveku.hpmax, hp=hpmax*(0.5+0.5*r.nextDouble());
 			double paika=paikaMax;
-			double R1=RMax/R1koefic*(0.5+0.5*r.nextDouble()), R2=RMax*(0.5+0.5*r.nextDouble());
+			double R1=RMax/R2koefic*(0.5+0.5*r.nextDouble()), R2=RMax*(0.5+0.5*r.nextDouble());
 			double brunas=brunasMin+(brunasMax-brunasMin)*r.nextDouble(), stiprums=stiprumsMin+(stiprumsMax-stiprumsMin)*r.nextDouble(), gataviba=100;
 			double drosme=0.5+r.nextDouble()/2;
 			
