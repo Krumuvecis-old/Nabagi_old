@@ -3,10 +3,11 @@ package konstantes;
 class Cilvekiem {
 	
 	protected static void initialize() {
+		Parametri.vardsDefault="S";
 		Parametri.maxGataviba=100;
 		Parametri.hpmax=20;
 		
-		Parametri.vmax=1.5;
+		Parametri.vmax=3;
 		Parametri.ommax=30;
 		
 		Parametri.RMax=400; //maksimâlais redzesloks
@@ -23,16 +24,14 @@ class Cilvekiem {
 		Parametri.paikaMin=40;
 		Parametri.esanasDaudzums=1; //par vienu pilnu paikaMax
 		
-		
 		Parametri.paikaNepiec = 4; //daudzums lîdz kuram mçìinâs savâkt paiku, tad skraidît apkârt
 		
 		Parametri.brunasMax=5;
 		Parametri.brunasMin=Parametri.brunasMax*0.7;
-		Parametri.dBrunasDzimstot=1;
+		Parametri.dBrunasDzimstot=0.1;
 		Parametri.stiprumsMax=20;
 		Parametri.stiprumsMin=Parametri.stiprumsMax*0.7;
-		Parametri.dStiprumsDzimstot=1;
-		Parametri.vardsDefault="S";
+		Parametri.dStiprumsDzimstot=0.1;
 		Parametri.cenaCilvekam=15;
 		Parametri.mantojumsCilvekam=0;
 		Parametri.mantojumsCilvekamPaika=2;

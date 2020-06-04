@@ -29,28 +29,31 @@ class Dati {
 	
 	//protected boolean karteDrawInfo=true; //zem kartes var izvadît datus par izmçriem
 	
-	protected static int karteNobideX=15, karteNobideY=nosaukumsY*2, karteAtstatumsX=20, karteAtstatumsY=100; //laukuma nobîde ekrânâ
+	protected static int karteNobideX=15, karteNobideY=nosaukumsY*2, karteAtstatumsX=20, karteAtstatumsY=60; //laukuma nobîde ekrânâ
 	protected int kartePlatums;
 	
 	//protected int kartesPlatums, kartesAugstums;
-	double merogs;
+	protected double merogs;
+	
+	protected boolean drawCrosshair=true;
+	protected static int crosshairSize=30;
 	
 	// --------------------
 	//zemâk par loot zîmçðanu
 	
-	protected boolean lietasDrawInfo=true; //papildinformâcijas zîmçðana
+	protected boolean lietasDrawInfo=false; //papildinformâcijas zîmçðana
 	
 	// --------------------
 	//zemâk par cilvçku zîmçðanu
 	
-	protected boolean cilvekiDrawInfo=true, cilvekiDrawR=true; //papildinformâcijas un redzesloku zîmçðana
+	protected boolean cilvekiDrawInfo=false, cilvekiDrawR=false; //papildinformâcijas un redzesloku zîmçðana
 	
 	
 	// --------------------
 	//zemâk par input testa paneli
 	
 	protected boolean diagnosticsPanelDraw=true;
-	protected static Color diagnosticsPanelColor=Color.red;
+	protected static Color diagnosticsPanelColor=nosaukumaKrasa;
 	protected static int diagnosticPanelPlatums=150, diagnosticPanelAugstums=200;
 	protected int diagnosticsPanelWx=150,
 			diagnosticsPanelX=ekranaPlatums-diagnosticsPanelWx-5, diagnosticsPanelY=30;

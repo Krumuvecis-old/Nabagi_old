@@ -26,6 +26,7 @@ class DrawSidePanels {
 	
 	private static void drawButtons(Graphics g) {
 		
+		@SuppressWarnings("unused")
 		Color
 			bodyColorDefault=Button.bodyColorDefault, bodyColorPressed=Button.bodyColorPressed, bodyColorActive=Button.bodyColorActive, 
 			contourColorDefault=Button.contourColorDefault, contourColorPressed=Button.contourColorPressed, contourColorActive=Button.contourColorActive,

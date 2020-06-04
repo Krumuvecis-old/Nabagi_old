@@ -29,7 +29,8 @@ class Grafika extends JPanel {
 		ekrans.getContentPane().add(BorderLayout.CENTER, grafika);
 		ekrans.setResizable(true);
 		ekrans.setSize(thread.dati.ekranaPlatums, thread.dati.ekranaAugstums);
-		ekrans.setLocationByPlatform(true);
+		//ekrans.setLocationByPlatform(true);
+		ekrans.setLocation(150,20);
 		
 		ekrans.setVisible(true);
 		
@@ -57,7 +58,7 @@ class Grafika extends JPanel {
 		g.fillRect(0, 0, getWidth(), getHeight());
 		
 		g.setColor(Dati.nosaukumaKrasa);
-		g.drawString(thread.dati.windowTitle, thread.dati.nosaukumsX, Dati.nosaukumsY);
+		g.drawString(thread.dati.windowTitle, Dati.nosaukumsX, Dati.nosaukumsY);
 	}
 	
 	

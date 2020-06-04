@@ -38,15 +38,15 @@ class MiniMap {
 		g.setColor(Parametri.laukumaKrasa);
 		g.fillRect((int)(x0+malaDefault*merogs), (int)(y0+malaDefault*merogs), (int)((laukumaPlatums-malaDefault*2)*merogs), (int)((laukumaAugstums-malaDefault*2)*merogs));
 		
-		if(threadTemp.dati.miniMapDrawInfo) {
+		if(threadTemp.dati.miniMapDrawInfo) { //informâcija apakðâ par paðu karti
 			g.setColor(Color.white);
-			g.drawString("xDef: "+laukumaPlatums+" yDef: "+laukumaAugstums,
+			g.drawString("laukuma platums (x): "+laukumaPlatums+" laukuma augstums (y): "+laukumaAugstums,
 					x0+5, y0+15+(int)(laukumaAugstums*merogs));
-			g.drawString("wx: "+(int)(laukumaPlatums*merogs)+" wy: "+(int)(laukumaAugstums*merogs)+" merogs: "+(new DecimalFormat("#.##").format(merogs)),
+			g.drawString("kartes platums: "+(int)(laukumaPlatums*merogs)+" kartes augstums: "+(int)(laukumaAugstums*merogs)+" merogs: "+(new DecimalFormat("#.##").format(merogs)),
 					x0+5, y0+30+(int)(laukumaAugstums*merogs));
-			g.drawString("genRate: "+(new DecimalFormat("#.###").format(Parametri.goldGenRate/2))+
-					"  goldGen: "+(new DecimalFormat("#.###").format(Parametri.goldGenRate))+
-					"  paikaGen: "+(new DecimalFormat("#.###").format(Parametri.paikaGenRate)),
+			g.drawString("overallGenRate: "+(new DecimalFormat("#.###").format(Parametri.goldGenRate))+
+					"  goldGenRate: "+(new DecimalFormat("#.###").format(Parametri.goldGenRate))+
+					"  paikaGenRate: "+(new DecimalFormat("#.###").format(Parametri.paikaGenRate)),
 					x0+5, y0+45+(int)(laukumaAugstums*merogs));
 		}
 		

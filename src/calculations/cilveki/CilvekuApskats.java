@@ -569,7 +569,6 @@ public class CilvekuApskats {
 		
 	}
 	
-	
 	private static int zeltsTuvakaisNr, paikaTuvakaNr;
 	private static double zeltsTuvakaisDist, paikaTuvakaDist;
 	

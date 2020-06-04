@@ -29,9 +29,6 @@ versija X (planned)
 versija 0.12 (planned)
 
 versija 0.11 (planned) - june 2020
-	fixed playerview window layout and graphics (merogs & focus (shifting view depending on location))
-	added "merogs" to playerView window
-	
 	singleplayer character control (planned)
 	add minimap (bigMap?) to playerView window
 
@@ -40,11 +37,12 @@ versija 0.10 (stable) - may/june 2020
 	multithreading
 		separate windows for setup and player view
 		option to set pause
-		good framerate calculator class and added to each thread
+		good framerate calculator class added to each thread
 	all main calculations brought to separate package
 	graphics updates
-		minimap in setup/diagnostics window
-		
+		map in setup/diagnostics window
+		fixed playerview window layout and graphics (merogs & focus (shifting view depending on location))
+		added "merogs" to playerView window
 
 versija 0.9 (stable) - may 2020
 	massive structural overhaul

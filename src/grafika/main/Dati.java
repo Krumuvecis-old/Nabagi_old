@@ -22,7 +22,7 @@ class Dati {
 	//zemâk par input testa paneli
 	
 	protected boolean inputPanelDraw=true;
-	protected Color inputPanelColor=Color.red;
+	protected Color inputPanelColor=Color.white;
 	protected int inputPanelX=5, inputPanelY=30;
 	
 	// --------------------
@@ -52,7 +52,7 @@ class Dati {
 	// --------------------
 	//zemâk par atïauto krâsu paneli
 	
-	protected boolean colorPanelDraw=true;
+	protected boolean colorPanelDraw=false;
 	protected Color colorPanelColor=Color.lightGray; //krâsu apïa kontûras krâsa
 	protected int colorPanelX0=10, colorPanelY0=380, colorPanelRadiuss=50;
 	
@@ -60,7 +60,7 @@ class Dati {
 	// --------------------
 	//zemâk par kartes zîmçðanu
 	
-	protected boolean miniMapDraw=true, miniMapDrawInfo=true;
+	protected boolean miniMapDraw=true, miniMapDrawInfo=true; //kartes zîmçðana vispâr un informâcija tai apakðâ
 	protected int miniMapX=tablo2x0, miniMapY=tablo2y0-15,
 			miniMapPlatums=ekranaPlatums-miniMapX-50,
 			miniMapAugstums=ekranaAugstums-miniMapY-50;
@@ -76,14 +76,15 @@ class Dati {
 		int pogasX0=5, pogasY0=20, pogasPlatums=100, pogasAugstums=30, pogasSprauga=5, w=0;
 		
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Pauze",0); w++;
-		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"PlayerView (0)",10); w++;
+		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"PlayerView(0)",10); w++;
+		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"PlayerView(rand)",10); w++;
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Tablo1",0); w++;
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Tablo2",0); w++;
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"MiniMap",0); w++;
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"InputPanel",3); w++;
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"ColorPanel",2); w++;
-		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"GenRate +0.001",2); w++;
-		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"GenRate -0.001",2); w++;
+		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"GenRate +0.01",3); w++;
+		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"GenRate -0.01",3); w++;
 		
 		inputPanelY+=(pogasAugstums+pogasSprauga)*w;
 		colorPanelY0=inputPanelY+120;
@@ -118,7 +119,6 @@ class Dati {
 		
 	}
 	
-	
 	protected void playerFocusFind() {
 		int number=-1;
 		for (int i=0; i<galvenais.Dati.cilvekiList.size(); i++) {
@@ -134,10 +134,12 @@ class Dati {
 		playerFocusNumber=number;
 	}
 	
-	protected void startPlayerView() {
+	protected void startPlayerView(boolean randomize) {
+		int i=0;
+		if (randomize) i=(new java.util.Random()).nextInt(galvenais.Dati.cilvekiList.size());
 		
 		grafika.player.PlayerThread threadTemp=new grafika.player.PlayerThread(); //jauns spçlçtâja logs
-		String playerName=galvenais.Dati.cilvekiList.get(0).vards;
+		String playerName=galvenais.Dati.cilvekiList.get(i).vards;
 		threadTemp.initialize(playerName);
 		
 		if(!playerFocused) { //ja nav fokusa, fokusçjas uz spçlçtâju

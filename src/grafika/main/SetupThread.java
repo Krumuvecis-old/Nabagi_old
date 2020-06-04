@@ -77,30 +77,33 @@ public class SetupThread implements Runnable{
 					galvenais.Main.pauze=!galvenais.Main.pauze;
 					
 				} else if (i==1) { //otrâ poga
-					dati.startPlayerView();
+					dati.startPlayerView(false);
 					
 				} else if (i==2) { //treðâ poga
-					dati.tablo1Draw=!dati.tablo1Draw;
+					dati.startPlayerView(true);
 					
 				} else if (i==3) { //ceturtâ poga
-					dati.tablo2Draw=!dati.tablo2Draw;
+					dati.tablo1Draw=!dati.tablo1Draw;
 					
 				} else if (i==4) { //piektâ poga
-					dati.miniMapDraw=!dati.miniMapDraw;
+					dati.tablo2Draw=!dati.tablo2Draw;
 					
 				} else if (i==5) { //sestâ poga
-					dati.inputPanelDraw=!dati.inputPanelDraw;
+					dati.miniMapDraw=!dati.miniMapDraw;
 					
 				} else if (i==6) { //septîtâ poga
-					dati.colorPanelDraw=!dati.colorPanelDraw;
+					dati.inputPanelDraw=!dati.inputPanelDraw;
 					
 				} else if (i==7) { //astotâ poga
-					Parametri.goldGenRate+=0.002;
-					Parametri.paikaGenRate+=0.005;
+					dati.colorPanelDraw=!dati.colorPanelDraw;
 					
 				} else if (i==8) { //devîtâ poga
-					Parametri.goldGenRate-=0.002;
-					Parametri.paikaGenRate-=0.005;
+					Parametri.goldGenRate+=0.01;
+					Parametri.paikaGenRate+=0.02;
+					
+				} else if (i==9) { //desmitâ poga
+					Parametri.goldGenRate-=0.01;
+					Parametri.paikaGenRate-=0.02;
 					
 				}
 				
