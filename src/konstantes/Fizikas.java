@@ -3,8 +3,8 @@ package konstantes;
 class Fizikas {
 	
 	protected static void initialize() {
-		Parametri.platums=1200; //laukuma izmçri (ieskaitot malu)
-		Parametri.augstums=650;
+		Parametri.platums=2000; //laukuma izmçri (ieskaitot malu)
+		Parametri.augstums=1500;
 		
 		Parametri.mala=10 ; //laukuma mala
 		

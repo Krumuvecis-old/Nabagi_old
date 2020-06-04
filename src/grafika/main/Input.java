@@ -2,7 +2,6 @@ package grafika.main;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -17,21 +16,20 @@ class Input {
 	protected boolean peleClick=false;
 	protected int[] pogas=new int[] {};
 	
-	protected void initialize(PlayerThread thread) {
+	protected void initialize(SetupThread thread) {
 		
 		thread.grafika.ekrans.addWindowListener(new WindowListener() {
 			
 			@Override
 			public void windowOpened(WindowEvent e) {
-				System.out.println("grafika3 open!!! -------------> !!!");
+				System.out.println("SetupWindow open.");
 				
 			}
 			
 			@Override
 			public void windowClosing(WindowEvent e) {
-				System.out.println("grafika3 ciet!!! -------------> !!!");
+				System.out.println("SetupWindow closed.");
 				thread.running=false;
-				//GrafikaManager.drawLogs1=false;
 			}
 			
 			@Override public void windowClosed(WindowEvent e) {}
@@ -105,7 +103,6 @@ class Input {
 					
 					pogas = pogasTemp;
 				} else pogas = new int[] {};
-				
 			}
 			
 		});

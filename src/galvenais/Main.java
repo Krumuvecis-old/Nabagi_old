@@ -1,13 +1,15 @@
 package galvenais;
 
+import konstantes.CalculationTimeCalculator;
 import konstantes.Parametri;
-import dataBase.Dati;
-import cilveki.CilvekuApskats;
+import calculations.lietas.LietuApskats;
+import calculations.komandas.KomanduApskats;
+import calculations.cilveki.CilvekuApskats;
 
 public class Main {
 	
 	public static boolean pauze=true;//, patsStarts=true;
-	
+	public static CalculationTimeCalculator calculationTimeCalculator = new CalculationTimeCalculator();
 	
 	public static void main(String... args) {
 		
@@ -15,18 +17,20 @@ public class Main {
 		
 		System.out.println("Main while() starting.");
 		while (true){ //ðis visu laiku atkârtojas
-			
-			FPScalculator.start();
+			calculationTimeCalculator.time(true);
 			
 			if (!pauze) {
-				System.out.println("---------- galvenâ cikla sâkums ----------");
-				GalvenaisCikls.main();
+				
+				//te jâbût arî kartes un reljefa ciklam
+				LietuApskats.main(); //viss kas saistîts ar pa  zemi izmçtâtajâm lietâm
+				KomanduApskats.main(); //viss kas saistîts ar komandâm
+				CilvekuApskats.main(); //viss kas saistîts ar cilvçkiem
+				
 			}
 			
-			FPScalculator.finish();
-			
+			calculationTimeCalculator.time(false);
 			try{
-				Thread.sleep(FPScalculator.simulationDelay);
+				Thread.sleep(calculationTimeCalculator.sleepT());
 			}catch (Exception e){
 				e.printStackTrace();
 			}
@@ -35,13 +39,12 @@ public class Main {
 	
 	private static void initialize(){
 		Parametri.initialize();
-		FPScalculator.FPScalculationFrequency=Parametri.FPScalculationFrequency; //ðî ir FPS kalkulatora inicializâcija
 		
 		Dati.initialize(); //sagatavo datubâzes
 		
 		CilvekuApskats.setup();
 		
-		grafika.setup.SetupThread setupThread = new grafika.setup.SetupThread(); //palaiþ grafisko daïu
+		grafika.main.SetupThread setupThread = new grafika.main.SetupThread(); //palaiþ grafisko daïu
 		setupThread.start();
 		
 	}

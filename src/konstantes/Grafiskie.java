@@ -7,11 +7,13 @@ class Grafiskie {
 	protected static void initialize() {
 		Parametri.ekranaNosaukums="Nabagi - versija: "+Parametri.versija;
 		
-		Parametri.FPScalculationFrequency=20;
-		
 		Parametri.cilvekiKrasaSaturation=1;
 		Parametri.cilvekiKrasaBrightnessMin=0.4; //pie hpRatio=0
 		Parametri.cilvekiKrasaBrightnessMax=1; //pie hpRatio=1
+
+		Parametri.kronaKrasa = new Color(0,0,0); //kroòa krâsa - melns  punkts
+		Parametri.kronaKoeficients=0.5; //kroòa resnums pret kopçjo resnumu
+		
 		
 		// --------------------
 		//zemâk definçtâs krâsas komandu krâsu noteikðanai
@@ -37,6 +39,7 @@ class Grafiskie {
 				180		/360.0,	//balansçðanas krâsa
 				240		/360.0	//balansçðanas krâsa
 		};
+		
 		
 		
 	}

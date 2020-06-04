@@ -21,7 +21,6 @@ public class Parametri { //visi default koeficienti un parametri vienkopus
 	//zemâk galvenie parametri
 	
 	public static String versija;
-	public static long simulationMaxDelay;
 	
 	
 	// --------------------
@@ -29,9 +28,10 @@ public class Parametri { //visi default koeficienti un parametri vienkopus
 	
 	public static String ekranaNosaukums;
 	
-	public static int FPScalculationFrequency;
-	
 	public static double cilvekiKrasaSaturation, cilvekiKrasaBrightnessMin, cilvekiKrasaBrightnessMax;
+	
+	public static Color kronaKrasa;
+	public static double kronaKoeficients;
 	
 	public static Color laukumaKrasa, malasKrasa;
 	public static Color lietasColorZelts, lietasColorPaika, lietasColorDefault;
@@ -67,6 +67,8 @@ public class Parametri { //visi default koeficienti un parametri vienkopus
 	// --------------------
 	//zemâk cilvçku parametri
 	
+	public static double vmax, ommax;
+	
 	public static int maxGataviba;
 	public static double hpmax;
 	public static int RMax, R1koefic;
@@ -84,6 +86,8 @@ public class Parametri { //visi default koeficienti un parametri vienkopus
 			stiprumsMax, stiprumsMin, dStiprumsDzimstot;
 	public static String vardsDefault;
 	public static int cenaCilvekam, mantojumsCilvekam, mantojumsCilvekamPaika;
+	
+	public static double dzimstotDefectionChance;
 	
 	
 	public static double dCenaProc;

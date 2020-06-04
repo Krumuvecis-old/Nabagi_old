@@ -1,6 +1,7 @@
 package konstantes;
 
 import java.awt.Color;
+import java.util.Random;
 
 public class Formulas {
 	
@@ -24,5 +25,9 @@ public class Formulas {
 		return HSBList[0];
 	}
 	
+	public static double novirzeRandom(double x0, double procenti) {
+		Random r = new Random();
+		return x0*( 1 + procenti*( 1 - 2*r.nextDouble() ) );
+	}
 	
 }

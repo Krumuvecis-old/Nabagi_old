@@ -26,19 +26,25 @@ versija X (planned)
 	convert to 3D
 	add height
 
-versija 0.11 (planned)
-	singleplayer character control
+versija 0.12 (planned)
+
+versija 0.11 (planned) - june 2020
+	fixed playerview window layout and graphics (merogs & focus (shifting view depending on location))
+	added "merogs" to playerView window
+	
+	singleplayer character control (planned)
 	add minimap (bigMap?) to playerView window
 
-versija 0.10 (stable, unfinished) - may/june 2020
+versija 0.10 (stable) - may/june 2020
 	added key/mouse listener
-	multithreading (gotta finish this one)
+	multithreading
 		separate windows for setup and player view
 		option to set pause
-		framerate calculator added to each thread (planned)
-		fix playerview window layout and graphics (merogs & focus (shifting view depending on location)) (planned)
-		add "merogs" to playerView window
-	minimap in setup/diagnostics window
+		good framerate calculator class and added to each thread
+	all main calculations brought to separate package
+	graphics updates
+		minimap in setup/diagnostics window
+		
 
 versija 0.9 (stable) - may 2020
 	massive structural overhaul
@@ -56,3 +62,4 @@ versija 0.9 (stable) - may 2020
 versija 0.8 (buggy) - may 2020
 	crashes after 5-15 minutes due to many bugs
 	basic design and structure
+	(previous versions deprecated)

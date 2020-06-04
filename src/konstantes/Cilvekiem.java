@@ -6,7 +6,10 @@ class Cilvekiem {
 		Parametri.maxGataviba=100;
 		Parametri.hpmax=20;
 		
-		Parametri.RMax=120; //maksimâlais redzesloks
+		Parametri.vmax=1.5;
+		Parametri.ommax=30;
+		
+		Parametri.RMax=400; //maksimâlais redzesloks
 		Parametri.R1koefic=4;  //minimâlâ redzesloka daïas koefic
 		
 		Parametri.dRDzimstot=0.1; //redzesloka procentuâla izmaiòa vairojoties
@@ -33,6 +36,8 @@ class Cilvekiem {
 		Parametri.cenaCilvekam=15;
 		Parametri.mantojumsCilvekam=0;
 		Parametri.mantojumsCilvekamPaika=2;
+		
+		Parametri.dzimstotDefectionChance=0.02;
 		
 		
 		Parametri.dCenaProc=0.1;

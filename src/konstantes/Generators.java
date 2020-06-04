@@ -6,7 +6,7 @@ class Generators {
 		Parametri.sakumaCilveki=15; //cilvçku skaits paðâ sâkumâ
 		Parametri.randomKomandas=false; //vai spçles sâkumâ cilvçki bûs pa komandâm (false -> visi anarhijâ)
 		
-		double overallGenRate=0.03; //0.007 bija labi (0.015 televizoram)
+		double overallGenRate=0.5; //0.007 bija labi (0.015 televizoram)
 		
 		Parametri.goldGenRate=2*overallGenRate; //zelta ìenerators
 		Parametri.goldGenMin=1;

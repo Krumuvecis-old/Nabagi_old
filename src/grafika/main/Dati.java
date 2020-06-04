@@ -1,50 +1,72 @@
 package grafika.main;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 class Dati {
+	protected konstantes.CalculationTimeCalculator calculationTimeCalculator = new konstantes.CalculationTimeCalculator();
 	
-	protected String windowTitle=konstantes.Parametri.ekranaNosaukums+", PlayerView";
+	protected String windowTitle=konstantes.Parametri.ekranaNosaukums+", SetupWindow";
+	protected Color fonaKrasa=Color.black, nosaukumaKrasa=Color.gray;
+	protected int ekranaPlatums=1000, ekranaAugstums=700;
 	
-	protected boolean fullscreen;
-	protected int ekranaPlatums, ekranaAugstums;
+	protected int nosaukumsX=5, nosaukumsY=15;
 	
 	protected ArrayList<Button> buttonList;
 	
-	protected int nobideX=130, nobideY=10, nobideXR=50, nobideYB=100; //laukuma nobîde ekrânâ
+	protected String playerFocusName;
+	protected boolean playerFocused=false;
+	protected int playerFocusNumber;
 	
 	// --------------------
-	//zemâk par loot zîmçðanu
+	//zemâk par input testa paneli
 	
-	protected boolean lietasDrawInfo=false; //papildinformâcijas zîmçðana
+	protected boolean inputPanelDraw=true;
+	protected Color inputPanelColor=Color.red;
+	protected int inputPanelX=5, inputPanelY=30;
 	
 	// --------------------
-	//zemâk par cilvçku zîmçðanu
+	//zemâk par galvenâ informâcijas tablo Parametriem (tablo1)
 	
-	protected boolean cilvekiDrawInfo=false, cilvekiDrawR=false; //papildinformâcijas un redzesloku zîmçðana
+	protected boolean tablo1Draw=true; //tablo zîmçðana vispâr
+	protected Color tablo1krasa=Color.white;
+	protected int tablo1x0=120, tablo1y0=30;
+	protected int tablo1tekstaPlatums=15;
+	protected boolean drawCalculationTime=true;
 	
 	
+	// --------------------
+	//zemâk par centrâlâ cilvçku tablo Parametriem
 	
-	protected void initialize(PlayerThread thread) {
-		windowTitle=windowTitle+" ("+thread.playerName+")";
-		
-		boolean MINI=false; //mini versija
-		boolean TV=false; //ir vai nav pieslçgts televizoram
-		
-		if (MINI) {
-			fullscreen=false; //mini versija
-			ekranaPlatums=600;
-			ekranaAugstums=400;
-		} else if (TV) {
-			fullscreen=false; //televizoram
-			ekranaPlatums=1700;
-			ekranaAugstums=1000;
-		} else {
-			fullscreen=true; //portatîvajam - default
-			ekranaPlatums=1350;
-			ekranaAugstums=700;
-		}
-		
+	protected boolean tablo2Draw=false;
+	
+	protected int tablo2x0=280, tablo2y0=tablo1y0, tablo2rindasPlatums=14;
+	
+	protected int tablo2platums1=200; //platums1
+	protected int tablo2platums2=130; //platums2
+	protected int tablo2platumsN=80; //platumsN
+	
+	protected Color tablo2krasaDefault, tablo2krasaCritical; //paðas krâsas nosaka initialize() ciklâ
+	
+	
+	// --------------------
+	//zemâk par atïauto krâsu paneli
+	
+	protected boolean colorPanelDraw=true;
+	protected Color colorPanelColor=Color.lightGray; //krâsu apïa kontûras krâsa
+	protected int colorPanelX0=10, colorPanelY0=380, colorPanelRadiuss=50;
+	
+	
+	// --------------------
+	//zemâk par kartes zîmçðanu
+	
+	protected boolean miniMapDraw=true, miniMapDrawInfo=true;
+	protected int miniMapX=tablo2x0, miniMapY=tablo2y0-15,
+			miniMapPlatums=ekranaPlatums-miniMapX-50,
+			miniMapAugstums=ekranaAugstums-miniMapY-50;
+	
+	
+	protected void initialize() {
 		
 		// --------------------
 		//par pogâm
@@ -54,10 +76,28 @@ class Dati {
 		int pogasX0=5, pogasY0=20, pogasPlatums=100, pogasAugstums=30, pogasSprauga=5, w=0;
 		
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Pauze",0); w++;
-		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Cilveku info",10); w++;
-		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Redzesloki",3); w++;
-		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Loot info",5); w++;
-		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Reset",0); w++;
+		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"PlayerView (0)",10); w++;
+		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Tablo1",0); w++;
+		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Tablo2",0); w++;
+		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"MiniMap",0); w++;
+		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"InputPanel",3); w++;
+		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"ColorPanel",2); w++;
+		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"GenRate +0.001",2); w++;
+		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"GenRate -0.001",2); w++;
+		
+		inputPanelY+=(pogasAugstums+pogasSprauga)*w;
+		colorPanelY0=inputPanelY+120;
+		
+		
+		// --------------------
+		//par cilvçku tablo (tablo2) zîmçðanas krâsâm
+		
+		boolean tablo2Transparent=false; //caurspîdîgs teksts
+		int tablo2alfa=255;
+		if(tablo2Transparent) tablo2alfa=100; //max caurspîdîgums
+		
+		tablo2krasaDefault=new Color(255,255,0,tablo2alfa); //dzeltens
+		tablo2krasaCritical=new Color(255,0,0,tablo2alfa); //sarkans
 		
 		
 	}
@@ -78,5 +118,32 @@ class Dati {
 		
 	}
 	
+	
+	protected void playerFocusFind() {
+		int number=-1;
+		for (int i=0; i<galvenais.Dati.cilvekiList.size(); i++) {
+			if (galvenais.Dati.cilvekiList.get(i).vards==playerFocusName) {
+				number=i;
+				break;
+			}
+		}
+		
+		if(number<0) {
+			playerFocused=false;
+		}
+		playerFocusNumber=number;
+	}
+	
+	protected void startPlayerView() {
+		
+		grafika.player.PlayerThread threadTemp=new grafika.player.PlayerThread(); //jauns spçlçtâja logs
+		String playerName=galvenais.Dati.cilvekiList.get(0).vards;
+		threadTemp.initialize(playerName);
+		
+		if(!playerFocused) { //ja nav fokusa, fokusçjas uz spçlçtâju
+			playerFocused=true;
+			playerFocusName=playerName;
+		}
+	}
 	
 }

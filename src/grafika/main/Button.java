@@ -16,7 +16,7 @@ class Button {
 	
 	protected static int burtaPlatums=7, burtaAugstums=12;
 	
-	protected void actions(PlayerThread thread) {
+	protected void actions(SetupThread thread) {
 		
 		if (thread.input.xPele>=x && thread.input.xPele<=(x+wx) &&
 				thread.input.yPele>=y && thread.input.yPele<=(y+wy)) { //pârbauda vai kursors ir virs pogas
