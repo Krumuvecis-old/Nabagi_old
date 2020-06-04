@@ -1,7 +1,5 @@
 package grafika;
 
-import calculations.konstantes.Parametri;
-
 import java.awt.Color;
 
 public class KonstantesGrafikai {

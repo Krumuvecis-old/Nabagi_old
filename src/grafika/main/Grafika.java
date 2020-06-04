@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import calculations.CalculationTimeCalculator;
 import calculations.cilveki.Cilveks;
 import calculations.komandas.Komanda;
 import calculations.komandas.KomanduApskats;
+import calculations.konstantes.Cilveku;
 import calculations.lietas.Lieta;
-import calculations.konstantes.Parametri;
-import calculations.CalculationTimeCalculator;
 
 @SuppressWarnings("serial")
 class Grafika extends JPanel {
@@ -145,7 +145,7 @@ class Grafika extends JPanel {
 				invSize=cilvekiList.get(i).inventory.size();
 				
 				
-				if (cilvekiList.get(i).paika<cilvekiList.get(i).paikaMin-Parametri.paikaReductionDefault) {
+				if (cilvekiList.get(i).paika<cilvekiList.get(i).paikaMin- Cilveku.paikaReductionDefault) {
 					g.setColor(threadTemp.dati.tablo2krasaCritical);
 				}
 			}

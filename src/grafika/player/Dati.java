@@ -16,7 +16,7 @@ public class Dati {
 	public String playerName;
 	public Cilveks player;
 		
-	protected String windowTitleDefault=calculations.konstantes.Parametri.ekranaNosaukums+", PlayerView";
+	protected String windowTitleDefault=grafika.KonstantesGrafikai.ekranaNosaukums+", PlayerView";
 	protected String windowTitle;
 	protected static Color fonaKrasa=Color.black, nosaukumaKrasa=Color.gray;
 	protected static int nosaukumsX=5, nosaukumsY=15;

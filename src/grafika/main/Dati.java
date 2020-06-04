@@ -1,12 +1,14 @@
 package grafika.main;
 
+import grafika.KonstantesGrafikai;
+
 import java.awt.Color;
 import java.util.ArrayList;
 
 class Dati {
 	protected calculations.CalculationTimeCalculator calculationTimeCalculator = new calculations.CalculationTimeCalculator();
 	
-	protected String windowTitle=calculations.konstantes.Parametri.ekranaNosaukums+", SetupWindow";
+	protected String windowTitle = KonstantesGrafikai.ekranaNosaukums + ", SetupWindow";
 	protected Color fonaKrasa=Color.black, nosaukumaKrasa=Color.gray;
 	protected int ekranaPlatums=1000, ekranaAugstums=700;
 	

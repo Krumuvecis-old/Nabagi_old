@@ -5,17 +5,18 @@ import java.awt.Graphics;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import calculations.konstantes.Parametri;
+import calculations.KonstantesUniversal;
+import calculations.konstantes.Fizikas;
 import calculations.konstantes.Formulas;
-
+import calculations.konstantes.Grafiskie;
 import calculations.lietas.Lieta;
-import grafika.player.Dati;
-import grafika.player.PlayerThread;
 import calculations.komandas.Komanda;
 import calculations.cilveki.Cilveks;
 import calculations.cilveki.CilvekuApskats;
 
-
+import grafika.KonstantesGrafikai;
+import grafika.player.Dati;
+import grafika.player.PlayerThread;
 
 class DrawMap {
 	private PlayerThread thread;
@@ -46,13 +47,13 @@ class DrawMap {
 	}
 	
 	private void drawLaukums(Graphics g) {
-		int mala=Parametri.mala;
+		int mala= KonstantesUniversal.mala;
 		int kartePlatums=thread.dati.kartePlatums;
 		
-		g.setColor(Parametri.malasKrasa); //laukuma mala
+		g.setColor(Grafiskie.malasKrasa); //laukuma mala
 		g.fillRect(nobideX, nobideY, kartePlatums, kartePlatums);
 		
-		g.setColor(Parametri.laukumaKrasa); //laukums
+		g.setColor(Grafiskie.laukumaKrasa); //laukums
 		g.fillRect(nobideX+mala, nobideY+mala, kartePlatums-(mala*2), kartePlatums-(mala*2));
 		g.setColor(Color.black); //laukuma kontûra
 		g.drawRect(nobideX+mala, nobideY+mala, kartePlatums-(mala*2), kartePlatums-(mala*2));
@@ -69,49 +70,47 @@ class DrawMap {
 			
 			double[] koord;
 			koord=getAbsoluteCoordinates(false, dx, dy);
-			
-			
+			double resnums;
+			Color krasa1, krasa2=Color.black;; //iekða un kontûra
+
 			if(lieta.nosaukums=="Zelts") {
-				double resnums=Parametri.zeltaResnums*merogs;
-				
-				g.setColor(Parametri.lietasColorZelts); //iekða
-				g.fillOval((int)(koord[0]-resnums/2), (int)(koord[1]-resnums/2), (int)resnums, (int)resnums);
-				
-				g.setColor(Color.black); //kontûra
-				g.drawOval((int)(koord[0]-resnums/2), (int)(koord[1]-resnums/2), (int)resnums, (int)resnums);
-				
+				resnums = Fizikas.zeltaResnums*merogs;
+				krasa1=Grafiskie.lietasColorZelts; //iekða
+
+
 				if(drawInfo==true) {
+					g.setColor(krasa1);
 					String nosaukums=""+new DecimalFormat("#.#").format(lieta.daudzums);
 					g.drawString(nosaukums, (int)(koord[0]+resnums/2+3), (int)(koord[1]+7));
 				}
 				
 			} else if(lieta.nosaukums=="Paika") {
-				double resnums=Parametri.paikasResnums*merogs;
-				
-				g.setColor(Parametri.lietasColorPaika); //iekða
-				g.fillOval((int)(koord[0]-resnums/2), (int)(koord[1]-resnums/2), (int)resnums, (int)resnums);
-				
-				g.setColor(Color.black); //kontûra
-				g.drawOval((int)(koord[0]-resnums/2), (int)(koord[1]-resnums/2), (int)resnums, (int)resnums);
+				resnums=Fizikas.paikasResnums*merogs;
+				krasa1 = Grafiskie.lietasColorPaika;
 				
 				if(drawInfo==true) {
+					g.setColor(krasa1);
 					String nosaukums=""+new DecimalFormat("#.#").format(lieta.daudzums);
 					g.drawString(nosaukums, (int)(koord[0]-7), (int)(koord[1]+resnums/2+15));
 				}
 				
 			} else { //neklasificçti objekti
-				double resnums=Parametri.lietasResnums*merogs;
+				resnums=Fizikas.lietasResnums*merogs;
 				
-				g.setColor(Parametri.lietasColorDefault); //iekða
-				g.fillOval((int)(koord[0]-resnums/2), (int)(koord[1]-resnums/2), (int)resnums, (int)resnums);
-				
-				g.setColor(Color.black); //kontûra
-				g.drawOval((int)(koord[0]-resnums/2), (int)(koord[1]-resnums/2), (int)resnums, (int)resnums);
+				krasa1 = Grafiskie.lietasColorDefault; //iekða
 				
 				if(drawInfo==true) {
+					g.setColor(krasa1);
 					String nosaukums=lieta.nosaukums+"-"+(int)lieta.daudzums;
 					g.drawString(nosaukums, (int)(koord[0]-15), (int)(koord[1]+resnums/2+15));
 				}
+
+				g.setColor(krasa1); //iekða
+				g.fillOval((int)(koord[0]-resnums/2), (int)(koord[1]-resnums/2), (int)resnums, (int)resnums);
+
+				g.setColor(krasa2); //kontûra
+				g.drawOval((int)(koord[0]-resnums/2), (int)(koord[1]-resnums/2), (int)resnums, (int)resnums);
+
 			}
 			
 			
@@ -127,7 +126,7 @@ class DrawMap {
 		
 		drawMapEdges(g);
 		
-		double resnumaKoefic=Parametri.resnumaKoefic;
+		double resnumaKoefic=Fizikas.resnumaKoefic;
 		
 		for(int i=0;i<cilvekiList.size();i++) {
 			Cilveks player=cilvekiList.get(i);
@@ -157,7 +156,7 @@ class DrawMap {
 	}
 	
 	private void drawMapEdges(Graphics g) {
-		int laukumaPlatums=Parametri.platums, laukumaAugstums=Parametri.augstums, kartesPlatums=thread.dati.kartePlatums;
+		int laukumaPlatums=KonstantesUniversal.platums, laukumaAugstums=KonstantesUniversal.augstums, kartesPlatums=thread.dati.kartePlatums;
 		
 		int[] sturisZR = {0,0},
 				sturisZA = {laukumaPlatums,0},
@@ -249,14 +248,17 @@ class DrawMap {
 	}
 	
 	private Color playerGetColor(Cilveks player, int komanda) {
-		
-		
-		
+
+
+
 		double hpRatio=player.hp/player.hpmax;
 		
-		return new Color(Color.HSBtoRGB((float)Formulas.getHue(komandasList.get(komanda).krasa),
-				(float)Parametri.cilvekiKrasaSaturation,
-				(float)(Parametri.cilvekiKrasaBrightnessMin+(Parametri.cilvekiKrasaBrightnessMax-Parametri.cilvekiKrasaBrightnessMin)*hpRatio)));
+		return new Color(Color.HSBtoRGB(
+				(float)Formulas.getHue(komandasList.get(komanda).krasa),
+				(float) KonstantesGrafikai.cilvekiKrasaSaturation,
+				(float)(KonstantesGrafikai.cilvekiKrasaBrightnessMin +
+							(KonstantesGrafikai.cilvekiKrasaBrightnessMax -
+								KonstantesGrafikai.cilvekiKrasaBrightnessMin) * hpRatio)));
 		
 	}
 	
@@ -270,8 +272,8 @@ class DrawMap {
 		
 		if(player.vards==komandasList.get(komanda).galvenais) { //karalis
 			
-			Color kronaKrasa = Parametri.kronaKrasa;
-			double kronaKoeficients=Parametri.kronaKoeficients;
+			Color kronaKrasa = KonstantesGrafikai.kronaKrasa;
+			double kronaKoeficients=KonstantesGrafikai.kronaKoeficients;
 			
 			g.setColor(kronaKrasa);
 			double kronaResnums=resnums*kronaKoeficients;

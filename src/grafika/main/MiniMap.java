@@ -5,11 +5,16 @@ import java.awt.Graphics;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import calculations.KonstantesUniversal;
+import calculations.konstantes.Fizikas;
 import calculations.konstantes.Formulas;
-import calculations.konstantes.Parametri;
 import calculations.cilveki.Cilveks;
 import calculations.komandas.Komanda;
+import calculations.konstantes.Grafiskie;
+import calculations.konstantes.Lietu;
 import calculations.lietas.Lieta;
+import grafika.KonstantesGrafikai;
+
 class MiniMap {
 	
 	private static ArrayList<Cilveks> cilvekiList;
@@ -18,7 +23,7 @@ class MiniMap {
 	
 	private static SetupThread thread;
 	
-	protected static void drawMiniMap(Graphics g, SetupThread threadTemp, Grafika grafika) { //pilnîgi visa karte'
+	protected static void drawMiniMap(Graphics g, SetupThread threadTemp, Grafika grafika) { //pilnîgi visa karte
 		
 		cilvekiList = grafika.cilvekiList;
 		komandasList = grafika.komandasList;
@@ -30,12 +35,14 @@ class MiniMap {
 				platumsMax=Math.max(0, threadTemp.dati.miniMapPlatums),
 				augstumsMax=Math.max(0, threadTemp.dati.miniMapAugstums);
 		
-		int laukumaPlatums=Parametri.platums, laukumaAugstums=Parametri.augstums, malaDefault=Parametri.mala;
+		int laukumaPlatums = KonstantesUniversal.platums,
+				laukumaAugstums=KonstantesUniversal.augstums,
+				malaDefault=KonstantesUniversal.mala;
 		double merogs=Math.min((double)platumsMax/laukumaPlatums, (double)augstumsMax/laukumaAugstums);
 		
-		g.setColor(Parametri.malasKrasa);
+		g.setColor(Grafiskie.malasKrasa);
 		g.fillRect(x0, y0, (int)(laukumaPlatums*merogs), (int)(laukumaAugstums*merogs));
-		g.setColor(Parametri.laukumaKrasa);
+		g.setColor(Grafiskie.laukumaKrasa);
 		g.fillRect((int)(x0+malaDefault*merogs), (int)(y0+malaDefault*merogs), (int)((laukumaPlatums-malaDefault*2)*merogs), (int)((laukumaAugstums-malaDefault*2)*merogs));
 		
 		if(threadTemp.dati.miniMapDrawInfo) { //informâcija apakðâ par paðu karti
@@ -44,9 +51,9 @@ class MiniMap {
 					x0+5, y0+15+(int)(laukumaAugstums*merogs));
 			g.drawString("kartes platums: "+(int)(laukumaPlatums*merogs)+" kartes augstums: "+(int)(laukumaAugstums*merogs)+" merogs: "+(new DecimalFormat("#.##").format(merogs)),
 					x0+5, y0+30+(int)(laukumaAugstums*merogs));
-			g.drawString("overallGenRate: "+(new DecimalFormat("#.###").format(Parametri.goldGenRate))+
-					"  goldGenRate: "+(new DecimalFormat("#.###").format(Parametri.goldGenRate))+
-					"  paikaGenRate: "+(new DecimalFormat("#.###").format(Parametri.paikaGenRate)),
+			g.drawString("overallGenRate: "+(new DecimalFormat("#.###").format(Lietu.goldGenRate))+
+					"  goldGenRate: "+(new DecimalFormat("#.###").format(Lietu.goldGenRate))+
+					"  paikaGenRate: "+(new DecimalFormat("#.###").format(Lietu.paikaGenRate)),
 					x0+5, y0+45+(int)(laukumaAugstums*merogs));
 		}
 		
@@ -57,7 +64,7 @@ class MiniMap {
 	
 	private static void drawCilveki(Graphics g, int x0, int y0, double merogs, ArrayList<Cilveks> cilvekiList, ArrayList<Komanda> komandasList) { //papildinâjums kartei
 		
-		double resnumaKoefic=Parametri.resnumaKoefic;
+		double resnumaKoefic = Fizikas.resnumaKoefic;
 		for(int i=0;i<cilvekiList.size();i++) {
 			
 			Cilveks cilveks = cilvekiList.get(i); //pats apskatâmais spçlçtâjs
@@ -76,8 +83,8 @@ class MiniMap {
 			double hpRatio=cilveks.hp/cilveks.hpmax;
 			
 			Color krasa = new Color(Color.HSBtoRGB((float)Formulas.getHue(komandasList.get(komanda).krasa),
-					(float)Parametri.cilvekiKrasaSaturation,
-					(float)(Parametri.cilvekiKrasaBrightnessMin+(Parametri.cilvekiKrasaBrightnessMax-Parametri.cilvekiKrasaBrightnessMin)*hpRatio)));
+					(float) KonstantesGrafikai.cilvekiKrasaSaturation,
+					(float)(KonstantesGrafikai.cilvekiKrasaBrightnessMin+(KonstantesGrafikai.cilvekiKrasaBrightnessMax-KonstantesGrafikai.cilvekiKrasaBrightnessMin)*hpRatio)));
 			
 			//rumpis
 			
@@ -115,33 +122,27 @@ class MiniMap {
 		
 		for(int i=0;i<lietasList.size();i++) { //zîmç lietas, kas izmçtâtas pa karti
 			
-			double x=x0+lietasList.get(i).x*merogs, y=y0+lietasList.get(i).y*merogs;
-			
+			double x=x0+lietasList.get(i).x*merogs, y=y0+lietasList.get(i).y*merogs, resnums;
+			Color krasa1, krasa2=Color.black; //iekðai un kontûrai
+
 			if(lietasList.get(i).nosaukums=="Zelts") {
-				double resnums=Parametri.zeltaResnums*merogs;
-				
-				g.setColor(Parametri.lietasColorZelts); //iekða
-				g.fillOval((int)(x-resnums/2), (int)(y-resnums/2), (int)resnums, (int)resnums);
-				g.setColor(Color.black); //kontûra
-				g.drawOval((int)(x-resnums/2), (int)(y-resnums/2), (int)resnums, (int)resnums);
+				resnums = Fizikas.zeltaResnums * merogs;
+				krasa1 = Grafiskie.lietasColorZelts;
 				
 			} else if(lietasList.get(i).nosaukums=="Paika") {
-				double resnums=Parametri.paikasResnums*merogs;
-				
-				g.setColor(Parametri.lietasColorPaika); //iekða
-				g.fillOval((int)(x-resnums/2), (int)(y-resnums/2), (int)resnums, (int)resnums);
-				g.setColor(Color.black); //kontûra
-				g.drawOval((int)(x-resnums/2), (int)(y-resnums/2), (int)resnums, (int)resnums);
+				resnums = Fizikas.paikasResnums * merogs;
+				krasa1 = Grafiskie.lietasColorPaika;
 				
 			} else { //neklasificçti objekti
-				double resnums=Parametri.lietasResnums*merogs;
-				
-				g.setColor(Parametri.lietasColorDefault); //iekða
-				g.fillOval((int)(x-resnums/2), (int)(y-resnums/2), (int)resnums, (int)resnums);
-				g.setColor(Color.black); //kontûra
-				g.drawOval((int)(x-resnums/2), (int)(y-resnums/2), (int)resnums, (int)resnums);
+				resnums = Fizikas.lietasResnums * merogs;
+				krasa1 = Grafiskie.lietasColorDefault;
 				
 			}
+
+			g.setColor(krasa1); //iekða
+			g.fillOval((int)(x-resnums/2), (int)(y-resnums/2), (int)resnums, (int)resnums);
+			g.setColor(krasa2); //kontûra
+			g.drawOval((int)(x-resnums/2), (int)(y-resnums/2), (int)resnums, (int)resnums);
 			
 		}
 		
