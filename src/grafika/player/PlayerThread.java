@@ -6,9 +6,9 @@ public class PlayerThread implements Runnable{
 	private static String threadName;
 	public boolean running, minimized, windowActive;
 	
-	protected Dati dati;
-	protected Grafika grafika;
-	protected Input input;
+	public Dati dati;
+	public Grafika grafika;
+	public Input input;
 	
 	public void initialize(String playerName) {
 		dati = new Dati(); //zîmçðana var bût atkarîga no datiem
@@ -79,7 +79,7 @@ public class PlayerThread implements Runnable{
 			if (dati.buttonList.get(i).result) { //ja poga nostrâdâjusi
 				
 				if(i==0) { //pirmâ poga
-					galvenais.Main.pauze=!galvenais.Main.pauze;
+					calculations.Main.pauze=!calculations.Main.pauze;
 					
 				} else if (i==1) { //otrâ poga
 					dati.cilvekiDrawInfo=!dati.cilvekiDrawInfo;

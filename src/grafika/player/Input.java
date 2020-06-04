@@ -10,11 +10,11 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
-class Input {
+public class Input {
 	
-	protected int xPele=0, yPele=0;
+	public int xPele=0, yPele=0;
 	protected boolean peleClick=false;
-	protected int[] pogas=new int[] {};
+	public int[] pogas=new int[] {};
 	
 	protected void initialize(PlayerThread thread) {
 		

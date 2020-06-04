@@ -5,8 +5,8 @@ import java.awt.Graphics;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import konstantes.Formulas;
-import konstantes.Parametri;
+import calculations.konstantes.Formulas;
+import calculations.konstantes.Parametri;
 import calculations.cilveki.Cilveks;
 import calculations.komandas.Komanda;
 import calculations.lietas.Lieta;

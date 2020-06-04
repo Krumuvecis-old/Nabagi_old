@@ -7,6 +7,9 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import grafika.player.centerPanel.DrawCenterPanel;
+import grafika.player.sidePanels.DrawSidePanels;
+
 @SuppressWarnings("serial")
 class Grafika extends JPanel {
 	

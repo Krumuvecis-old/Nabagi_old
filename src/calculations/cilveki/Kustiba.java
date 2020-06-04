@@ -1,14 +1,14 @@
 package calculations.cilveki;
 
-import galvenais.Dati;
-import konstantes.Parametri;
+import calculations.Main;
+import calculations.konstantes.Parametri;
 
 class Kustiba {
 	
 	private static Cilveks cilveks;
 	
 	protected static void main(int numurs) {
-		cilveks=Dati.cilvekiList.get(numurs);
+		cilveks=Main.cilvekiList.get(numurs);
 		
 		lenkuParbaude();
 		maluParbaude();

@@ -2,18 +2,18 @@ package calculations.cilveki;
 
 import java.util.Random;
 
-import konstantes.Parametri;
-import konstantes.Formulas;
+import calculations.konstantes.Parametri;
+import calculations.konstantes.Formulas;
 import calculations.komandas.KomanduApskats;
 import calculations.lietas.Lieta;
-import galvenais.Dati;
+import calculations.Main;
 
 class CilvekuDarbibas {
 	
 	protected static boolean navKoEst;
 	protected static void esanaNoInventory(int numurs) {
 		
-		Cilveks cilveks=Dati.cilvekiList.get(numurs);
+		Cilveks cilveks=Main.cilvekiList.get(numurs);
 		
 		if (cilveks.paika<=cilveks.paikaMin) { //çðana no inventory - tie visi valueOf ðajâ voidâ neko nedeva - var izòemt
 			
@@ -36,7 +36,7 @@ class CilvekuDarbibas {
 	protected static void updateTradeOrders(int numurs) {
 		//tirdzniecîbas orderu pârskats
 		
-		Cilveks cilveks=Dati.cilvekiList.get(numurs);
+		Cilveks cilveks=Main.cilvekiList.get(numurs);
 		
 		double defaultCena=Parametri.paikaPriceDefault; //cenas apskats no atmiòas vçl nav ieviests
 		//double apjomsMin=0.01;
@@ -114,7 +114,7 @@ class CilvekuDarbibas {
 	}
 	
 	protected static void healingAndHunger(int numurs) {
-		Cilveks cilveks=Dati.cilvekiList.get(numurs);
+		Cilveks cilveks=Main.cilvekiList.get(numurs);
 		
 		double dHpRegen=Parametri.healingRateDefault,
 				dHpHungry=Parametri.healthReductionRate,
@@ -135,7 +135,7 @@ class CilvekuDarbibas {
 	}
 	
 	protected static void trauma(int numurs, double stiprums, double precizitate) {
-		Cilveks cilveks=Dati.cilvekiList.get(numurs);
+		Cilveks cilveks=Main.cilvekiList.get(numurs);
 		
 		if (stiprums*precizitate>cilveks.brunas) {
 			cilveks.hp-=stiprums*precizitate-cilveks.brunas;
@@ -143,11 +143,11 @@ class CilvekuDarbibas {
 	}
 	
 	protected static void vairosanas(int numurs) {
-		Cilveks cilveks=Dati.cilvekiList.get(numurs);
+		Cilveks cilveks=Main.cilvekiList.get(numurs);
 		
 		Random r=new Random();
 		
-		//System.out.println(Dati.cilvekiList.indexOf(this)+" vairosanas cikls");
+		//System.out.println(Main.cilvekiList.indexOf(this)+" vairosanas cikls");
 		Cilveks.maxCilveks++;
 		String vards=Parametri.vardsDefault+Cilveks.maxCilveks;
 		double x=cilveks.xyz.x, y=cilveks.xyz.y; //x un y
@@ -177,7 +177,7 @@ class CilvekuDarbibas {
 		int[] rangs= new int[2];
 		if ((r.nextDouble()<Parametri.dzimstotDefectionChance && cilveks.rangs[1]==0 )|| cilveks.komanda=="Anarhija") { //izveido savu komandu
 			KomanduApskats.jaunaKomanda(cilveks.vards);//nosauks tçva vârdâ, tçvs bûs karalis
-			komanda=Dati.komandasList.get(Dati.komandasList.size()-1).nosaukums;
+			komanda=Main.komandasList.get(Main.komandasList.size()-1).nosaukums;
 			System.out.println("izveidota komanda "+komanda);
 			cilveks.komanda = komanda;
 			cilveks.rangs[0]=0;
@@ -197,7 +197,7 @@ class CilvekuDarbibas {
     }
 	
 	protected static void tuvoties(int numurs, double[] XY, double hpKoef, double vKoef){
-		Cilveks cilveks=Dati.cilvekiList.get(numurs);
+		Cilveks cilveks=Main.cilvekiList.get(numurs);
 		
 		cilveks.xyz.fi = Formulas.lenkaNoteiksana(cilveks.xyz.x, cilveks.xyz.y, XY[0], XY[1]);
 		
@@ -205,7 +205,7 @@ class CilvekuDarbibas {
 	}
 	
 	protected static void atkapties(int numurs, double[] XY, double hpKoef, double vKoef){
-		Cilveks cilveks=Dati.cilvekiList.get(numurs);
+		Cilveks cilveks=Main.cilvekiList.get(numurs);
 		
 		cilveks.xyz.fi = 180 + Formulas.lenkaNoteiksana(cilveks.xyz.x,cilveks.xyz.y, XY[0], XY[1]);
 		
@@ -213,23 +213,23 @@ class CilvekuDarbibas {
 	}
 	
 	protected static void mekletZeltu(int numurs, int i, double hpKoef, double vKoef) {
-		Cilveks cilveks=Dati.cilvekiList.get(numurs);
+		Cilveks cilveks=Main.cilvekiList.get(numurs);
 		
 		cilveks.darbiba="meklet zeltu";
 		
-		tuvoties(numurs, new double[] {Dati.lietas.get(i).x,Dati.lietas.get(i).y},hpKoef, vKoef);
+		tuvoties(numurs, new double[] {Main.lietas.get(i).x,Main.lietas.get(i).y},hpKoef, vKoef);
 	}
 	
 	protected static void mekletPaiku(int numurs, int i, double hpKoef, double vKoef) {
-		Cilveks cilveks=Dati.cilvekiList.get(numurs);
+		Cilveks cilveks=Main.cilvekiList.get(numurs);
 		
 		cilveks.darbiba="meklet paiku";
 		
-		tuvoties(numurs, new double[] {Dati.lietas.get(i).x,Dati.lietas.get(i).y},hpKoef, vKoef);
+		tuvoties(numurs, new double[] {Main.lietas.get(i).x,Main.lietas.get(i).y},hpKoef, vKoef);
 	}
 	
 	protected static void atputa(int numurs, double hpKoef) {
-		Cilveks cilveks=Dati.cilvekiList.get(numurs);
+		Cilveks cilveks=Main.cilvekiList.get(numurs);
 		
 		cilveks.darbiba="atputa";
 		
@@ -254,7 +254,7 @@ class CilvekuDarbibas {
 	}
 	
 	protected static void komanduMaina(int numurs, double paikaMaina, double zeltsMaina, double anarchyChance, double orderChance) {
-		Cilveks cilveks=Dati.cilvekiList.get(numurs);
+		Cilveks cilveks=Main.cilvekiList.get(numurs);
 		
 		int zeltsNr=CilvekuApskats.countInventory(numurs,"Zelts", true);
 		double zeltsSum=0;
@@ -266,10 +266,10 @@ class CilvekuDarbibas {
 		
 		Random r = new Random();
 		if (cilveks.rangs[1]==0 && paikaSum<paikaMaina && zeltsSum<zeltsMaina) { //tikai pirmâ lîmeòa spçlçtâji varçs mainît komandu
-			if (Dati.komandasList.size()>1 && (cilveks.komanda==Dati.komandasList.get(0).nosaukums && r.nextDouble()<orderChance)) { //ja ir bez komandas, pievienojas citai (izvçlâs  random, bet ne 0)
-				cilveks.komanda=Dati.komandasList.get(r.nextInt(Dati.komandasList.size()-1)+1).nosaukums; 
-			} else if (r.nextDouble()<anarchyChance && cilveks.komanda!=Dati.komandasList.get(0).nosaukums) { //iespçja, ka pametîs esoðo komandu (tikai, ja kâdâ ir komandâ)
-				cilveks.komanda=Dati.komandasList.get(0).nosaukums;
+			if (Main.komandasList.size()>1 && (cilveks.komanda==Main.komandasList.get(0).nosaukums && r.nextDouble()<orderChance)) { //ja ir bez komandas, pievienojas citai (izvçlâs  random, bet ne 0)
+				cilveks.komanda=Main.komandasList.get(r.nextInt(Main.komandasList.size()-1)+1).nosaukums; 
+			} else if (r.nextDouble()<anarchyChance && cilveks.komanda!=Main.komandasList.get(0).nosaukums) { //iespçja, ka pametîs esoðo komandu (tikai, ja kâdâ ir komandâ)
+				cilveks.komanda=Main.komandasList.get(0).nosaukums;
 			}
 		}
 	}
@@ -279,8 +279,8 @@ class CilvekuDarbibas {
 			double hp, double hpmax, double paika, double R1, double R2,
 			double brunas, double stiprums, double gataviba, double drosme, String komanda, int[] rangs) {
 		
-		int i=Dati.cilvekiList.size();
-		Dati.cilvekiList.add(new Cilveks());
+		int i=Main.cilvekiList.size();
+		Main.cilvekiList.add(new Cilveks());
 		
 		
 		Koord xyz = new Koord();
@@ -290,24 +290,24 @@ class CilvekuDarbibas {
 		xyz.fi=koord[3];
 		
 		
-		Dati.cilvekiList.get(i).xyz=xyz;
-		Dati.cilvekiList.get(i).vards=vards;
+		Main.cilvekiList.get(i).xyz=xyz;
+		Main.cilvekiList.get(i).vards=vards;
 		
-		Dati.cilvekiList.get(i).vmax=vmax;				//primârie Parametri
-		Dati.cilvekiList.get(i).ommax=ommax;
-		Dati.cilvekiList.get(i).hp=hp;
-		Dati.cilvekiList.get(i).hpmax=hpmax;
-		Dati.cilvekiList.get(i).paika=paika;
-		Dati.cilvekiList.get(i).paikaMax=Parametri.paikaMax;
-		Dati.cilvekiList.get(i).paikaMin=Parametri.paikaMin;
+		Main.cilvekiList.get(i).vmax=vmax;				//primârie Parametri
+		Main.cilvekiList.get(i).ommax=ommax;
+		Main.cilvekiList.get(i).hp=hp;
+		Main.cilvekiList.get(i).hpmax=hpmax;
+		Main.cilvekiList.get(i).paika=paika;
+		Main.cilvekiList.get(i).paikaMax=Parametri.paikaMax;
+		Main.cilvekiList.get(i).paikaMin=Parametri.paikaMin;
 		
-		Dati.cilvekiList.get(i).R1=R1;					//redzesloks
-		Dati.cilvekiList.get(i).R2=R2;
+		Main.cilvekiList.get(i).R1=R1;					//redzesloks
+		Main.cilvekiList.get(i).R2=R2;
 		
 		//default inventory
 		Lieta mantojumsZelts=new Lieta();
-		mantojumsZelts.x=Dati.cilvekiList.get(i).xyz.x;
-		mantojumsZelts.y=Dati.cilvekiList.get(i).xyz.y;
+		mantojumsZelts.x=Main.cilvekiList.get(i).xyz.x;
+		mantojumsZelts.y=Main.cilvekiList.get(i).xyz.y;
 		mantojumsZelts.nosaukums="Zelts";
 		mantojumsZelts.daudzums=Parametri.mantojumsCilvekam;
 		mantojumsZelts.zelts=1;
@@ -316,11 +316,11 @@ class CilvekuDarbibas {
 		mantojumsZelts.attack=0;
 		mantojumsZelts.defence=0;
 		mantojumsZelts.condition=1;
-		Dati.cilvekiList.get(i).inventory.add(mantojumsZelts);
+		Main.cilvekiList.get(i).inventory.add(mantojumsZelts);
 		
 		Lieta mantojumsPaika=new Lieta();
-		mantojumsPaika.x=Dati.cilvekiList.get(i).xyz.x;
-		mantojumsPaika.y=Dati.cilvekiList.get(i).xyz.y;
+		mantojumsPaika.x=Main.cilvekiList.get(i).xyz.x;
+		mantojumsPaika.y=Main.cilvekiList.get(i).xyz.y;
 		mantojumsPaika.nosaukums="Paika";
 		mantojumsPaika.daudzums=Parametri.mantojumsCilvekamPaika;
 		mantojumsPaika.zelts=0;
@@ -329,15 +329,15 @@ class CilvekuDarbibas {
 		mantojumsPaika.attack=0;
 		mantojumsPaika.defence=0;
 		mantojumsPaika.condition=1;
-		Dati.cilvekiList.get(i).inventory.add(mantojumsPaika);
+		Main.cilvekiList.get(i).inventory.add(mantojumsPaika);
 		
-		Dati.cilvekiList.get(i).brunas=brunas;			//cîòas parametri
-		Dati.cilvekiList.get(i).stiprums=stiprums;
-		Dati.cilvekiList.get(i).gataviba=gataviba;
-		Dati.cilvekiList.get(i).drosme=drosme;
+		Main.cilvekiList.get(i).brunas=brunas;			//cîòas parametri
+		Main.cilvekiList.get(i).stiprums=stiprums;
+		Main.cilvekiList.get(i).gataviba=gataviba;
+		Main.cilvekiList.get(i).drosme=drosme;
 		
-		Dati.cilvekiList.get(i).rangs = rangs;
-		Dati.cilvekiList.get(i).komanda=komanda;
+		Main.cilvekiList.get(i).rangs = rangs;
+		Main.cilvekiList.get(i).komanda=komanda;
 	}
 	
 	

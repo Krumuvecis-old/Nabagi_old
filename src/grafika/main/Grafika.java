@@ -13,8 +13,8 @@ import calculations.cilveki.Cilveks;
 import calculations.komandas.Komanda;
 import calculations.komandas.KomanduApskats;
 import calculations.lietas.Lieta;
-import konstantes.Parametri;
-import konstantes.CalculationTimeCalculator;
+import calculations.konstantes.Parametri;
+import calculations.CalculationTimeCalculator;
 
 @SuppressWarnings("serial")
 class Grafika extends JPanel {
@@ -24,9 +24,9 @@ class Grafika extends JPanel {
 	
 	private static SetupThread threadTemp; //temporary lielums zîmçðanas funkcijâm
 	
-	protected ArrayList<Cilveks> cilvekiList = galvenais.Dati.cilvekiList;
-	protected ArrayList<Komanda> komandasList = galvenais.Dati.komandasList;
-	protected ArrayList<Lieta> lietasList = galvenais.Dati.lietas;
+	protected ArrayList<Cilveks> cilvekiList = calculations.Main.cilvekiList;
+	protected ArrayList<Komanda> komandasList = calculations.Main.komandasList;
+	protected ArrayList<Lieta> lietasList = calculations.Main.lietas;
 	
 	//te nelikt mainîgos!!! (var likt pie thread.dati)
 	
@@ -85,7 +85,7 @@ class Grafika extends JPanel {
 		
 		int w=0; //uzrakstîto rindu skaits
 		
-		CalculationTimeCalculator calculationTimeCalculatorTemp=galvenais.Main.calculationTimeCalculator; //informâcija par galvenâ thread statusu
+		CalculationTimeCalculator calculationTimeCalculatorTemp=calculations.Main.calculationTimeCalculator; //informâcija par galvenâ thread statusu
 		if (threadTemp.dati.drawCalculationTime) {
 			g.drawString("Par aprçíinu Thread:", nobideX,w*tekstaPlatums+nobideY); w++;
 			g.drawString("CalcTimeMax("+calculationTimeCalculatorTemp.timeCalculationFrequency+"): "+
@@ -93,7 +93,7 @@ class Grafika extends JPanel {
 			g.drawString("TotalFrameTime("+calculationTimeCalculatorTemp.timeCalculationFrequency+"): "+
 					calculationTimeCalculatorTemp.totalFrameTimeMax, nobideX,w*tekstaPlatums+nobideY); w++;
 		}
-		g.drawString("Pauze: "+galvenais.Main.pauze,nobideX,w*tekstaPlatums+nobideY);w++;
+		g.drawString("Pauze: "+calculations.Main.pauze,nobideX,w*tekstaPlatums+nobideY);w++;
 		g.drawString("---------------",nobideX,w*tekstaPlatums+nobideY);w++;
 		
 		//tekoðâ informâcija par komandâm

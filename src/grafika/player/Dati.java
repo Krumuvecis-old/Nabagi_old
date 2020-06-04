@@ -4,57 +4,67 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import calculations.cilveki.Cilveks;
+import grafika.player.centerPanel.DrawCenterPanel;
+import grafika.player.sidePanels.DrawSidePanels;
 
-class Dati {
-	protected konstantes.CalculationTimeCalculator calculationTimeCalculator = new konstantes.CalculationTimeCalculator();
+public class Dati {
+	public calculations.CalculationTimeCalculator calculationTimeCalculator = new calculations.CalculationTimeCalculator();
 	
-	protected boolean lobby=false, playerDead=false;
+	public boolean lobby=false;
+
+	public boolean playerDead=false;
 	public String playerName;
-	protected Cilveks player;
+	public Cilveks player;
 		
-	protected String windowTitleDefault=konstantes.Parametri.ekranaNosaukums+", PlayerView";
+	protected String windowTitleDefault=calculations.konstantes.Parametri.ekranaNosaukums+", PlayerView";
 	protected String windowTitle;
 	protected static Color fonaKrasa=Color.black, nosaukumaKrasa=Color.gray;
 	protected static int nosaukumsX=5, nosaukumsY=15;
 	protected boolean fullscreen;
-	protected int ekranaPlatums, ekranaAugstums;
+	public int ekranaPlatums, ekranaAugstums;
 	
-	protected ArrayList<Button> buttonList;
+	public ArrayList<Button> buttonList;
 	
 	
 	// --------------------
 	//zemâk par kartes zîmçðanu
 	
-	protected DrawMap drawMap = new DrawMap();
+	public DrawCenterPanel drawCenterPanel = new DrawCenterPanel();
+	public DrawSidePanels drawSidePanels = new DrawSidePanels();
 	
 	//protected boolean karteDrawInfo=true; //zem kartes var izvadît datus par izmçriem
 	
-	protected static int karteNobideX=15, karteNobideY=nosaukumsY*2, karteAtstatumsX=20, karteAtstatumsY=60; //laukuma nobîde ekrânâ
-	protected int kartePlatums;
+	public static int karteNobideX=15, karteNobideY=nosaukumsY*2; //laukuma nobîde ekrânâ
+	
+	
+	public static int karteAtstatumsX=20, karteAtstatumsY=60;
+	public int kartePlatums;
 	
 	//protected int kartesPlatums, kartesAugstums;
 	protected double merogs;
 	
-	protected boolean drawCrosshair=true;
-	protected static int crosshairSize=30;
+	public boolean drawCrosshair=true;
+	public static int crosshairSize=30;
 	
 	// --------------------
 	//zemâk par loot zîmçðanu
 	
-	protected boolean lietasDrawInfo=false; //papildinformâcijas zîmçðana
+	public boolean lietasDrawInfo=false; //papildinformâcijas zîmçðana
 	
 	// --------------------
 	//zemâk par cilvçku zîmçðanu
 	
-	protected boolean cilvekiDrawInfo=false, cilvekiDrawR=false; //papildinformâcijas un redzesloku zîmçðana
+	public boolean cilvekiDrawInfo=false; //papildinformâcijas un redzesloku zîmçðana
+
+	public boolean cilvekiDrawR=false;
 	
 	
 	// --------------------
 	//zemâk par input testa paneli
 	
-	protected boolean diagnosticsPanelDraw=true;
-	protected static Color diagnosticsPanelColor=nosaukumaKrasa;
-	protected static int diagnosticPanelPlatums=150, diagnosticPanelAugstums=200;
+	public boolean diagnosticsPanelDraw=true;
+	public static Color diagnosticsPanelColor=nosaukumaKrasa;
+	public static int diagnosticPanelPlatums=150, diagnosticPanelAugstums=200;
 	protected int diagnosticsPanelWx=150,
 			diagnosticsPanelX=ekranaPlatums-diagnosticsPanelWx-5, diagnosticsPanelY=30;
 	
@@ -120,7 +130,7 @@ class Dati {
 		playerDead=false;
 		
 		if (!primary) {
-			playerName=galvenais.Dati.cilvekiList.get(0).vards;
+			playerName=calculations.Main.cilvekiList.get(0).vards;
 		}
 		
 		findPlayer(thread);
@@ -129,10 +139,10 @@ class Dati {
 	
 	protected int findPlayer(PlayerThread thread) {
 		int number=-1;
-		for (int i=0; i<galvenais.Dati.cilvekiList.size();i++) {
-			if (galvenais.Dati.cilvekiList.get(i).vards==playerName) {
+		for (int i=0; i<calculations.Main.cilvekiList.size();i++) {
+			if (calculations.Main.cilvekiList.get(i).vards==playerName) {
 				number=i;
-				player=galvenais.Dati.cilvekiList.get(i);
+				player=calculations.Main.cilvekiList.get(i);
 				break;
 			}
 		}

@@ -1,6 +1,6 @@
 package grafika.main;
 
-import konstantes.Parametri;
+import calculations.konstantes.Parametri;
 
 public class SetupThread implements Runnable{
 	
@@ -74,7 +74,7 @@ public class SetupThread implements Runnable{
 			if (dati.buttonList.get(i).result) { //ja poga nostrâdâjusi
 				
 				if (i==0) { //pirmâ poga
-					galvenais.Main.pauze=!galvenais.Main.pauze;
+					calculations.Main.pauze=!calculations.Main.pauze;
 					
 				} else if (i==1) { //otrâ poga
 					dati.startPlayerView(false);

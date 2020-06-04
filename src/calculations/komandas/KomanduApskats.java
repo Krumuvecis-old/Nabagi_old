@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.util.Arrays;
 import java.util.Random;
 
-import konstantes.Formulas;
-import konstantes.Parametri;
-import galvenais.Dati;
+import calculations.konstantes.Formulas;
+import calculations.konstantes.Parametri;
+import calculations.Main;
 import calculations.cilveki.Cilveks;
 import calculations.cilveki.CilvekuApskats;
 
@@ -17,7 +17,7 @@ public class KomanduApskats {
 	public static String komanduVestureLielakaKomanda="0";
 	
 	public static void main() {
-		for(int i=0;i<Dati.komandasList.size();i++) { //apskata visas komandas
+		for(int i=0;i<Main.komandasList.size();i++) { //apskata visas komandas
 			
 			playerCount(i);
 			
@@ -25,15 +25,15 @@ public class KomanduApskats {
 			
 			
 			
-			if (Dati.komandasList.get(i).skaits>0){ //pârbaudu, lai nav jâmaïâs cauri tukðajâm komandâm
+			if (Main.komandasList.get(i).skaits>0){ //pârbaudu, lai nav jâmaïâs cauri tukðajâm komandâm
 				
 				komanduVesture(i);
 				komanduApskats(i);
 				
 			}
 			
-			if (Dati.komandasList.get(i).skaits<=0){ //ðis ir komandu cleanup
-				Dati.komandasList.remove(i);
+			if (Main.komandasList.get(i).skaits<=0){ //ðis ir komandu cleanup
+				Main.komandasList.remove(i);
 				i--;
 				continue;
 			}
@@ -42,10 +42,10 @@ public class KomanduApskats {
 	}
 	
 	private static void playerCount(int numurs) {
-		Komanda komanda=Dati.komandasList.get(numurs);
+		Komanda komanda=Main.komandasList.get(numurs);
 		int speletaji=0;
-		for (int i=0;i<Dati.cilvekiList.size();i++) {
-			if (komanda.nosaukums==Dati.cilvekiList.get(i).komanda) speletaji++;
+		for (int i=0;i<Main.cilvekiList.size();i++) {
+			if (komanda.nosaukums==Main.cilvekiList.get(i).komanda) speletaji++;
 		}
 		komanda.skaits=speletaji;
 	}
@@ -53,15 +53,15 @@ public class KomanduApskats {
 	private static void komanduVesture(int i) {
 		//i nekad nebûs 0, jo tiek atsijâts iepriekð
 		
-		if (Dati.komandasList.get(i).skaits>komanduVestureMaksimums) {
-			komanduVestureMaksimums=Integer.valueOf(Dati.komandasList.get(i).skaits);
-			komanduVestureLielakaKomanda=String.valueOf(Dati.komandasList.get(i).nosaukums);
+		if (Main.komandasList.get(i).skaits>komanduVestureMaksimums) {
+			komanduVestureMaksimums=Integer.valueOf(Main.komandasList.get(i).skaits);
+			komanduVestureLielakaKomanda=String.valueOf(Main.komandasList.get(i).nosaukums);
 		}
 	}
 	
 	private static void komanduApskats(int numurs) {
 		//numurs nekad nebûs 0, jo tiek atsijâts jau ieprekð
-		//Komanda komanda=Dati.komandasList.get(numurs); 
+		//Komanda komanda=Main.komandasList.get(numurs); 
 		
 		int[] elite = mekleKarali(numurs); //temporary lielums
 		int karalis=elite[0], bagatakais=elite[1];
@@ -69,7 +69,7 @@ public class KomanduApskats {
 		if (karalis<0) karalis=navKaralis(numurs, bagatakais); //ja komandâ nav atrodams galvenais
 		
 		if(!(karalis<0)) {//vçlreiz apskata visus, ja jauns karalis atrasts
-			for (int i=0;i<Dati.cilvekiList.size();i++) { //vçlreiz apskata visus komandasbiedrus
+			for (int i=0;i<Main.cilvekiList.size();i++) { //vçlreiz apskata visus komandasbiedrus
 				if(i==karalis) continue;
 				
 				//te varçtu pârskatît rangus vai veikt jebkâdas citas darbîbas
@@ -79,11 +79,11 @@ public class KomanduApskats {
 	
 	private static int[] mekleKarali(int numurs) {
 		int karalis=-1, bagatakais=-1;
-		Komanda komanda=Dati.komandasList.get(numurs);
+		Komanda komanda=Main.komandasList.get(numurs);
 		
 		double bagatiba=0;
-		for (int i=0;i<Dati.cilvekiList.size();i++) {
-			Cilveks cilveks=Dati.cilvekiList.get(i);
+		for (int i=0;i<Main.cilvekiList.size();i++) {
+			Cilveks cilveks=Main.cilvekiList.get(i);
 			
 			if(cilveks.komanda==komanda.nosaukums) {//apskata  visus komandas locekïus
 				
@@ -106,18 +106,18 @@ public class KomanduApskats {
 	}
 	
 	private static int navKaralis(int numurs, int bagatakais) {
-		Komanda komanda=Dati.komandasList.get(numurs);
+		Komanda komanda=Main.komandasList.get(numurs);
 		int karalis=-1;
 		Random r=new Random();
 		
 		if(r.nextDouble()<Parametri.komandaIzjuktChance) { //iespçja, ka mirstot karalim, izjuks komanda
 			
-			for (int i=0;i<Dati.cilvekiList.size();i++) { //visus komandasbiedrus pârliek 0.komandâ
-				if(Dati.cilvekiList.get(i).komanda==komanda.nosaukums) {
-					Dati.cilvekiList.get(i).komanda=Dati.komandasList.get(0).nosaukums; //visus ieliek 0.komandâ
+			for (int i=0;i<Main.cilvekiList.size();i++) { //visus komandasbiedrus pârliek 0.komandâ
+				if(Main.cilvekiList.get(i).komanda==komanda.nosaukums) {
+					Main.cilvekiList.get(i).komanda=Main.komandasList.get(0).nosaukums; //visus ieliek 0.komandâ
 					
-					//Dati.cilvekiList.get(i).rangs[0]=0; //ðî aile lai paliek, jo karavîri var bût karavîri arî bez komandas
-					Dati.cilvekiList.get(i).rangs[1]=0;
+					//Main.cilvekiList.get(i).rangs[0]=0; //ðî aile lai paliek, jo karavîri var bût karavîri arî bez komandas
+					Main.cilvekiList.get(i).rangs[1]=0;
 					
 					komanda.skaits=0; //ðis vajadzîgs, lai komandu varçtu izdzçst
 				}
@@ -126,9 +126,9 @@ public class KomanduApskats {
 		} else { //karaïa titula pârdalîðana
 			
 			karalis=bagatakais;
-			Dati.cilvekiList.get(karalis).rangs[0]=0;
-			Dati.cilvekiList.get(karalis).rangs[1]=3;
-			komanda.galvenais=Dati.cilvekiList.get(karalis).vards;
+			Main.cilvekiList.get(karalis).rangs[0]=0;
+			Main.cilvekiList.get(karalis).rangs[1]=3;
+			komanda.galvenais=Main.cilvekiList.get(karalis).vards;
 		}
 		
 		return karalis;
@@ -148,7 +148,7 @@ public class KomanduApskats {
 		jaunaKomanda.krasa=assignColor();
 		
 		
-		Dati.komandasList.add(jaunaKomanda);
+		Main.komandasList.add(jaunaKomanda);
 			
 	}
 	
@@ -165,15 +165,15 @@ public class KomanduApskats {
 		} else bannedList = new double[0];
 		
 		
-		double[] colorList = new double[Dati.komandasList.size() + bannedList.length]; //kopçjais nepieejamo krâsu saraksts
+		double[] colorList = new double[Main.komandasList.size() + bannedList.length]; //kopçjais nepieejamo krâsu saraksts
 		
-		for (int i=0; i<Dati.komandasList.size(); i++) { //nolasa visu esoðo komandu krâsas un saliek sarakstâ
-			Color krasa = Dati.komandasList.get(i).krasa;
+		for (int i=0; i<Main.komandasList.size(); i++) { //nolasa visu esoðo komandu krâsas un saliek sarakstâ
+			Color krasa = Main.komandasList.get(i).krasa;
 			colorList[i] = Formulas.getHue(krasa);
 		}
 		
 		for (int i=0;i<bannedList.length;i++) { //saliek sarakstâ visas pavisam aizliegtâs krâsas
-			colorList[i+Dati.komandasList.size()]=bannedList[i];
+			colorList[i+Main.komandasList.size()]=bannedList[i];
 		}
 		
 		return colorList;
