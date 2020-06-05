@@ -13,8 +13,7 @@ class InitializeManager {
 
         CilvekuApskats.setup();
 
-        grafika.main.SetupThread setupThread = new grafika.main.SetupThread(); //palaiþ grafisko daïu
-        setupThread.start();
+        newSetupWindow();
 
     }
 
@@ -49,10 +48,14 @@ class InitializeManager {
 
     private static void initializeKomandas(){
 
+        //kas te notiek?
+
+
     }
 
     private static void newSetupWindow(){
-
+        grafika.main.SetupThread setupThread = new grafika.main.SetupThread(); //palaiþ grafisko daïu
+        setupThread.start();
     }
 
 }
