@@ -15,8 +15,8 @@ class Kustiba {
 	}
 	
 	private static void lenkuParbaude(Cilveks cilveks) { //leòíu noîsinâðana
-		for(;cilveks.xyz.fi<0;cilveks.xyz.fi+=360) {}
-		for(;cilveks.xyz.fi>=360;cilveks.xyz.fi-=360) {}
+		for( ; cilveks.xyz.fi<0; cilveks.xyz.fi+=360) {}
+		for( ; cilveks.xyz.fi>=360; cilveks.xyz.fi-=360) {}
 	}
 
 	private static void kustiba(Cilveks cilveks) { //koordinâtu nomaiòa
@@ -54,10 +54,21 @@ class Kustiba {
 			if (chunkY >= KonstantesUniversal.mapChunkCountY) chunkY = 0;
 		}
 
-		cilveks.xyz.xChunk=chunkX;
-		cilveks.xyz.yChunk=chunkY;
+		if(cilveks.xyz.xChunk!=chunkX || cilveks.xyz.yChunk!=chunkY){
 
-//		zemâk atdurðanâs pret malâm
+
+			//jâizòem no vienas tabulas un jâieliek otrâ - jâmaina metodes argumenti
+
+
+
+			cilveks.xyz.xChunk=chunkX;
+			cilveks.xyz.yChunk=chunkY;
+		}
+
+	}
+
+	private static void maluParbaudeVecais(){
+		//		zemâk atdurðanâs pret malâm
 //		int augstums= KonstantesUniversal.laukumaAugstumsSum, platums=KonstantesUniversal.laukumaPlatumsSum, mala=KonstantesUniversal.mala;
 //		double resnums= Fizikas.resnumaKoefic*cilveks.hpmax;
 //
@@ -103,7 +114,6 @@ class Kustiba {
 //				cilveks.xyz.fi=360-cilveks.xyz.fi;
 //			}
 //		}
-		
 	}
 
 	

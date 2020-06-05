@@ -6,6 +6,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import calculations.KonstantesUniversal;
+import calculations.Main;
+import calculations.MapChunk;
 import calculations.konstantes.Fizikas;
 import calculations.konstantes.Formulas;
 import calculations.cilveki.Cilveks;
@@ -16,18 +18,16 @@ import calculations.lietas.Lieta;
 import grafika.KonstantesGrafikai;
 
 class MiniMap {
-	
-	private static ArrayList<Cilveks> cilvekiList;
+
 	private static ArrayList<Komanda> komandasList;
-	private static ArrayList<Lieta> lietasList;
+	protected static ArrayList<ArrayList<MapChunk>> laukums;
 	
 	private static SetupThread thread;
 	
 	protected static void drawMiniMap(Graphics g, SetupThread threadTemp, Grafika grafika) { //pilnîgi visa karte
-		
-		cilvekiList = grafika.cilvekiList;
+
 		komandasList = grafika.komandasList;
-		lietasList = grafika.lietasList;
+		laukums = Main.laukums;
 		
 		thread = threadTemp;
 		

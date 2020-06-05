@@ -1,6 +1,9 @@
 package grafika.main;
 
+import calculations.Main;
 import calculations.MapChunk;
+import calculations.cilveki.Cilveks;
+import calculations.komandas.Biedrs;
 import grafika.KonstantesGrafikai;
 
 import java.awt.Color;
@@ -14,7 +17,8 @@ class Dati {
 	protected int ekranaPlatums=1000, ekranaAugstums=700;
 	
 	protected int nosaukumsX=5, nosaukumsY=15;
-	
+
+	protected ArrayList<Biedrs> cilvekuPilnaisList;
 	protected ArrayList<Button> buttonList;
 	
 	protected String playerFocusName;
@@ -70,7 +74,12 @@ class Dati {
 	
 	
 	protected void initialize() {
-		
+
+		//par spçlçtâjiem
+
+		getPlayerTotalList();
+
+
 		// --------------------
 		//par pogâm
 		
@@ -121,11 +130,31 @@ class Dati {
 		buttonList.get(i).result=false;
 		
 	}
-	
+
+	private void getPlayerTotalList(){
+		cilvekuPilnaisList = new ArrayList<Biedrs>();
+
+		for(int[] chunkXY = {0, 0}; chunkXY[0]< Main.laukums.size(); chunkXY[0]++) {
+			for( ; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
+
+
+
+				for (int i=0; i<Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
+
+					Biedrs cilveks = new Biedrs();
+					cilveks.chunkXY=chunkXY;
+					cilveks.i=i;
+					cilvekuPilnaisList.add(cilveks);
+				}
+
+			}
+		}
+	}
+
 	protected void playerFocusFind() {
 		int number=-1;
-		for (int i = 0; i< MapChunk.cilvekiList.size(); i++) {
-			if (MapChunk.cilvekiList.get(i).vards==playerFocusName) {
+		for (int i = 0; i< cilvekuPilnaisList.size(); i++) {
+			if (Cilveks.getPlayer(cilvekuPilnaisList.get(i).chunkXY,cilvekuPilnaisList.get(i).i).vards==playerFocusName) {
 				number=i;
 				break;
 			}
@@ -139,10 +168,10 @@ class Dati {
 	
 	protected void startPlayerView(boolean randomize) {
 		int i=0;
-		if (randomize) i=(new java.util.Random()).nextInt(MapChunk.cilvekiList.size());
+		if (randomize) i=(new java.util.Random()).nextInt(cilvekuPilnaisList.size());
 		
 		grafika.player.PlayerThread threadTemp=new grafika.player.PlayerThread(); //jauns spçlçtâja logs
-		String playerName= MapChunk.cilvekiList.get(i).vards;
+		String playerName = Cilveks.getPlayer(cilvekuPilnaisList.get(i).chunkXY,cilvekuPilnaisList.get(i).i).vards;
 		threadTemp.initialize(playerName);
 		
 		if(!playerFocused) { //ja nav fokusa, fokusçjas uz spçlçtâju
