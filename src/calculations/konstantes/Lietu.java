@@ -18,7 +18,6 @@ public class Lietu {
 
         updateGenRates();
 
-
     }
 
     public static void updateGenRates(){

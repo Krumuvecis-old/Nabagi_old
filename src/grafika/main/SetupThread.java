@@ -97,12 +97,12 @@ public class SetupThread implements Runnable{
 					dati.colorPanelDraw=!dati.colorPanelDraw;
 					
 				} else if (i==8) { //devîtâ poga
-					Lietu.goldGenRate+=0.01;
-					Lietu.paikaGenRate+=0.02;
+					Lietu.overallGenRate+=0.01;
+					Lietu.updateGenRates();
 					
 				} else if (i==9) { //desmitâ poga
-					Lietu.goldGenRate-=0.01;
-					Lietu.paikaGenRate-=0.02;
+					Lietu.overallGenRate-=0.01;
+					Lietu.updateGenRates();
 					
 				}
 				
