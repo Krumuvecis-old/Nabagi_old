@@ -13,8 +13,8 @@ import calculations.cilveki.CilvekuApskats;
 
 public class Main {
 
-	public static ArrayList<Komanda> komandasList; //komandu datubâze
-	public static ArrayList<ArrayList<MapChunk>> laukums; //laukums-karte
+	public static ArrayList<Komanda> komandasList = new ArrayList<Komanda>(); //komandu datubâze
+	public static ArrayList<ArrayList<MapChunk>> laukums = new  ArrayList<ArrayList<MapChunk>>(); //laukums-karte
 	
 	public static boolean pauze=true;//, patsStarts=true;
 	public static CalculationTimeCalculator calculationTimeCalculator = new CalculationTimeCalculator();
@@ -48,46 +48,7 @@ public class Main {
 	}
 	
 	private static void initialize() {
-		initializeKonstantes();
-		komandasList = new ArrayList<Komanda>();
-		initializeLaukums();
-		
-		CilvekuApskats.setup();
-		
-		grafika.main.SetupThread setupThread = new grafika.main.SetupThread(); //palaiþ grafisko daïu
-		setupThread.start();
-		
-	}
 
-	private static void initializeKonstantes() {
-
-		KonstantesUniversal.initialize();
-
-		Lietu.initialize();
-
-		Komandu.initialize();
-		Cilveku.initialize();
-
-		Fizikas.initialize();
-		Grafiskie.initialize();
-
-	}
-
-	private static void  initializeLaukums() {
-		int mapChunkCountX = KonstantesUniversal.mapChunkCountX,
-				mapChunkCountY = KonstantesUniversal.mapChunkCountY;
-		laukums =  new  ArrayList<ArrayList<MapChunk>>();
-
-		for (int i=0; i<mapChunkCountX;i++){
-			laukums.add(new ArrayList<MapChunk>());
-			for (int j=0; j<mapChunkCountY;j++){
-				MapChunk chunk = new MapChunk();
-				laukums.get(i).add(chunk);
-				laukums.get(i).get(j).initialize();
-
-			}
-		}
-	}
 
 
 }
