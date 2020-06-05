@@ -21,9 +21,8 @@ public class LietuApskats {
 	private static void lootGeneratorAll(){
 		Random r=new Random();
 
-		for (int i=0; i<Main.laukums.size(); i++){
-			for(int j=0; j<Main.laukums.get(i).size(); j++){
-				int[] chunkXY = { i, j };
+		for (int[] chunkXY={0,0}; chunkXY[0]<Main.laukums.size(); chunkXY[0]++){
+			for( ; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++){
 
 				if (r.nextDouble() < Lietu.goldGenRate){ //random zelta ìenerators
 					lootGeneratorOnce(chunkXY, "Zelts", Lietu.goldGenMin, Lietu.goldGenMax);

@@ -3,11 +3,14 @@ package calculations.cilveki;
 import java.util.ArrayList;
 
 import calculations.Main;
+import calculations.komandas.Biedrs;
 import calculations.lietas.Lieta;
 
 public class Cilveks {
 	
 	public static int maxCilveks=0; //numerâcija vârdu doðanai
+	public static ArrayList<Biedrs> cilvekuListPilnais = new ArrayList<Biedrs>();
+	public static int rekords=0;
 	
 	
 	public String vards;
@@ -45,10 +48,64 @@ public class Cilveks {
 	
 	//animâcijai un testiem
 	public String darbiba;
-	
+
+	protected static void getCilvekuList(){
+		for(int[] chunkXY = {0, 0}; chunkXY[0]< Main.laukums.size(); chunkXY[0]++) {
+			for( ; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
+
+				for (int i=0; i<cilvekuListPilnais.size(); i++){
+					Biedrs biedrs = new Biedrs();
+					biedrs.chunkXY=chunkXY;
+					biedrs.i=i;
+					cilvekuListPilnais.add(biedrs);
+				}
+
+			}
+		}
+	}
 	
 	public static Cilveks getPlayer(int[] chunkXY, int i){
 		return Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.get(i);
 	}
-	
+
+	public int countInventory(String nosaukums, boolean cleanup) {
+
+		int numurs=-1;
+		@SuppressWarnings("unused")
+		double daudzums=0;
+
+		for (int i=0;i<inventory.size();i++) {
+
+			if (inventory.get(i).daudzums<=0) { //izdzçð tukðos elementus
+
+				inventory.remove(i);
+
+				i--;
+				continue;
+			}
+
+			if(numurs<0 && inventory.get(i).nosaukums.equals(nosaukums) && inventory.get(i).daudzums>0) { //ja atrod pirmo atbilstoðo
+				numurs= i;
+
+				daudzums+=inventory.get(i).daudzums;;
+				if(!cleanup) break;
+
+				continue;
+			}
+
+			if (inventory.get(i).nosaukums.equals(nosaukums) &&
+					inventory.get(i).daudzums>0  && i!=numurs && numurs>=0) { //meklç atbilstoðus elementus
+
+				daudzums+=inventory.get(i).daudzums;
+
+				inventory.get(numurs).daudzums += inventory.get(i).daudzums;
+				inventory.get(i).daudzums=0; //sagatavo dublikâtus tâlâkai izdzçðanai
+
+			}
+
+		}
+
+		return numurs;
+	}
+
 }

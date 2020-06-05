@@ -326,11 +326,11 @@ class DrawMap {
 	private void playerDrawInfo(Graphics g, int i, Cilveks player, double[] koord, double resnums) {
 		
 		//saskaita cik kuram paika un zelts, lai varçtu izvadît
-		int zeltsNr=CilvekuApskats.countInventory(new int[]{player.xyz.xChunk, player.xyz.yChunk}, i,"Zelts", false);
+		int zeltsNr=player.countInventory("Zelts", false);
 		double zeltsSum=0;
 		if (zeltsNr>=0) zeltsSum=player.inventory.get(zeltsNr).daudzums;
 		
-		int paikaNr=CilvekuApskats.countInventory(new int[]{player.xyz.xChunk, player.xyz.yChunk}, i,"Paika", false);
+		int paikaNr=player.countInventory("Paika", false);
 		double paikaSum=0;
 		if (paikaNr>=0) paikaSum=player.inventory.get(paikaNr).daudzums;
 		

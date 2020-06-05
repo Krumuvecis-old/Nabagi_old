@@ -18,11 +18,11 @@ class CilvekuDarbibas {
 		
 		if (cilveks.paika<=cilveks.paikaMin) { //çðana no inventory - tie visi valueOf ðajâ voidâ neko nedeva - var izòemt
 			
-			int paikaJ=CilvekuApskats.countInventory(chunkXY, numurs, "Paika", true);
+			int paikaJ=cilveks.countInventory("Paika", true);
 			double paikaSum=0;
 			if (paikaJ>=0) paikaSum=cilveks.inventory.get(paikaJ).daudzums;
 			
-			if ( paikaSum>0 && (paikaJ>=0 && cilveks.inventory.size()>0) ) { //otro daïu ifâ pec OR var izòemt
+			if ( paikaSum>0/* && (paikaJ>=0 && cilveks.inventory.size()>0) */) { //otro daïu ifâ pec OR var izòemt
 				double apests=Math.min(Cilveku.esanasDaudzums, cilveks.inventory.get(paikaJ).daudzums);
 				cilveks.inventory.get(paikaJ).daudzums-=apests;
 				
@@ -64,7 +64,7 @@ class CilvekuDarbibas {
 			
 			//System.out.println("kaut ko sprieþ2: "+i+"/"+cilveks.inventory.size());
 			
-			int zeltsNr=CilvekuApskats.countInventory(chunkXY, numurs, "Zelts", false);
+			int zeltsNr=cilveks.countInventory("Zelts", false);
 			double zeltsTirgum=0;
 			if (zeltsNr>=0) zeltsTirgum=cilveks.inventory.get(zeltsNr).daudzums;
 			
@@ -156,8 +156,6 @@ class CilvekuDarbibas {
 		xyz.y = cilveks.xyz.y;
 		xyz.v = 0;
 		xyz.fi = 360*r.nextDouble();
-		xyz.xChunk = cilveks.xyz.xChunk;
-		xyz.yChunk = cilveks.xyz.yChunk;
 		
 		double vmax=Formulas.novirzeRandom(cilveks.vmax, Cilveku.dvMaxDzimstot),
 				ommax=Formulas.novirzeRandom(cilveks.ommax, Cilveku.dommaxDzimstot);
@@ -202,7 +200,7 @@ class CilvekuDarbibas {
     		rangs[1]=0;
 		}
 		
-		dzemdibas(vards,xyz,vmax,ommax,hp,hpmax,paika,
+		dzemdibas(vards,chunkXY,xyz,vmax,ommax,hp,hpmax,paika,
 				R1,R2,brunas,stiprums,gataviba,drosme,komanda,rangs);
     }
 	
@@ -263,14 +261,15 @@ class CilvekuDarbibas {
 		if(cilveks.gataviba<=Cilveku.maxGataviba-dGataviba) cilveks.gataviba+=dGataviba;
 	}
 	
-	protected static void komanduMaina(int[] chunkXY, int numurs, double paikaMaina, double zeltsMaina, double anarchyChance, double orderChance) {
+	protected static void komanduMaina(int[] chunkXY, int numurs,
+									   double paikaMaina, double zeltsMaina, double anarchyChance, double orderChance) {
 		Cilveks cilveks= Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.get(numurs);
 		
-		int zeltsNr=CilvekuApskats.countInventory(chunkXY, numurs,"Zelts", true);
+		int zeltsNr=cilveks.countInventory("Zelts", true);
 		double zeltsSum=0;
 		if (zeltsNr>=0) zeltsSum=cilveks.inventory.get(zeltsNr).daudzums;
 		
-		int paikaNr=CilvekuApskats.countInventory(chunkXY, numurs,"Paika", true);
+		int paikaNr=cilveks.countInventory("Paika", true);
 		double paikaSum=0;
 		if (paikaNr>=0) paikaSum=cilveks.inventory.get(paikaNr).daudzums;
 		
@@ -285,9 +284,10 @@ class CilvekuDarbibas {
 	}
 	
 	protected static void dzemdibas(String vards,
-			Koord xyz, double vmax, double ommax,
-			double hp, double hpmax, double paika, double R1, double R2,
-			double brunas, double stiprums, double gataviba, double drosme, String komanda, int[] rangs) {
+									int[] chunkXY, Koord xyz, double vmax, double ommax,
+									double hp, double hpmax, double paika, double R1, double R2,
+									double brunas, double stiprums, double gataviba, double drosme,
+									String komanda, int[] rangs) {
 
 		Cilveks cilveks = new Cilveks();
 
@@ -307,8 +307,6 @@ class CilvekuDarbibas {
 		
 		//default inventory
 		Lieta mantojumsZelts=new Lieta();
-		mantojumsZelts.xChunk = xyz.xChunk;
-		mantojumsZelts.yChunk = xyz.yChunk;
 		mantojumsZelts.x = xyz.x;
 		mantojumsZelts.y = xyz.y;
 		mantojumsZelts.nosaukums="Zelts";
@@ -322,8 +320,6 @@ class CilvekuDarbibas {
 		cilveks.inventory.add(mantojumsZelts);
 		
 		Lieta mantojumsPaika=new Lieta();
-		mantojumsPaika.xChunk = xyz.xChunk;
-		mantojumsPaika.yChunk = xyz.yChunk;
 		mantojumsPaika.x= cilveks.xyz.x;
 		mantojumsPaika.y= cilveks.xyz.y;
 		mantojumsPaika.nosaukums="Paika";
@@ -344,8 +340,8 @@ class CilvekuDarbibas {
 		cilveks.rangs = rangs;
 		cilveks.komanda=komanda;
 
-		int i = Main.laukums.get(xyz.xChunk).get(xyz.yChunk).cilvekiList.size();
-		Main.laukums.get(xyz.xChunk).get(xyz.yChunk).cilvekiList.add(cilveks);
+		int i = Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size();
+		Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.add(cilveks);
 	}
 	
 	

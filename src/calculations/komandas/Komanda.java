@@ -21,15 +21,6 @@ public class Komanda {
 	public ArrayList<Biedrs> biedruList = new ArrayList<Biedrs>();
 	public int karalis=-1, bagatakais=-1, rekords=0;
 
-	void update(int numurs){
-
-		getBiedruList(numurs);
-
-		//te pârçjâs funkcijas
-
-
-	}
-
 	void getBiedruList(int numurs){
 		for(int[] chunkXY = {0, 0}; chunkXY[0]< Main.laukums.size(); chunkXY[0]++) {
 			for( ; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
@@ -52,20 +43,20 @@ public class Komanda {
 
 	protected void mekleKarali(int numurs) {
 		karalis=-1;
-		bagatakais=-1;
-
+		bagatakais = -1;
 		double bagatiba=0;
+
 		for (int i = 0; i< biedruList.size(); i++) {
 			Cilveks cilveks = Main.laukums.get(biedruList.get(i).chunkXY[0]).get(biedruList.get(i).chunkXY[1]).cilvekiList.get(i);
 
 			if(cilveks.komanda.equals(nosaukums)) {//apskata  visus komandas locekïus
 
-				if (cilveks.vards.equals(galvenais)) { // meklç  galveno
+				if (cilveks.vards.equals(galvenais)) { // meklç galveno un atrod
 					karalis=i;
 				}
 
 
-				int zeltsNr= CilvekuApskats.countInventory(biedruList.get(i).chunkXY, i,"Zelts", false);
+				int zeltsNr = cilveks.countInventory("Zelts", false);
 				double zeltsSum=0;
 				if (zeltsNr>=0) zeltsSum=cilveks.inventory.get(zeltsNr).daudzums;
 
@@ -76,7 +67,5 @@ public class Komanda {
 			}
 		}
 	}
-
-
 
 }

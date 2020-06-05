@@ -20,18 +20,17 @@ public class KomanduApskats {
 	
 	public static void main() {
 		for(int i=0;i<Main.komandasList.size();i++) { //apskata visas komandas
-			
+
+			Main.komandasList.get(i).getBiedruList(i); //atjauno biedru sarakstu tâlâkiem aprçíiniem
+
 			if (i==0) continue; //pirmo komandu tâlâk neapskata
 			
 			
-			
 			if (Main.komandasList.get(i).biedruList.size()>0){ //pârbaudu, lai nav jâmaïâs cauri tukğajâm komandâm
-				
 				komanduVesture(i);
 				komanduApskats(i);
-				
 			}
-			
+
 			if (Main.komandasList.get(i).biedruList.size()<=0){ //ğis ir komandu cleanup
 				Main.komandasList.remove(i);
 				i--;
@@ -43,29 +42,30 @@ public class KomanduApskats {
 
 	private static void komanduVesture(int i) {
 		//i nekad nebûs 0, jo tiek atsijâts iepriekğ
-		
-		if (Main.komandasList.get(i).biedruList.size()>komanduVestureMaksimums) {
-			komanduVestureMaksimums=Main.komandasList.get(i).biedruList.size();
-			komanduVestureLielakaKomanda=String.valueOf(Main.komandasList.get(i).nosaukums);
+
+		Komanda komanda = Main.komandasList.get(i);
+		int skaits=komanda.biedruList.size();
+
+		if (skaits>komanda.rekords) { //nosaka personîgo rekordu
+			komanda.rekords=skaits;
+		}
+
+		if (skaits>komanduVestureMaksimums) { //meklç vçsturisko komandu-rekordisti
+			komanduVestureMaksimums=skaits;
+			komanduVestureLielakaKomanda=String.valueOf(komanda.nosaukums);
 		}
 	}
 	
 	private static void komanduApskats(int numurs) {
-		//numurs nekad nebûs 0, jo tiek atsijâts jau ieprekğ
+		//numurs un skaits nekad nebûs 0, jo tie tiek atsijâti jau ieprekğ
 		Komanda komanda=Main.komandasList.get(numurs);
 		
 		komanda.mekleKarali(numurs);
 		
 		if (komanda.karalis<0) navKaralis(numurs); //ja komandâ nav atrodams galvenais
-		
-		if(!(komanda.karalis<0)) {//vçlreiz apskata visus, ja jauns karalis atrasts
 
-			for (int i = 0; i< komanda.biedruList.size(); i++) { //vçlreiz apskata visus komandasbiedrus
-				if(i==komanda.karalis) continue;
-				
-				//te varçtu pârskatît rangus vai veikt jebkâdas citas darbîbas
-			}
-		}
+		nakotnesKomanduApskats(komanda); //nepabeigtas nâkotnes idejas
+
 	}
 
  	public static void jaunaKomanda(String galvenais) {
@@ -186,6 +186,17 @@ public class KomanduApskats {
 			komanda.galvenais = cilveks.vards;
 		}
 
+	}
+
+	private static void nakotnesKomanduApskats(Komanda komanda){
+//		if(!(komanda.karalis<0)) {//vçlreiz apskata visus, ja jauns karalis atrasts
+//
+//			for (int i = 0; i< komanda.biedruList.size(); i++) { //vçlreiz apskata visus komandasbiedrus
+//				//if(i==komanda.karalis) continue;
+//
+//				//te varçtu pârskatît rangus vai veikt jebkâdas citas darbîbas
+//			}
+//		}
 	}
 
 }

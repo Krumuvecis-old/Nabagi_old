@@ -15,11 +15,6 @@ import calculations.lietas.Lieta;
 
 public class CilvekuApskats {
 	
-	static int mala, platums, augstums; //laukuma izmçri
-	
-	//static int zeltsJ=-1, paikaJ=-1;//vajadzîgi  funkciju sasaistei
-	//static double zeltsSum=0, paikaSum=0; //vajadzîgi  funkciju sasaistei
-	
 	static double vmax, ommax;
 	
 	static double resnumaKoefic; //HpMax attiecîbai pret resnumu
@@ -46,32 +41,22 @@ public class CilvekuApskats {
 	static double dCenaProc;
 	
 	public static void main() {
+		Cilveks.getCilvekuList();
 
-		int[] chunkXY = new int[2];
-
-		for (chunkXY=new int[]{0,0}; chunkXY[0]<Main.laukums.size(); chunkXY[0]++){
-			for ( ; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++){
-
-				for (int i = 0; i< Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++) {
-					galvenaisApskats(chunkXY, i);
-				}
-
-			}
+		for (int i = 0; i< Cilveks.cilvekuListPilnais.size(); i++) {
+			galvenaisApskats(i);
 		}
 
-		for (chunkXY=new int[]{0,0}; chunkXY[0]<Main.laukums.size(); chunkXY[0]++){
-			for ( ; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++){
-
-				for (int i = 0; i< Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++) {
-					naavesPaarbaude(chunkXY, i); //nodzçð miruðos cilvçkus
-				}
-
-			}
+		for (int i = 0; i< Cilveks.cilvekuListPilnais.size(); i++) {
+			calculations.komandas.Biedrs biedrs=Cilveks.cilvekuListPilnais.get(i);
+			naavesPaarbaude(biedrs.chunkXY, biedrs.i); //nodzçð miruðos cilvçkus
 		}
 		
 	}
 	
-	private static void galvenaisApskats(int[] chunkXY, int i) {
+	private static void galvenaisApskats(int numurs) {
+		int[] chunkXY = Cilveks.cilvekuListPilnais.get(numurs).chunkXY;
+		int i = Cilveks.cilvekuListPilnais.get(numurs).i;
 		Cilveks cilveks= Cilveks.getPlayer(chunkXY, i);
 		Random r=new Random();
 		
@@ -84,11 +69,11 @@ public class CilvekuApskats {
 		boolean navKoEst=CilvekuDarbibas.navKoEst;
 		
 		//atkârtota saskaite un papildus cleanup
-		int zeltsNr=countInventory(chunkXY, i,"Zelts", true);
+		int zeltsNr=cilveks.countInventory("Zelts", true);
 		double zeltsSum=0;
 		if (zeltsNr>=0) zeltsSum=cilveks.inventory.get(zeltsNr).daudzums;
 		
-		int paikaNr=countInventory(chunkXY, i,"Paika", true); //çdot no inventory jau bija viens cleanup
+		int paikaNr=cilveks.countInventory("Paika", true); //çdot no inventory jau bija viens cleanup
 		double paikaSum=0;
 		if (paikaNr>=0) paikaSum=cilveks.inventory.get(paikaNr).daudzums;
 		
@@ -341,11 +326,11 @@ public class CilvekuApskats {
 		
 		
 		//vçrlreiz saskaita paiku un zeltu, arî vçlreiz izdzçð tukðos
-		zeltsNr=countInventory(chunkXY, i,"Zelts", true);
+		zeltsNr=cilveks.countInventory("Zelts", true);
 		zeltsSum=0;
 		if (zeltsNr>=0) zeltsSum=cilveks.inventory.get(zeltsNr).daudzums;
 		
-		paikaNr=countInventory(chunkXY, i,"Paika", true);
+		paikaNr=cilveks.countInventory("Paika", true);
 		paikaSum=0;
 		if (paikaNr>=0) paikaSum=cilveks.inventory.get(paikaNr).daudzums;
 		
@@ -506,50 +491,12 @@ public class CilvekuApskats {
 			//leòía pagrieðana
 			//ieskrieðanâs (paâtrinâjums)
 		
-		Kustiba.main(cilveks);
+		Kustiba.main(cilveks, numurs);
 		
 		CilvekuDarbibas.healingAndHunger(chunkXY, i);
 	}
 	
-	public static int countInventory(int[] chunkXY, int numursCilvekam, String nosaukums, boolean cleanup) {
-		Cilveks cilveks = Cilveks.getPlayer(chunkXY, numursCilvekam);
-		
-		int numurs=-1;
-		@SuppressWarnings("unused")
-		double daudzums=0;
-		
-		for (int i=0;i<cilveks.inventory.size();i++) {
-			
-			if(numurs<0 && cilveks.inventory.get(i).nosaukums==nosaukums && cilveks.inventory.get(i).daudzums>0) { //ja atrod pirmo atbilstoðo
-				numurs=Integer.valueOf(i);
-				
-				daudzums+=cilveks.inventory.get(i).daudzums;;
-				if(cleanup==false) break;
-				
-				continue;
-			} 
-			
-			if (cilveks.inventory.get(i).nosaukums==nosaukums && cilveks.inventory.get(i).daudzums>0  && i!=numurs && numurs>=0) { //meklç atbilstoðus elementus
-				
-				daudzums+=cilveks.inventory.get(i).daudzums;
-				
-				cilveks.inventory.get(numurs).daudzums += Double.valueOf(cilveks.inventory.get(i).daudzums);
-				cilveks.inventory.get(i).daudzums=0; //sagatavo dublikâtus tâlâkai izdzçðanai
-				
-			}
-			
-			if (cilveks.inventory.get(i).daudzums<=0) { //izdzçð tukðos elementus
-				
-				cilveks.inventory.remove(i);
-				
-				i--;
-				continue;
-			}
-		}
-		
-		//System.out.println(cilveks.vards+"countInventory beidzies ("+nosaukums+" "+numurs+" sk:"+daudzums+") -------");
-		return numurs;
-	}
+
 	
 	private static void lootApskatsSadursmei(int[] chunkXY, int i) { //cilvçks apskata lietas, kas izmçtâtas pa karti
 		Cilveks cilveks = Cilveks.getPlayer(chunkXY, i);
@@ -648,10 +595,6 @@ public class CilvekuApskats {
 	
 	private static void initialize() {
 		
-		mala = KonstantesUniversal.mala; //laukuma izmçriem
-		platums = KonstantesUniversal.laukumaPlatumsSum;
-		augstums = KonstantesUniversal.laukumaAugstumsSum;
-		
 		vmax=Cilveku.vmax;
 		ommax=Cilveku.ommax;
 		resnumaKoefic=Fizikas.resnumaKoefic; //HpMax attiecîbai pret resnumu
@@ -709,13 +652,13 @@ public class CilvekuApskats {
 		for(int i=0;i<skaits;i++) {
 			Cilveks.maxCilveks++;
 			String vards=vardsDefault+Cilveks.maxCilveks;
+			int[] chunkXY = {r.nextInt(KonstantesUniversal.mapChunkCountX),
+					r.nextInt(KonstantesUniversal.mapChunkCountY)};
 			Koord xyz = new Koord();
 			xyz.x = KonstantesUniversal.mapChunkW * r.nextDouble();
 			xyz.y = KonstantesUniversal.mapChunkW * r.nextDouble();
 			xyz.v = 0;
 			xyz.fi = 360*r.nextDouble();
-			xyz.xChunk = r.nextInt(KonstantesUniversal.mapChunkCountX);
-			xyz.yChunk = r.nextInt(KonstantesUniversal.mapChunkCountY);
 
 			double vmax=Cilveku.vmax, ommax=Cilveku.ommax;
 			double hpmax=Cilveku.hpmax, hp=hpmax*(0.5+0.5*r.nextDouble());
@@ -747,7 +690,7 @@ public class CilvekuApskats {
 			
 
 
-			CilvekuDarbibas.dzemdibas(vards,xyz,vmax,ommax,hp,hpmax,paika,R1,R2,brunas,stiprums,gataviba,drosme,komanda,rangs);
+			CilvekuDarbibas.dzemdibas(vards,chunkXY,xyz,vmax,ommax,hp,hpmax,paika,R1,R2,brunas,stiprums,gataviba,drosme,komanda,rangs);
 		}
 		
 	}

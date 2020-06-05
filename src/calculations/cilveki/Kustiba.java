@@ -1,16 +1,17 @@
 package calculations.cilveki;
 
 import calculations.KonstantesUniversal;
+import calculations.Main;
 import calculations.MapChunk;
 import calculations.konstantes.Fizikas;
 
 class Kustiba {
 	
-	protected static void main(Cilveks cilveks) {
+	protected static void main(Cilveks cilveks, int i) {
 		
 		lenkuParbaude(cilveks);
 		kustiba(cilveks);
-		maluParbaude(cilveks);
+		maluParbaude(i);
 
 	}
 	
@@ -30,8 +31,11 @@ class Kustiba {
 		cilveks.xyz.y+=vy;
 	}
 
-	private static void maluParbaude(Cilveks cilveks) { //situâcijas pie laukuma malâm
-		int platums=KonstantesUniversal.mapChunkW, chunkX=cilveks.xyz.xChunk, chunkY=cilveks.xyz.yChunk;
+	private static void maluParbaude(int numurs) { //situâcijas pie laukuma malâm
+		calculations.komandas.Biedrs biedrs = Cilveks.cilvekuListPilnais.get(numurs);
+		Cilveks cilveks = Cilveks.getPlayer(biedrs.chunkXY, biedrs.i);
+
+		int platums=KonstantesUniversal.mapChunkW, chunkX=biedrs.chunkXY[0], chunkY=biedrs.chunkXY[0];
 
 		if (cilveks.xyz.x < 0 ) { //rietumi
 			cilveks.xyz.x+=platums;
@@ -54,21 +58,19 @@ class Kustiba {
 			if (chunkY >= KonstantesUniversal.mapChunkCountY) chunkY = 0;
 		}
 
-		if(cilveks.xyz.xChunk!=chunkX || cilveks.xyz.yChunk!=chunkY){
+		int chunkX0=biedrs.chunkXY[0], chunkY0=biedrs.chunkXY[0];
+		if(chunkX!=chunkX0 || chunkY!=chunkY0){ //jâizòem no vienas tabulas un jâieliek otrâ
 
-
-			//jâizòem no vienas tabulas un jâieliek otrâ - jâmaina metodes argumenti
-
-
-
-			cilveks.xyz.xChunk=chunkX;
-			cilveks.xyz.yChunk=chunkY;
+			Main.laukums.get(chunkX).get(chunkY).cilvekiList.add(cilveks);
+			Main.laukums.get(chunkX0).get(chunkY0).cilvekiList.remove(biedrs.i);
 		}
 
 	}
 
 	private static void maluParbaudeVecais(){
-		//		zemâk atdurðanâs pret malâm
+
+		// zemâk atdurðanâs pret malâm
+
 //		int augstums= KonstantesUniversal.laukumaAugstumsSum, platums=KonstantesUniversal.laukumaPlatumsSum, mala=KonstantesUniversal.mala;
 //		double resnums= Fizikas.resnumaKoefic*cilveks.hpmax;
 //

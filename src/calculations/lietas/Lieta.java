@@ -1,7 +1,6 @@
 package calculations.lietas;
 
 public class Lieta {
-	public int xChunk,yChunk;
 	public double x, y;
 	public String nosaukums;
 	public double daudzums;
