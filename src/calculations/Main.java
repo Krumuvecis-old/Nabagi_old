@@ -31,7 +31,7 @@ public class Main {
 			
 			if (!pauze) {
 				
-				//te jâbût arî kartes un reljefa ciklam
+				//LaukumaApskats.main(); //te jâbût arî kartes un reljefa ciklam
 				LietuApskats.main(); //viss kas saistîts ar pa  zemi izmçtâtajâm lietâm
 				KomanduApskats.main(); //viss kas saistîts ar komandâm
 				CilvekuApskats.main(); //viss kas saistîts ar cilvçkiem
