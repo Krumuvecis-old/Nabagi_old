@@ -12,10 +12,9 @@ import calculations.cilveki.Cilveks;
 import calculations.cilveki.CilvekuApskats;
 
 public class Main {
-	
-	public static ArrayList<Cilveks> cilvekiList; //cilvçku datubâze
+
 	public static ArrayList<Komanda> komandasList; //komandu datubâze
-	public static ArrayList<Lieta> lietas; //loot datubâze
+	public static ArrayList<ArrayList<MapChunk>> laukums; //laukums-karte
 	
 	public static boolean pauze=true;//, patsStarts=true;
 	public static CalculationTimeCalculator calculationTimeCalculator = new CalculationTimeCalculator();
@@ -48,12 +47,10 @@ public class Main {
 		}
 	}
 	
-	private static void initialize(){
+	private static void initialize() {
 		initializeKonstantes();
-		
-		cilvekiList = new ArrayList<Cilveks>();
 		komandasList = new ArrayList<Komanda>();
-		lietas = new ArrayList<Lieta>();
+		initializeLaukums();
 		
 		CilvekuApskats.setup();
 		
@@ -74,8 +71,23 @@ public class Main {
 		Fizikas.initialize();
 		Grafiskie.initialize();
 
-
-
-
 	}
+
+	private static void  initializeLaukums() {
+		int mapChunkCountX = KonstantesUniversal.mapChunkCountX,
+				mapChunkCountY = KonstantesUniversal.mapChunkCountY;
+		laukums =  new  ArrayList<ArrayList<MapChunk>>();
+
+		for (int i=0; i<mapChunkCountX;i++){
+			laukums.add(new ArrayList<MapChunk>());
+			for (int j=0; j<mapChunkCountY;j++){
+				MapChunk chunk = new MapChunk();
+				laukums.get(i).add(chunk);
+				laukums.get(i).get(j).initialize();
+
+			}
+		}
+	}
+
+
 }

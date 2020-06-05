@@ -3,4 +3,5 @@ package calculations.cilveki;
 public class Koord {
 	//objektu kustîbas atviegloðanai - pamatparametri
 	public double x, y, v, fi;
+	public int xChunk, yChunk;
 }

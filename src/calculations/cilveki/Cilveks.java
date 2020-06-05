@@ -2,6 +2,7 @@ package calculations.cilveki;
 
 import java.util.ArrayList;
 
+import calculations.Main;
 import calculations.lietas.Lieta;
 
 public class Cilveks {
@@ -46,6 +47,8 @@ public class Cilveks {
 	public String darbiba;
 	
 	
-	
+	public static Cilveks getPlayer(int[] chunkXY, int i){
+		return Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.get(i);
+	}
 	
 }

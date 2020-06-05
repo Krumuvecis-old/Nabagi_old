@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.Arrays;
 import java.util.Random;
 
-import calculations.konstantes.Cilveku;
+import calculations.MapChunk;
 import calculations.konstantes.Formulas;
 import calculations.Main;
 import calculations.cilveki.Cilveks;
@@ -21,20 +21,18 @@ public class KomanduApskats {
 	public static void main() {
 		for(int i=0;i<Main.komandasList.size();i++) { //apskata visas komandas
 			
-			playerCount(i);
-			
 			if (i==0) continue; //pirmo komandu tâlâk neapskata
 			
 			
 			
-			if (Main.komandasList.get(i).skaits>0){ //pârbaudu, lai nav jâmaïâs cauri tukðajâm komandâm
+			if (Main.komandasList.get(i).biedruList.size()>0){ //pârbaudu, lai nav jâmaïâs cauri tukðajâm komandâm
 				
 				komanduVesture(i);
 				komanduApskats(i);
 				
 			}
 			
-			if (Main.komandasList.get(i).skaits<=0){ //ðis ir komandu cleanup
+			if (Main.komandasList.get(i).biedruList.size()<=0){ //ðis ir komandu cleanup
 				Main.komandasList.remove(i);
 				i--;
 				continue;
@@ -42,118 +40,49 @@ public class KomanduApskats {
 			
 		}
 	}
-	
-	private static void playerCount(int numurs) {
-		Komanda komanda=Main.komandasList.get(numurs);
-		int speletaji=0;
-		for (int i=0;i<Main.cilvekiList.size();i++) {
-			if (komanda.nosaukums==Main.cilvekiList.get(i).komanda) speletaji++;
-		}
-		komanda.skaits=speletaji;
-	}
-	
+
 	private static void komanduVesture(int i) {
 		//i nekad nebûs 0, jo tiek atsijâts iepriekð
 		
-		if (Main.komandasList.get(i).skaits>komanduVestureMaksimums) {
-			komanduVestureMaksimums=Integer.valueOf(Main.komandasList.get(i).skaits);
+		if (Main.komandasList.get(i).biedruList.size()>komanduVestureMaksimums) {
+			komanduVestureMaksimums=Main.komandasList.get(i).biedruList.size();
 			komanduVestureLielakaKomanda=String.valueOf(Main.komandasList.get(i).nosaukums);
 		}
 	}
 	
 	private static void komanduApskats(int numurs) {
 		//numurs nekad nebûs 0, jo tiek atsijâts jau ieprekð
-		//Komanda komanda=Main.komandasList.get(numurs); 
+		Komanda komanda=Main.komandasList.get(numurs);
 		
-		int[] elite = mekleKarali(numurs); //temporary lielums
-		int karalis=elite[0], bagatakais=elite[1];
+		komanda.mekleKarali(numurs);
 		
-		if (karalis<0) karalis=navKaralis(numurs, bagatakais); //ja komandâ nav atrodams galvenais
+		if (komanda.karalis<0) navKaralis(numurs); //ja komandâ nav atrodams galvenais
 		
-		if(!(karalis<0)) {//vçlreiz apskata visus, ja jauns karalis atrasts
-			for (int i=0;i<Main.cilvekiList.size();i++) { //vçlreiz apskata visus komandasbiedrus
-				if(i==karalis) continue;
+		if(!(komanda.karalis<0)) {//vçlreiz apskata visus, ja jauns karalis atrasts
+
+			for (int i = 0; i< komanda.biedruList.size(); i++) { //vçlreiz apskata visus komandasbiedrus
+				if(i==komanda.karalis) continue;
 				
 				//te varçtu pârskatît rangus vai veikt jebkâdas citas darbîbas
 			}
 		}
 	}
-	
-	private static int[] mekleKarali(int numurs) {
-		int karalis=-1, bagatakais=-1;
-		Komanda komanda=Main.komandasList.get(numurs);
-		
-		double bagatiba=0;
-		for (int i=0;i<Main.cilvekiList.size();i++) {
-			Cilveks cilveks=Main.cilvekiList.get(i);
-			
-			if(cilveks.komanda==komanda.nosaukums) {//apskata  visus komandas locekïus
-				
-				if (cilveks.vards==komanda.galvenais) { // meklç  galveno
-					karalis=i;
-				}
-				
-				
-				int zeltsNr=CilvekuApskats.countInventory(i,"Zelts", false);
-				double zeltsSum=0;
-				if (zeltsNr>=0) zeltsSum=cilveks.inventory.get(zeltsNr).daudzums;
-				
-				if(bagatakais<0||bagatiba<zeltsSum) {
-					bagatiba=zeltsSum;
-					bagatakais=i;
-				}
-			}
-		}
-		return new int[]{karalis,bagatakais};
-	}
-	
-	private static int navKaralis(int numurs, int bagatakais) {
-		Komanda komanda=Main.komandasList.get(numurs);
-		int karalis=-1;
-		Random r=new Random();
-		
-		if(r.nextDouble()< Komandu.komandaIzjuktChance) { //iespçja, ka mirstot karalim, izjuks komanda
-			
-			for (int i=0;i<Main.cilvekiList.size();i++) { //visus komandasbiedrus pârliek 0.komandâ
-				if(Main.cilvekiList.get(i).komanda==komanda.nosaukums) {
-					Main.cilvekiList.get(i).komanda=Main.komandasList.get(0).nosaukums; //visus ieliek 0.komandâ
-					
-					//Main.cilvekiList.get(i).rangs[0]=0; //ðî aile lai paliek, jo karavîri var bût karavîri arî bez komandas
-					Main.cilvekiList.get(i).rangs[1]=0;
-					
-					komanda.skaits=0; //ðis vajadzîgs, lai komandu varçtu izdzçst
-				}
-			}
-			
-		} else { //karaïa titula pârdalîðana
-			
-			karalis=bagatakais;
-			Main.cilvekiList.get(karalis).rangs[0]=0;
-			Main.cilvekiList.get(karalis).rangs[1]=3;
-			komanda.galvenais=Main.cilvekiList.get(karalis).vards;
-		}
-		
-		return karalis;
-	}
-	
+
  	public static void jaunaKomanda(String galvenais) {
-		
-		
-		
+
 		Komanda.maxKomanda++;
-		
+
 		Komanda jaunaKomanda=new Komanda();
-		
-		jaunaKomanda.nosaukums=new String(Komandu.komandaNosaukumsDefault+Komanda.maxKomanda);
+
+		jaunaKomanda.nosaukums=Komandu.komandaNosaukumsDefault+Komanda.maxKomanda;
 		jaunaKomanda.galvenais=galvenais;
-		
+
 		jaunaKomanda.krasa=assignColor();
-		
-		
+
 		Main.komandasList.add(jaunaKomanda);
-			
+
 	}
-	
+
 	public static double[] komandasTakenColors() { //jâbût public, lai varçtu izvadît grafiski (saglabâ tikai hue vçrtîbas)
 		//pârbauda kuras krâsas komandâm ir nepieejamas
 		
@@ -225,5 +154,38 @@ public class KomanduApskats {
 		
 		return new Color(Color.HSBtoRGB((float)hue, 1, 1));
 	}
-	
+
+	private static void navKaralis(int numurs) {
+		Komanda komanda=Main.komandasList.get(numurs);
+		Random r=new Random();
+
+		if(r.nextDouble()< Komandu.komandaIzjuktChance) { //iespçja, ka mirstot karalim, izjuks komanda
+
+			for (int i = 0; i< komanda.biedruList.size(); i++) { //visus komandasbiedrus pârliek 0.komandâ
+
+				Biedrs biedrs = komanda.biedruList.get(i);
+				Cilveks cilveks = Cilveks.getPlayer(biedrs.chunkXY, biedrs.i);
+
+				cilveks.komanda=Main.komandasList.get(0).nosaukums; //visus ieliek 0.komandâ
+
+				//cilveks.rangs[0]=0; //ðî aile lai paliek, jo karavîri var bût karavîri arî bez komandas
+				cilveks.rangs[1]=0;
+
+				komanda.biedruList.remove(i);
+				i--;
+			}
+
+		} else { //karaïa titula pârdalîðana
+
+			komanda.karalis=komanda.bagatakais;
+
+			Biedrs biedrs = komanda.biedruList.get(komanda.karalis);
+			Cilveks cilveks = Cilveks.getPlayer(biedrs.chunkXY, biedrs.i);
+
+			cilveks.rangs = new int[]{0, 3};
+			komanda.galvenais = cilveks.vards;
+		}
+
+	}
+
 }

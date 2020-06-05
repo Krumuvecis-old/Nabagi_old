@@ -3,7 +3,12 @@ package calculations;
 public class KonstantesUniversal {
     public static String versija="0.11.0 (beta)";
 
-    public static int platums=2000, augstums=1500, mala=10; //laukuma izmçri un mala
+    public static int mapCellW=20, mapCellCount=25,
+            mapChunkW=mapCellW * mapCellCount, mapChunkCountX=4, mapChunkCountY=3;
+
+    public static int laukumaPlatumsSum = mapChunkW * mapChunkCountX,
+            laukumaAugstumsSum = mapChunkW * mapChunkCountY,
+            mala = 10;
 
     public static void initialize(){
 

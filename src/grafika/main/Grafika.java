@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import calculations.CalculationTimeCalculator;
+import calculations.MapChunk;
 import calculations.cilveki.Cilveks;
 import calculations.komandas.Komanda;
 import calculations.komandas.KomanduApskats;
@@ -23,9 +24,9 @@ class Grafika extends JPanel {
 	
 	private static SetupThread threadTemp; //temporary lielums zîmçðanas funkcijâm
 	
-	protected ArrayList<Cilveks> cilvekiList = calculations.Main.cilvekiList;
+	protected ArrayList<Cilveks> cilvekiList = MapChunk.cilvekiList;
 	protected ArrayList<Komanda> komandasList = calculations.Main.komandasList;
-	protected ArrayList<Lieta> lietasList = calculations.Main.lietas;
+	protected ArrayList<Lieta> lietasList = MapChunk.lietas;
 	
 	//te nelikt mainîgos!!! (var likt pie thread.dati)
 	

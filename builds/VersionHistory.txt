@@ -1,9 +1,6 @@
 versija X (planned)
 	switch coordinates (and maybe angles and such) to integers/float for faster computing
-	divide map into cells for bigger map support
-	map wrapping around edges
 	add savefiles for settings presets
-	add grid for map cells, add changing terrain and trees
 	improve user interface
 	add buildings
 	add more resources and crafting
@@ -29,10 +26,18 @@ versija X (planned)
 versija 0.12 (planned)
 
 versija 0.11 (planned) - june 2020
-	singleplayer character control (planned)
-	add minimap (bigMap?) to playerView window
+    changes to file system
 
-versija 0.10 (stable) - may/june 2020
+    planned:
+	    singleplayer character control (planned)
+	    add minimap (bigMap?) to playerView window
+	    big map cells to divide map for faster computing and bigger map support
+        map wrapping around edges
+        add fading view depending on R1 and R2
+	    add small grid for map cells, add changing terrain and trees
+	    fix multithreading for playerView
+
+versija 0.10 - may/june 2020
 	added key/mouse listener
 	multithreading
 		separate windows for setup and player view
@@ -44,7 +49,7 @@ versija 0.10 (stable) - may/june 2020
 		fixed playerview window layout and graphics (merogs & focus (shifting view depending on location))
 		added "merogs" to playerView window
 
-versija 0.9 (stable) - may 2020
+versija 0.9 - may 2020
 	massive structural overhaul
 		methods separated in classes
 		classes separated in packets

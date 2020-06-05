@@ -35,8 +35,8 @@ class MiniMap {
 				platumsMax=Math.max(0, threadTemp.dati.miniMapPlatums),
 				augstumsMax=Math.max(0, threadTemp.dati.miniMapAugstums);
 		
-		int laukumaPlatums = KonstantesUniversal.platums,
-				laukumaAugstums=KonstantesUniversal.augstums,
+		int laukumaPlatums = KonstantesUniversal.laukumaPlatumsSum,
+				laukumaAugstums=KonstantesUniversal.laukumaAugstumsSum,
 				malaDefault=KonstantesUniversal.mala;
 		double merogs=Math.min((double)platumsMax/laukumaPlatums, (double)augstumsMax/laukumaAugstums);
 		

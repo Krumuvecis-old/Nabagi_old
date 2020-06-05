@@ -1,5 +1,6 @@
 package grafika.main;
 
+import calculations.MapChunk;
 import grafika.KonstantesGrafikai;
 
 import java.awt.Color;
@@ -123,8 +124,8 @@ class Dati {
 	
 	protected void playerFocusFind() {
 		int number=-1;
-		for (int i=0; i<calculations.Main.cilvekiList.size(); i++) {
-			if (calculations.Main.cilvekiList.get(i).vards==playerFocusName) {
+		for (int i = 0; i< MapChunk.cilvekiList.size(); i++) {
+			if (MapChunk.cilvekiList.get(i).vards==playerFocusName) {
 				number=i;
 				break;
 			}
@@ -138,10 +139,10 @@ class Dati {
 	
 	protected void startPlayerView(boolean randomize) {
 		int i=0;
-		if (randomize) i=(new java.util.Random()).nextInt(calculations.Main.cilvekiList.size());
+		if (randomize) i=(new java.util.Random()).nextInt(MapChunk.cilvekiList.size());
 		
 		grafika.player.PlayerThread threadTemp=new grafika.player.PlayerThread(); //jauns spçlçtâja logs
-		String playerName=calculations.Main.cilvekiList.get(i).vards;
+		String playerName= MapChunk.cilvekiList.get(i).vards;
 		threadTemp.initialize(playerName);
 		
 		if(!playerFocused) { //ja nav fokusa, fokusçjas uz spçlçtâju

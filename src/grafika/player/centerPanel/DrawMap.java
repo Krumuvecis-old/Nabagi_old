@@ -6,6 +6,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import calculations.KonstantesUniversal;
+import calculations.MapChunk;
 import calculations.konstantes.Fizikas;
 import calculations.konstantes.Formulas;
 import calculations.konstantes.Grafiskie;
@@ -21,9 +22,9 @@ import grafika.player.PlayerThread;
 class DrawMap {
 	private PlayerThread thread;
 	
-	private ArrayList<Cilveks> cilvekiList = calculations.Main.cilvekiList;
+	private ArrayList<Cilveks> cilvekiList = MapChunk.cilvekiList;
 	private ArrayList<Komanda> komandasList = calculations.Main.komandasList;
-	private ArrayList<Lieta> lietasList = calculations.Main.lietas;
+	private ArrayList<Lieta> lietasList = MapChunk.lietas;
 	
 	private int nobideX, nobideY;
 	@SuppressWarnings("unused")
@@ -156,7 +157,7 @@ class DrawMap {
 	}
 	
 	private void drawMapEdges(Graphics g) {
-		int laukumaPlatums=KonstantesUniversal.platums, laukumaAugstums=KonstantesUniversal.augstums, kartesPlatums=thread.dati.kartePlatums;
+		int laukumaPlatums=KonstantesUniversal.laukumaPlatumsSum, laukumaAugstums=KonstantesUniversal.laukumaAugstumsSum, kartesPlatums=thread.dati.kartePlatums;
 		
 		int[] sturisZR = {0,0},
 				sturisZA = {laukumaPlatums,0},

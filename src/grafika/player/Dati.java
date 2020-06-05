@@ -3,6 +3,7 @@ package grafika.player;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import calculations.MapChunk;
 import calculations.cilveki.Cilveks;
 import grafika.player.centerPanel.DrawCenterPanel;
 import grafika.player.sidePanels.DrawSidePanels;
@@ -130,7 +131,7 @@ public class Dati {
 		playerDead=false;
 		
 		if (!primary) {
-			playerName=calculations.Main.cilvekiList.get(0).vards;
+			playerName= MapChunk.cilvekiList.get(0).vards;
 		}
 		
 		findPlayer(thread);
@@ -139,10 +140,10 @@ public class Dati {
 	
 	protected int findPlayer(PlayerThread thread) {
 		int number=-1;
-		for (int i=0; i<calculations.Main.cilvekiList.size();i++) {
-			if (calculations.Main.cilvekiList.get(i).vards==playerName) {
+		for (int i = 0; i< MapChunk.cilvekiList.size(); i++) {
+			if (MapChunk.cilvekiList.get(i).vards==playerName) {
 				number=i;
-				player=calculations.Main.cilvekiList.get(i);
+				player= MapChunk.cilvekiList.get(i);
 				break;
 			}
 		}
