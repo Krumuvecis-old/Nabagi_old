@@ -6,7 +6,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import calculations.KonstantesUniversal;
-import calculations.MapChunk;
 import calculations.konstantes.Fizikas;
 import calculations.konstantes.Formulas;
 import calculations.konstantes.Grafiskie;
@@ -21,10 +20,9 @@ import grafika.player.PlayerThread;
 
 class DrawMap {
 	private PlayerThread thread;
-	
-	private ArrayList<Cilveks> cilvekiList = MapChunk.cilvekiList;
+
 	private ArrayList<Komanda> komandasList = calculations.Main.komandasList;
-	private ArrayList<Lieta> lietasList = MapChunk.lietas;
+	private ArrayList<ArrayList<calculations.MapChunk>> laukums = calculations.Main.laukums;
 	
 	private int nobideX, nobideY;
 	@SuppressWarnings("unused")
@@ -61,61 +59,74 @@ class DrawMap {
 	}
 	
 	private void drawLoot(Graphics g, boolean drawInfo) {
-		for(int i=0;i<lietasList.size();i++) { //zîmç lietas, kas izmçtâtas pa karti
-			
-			Lieta lieta=lietasList.get(i);
-			double dx = thread.dati.player.xyz.x - lieta.x,
-					dy = thread.dati.player.xyz.y - lieta.y;
-			
-			if (Math.hypot(dx, dy) > R2) continue; //lai atmet tos kas par tâlu
-			
-			double[] koord;
-			koord=getAbsoluteCoordinates(false, dx, dy);
-			double resnums;
-			Color krasa1, krasa2=Color.black;; //iekða un kontûra
+		for(int[] chunkXY={0,0}; chunkXY[0]<laukums.size(); chunkXY[0]++){
+			for( ; chunkXY[1]<laukums.get(chunkXY[0]).size(); chunkXY[1]++){
 
-			if(lieta.nosaukums=="Zelts") {
-				resnums = Fizikas.zeltaResnums*merogs;
-				krasa1=Grafiskie.lietasColorZelts; //iekða
+				ArrayList<Lieta> lietasList = laukums.get(chunkXY[0]).get(chunkXY[1]).lietas;
+
+				for(int i=0;i<lietasList.size();i++) { //zîmç lietas, kas izmçtâtas pa karti
+
+					Lieta lieta=lietasList.get(i);
+					double dx = thread.dati.player.xyz.x - lieta.x,
+							dy = thread.dati.player.xyz.y - lieta.y;
+
+					if (Math.hypot(dx, dy) > R2) continue; //lai atmet tos kas par tâlu
+
+					double[] koord;
+					koord=getAbsoluteCoordinates(false, dx, dy);
+					double resnums;
+					Color krasa1, krasa2=Color.black;; //iekða un kontûra
+
+					if(lieta.nosaukums=="Zelts") {
+						resnums = Fizikas.zeltaResnums*merogs;
+						krasa1=Grafiskie.lietasColorZelts; //iekða
 
 
-				if(drawInfo==true) {
-					g.setColor(krasa1);
-					String nosaukums=""+new DecimalFormat("#.#").format(lieta.daudzums);
-					g.drawString(nosaukums, (int)(koord[0]+resnums/2+3), (int)(koord[1]+7));
+						if(drawInfo==true) {
+							g.setColor(krasa1);
+							String nosaukums=""+new DecimalFormat("#.#").format(lieta.daudzums);
+							g.drawString(nosaukums, (int)(koord[0]+resnums/2+3), (int)(koord[1]+7));
+						}
+
+					} else if(lieta.nosaukums=="Paika") {
+						resnums=Fizikas.paikasResnums*merogs;
+						krasa1 = Grafiskie.lietasColorPaika;
+
+						if(drawInfo==true) {
+							g.setColor(krasa1);
+							String nosaukums=""+new DecimalFormat("#.#").format(lieta.daudzums);
+							g.drawString(nosaukums, (int)(koord[0]-7), (int)(koord[1]+resnums/2+15));
+						}
+
+					} else { //neklasificçti objekti
+						resnums=Fizikas.lietasResnums*merogs;
+
+						krasa1 = Grafiskie.lietasColorDefault; //iekða
+
+						if(drawInfo==true) {
+							g.setColor(krasa1);
+							String nosaukums=lieta.nosaukums+"-"+(int)lieta.daudzums;
+							g.drawString(nosaukums, (int)(koord[0]-15), (int)(koord[1]+resnums/2+15));
+						}
+
+						g.setColor(krasa1); //iekða
+						g.fillOval((int)(koord[0]-resnums/2), (int)(koord[1]-resnums/2), (int)resnums, (int)resnums);
+
+						g.setColor(krasa2); //kontûra
+						g.drawOval((int)(koord[0]-resnums/2), (int)(koord[1]-resnums/2), (int)resnums, (int)resnums);
+
+					}
+
+
 				}
-				
-			} else if(lieta.nosaukums=="Paika") {
-				resnums=Fizikas.paikasResnums*merogs;
-				krasa1 = Grafiskie.lietasColorPaika;
-				
-				if(drawInfo==true) {
-					g.setColor(krasa1);
-					String nosaukums=""+new DecimalFormat("#.#").format(lieta.daudzums);
-					g.drawString(nosaukums, (int)(koord[0]-7), (int)(koord[1]+resnums/2+15));
-				}
-				
-			} else { //neklasificçti objekti
-				resnums=Fizikas.lietasResnums*merogs;
-				
-				krasa1 = Grafiskie.lietasColorDefault; //iekða
-				
-				if(drawInfo==true) {
-					g.setColor(krasa1);
-					String nosaukums=lieta.nosaukums+"-"+(int)lieta.daudzums;
-					g.drawString(nosaukums, (int)(koord[0]-15), (int)(koord[1]+resnums/2+15));
-				}
 
-				g.setColor(krasa1); //iekða
-				g.fillOval((int)(koord[0]-resnums/2), (int)(koord[1]-resnums/2), (int)resnums, (int)resnums);
-
-				g.setColor(krasa2); //kontûra
-				g.drawOval((int)(koord[0]-resnums/2), (int)(koord[1]-resnums/2), (int)resnums, (int)resnums);
 
 			}
-			
-			
 		}
+
+
+
+
 	}
 	
 	private void drawCilveki(Graphics g) {
@@ -128,32 +139,44 @@ class DrawMap {
 		drawMapEdges(g);
 		
 		double resnumaKoefic=Fizikas.resnumaKoefic;
-		
-		for(int i=0;i<cilvekiList.size();i++) {
-			Cilveks player=cilvekiList.get(i);
-			double dx = x0-player.xyz.x,
-					dy = y0-player.xyz.y;
-			
-			if (Math.hypot(dx, dy) > R2) continue; //lai atmet tos kas par tâlu (true - par tâlu)
-			
-			double resnums=merogs*resnumaKoefic*player.hpmax;
-			
-			int komanda = playerGetKomanda(player);
-			Color krasa = playerGetColor(player, komanda); //pçc komandas nosaka krâsu
-			
-			double[] koord;
-			if (player==thread.dati.player) { //zîmç galveno spçlçtâju paðâ centrâ
-				koord=getAbsoluteCoordinates(true, dx, dy);
-				
-			} else { //zîmç pârçjos spçlçtâjus
-				koord=getAbsoluteCoordinates(false, dx, dy);
-				
+
+		for(int[] chunkXY={0,0}; chunkXY[0]<laukums.size(); chunkXY[0]++) {
+			for (; chunkXY[1] < laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
+
+				ArrayList<Lieta> lietasList = laukums.get(chunkXY[0]).get(chunkXY[1]).lietas;
+				ArrayList<Cilveks> cilvekiList = laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList;
+
+				for(int i=0;i<cilvekiList.size();i++) {
+
+					double dx = x0-player.xyz.x,
+							dy = y0-player.xyz.y;
+
+					if (Math.hypot(dx, dy) > R2) continue; //lai atmet tos kas par tâlu (true - par tâlu)
+
+					double resnums=merogs*resnumaKoefic*player.hpmax;
+
+					int komanda = playerGetKomanda(player);
+					Color krasa = playerGetColor(player, komanda); //pçc komandas nosaka krâsu
+
+					double[] koord;
+					if (player==thread.dati.player) { //zîmç galveno spçlçtâju paðâ centrâ
+						koord=getAbsoluteCoordinates(true, dx, dy);
+
+					} else { //zîmç pârçjos spçlçtâjus
+						koord=getAbsoluteCoordinates(false, dx, dy);
+
+					}
+
+					drawPlayer(g, i, player, komanda, koord, resnums, krasa);
+
+
+				}
+
+
 			}
-			
-			drawPlayer(g, i, player, komanda, koord, resnums, krasa);
-			
-			
 		}
+
+
 	}
 	
 	private void drawMapEdges(Graphics g) {

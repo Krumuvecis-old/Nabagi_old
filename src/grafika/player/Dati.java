@@ -3,14 +3,17 @@ package grafika.player;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import calculations.Main;
 import calculations.MapChunk;
 import calculations.cilveki.Cilveks;
+import calculations.komandas.Biedrs;
 import grafika.player.centerPanel.DrawCenterPanel;
 import grafika.player.sidePanels.DrawSidePanels;
 
 public class Dati {
 	public calculations.CalculationTimeCalculator calculationTimeCalculator = new calculations.CalculationTimeCalculator();
-	
+	protected ArrayList<Biedrs> cilvekuPilnaisList;
+
 	public boolean lobby=false;
 
 	public boolean playerDead=false;
@@ -131,23 +134,35 @@ public class Dati {
 		playerDead=false;
 		
 		if (!primary) {
-			playerName = MapChunk.cilvekiList.get(0).vards;
+			playerName = Cilveks.getPlayer(cilvekuPilnaisList.get(0).chunkXY,cilvekuPilnaisList.get(0).i).vards;
 		}
-		
-		findPlayer(thread);
+
 		windowTitle=windowTitleDefault+" ("+playerName+")"; //nomaina loga nosaukumu
 	}
-	
-	protected int findPlayer(PlayerThread thread) {
-		int number=-1;
-		for (int i = 0; i< MapChunk.cilvekiList.size(); i++) {
-			if (MapChunk.cilvekiList.get(i).vards==playerName) {
-				number=i;
-				player= MapChunk.cilvekiList.get(i);
-				break;
+
+	private void getPlayerTotalList(){
+		cilvekuPilnaisList = new ArrayList<Biedrs>();
+
+		for(int[] chunkXY = {0, 0}; chunkXY[0]< Main.laukums.size(); chunkXY[0]++) {
+			for( ; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
+
+
+
+				for (int i=0; i<Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
+
+					Biedrs cilveks = new Biedrs();
+					cilveks.chunkXY=chunkXY;
+					cilveks.i=i;
+					cilvekuPilnaisList.add(cilveks);
+				}
+
 			}
 		}
-		return number;
+	}
+
+	protected int findPlayer(PlayerThread thread){
+
+		return i
 	}
 	
 	protected void playerDead() {
