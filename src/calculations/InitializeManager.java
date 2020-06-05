@@ -11,7 +11,7 @@ class InitializeManager {
         initializeLaukums();
         initializeKomandas();
 
-        CilvekuApskats.setup();
+        CilvekuApskats.setup(); //initialize + jaunie spçlçtâji
 
         newSetupWindow();
 

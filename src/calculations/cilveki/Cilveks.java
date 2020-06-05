@@ -45,7 +45,9 @@ public class Cilveks {
 						//0,1-zemnieks - var uzbûvçt fermu 						1,1 -karotâjs - staigâ ap pili
 						//0,2-tirgotâjs	- iepçrk resursus un pârdod kur vajag	1,2 -gvarde - staigâ pilî/sargâ karali
 						//0,3-raþotâjs - iepçrk resursus un no tiem raþo  citus	1,3 -dedicated karalis - dod visiem drosmi?
-	
+
+	public boolean autoPilot=true; //true - kontrolç spçlçtâjs
+
 	//animâcijai un testiem
 	public String darbiba;
 
