@@ -131,7 +131,7 @@ public class Dati {
 		playerDead=false;
 		
 		if (!primary) {
-			playerName= MapChunk.cilvekiList.get(0).vards;
+			playerName = MapChunk.cilvekiList.get(0).vards;
 		}
 		
 		findPlayer(thread);

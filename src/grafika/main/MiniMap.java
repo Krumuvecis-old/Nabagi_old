@@ -57,17 +57,18 @@ class MiniMap {
 					x0+5, y0+45+(int)(laukumaAugstums*merogs));
 		}
 		
-		drawCilveki(g, x0, y0, merogs, cilvekiList, komandasList);
-		drawLoot(g, x0, y0, merogs, lietasList);
+		drawCilveki(g, x0, y0, merogs, laukums, komandasList);
+		drawLoot(g, x0, y0, merogs, laukums);
 		
 	}
 	
-	private static void drawCilveki(Graphics g, int x0, int y0, double merogs, ArrayList<Cilveks> cilvekiList, ArrayList<Komanda> komandasList) { //papildinâjums kartei
+	private static void drawCilveki(Graphics g, int x0, int y0, double merogs, ArrayList<ArrayList<MapChunk>> laukums, ArrayList<Komanda> komandasList) { //papildinâjums kartei
+
 		
 		double resnumaKoefic = Fizikas.resnumaKoefic;
-		for(int i=0;i<cilvekiList.size();i++) {
+		for(int i=0;i<thread.dati.cilvekuPilnaisList.size();i++) {
 			
-			Cilveks cilveks = cilvekiList.get(i); //pats apskatâmais spçlçtâjs
+			Cilveks cilveks = Cilveks.getPlayer(thread.dati.cilvekuPilnaisList.get(i).chunkXY,thread.dati.cilvekuPilnaisList.get(i).i); //pats apskatâmais spçlçtâjs
 			
 			double resnums=resnumaKoefic*cilveks.hpmax*merogs;
 			
@@ -118,33 +119,42 @@ class MiniMap {
 		
 	}
 	
-	private static void drawLoot(Graphics g, int x0, int y0, double merogs, ArrayList<Lieta> lietasList) {
-		
-		for(int i=0;i<lietasList.size();i++) { //zîmç lietas, kas izmçtâtas pa karti
-			
-			double x=x0+lietasList.get(i).x*merogs, y=y0+lietasList.get(i).y*merogs, resnums;
-			Color krasa1, krasa2=Color.black; //iekðai un kontûrai
+	private static void drawLoot(Graphics g, int x0, int y0, double merogs, ArrayList<ArrayList<MapChunk>> laukums) {
+		for(int[] chunkXY={0,0}; chunkXY[0]<laukums.size(); chunkXY[0]++){
+			for( ; chunkXY[1]<laukums.get(chunkXY[0]).size(); chunkXY[1]++){
 
-			if(lietasList.get(i).nosaukums=="Zelts") {
-				resnums = Fizikas.zeltaResnums * merogs;
-				krasa1 = Grafiskie.lietasColorZelts;
-				
-			} else if(lietasList.get(i).nosaukums=="Paika") {
-				resnums = Fizikas.paikasResnums * merogs;
-				krasa1 = Grafiskie.lietasColorPaika;
-				
-			} else { //neklasificçti objekti
-				resnums = Fizikas.lietasResnums * merogs;
-				krasa1 = Grafiskie.lietasColorDefault;
-				
+				ArrayList<Lieta> lietasList = laukums.get(chunkXY[0]).get(chunkXY[1]).lietas;
+
+				for(int i=0;i<lietasList.size();i++) { //zîmç lietas, kas izmçtâtas pa karti
+
+					double x=x0+lietasList.get(i).x*merogs, y=y0+lietasList.get(i).y*merogs, resnums;
+					Color krasa1, krasa2=Color.black; //iekðai un kontûrai
+
+					if(lietasList.get(i).nosaukums=="Zelts") {
+						resnums = Fizikas.zeltaResnums * merogs;
+						krasa1 = Grafiskie.lietasColorZelts;
+
+					} else if(lietasList.get(i).nosaukums=="Paika") {
+						resnums = Fizikas.paikasResnums * merogs;
+						krasa1 = Grafiskie.lietasColorPaika;
+
+					} else { //neklasificçti objekti
+						resnums = Fizikas.lietasResnums * merogs;
+						krasa1 = Grafiskie.lietasColorDefault;
+
+					}
+
+					g.setColor(krasa1); //iekða
+					g.fillOval((int)(x-resnums/2), (int)(y-resnums/2), (int)resnums, (int)resnums);
+					g.setColor(krasa2); //kontûra
+					g.drawOval((int)(x-resnums/2), (int)(y-resnums/2), (int)resnums, (int)resnums);
+
+				}
+
 			}
-
-			g.setColor(krasa1); //iekða
-			g.fillOval((int)(x-resnums/2), (int)(y-resnums/2), (int)resnums, (int)resnums);
-			g.setColor(krasa2); //kontûra
-			g.drawOval((int)(x-resnums/2), (int)(y-resnums/2), (int)resnums, (int)resnums);
-			
 		}
+
+
 		
 	}
 	
