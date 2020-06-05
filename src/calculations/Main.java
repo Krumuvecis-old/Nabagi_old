@@ -23,7 +23,7 @@ public class Main {
 	
 	public static void main(String... args) {
 		
-		initialize(); //galvenâ inicializâcija - sagatavo pilnîgi visu tâlâkam darbam
+		InitializeManager.main(); //galvenâ inicializâcija - sagatavo pilnîgi visu tâlâkam darbam
 		
 		System.out.println("Main while() starting.");
 		while (true){ //ðis visu laiku atkârtojas
@@ -46,8 +46,6 @@ public class Main {
 			}
 		}
 	}
-	
-	private static void initialize() {
 
 
 

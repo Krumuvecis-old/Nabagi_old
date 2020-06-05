@@ -6,9 +6,9 @@ import calculations.konstantes.*;
 import java.util.ArrayList;
 
 class InitializeManager {
-    protected static void main(Main main){
+    protected static void main(){
         initializeKonstantes();
-        initializeLaukums(main);
+        initializeLaukums();
         initializeKomandas();
 
         CilvekuApskats.setup();
@@ -32,16 +32,16 @@ class InitializeManager {
 
     }
 
-    private static void  initializeLaukums(Main main) {
+    private static void  initializeLaukums() {
         int mapChunkCountX = KonstantesUniversal.mapChunkCountX,
                 mapChunkCountY = KonstantesUniversal.mapChunkCountY;
 
         for (int i=0; i<mapChunkCountX;i++){
-            main.laukums.add(new ArrayList<MapChunk>());
+            Main.laukums.add(new ArrayList<MapChunk>());
             for (int j=0; j<mapChunkCountY;j++){
                 MapChunk chunk = new MapChunk();
-                main.laukums.get(i).add(chunk);
-                main.laukums.get(i).get(j).initialize();
+                Main.laukums.get(i).add(chunk);
+                Main.laukums.get(i).get(j).initialize();
 
             }
         }
