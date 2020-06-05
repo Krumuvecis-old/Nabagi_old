@@ -160,9 +160,23 @@ public class Dati {
 		}
 	}
 
-	protected int findPlayer(PlayerThread thread){
+	int findPlayer(PlayerThread thread){
 
-		return i
+
+//		i=-1;
+//
+//		jânomaina spçlçtâja parametri fokusam
+//
+//
+//		int[] chunkXY
+//
+//
+//
+//
+//
+//		return i;
+		return 0; //pagaidâm
+
 	}
 	
 	protected void playerDead() {

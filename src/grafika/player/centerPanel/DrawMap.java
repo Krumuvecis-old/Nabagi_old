@@ -148,6 +148,8 @@ class DrawMap {
 
 				for(int i=0;i<cilvekiList.size();i++) {
 
+					Cilveks player = cilvekiList.get(i);
+
 					double dx = x0-player.xyz.x,
 							dy = y0-player.xyz.y;
 
@@ -324,11 +326,11 @@ class DrawMap {
 	private void playerDrawInfo(Graphics g, int i, Cilveks player, double[] koord, double resnums) {
 		
 		//saskaita cik kuram paika un zelts, lai varçtu izvadît
-		int zeltsNr=CilvekuApskats.countInventory(i,"Zelts", false);
+		int zeltsNr=CilvekuApskats.countInventory(new int[]{player.xyz.xChunk, player.xyz.yChunk}, i,"Zelts", false);
 		double zeltsSum=0;
 		if (zeltsNr>=0) zeltsSum=player.inventory.get(zeltsNr).daudzums;
 		
-		int paikaNr=CilvekuApskats.countInventory(i,"Paika", false);
+		int paikaNr=CilvekuApskats.countInventory(new int[]{player.xyz.xChunk, player.xyz.yChunk}, i,"Paika", false);
 		double paikaSum=0;
 		if (paikaNr>=0) paikaSum=player.inventory.get(paikaNr).daudzums;
 		
