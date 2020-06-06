@@ -65,7 +65,39 @@ class CilvekuDarbibas {
 			cilveks.hp-=stiprums*precizitate-cilveks.brunas;
 		}
 	}
-	
+
+	protected static void trading(Cilveks pircejs, int zeltsNrPerk,
+								  Cilveks pardevejs, int preceNr, double kurss, double apjoms){
+
+		pardevejs.inventory.get(zeltsNrTemp).daudzums+=apjomsTirgo*cenaTirgo; //pieliek naudu pârdevçjam
+		pardevejs.orderi.get(orderisPardodNr).daudzums-=apjomsTirgo; //samazina orderi
+
+		pircejs.inventory.get(preceNrTemp).daudzums+=apjomsTirgo;
+		pircejs.orderi.get(orderisPerkNr).daudzums-=apjomsTirgo; //samazina orderi
+
+		//reseto temporary lielumus, jo tirdznieciba jau notikusi
+
+		perkBiedrs.i=-1;
+		pardodBiedrs.i=-1;
+		perkBiedrs.chunkXY=new int[]{0,0};
+		pardodBiedrs.chunkXY=new int[]{0,0};
+
+		apjomsTirgo=0;
+		jTirgoXY[0]=0;
+		jTirgoXY[1]=0;
+
+		//vçrlreiz saskaita paiku un zeltu, arî vçlreiz izdzçð tukðos
+		zeltsNr=pardevejs.countInventory("Zelts", true);
+		zeltsSum=0;
+		if (zeltsNr>=0) zeltsSum=pardevejs.inventory.get(zeltsNr).daudzums;
+
+		String preceName = pircejs.inventory.get(paikaNr).nosaukums;
+		paikaNr=pircejs.countInventory(preceName, true);
+		paikaSum=0;
+		if (paikaNr>=0) paikaSum=pircejs.inventory.get(paikaNr).daudzums;
+
+	}
+
 	protected static void vairosanas(int[] chunkXY, int numurs) {
 		Cilveks cilveks = Cilveks.getPlayer(chunkXY, numurs);
 
