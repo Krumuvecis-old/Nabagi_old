@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.util.Random;
 
 import calculations.KonstantesUniversal;
+import calculations.MapChunk;
+import calculations.komandas.Biedrs;
 import calculations.konstantes.Cilveku;
 import calculations.konstantes.Fizikas;
 import calculations.konstantes.Formulas;
@@ -59,18 +61,21 @@ public class CilvekuApskats {
 		int i = Cilveks.cilvekuListPilnais.get(numurs).i;
 		Cilveks cilveks= Cilveks.getPlayer(chunkXY, i);
 		Random r=new Random();
-		
-		double resnums=resnumaKoefic*cilveks.hpmax;
-		
-		lootApskatsSadursmei(chunkXY, i);
+
+
+		lootApskatsSadursmei(numurs);
+
+
 
 		if (cilveks.autoPilot) {
 			//spçlçtâjs kontrolç cilvçku
+
+			// errori var bût zemâk
 		} else CilvekuAI.main(numurs); //autopilots
 
-		CilvekuDarbibas.main(numurs);
+		CilvekuDarbibas.main(numurs); //default nekontrolçjamas darbîbas visiem
 
-
+		//errori var bût augstâk
 
 		
 		//ideâlai kustîbai pietrûkst:
@@ -78,80 +83,80 @@ public class CilvekuApskats {
 			//ieskrieðanâs (paâtrinâjums)
 		
 		Kustiba.main(cilveks, numurs);
-		
-		CilvekuDarbibas.healingAndHunger(chunkXY, i);
-	}
-	
-	private static void playerAI(int numurs){
 
+		healingAndHunger(chunkXY, i);
 	}
 	
-	private static void lootApskatsSadursmei(int[] chunkXY, int i) { //cilvçks apskata lietas, kas izmçtâtas pa karti
-		Cilveks cilveks = Cilveks.getPlayer(chunkXY, i);
-		double resnums=resnumaKoefic*cilveks.hpmax;
-		//Random r=new Random();
-		
-		for(int j = 0; j< Main.laukums.get(chunkXY[0]).get(chunkXY[1]).lietas.size(); j++){
-			double distance = Math.hypot(cilveks.xyz.x- Main.laukums.get(chunkXY[0]).get(chunkXY[1]).lietas.get(j).x,
-					cilveks.xyz.y- Main.laukums.get(chunkXY[0]).get(chunkXY[1]).lietas.get(j).y);
-			
-			double resnumsJ; //nosaka lietas resnumu
-			
-			if (Main.laukums.get(chunkXY[0]).get(chunkXY[1]).lietas.get(j).nosaukums=="Zelts") { resnumsJ = Fizikas.zeltaResnums;
-			} else if (Main.laukums.get(chunkXY[0]).get(chunkXY[1]).lietas.get(j).nosaukums=="Paika") { resnumsJ = Fizikas.paikasResnums;
-			} else resnumsJ = Fizikas.lietasResnums; // default neklasificçtai lietai
-			
-			if(distance<=(resnums+resnumsJ)/2) { //paòem jebkâdu lietu, ja  saskaras
-				cilveks.inventory.add(Main.laukums.get(chunkXY[0]).get(chunkXY[1]).lietas.get(j));
-				Main.laukums.get(chunkXY[0]).get(chunkXY[1]).lietas.remove(j);
-				j--;
-				continue;
-			}
-		}
-		
-	}
+
 	
 	private static int zeltsTuvakaisNr, paikaTuvakaNr;
 	private static double zeltsTuvakaisDist, paikaTuvakaDist;
-	
-	private static void lootApskatsMeklesanai(int[] chunkXY, int i) {
-		Cilveks cilveks= Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.get(i);
-		//double resnums=resnumaKoefic*cilveks.hpmax;
+
+	private static void lootApskatsSadursmei(int numurs) { //cilvçks apskata lietas, kas izmçtâtas pa karti
+		Biedrs biedrs = Cilveks.cilvekuListPilnais.get(numurs);
+		Cilveks cilveks = Cilveks.getPlayer(biedrs.chunkXY,biedrs.i);
+
+		double resnums=resnumaKoefic*cilveks.hpmax;
 		//Random r=new Random();
-		
-		
-		zeltsTuvakaisNr = 0; //numurs J
-		paikaTuvakaNr = 0;
-		
-		zeltsTuvakaisDist=-1; //distance
-		paikaTuvakaDist=-1;
-		
-		for(int j = 0; j< Main.laukums.get(chunkXY[0]).get(chunkXY[1]).lietas.size(); j++){
-			double distance = Math.hypot(cilveks.xyz.x- Main.laukums.get(chunkXY[0]).get(chunkXY[1]).lietas.get(j).x,
-					cilveks.xyz.y- Main.laukums.get(chunkXY[0]).get(chunkXY[1]).lietas.get(j).y);
-			
-			/*double resnumsJ; //nosaka lietas resnumu
-			if (Main.lietas.get(j).nosaukums=="Zelts") { resnumsJ = zeltaResnums;
-			} else if (Main.lietas.get(j).nosaukums=="Paika") { resnumsJ = paikasResnums;
-			} else resnumsJ = lietasResnums;*/
-			
-			if(Main.laukums.get(chunkXY[0]).get(chunkXY[1]).lietas.get(j).nosaukums=="Zelts") {
-				if (distance<zeltsTuvakaisDist || (zeltsTuvakaisDist<0 && distance<=cilveks.R2)) {
-					zeltsTuvakaisDist = distance;
-					zeltsTuvakaisNr=j;
+
+		int chunkViewDistance=1; //0 - redz tikai savu chunk, 1 - redz 1 uz visâm pusçm
+		for(int[] dChunkXY={-chunkViewDistance,-chunkViewDistance}; dChunkXY[0]<=chunkViewDistance; dChunkXY[0]++){
+			for( ; dChunkXY[1]<=chunkViewDistance; dChunkXY[1]++){
+				MapChunk chunk = Main.laukums.get(biedrs.chunkXY[0]+dChunkXY[0]).get(biedrs.chunkXY[1]+dChunkXY[1]);
+
+				for(int i = 0; i < chunk.lietas.size(); i++){
+
+					double dx = dChunkXY[0] * KonstantesUniversal.mapChunkW +
+									chunk.lietas.get(i).x - cilveks.xyz.x,
+
+							dy = dChunkXY[1] * KonstantesUniversal.mapChunkW +
+									chunk.lietas.get(i).y - cilveks.xyz.y;
+
+					double distance = Math.hypot(dx, dy);
+
+					double resnumsJ; //nosaka lietas resnumu
+
+					if (chunk.lietas.get(i).nosaukums.equals("Zelts")) { resnumsJ = Fizikas.zeltaResnums;
+					} else if (chunk.lietas.get(i).nosaukums.equals("Paika")) { resnumsJ = Fizikas.paikasResnums;
+					} else resnumsJ = Fizikas.lietasResnums; // default neklasificçtai lietai
+
+					if(distance<=(resnums+resnumsJ)/2) { //paòem jebkâdu lietu, ja saskaras
+						cilveks.inventory.add(chunk.lietas.get(i));
+						chunk.lietas.remove(i);
+						i--;
+						continue;
+					}
 				}
+
 			}
-			
-			if(Main.laukums.get(chunkXY[0]).get(chunkXY[1]).lietas.get(j).nosaukums=="Paika") {
-				if (distance<paikaTuvakaDist || (paikaTuvakaDist<0 && distance<=cilveks.R2)) {
-					paikaTuvakaDist = distance;
-					paikaTuvakaNr=j;
-				}
-			}
-				
 		}
+
+
+
+
 	}
-	
+
+	protected static void healingAndHunger(int[] chunkXY, int numurs) {
+		Cilveks cilveks= Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.get(numurs);
+
+		double dHpRegen=Cilveku.healingRateDefault,
+				dHpHungry=Cilveku.healthReductionRate,
+				paikaD=Cilveku.paikaReductionDefault;
+
+		if (cilveks.paika>=cilveks.paikaMin) { //ja pietiek pârtika, veseïojas
+			if(cilveks.hp<cilveks.hpmax) cilveks.hp+=dHpRegen;
+		} else if(cilveks.paika<=0) { //ja pârtika nav - zaudç Hp
+			if(cilveks.hp>0) cilveks.hp-=dHpHungry;
+		}
+
+		if(cilveks.hp<0) cilveks.hp=0; //nolîdzina pie 0
+		if(cilveks.hp>cilveks.hpmax) cilveks.hp=cilveks.hpmax; //nolîdzina pie hpmax
+
+		//konstanti atòemâs paika
+		if(cilveks.paika>0) cilveks.paika-=paikaD;
+		if(cilveks.paika<0) cilveks.paika=0;
+	}
+
 	private static void naavesPaarbaude(int[] chunkXY, int numurs) {
 		double lootDropDistance=10;
 		Cilveks cilveks = Cilveks.getPlayer(chunkXY, numurs);

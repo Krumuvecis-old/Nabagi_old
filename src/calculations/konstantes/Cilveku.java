@@ -8,7 +8,8 @@ public class Cilveku {
     public static String vardsDefault="S";
     public static int maxGataviba=100;
 
-    public static double vmax=3, ommax=30;
+    public static double vmax=3, ommax=30,
+            omChangeRate=0.1; //grieðanâs atpûðoties
 
     public static double RMax=400; //maksimâlais redzesloks (jaunus ìenerçjot)
     public static double R2koefic=0.3; //minimâlâ redzesloka daïas koefic
