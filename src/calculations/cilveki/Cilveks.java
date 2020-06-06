@@ -25,6 +25,7 @@ public class Cilveks {
 	public double paika;
 	public double paikaMax;
 	public double paikaMin;
+	public boolean navKoEst;
 	
 	//sensorie parametri
 	public double R1, R2; //redzesloks

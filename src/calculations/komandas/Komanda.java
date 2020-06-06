@@ -1,14 +1,10 @@
 package calculations.komandas;
 
 import calculations.Main;
-import calculations.MapChunk;
 import calculations.cilveki.Cilveks;
-import calculations.cilveki.CilvekuApskats;
-import calculations.konstantes.Komandu;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Komanda {
 	

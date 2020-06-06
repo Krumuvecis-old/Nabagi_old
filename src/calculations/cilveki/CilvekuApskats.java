@@ -8,7 +8,6 @@ import calculations.MapChunk;
 import calculations.komandas.Biedrs;
 import calculations.konstantes.Cilveku;
 import calculations.konstantes.Fizikas;
-import calculations.konstantes.Formulas;
 import calculations.Main;
 import calculations.komandas.Komanda;
 import calculations.komandas.KomanduApskats;
@@ -50,7 +49,7 @@ public class CilvekuApskats {
 		}
 
 		for (int i = 0; i< Cilveks.cilvekuListPilnais.size(); i++) {
-			calculations.komandas.Biedrs biedrs=Cilveks.cilvekuListPilnais.get(i);
+			Biedrs biedrs=Cilveks.cilvekuListPilnais.get(i);
 			naavesPaarbaude(biedrs.chunkXY, biedrs.i); //nodzçð miruðos cilvçkus
 		}
 		
@@ -84,7 +83,6 @@ public class CilvekuApskats {
 		
 		Kustiba.main(cilveks, numurs);
 
-		healingAndHunger(chunkXY, i);
 	}
 	
 
@@ -131,30 +129,6 @@ public class CilvekuApskats {
 			}
 		}
 
-
-
-
-	}
-
-	protected static void healingAndHunger(int[] chunkXY, int numurs) {
-		Cilveks cilveks= Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.get(numurs);
-
-		double dHpRegen=Cilveku.healingRateDefault,
-				dHpHungry=Cilveku.healthReductionRate,
-				paikaD=Cilveku.paikaReductionDefault;
-
-		if (cilveks.paika>=cilveks.paikaMin) { //ja pietiek pârtika, veseïojas
-			if(cilveks.hp<cilveks.hpmax) cilveks.hp+=dHpRegen;
-		} else if(cilveks.paika<=0) { //ja pârtika nav - zaudç Hp
-			if(cilveks.hp>0) cilveks.hp-=dHpHungry;
-		}
-
-		if(cilveks.hp<0) cilveks.hp=0; //nolîdzina pie 0
-		if(cilveks.hp>cilveks.hpmax) cilveks.hp=cilveks.hpmax; //nolîdzina pie hpmax
-
-		//konstanti atòemâs paika
-		if(cilveks.paika>0) cilveks.paika-=paikaD;
-		if(cilveks.paika<0) cilveks.paika=0;
 	}
 
 	private static void naavesPaarbaude(int[] chunkXY, int numurs) {

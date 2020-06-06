@@ -2,7 +2,6 @@ package calculations.cilveki;
 
 import java.util.Random;
 
-import calculations.MapChunk;
 import calculations.komandas.Biedrs;
 import calculations.konstantes.Cilveku;
 import calculations.konstantes.Formulas;
@@ -13,32 +12,16 @@ import calculations.Main;
 class CilvekuDarbibas {
 
 	protected static void main(int numurs){
-
-		esanaNoInventory(numurs);
-		boolean navKoEst=CilvekuDarbibas.navKoEst;
-
 		Biedrs biedrs = Cilveks.cilvekuListPilnais.get(numurs);
 		Cilveks cilveks = Cilveks.getPlayer(biedrs.chunkXY,  biedrs.i);
 
-		//errori var bût zemâk
+		esanaNoInventory(cilveks);
 
-		//atkârtota saskaite un papildus cleanup
-		int zeltsNr=cilveks.countInventory("Zelts", true);
-		double zeltsSum=0;
-		if (zeltsNr>=0) zeltsSum=cilveks.inventory.get(zeltsNr).daudzums;
-
-		int paikaNr=cilveks.countInventory("Paika", true); //çdot no inventory jau bija viens cleanup
-		double paikaSum=0;
-		if (paikaNr>=0) paikaSum=cilveks.inventory.get(paikaNr).daudzums;
-
-		//errori var bût augstâk
+		healingAndHunger(cilveks);
 
 	}
 
-	protected static boolean navKoEst;
-	protected static void esanaNoInventory(int numurs) {
-		Biedrs biedrs = Cilveks.cilvekuListPilnais.get(numurs);
-		Cilveks cilveks = Cilveks.getPlayer(biedrs.chunkXY,  biedrs.i);
+	protected static void esanaNoInventory(Cilveks cilveks) {
 		
 		if (cilveks.paika<=cilveks.paikaMin) { //çðana no inventory
 			
@@ -52,13 +35,31 @@ class CilvekuDarbibas {
 				
 				cilveks.paika+=Math.min((apests/Cilveku.esanasDaudzums)*cilveks.paikaMax, cilveks.paikaMax-cilveks.paika);
 				
-			} else { navKoEst = true; }
+			} else { cilveks.navKoEst = true; }
 		}
 		
 	}
-	
-	protected static void trauma(int[] chunkXY, int numurs, double stiprums, double precizitate) {
-		Cilveks cilveks = Cilveks.getPlayer(chunkXY, numurs);
+
+	protected static void healingAndHunger(Cilveks cilveks) {
+		double dHpRegen=Cilveku.healingRateDefault,
+				dHpHungry=Cilveku.healthReductionRate,
+				paikaD=Cilveku.paikaReductionDefault;
+
+		if (cilveks.paika>=cilveks.paikaMin) { //ja pietiek pârtika, veseïojas
+			if(cilveks.hp<cilveks.hpmax) cilveks.hp+=dHpRegen;
+		} else if(cilveks.paika<=0) { //ja pârtika nav - zaudç Hp
+			if(cilveks.hp>0) cilveks.hp-=dHpHungry;
+		}
+
+		if(cilveks.hp<0) cilveks.hp=0; //nolîdzina pie 0
+		if(cilveks.hp>cilveks.hpmax) cilveks.hp=cilveks.hpmax; //nolîdzina pie hpmax
+
+		//konstanti atòemâs paika
+		if(cilveks.paika>0) cilveks.paika-=paikaD;
+		if(cilveks.paika<0) cilveks.paika=0;
+	}
+
+	protected static void trauma(Cilveks cilveks, double stiprums, double precizitate) {
 		
 		if (stiprums*precizitate>cilveks.brunas) {
 			cilveks.hp-=stiprums*precizitate-cilveks.brunas;
@@ -66,8 +67,8 @@ class CilvekuDarbibas {
 	}
 	
 	protected static void vairosanas(int[] chunkXY, int numurs) {
-		Cilveks cilveks= Cilveks.getPlayer(chunkXY,numurs);
-		
+		Cilveks cilveks = Cilveks.getPlayer(chunkXY, numurs);
+
 		Random r=new Random();
 
 		Cilveks.maxCilveks++;
@@ -126,24 +127,21 @@ class CilvekuDarbibas {
 				R1,R2,brunas,stiprums,gataviba,drosme,komanda,rangs);
     }
 	
-	protected static void tuvoties(int[] chunkXY, int numurs, double[] XY, double hpKoef, double vKoef){
-		Cilveks cilveks= Cilveks.getPlayer(chunkXY, numurs);
+	protected static void tuvoties(Cilveks cilveks, double[] XY, double hpKoef, double vKoef){
 		
 		cilveks.xyz.fi = Formulas.lenkaNoteiksana(cilveks.xyz.x, cilveks.xyz.y, XY[0], XY[1]);
 		
 		cilveks.xyz.v = hpKoef*vKoef*cilveks.vmax;
 	}
 	
-	protected static void atkapties(int[] chunkXY, int numurs, double[] XY, double hpKoef, double vKoef){
-		Cilveks cilveks = Cilveks.getPlayer(chunkXY, numurs);
+	protected static void atkapties(Cilveks cilveks, double[] XY, double hpKoef, double vKoef){
 		
 		cilveks.xyz.fi = 180 + Formulas.lenkaNoteiksana(cilveks.xyz.x,cilveks.xyz.y, XY[0], XY[1]);
 		
 		cilveks.xyz.v = hpKoef*vKoef*cilveks.vmax;
 	}
 
-	protected static void atputa(int[] chunkXY, int numurs, double hpKoef, double vKoef) {
-		Cilveks cilveks = Cilveks.getPlayer(chunkXY, numurs);
+	protected static void atputa(Cilveks cilveks, double hpKoef, double vKoef) {
 		
 		cilveks.darbiba="atputa";
 		

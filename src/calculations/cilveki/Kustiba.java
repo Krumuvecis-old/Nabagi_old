@@ -2,8 +2,7 @@ package calculations.cilveki;
 
 import calculations.KonstantesUniversal;
 import calculations.Main;
-import calculations.MapChunk;
-import calculations.konstantes.Fizikas;
+import calculations.komandas.Biedrs;
 
 class Kustiba {
 	
@@ -32,7 +31,7 @@ class Kustiba {
 	}
 
 	private static void maluParbaude(int numurs) { //situâcijas pie laukuma malâm
-		calculations.komandas.Biedrs biedrs = Cilveks.cilvekuListPilnais.get(numurs);
+		Biedrs biedrs = Cilveks.cilvekuListPilnais.get(numurs);
 		Cilveks cilveks = Cilveks.getPlayer(biedrs.chunkXY, biedrs.i);
 
 		int platums=KonstantesUniversal.mapChunkW, chunkX=biedrs.chunkXY[0], chunkY=biedrs.chunkXY[0];

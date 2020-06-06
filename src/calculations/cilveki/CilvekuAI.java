@@ -6,13 +6,19 @@ import calculations.konstantes.Cilveku;
 import calculations.konstantes.Formulas;
 import calculations.lietas.Lieta;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class CilvekuAI {
 
+    private static Biedrs perkBiedrs, pardodBiedrs;
+
     protected  static void main(int numurs){
         Biedrs biedrs = Cilveks.cilvekuListPilnais.get(numurs);
         Cilveks cilveks = Cilveks.getPlayer(biedrs.chunkXY,biedrs.i);
+        double hpRatio=cilveks.hp/cilveks.hpmax;
+
+        //errori var bût zemâk
 
         updateTradeOrders(numurs); //orderu apskats
 
@@ -21,8 +27,16 @@ public class CilvekuAI {
         cilvekuSalidzinajums(numurs);
 
         boolean gatavsTirgot=false;
-        if(perkNr>=0||pardodNr>=0) gatavsTirgot=true;
+        if(perkBiedrs.i>=0||pardodBiedrs.i>=0) gatavsTirgot=true;
 
+        //atkârtota saskaite un papildus cleanup
+        int zeltsNr=cilveks.countInventory("Zelts", true);
+        double zeltsSum=0;
+        if (zeltsNr>=0) zeltsSum=cilveks.inventory.get(zeltsNr).daudzums;
+
+        int paikaNr=cilveks.countInventory("Paika", true); //çdot no inventory jau bija viens cleanup
+        double paikaSum=0;
+        if (paikaNr>=0) paikaSum=cilveks.inventory.get(paikaNr).daudzums;
 
 
 
@@ -42,9 +56,9 @@ public class CilvekuAI {
             }
         }
 
-        lootApskatsMeklesanai(i);
+        lootApskatsMeklesanai(numurs);
 
-        if(navKoEst==false || paikaTuvakaDist<0) { //ja ir ko est vai neredz paiku
+        if(!cilveks.navKoEst || paikaTuvakaDist<0) { //ja ir ko est vai neredz paiku
             if( pretiniekuSkaitsR1>0 && savejoSkaitsR1>0) {
                 if((pretiniekuBrunasR1/pretiniekuSkaitsR1)*cilveks.hp / (cilveks.stiprums) /
                         ((savejoBrunasR1/savejoSkaitsR1)*cilveks.hp / (pretiniekuStiprumsR1/pretiniekuSkaitsR1)) <
@@ -71,62 +85,62 @@ public class CilvekuAI {
             if(cilveks.darbiba=="mukt") {
                 cilveks.darbiba="mukt";
 
-                int vKoef=;
-                CilvekuDarbibas.atkapties(chunkXY,i,pretiniekuXYR1,hpKoef,1);
+                double vKoef=1;
+                CilvekuDarbibas.atkapties(cilveks,pretiniekuXYR1,hpRatio,vKoef);
 
                 cilveks.drosme-=cilveks.drosme*0.1; //atòem drosmi
             }
 
         } else if(uzbrukt) {
-            if(cilveks.darbiba!="uzbrukt" && cilveks.gataviba>=maxGataviba) {
+            if(!cilveks.darbiba.equals("uzbrukt") && cilveks.gataviba>=maxGataviba) {
                 cilveks.darbiba="uzbrukt";
                 cilveks.gataviba=0;
             }
 
-            if(cilveks.darbiba=="uzbrukt") {
+            if(cilveks.darbiba.equals("uzbrukt")) {
                 cilveks.darbiba="uzbrukt";
 
-                int vKoef=;
-                CilvekuDarbibas.tuvoties(chunkXY,i,pretiniekuXYR1,hpKoef,0.9);
+                double vKoef=0.9;
+                CilvekuDarbibas.tuvoties(cilveks,pretiniekuXYR1,hpRatio,vKoef);
 
                 cilveks.drosme+=cilveks.drosme*0.1; //pieskaita  drosmi
             }
 
         } else if(paikaSum<paikaNepiec && paikaTuvakaDist>0) {
-            int vKoef=;
-            CilvekuDarbibas.mekletPaiku(chunkXY, i,paikaTuvakaNr,hpKoef,0.7);
+            double vKoef=0.7;
+            CilvekuDarbibas.mekletPaiku(cilveks,paikaTuvakaNr,hpRatio,vKoef);
 
         } else if(zeltsTuvakaisDist>0) {
-            int vKoef=;
-            CilvekuDarbibas.mekletZeltu(chunkXY, i,zeltsTuvakaisNr,hpKoef,0.6);
+            double vKoef=0.6;
+            CilvekuDarbibas.mekletZeltu(cilveks,zeltsTuvakaisNr,hpRatio,vKoef);
 
-        } else if(atkapties==true) {
-            if(cilveks.darbiba!="atkapties"&&cilveks.gataviba>=maxGataviba/2) {
+        } else if(atkapties) {
+            if(!cilveks.darbiba.equals("atkapties") &&cilveks.gataviba>=maxGataviba/2) {
                 cilveks.darbiba="atkapties";
                 cilveks.gataviba=0;
             }
 
-            if(cilveks.darbiba=="atkapties") {
+            if(cilveks.darbiba.equals("atkapties")) {
                 cilveks.darbiba="atkapties";
 
-                int vKoef=;
-                CilvekuDarbibas.atkapties(chunkXY, i,pretiniekuXYR2,hpKoef,0.8);
+                double vKoef=0.8;
+                CilvekuDarbibas.atkapties(cilveks,pretiniekuXYR2,hpRatio,vKoef);
 
                 cilveks.drosme-=cilveks.drosme*0.05;
             }
 
 
-        } else if(tuvoties==true) {
-            if(cilveks.darbiba!="tuvoties"&&cilveks.gataviba>=maxGataviba) {
+        } else if(tuvoties) {
+            if(!cilveks.darbiba.equals("tuvoties") &&cilveks.gataviba>=Cilveku.maxGataviba) {
                 cilveks.darbiba="tuvoties";
                 cilveks.gataviba=0;
             }
 
-            if(cilveks.darbiba=="tuvoties") {
+            if(cilveks.darbiba.equals("tuvoties")) {
                 cilveks.darbiba="tuvoties";
 
-                int vKoef=;
-                CilvekuDarbibas.tuvoties(chunkXY,i,pretiniekuXYR2,hpKoef,0.8);
+                double vKoef=0.6;
+                CilvekuDarbibas.tuvoties(cilveks,pretiniekuXYR2,hpRatio,vKoef);
 
                 cilveks.drosme+=cilveks.drosme*0.05;
             }
@@ -135,18 +149,18 @@ public class CilvekuAI {
         } else if(gatavsTirgot){
             cilveks.darbiba="tirgojas";
 
-            int vKoef=;
-            CilvekuDarbibas.tuvoties(chunkXY,i,jTirgoXY,hpKoef,0.6);
+            double vKoef=0.6;
+            CilvekuDarbibas.tuvoties(cilveks,jTirgoXY,hpRatio,vKoef);
 
         } else if(paikaTuvakaDist>0) { //savâkt redzamo paiku pat ja nevajag
 
-            int vKoef=;
-            CilvekuDarbibas.mekletPaiku(chunkXY,i,paikaTuvakaNr,hpKoef,0.6);
+            double vKoef=0.6;
+            mekletPaiku(cilveks,paikaTuvakaNr,hpRatio,vKoef);
 
         } else {
             cilveks.darbiba=""; //reseto aili
 
-            CilvekuDarbibas.komanduMaina(chunkXY, i, 1.5, 5, 0.01, 0.01); //paikaMaina (minimums), zeltsMaina (minimums), anarchyChance, orderChance;
+            komanduMaina(cilveks, 1.5, 5, 0.01, 0.01); //paikaMaina (minimums), zeltsMaina (minimums), anarchyChance, orderChance;
 
 
 
@@ -171,7 +185,7 @@ public class CilvekuAI {
             if(cilveks.drosme<0) cilveks.drosme=0;
 
             double vKoef=0.4;
-            CilvekuDarbibas.atputa(chunkXY, i, hpKoef, vKoef); //ja nekas nenotiek un neko nevar izdarît
+            CilvekuDarbibas.atputa(cilveks, hpRatio, vKoef); //ja nekas nenotiek un neko nevar izdarît
         }
 
 
@@ -222,9 +236,7 @@ public class CilvekuAI {
 
         Biedrs biedrs = Cilveks.cilvekuListPilnais.get(numurs);
         Cilveks cilveks = Cilveks.getPlayer(biedrs.chunkXY, biedrs.i);
-
         double hpRatio=cilveks.hp/cilveks.hpmax;
-        double hpKoef=0.5+0.5*hpRatio;
 
         int savejoSkaitsR1=1, pretiniekuSkaitsR1=0, savejoSkaitsR2=1, pretiniekuSkaitsR2=0;
         double pretiniekuXR1=0,pretiniekuYR1=0,pretiniekuXR2=0,pretiniekuYR2=0;
@@ -246,242 +258,256 @@ public class CilvekuAI {
         //double[] savejoXYR1=new double[] {savejoXR1/savejoSkaitsR1,savejoYR1/savejoSkaitsR1};
         //double[] savejoXYR2=new double[] {savejoXR2/savejoSkaitsR2,savejoYR2/savejoSkaitsR2};
 
-        int perkNr=-1, orderisPerkNr=-1;
-        int pardodNr=-1, orderisPardodNr=-1;
+        perkBiedrs.i=-1;
+        pardodBiedrs.i=-1;
+        int orderisPerkNr=-1, orderisPardodNr=-1;
         String preceTirgo=" ";
         double apjomsTirgo=0;
         double cenaTirgo= Cilveku.paikaPriceDefault;// temporary default  value
         double[] jTirgoXY=new double[2];
 
-        for(int i = 0; i< Cilveks.cilvekuListPilnais.size(); i++) {
-            if (i==biedrs.i) { continue; }//ar sevi nesalîdzina
+        int chunkViewDistance=1;
+        for(int[] dChunkXY={-chunkViewDistance,-chunkViewDistance}; dChunkXY[0]<=chunkViewDistance; dChunkXY[0]++){
+            for( ; dChunkXY[1]<=chunkViewDistance; dChunkXY[1]++){
+
+                int[] chunkXY = {biedrs.chunkXY[0]+dChunkXY[0], biedrs.chunkXY[1]+dChunkXY[1]};
+                ArrayList<Cilveks> cilvekiList = Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList;
+
+                for(int i = 0; i < cilvekiList.size(); i++) {
+                    if (biedrs.chunkXY==chunkXY && biedrs.i==i) { continue; }//ar sevi nesalîdzina
+
+                    Cilveks cilveks2 = Cilveks.getPlayer(chunkXY, i);
+
+                    //pie dx un dy jâpieskaita chunk nobîdes radîtâs izmaiòas --- !!!!!!
+                    double dx=cilveks.xyz.x - cilveks2.xyz.x,
+                            dy=cilveks.xyz.y - cilveks2.xyz.y;
+
+                    double distance = Math.hypot(dx, dy);
+
+                    if(distance>cilveks.R2) { continue; } else { //atmet pavisam tâlos
+
+                        //sâkas R2
+
+                        double hpRatio2 = cilveks2.hp / cilveks2.hpmax;
+
+                        if (!cilveks.komanda.equals(cilveks2.komanda) ||
+                                cilveks2.komanda.equals("Anarhija")) {
+                            pretiniekuSkaitsR2++;
+                            pretiniekuXR2+= cilveks2.xyz.x;
+                            pretiniekuYR2+= cilveks2.xyz.y;
+                            pretiniekuStiprumsR2+= cilveks2.stiprums*hpRatio2;
+                            pretiniekuBrunasR2+= cilveks2.brunas;
+                        }
+
+                        if (cilveks.komanda.equals(cilveks2.komanda) && !cilveks.komanda.equals("Anarhija")) {
+                            savejoSkaitsR2++;
+                            savejoXR2+= cilveks2.xyz.x;
+                            savejoYR2+= cilveks2.xyz.y;
+                            savejoStiprumsR2+= cilveks2.stiprums*hpRatio2;
+                            savejoBrunasR2+= cilveks2.brunas;
+
+                            //te  vajadzçtu arî pârbaudît tirdzniecîbas cenas un  saglabât atmiòâ
 
 
-            double distance = Math.hypot(cilveks.xyz.x- Cilveks.getPlayer(chunkXY, j).xyz.x,
-                    cilveks.xyz.y- Cilveks.getPlayer(chunkXY, j).xyz.y);
 
-            if(distance>cilveks.R2) { continue; } else { //atmet pavisam tâlos
+                            if(cilveks.orderi.size()>0) { //pârbauda tirdzniecîbas iespçjas, bet tikai starp saviem komandasbiedriem
 
-                //sâkas R2
+                                for(int w1=0;w1<cilveks.orderi.size();w1++) { // apskata savus orderus
 
-                double hpRatioJ = Cilveks.getPlayer(chunkXY, j).hp/ Cilveks.getPlayer(chunkXY, j).hpmax;
+                                    if(apjomsTirgo>0) break;
 
-                if (cilveks.komanda!= Cilveks.getPlayer(chunkXY, j).komanda ||
-                        Cilveks.getPlayer(chunkXY, j).komanda == "Anarhija") {
-                    pretiniekuSkaitsR2++;
-                    pretiniekuXR2+= Cilveks.getPlayer(chunkXY, j).xyz.x;
-                    pretiniekuYR2+= Cilveks.getPlayer(chunkXY, j).xyz.y;
-                    pretiniekuStiprumsR2+= Cilveks.getPlayer(chunkXY, j).stiprums*hpRatioJ;
-                    pretiniekuBrunasR2+= Cilveks.getPlayer(chunkXY, j).brunas;
-                }
+                                    System.out.println(cilveks.vards+" salîdzina sevi ar "+ cilveks2.vards);
 
-                if (cilveks.komanda== Cilveks.getPlayer(chunkXY, j).komanda &&
-                        cilveks.komanda != "Anarhija") {
-                    savejoSkaitsR2++;
-                    savejoXR2+= Cilveks.getPlayer(chunkXY, j).xyz.x;
-                    savejoYR2+= Cilveks.getPlayer(chunkXY, j).xyz.y;
-                    savejoStiprumsR2+= Cilveks.getPlayer(chunkXY, j).stiprums*hpRatioJ;
-                    savejoBrunasR2+= Cilveks.getPlayer(chunkXY, j).brunas;
+                                    for(int w2 = 0; w2< cilveks2.orderi.size(); w2++) { // apskata otra orderus
 
-                    //te  vajadzçtu arî pârbaudît tirdzniecîbas cenas un  saglabât atmiòâ
+                                        if(cilveks.orderi.get(w1).prece.equals(cilveks2.orderi.get(w2).prece) &&
+                                                (cilveks.orderi.get(w1).perk != cilveks2.orderi.get(w2).perk)) { //ja abiem sakrît vçlmes un atðíiras virzieni
 
 
+                                            preceTirgo=cilveks.orderi.get(w1).prece;
+                                            apjomsTirgo=Math.min(cilveks.orderi.get(w1).daudzums, cilveks2.orderi.get(w2).daudzums);
 
-                    if(cilveks.orderi.size()>0) { //pârbauda tirdzniecîbas iespçjas, bet tikai starp saviem komandasbiedriem
+                                            if (apjomsTirgo>0) { //pârbauda vai nesola tukðu
+                                                jTirgoXY[0] = cilveks2.xyz.x;
+                                                jTirgoXY[1] = cilveks2.xyz.y;
 
-                        for(int w1=0;w1<cilveks.orderi.size();w1++) { // apskata savus orderus
+                                                if(cilveks.orderi.get(w1).perk) {
+                                                    perkBiedrs=biedrs;
+                                                    orderisPerkNr=w1;
+                                                    pardodBiedrs.i=i;
+                                                    pardodBiedrs.chunkXY=chunkXY;
+                                                    orderisPardodNr=w2;
+                                                } else {
+                                                    perkBiedrs.i=i;
+                                                    perkBiedrs.chunkXY=chunkXY;
+                                                    orderisPerkNr=w2;
+                                                    pardodBiedrs=biedrs;
+                                                    orderisPardodNr=w1;
+                                                }
 
-                            if(apjomsTirgo>0) break;
+                                                break;
+                                            }
 
-                            System.out.println(cilveks.vards+" salîdzina sevi ar "+ Cilveks.getPlayer(chunkXY, j).vards);
-
-                            for(int w2 = 0; w2< Cilveks.getPlayer(chunkXY, j).orderi.size(); w2++) { // apskata otra orderus
-
-                                if(cilveks.orderi.get(w1).prece== Cilveks.getPlayer(chunkXY, j).orderi.get(w2).prece &&
-                                        (cilveks.orderi.get(w1).perk!= Cilveks.getPlayer(chunkXY, j).orderi.get(w2).perk)) { //ja abiem sakrît vçlmes un atðíiras virzieni
-
-
-                                    preceTirgo=cilveks.orderi.get(w1).prece;
-                                    apjomsTirgo=Math.min(cilveks.orderi.get(w1).daudzums, Cilveks.getPlayer(chunkXY, j).orderi.get(w2).daudzums);
-
-                                    if (apjomsTirgo>0) { //pârbauda vai nesola tukðu
-                                        jTirgoXY[0]= Cilveks.getPlayer(chunkXY, j).xyz.x;
-                                        jTirgoXY[1]= Cilveks.getPlayer(chunkXY, j).xyz.y;
-
-                                        if(cilveks.orderi.get(w1).perk==true) {
-                                            perkNr=i;
-                                            orderisPerkNr=w1;
-                                            pardodNr=j;
-                                            orderisPardodNr=w2;
-                                        } else {
-                                            perkNr=j;
-                                            orderisPerkNr=w2;
-                                            pardodNr=i;
-                                            orderisPardodNr=w1;
                                         }
+                                    }
+                                }
+                                // partneris atrasts, prece noskaidrota;
+                            }
+                        }
 
-                                        break;
+
+                        if(distance>cilveks.R1) continue; //lai nesalîdzina sîkâk, ko nevajag
+                        //sâkas R1
+
+                        if (!cilveks.komanda.equals(cilveks2.komanda) ||
+                                cilveks2.komanda.equals("Anarhija")) {
+                            pretiniekuSkaitsR1++;
+                            pretiniekuXR1+= cilveks2.xyz.x;
+                            pretiniekuYR1+= cilveks2.xyz.y;
+                            pretiniekuStiprumsR1+= cilveks2.stiprums*hpRatio2;
+                            pretiniekuBrunasR1+= cilveks2.brunas;
+                        }
+
+                        if (cilveks.komanda.equals(cilveks2.komanda) &&
+                                !cilveks.komanda.equals("Anarhija")) {
+                            savejoSkaitsR1++;
+                            savejoXR1+= cilveks2.xyz.x;
+                            savejoYR1+= cilveks2.xyz.y;
+                            savejoStiprumsR1+= cilveks2.stiprums*hpRatio2;
+                            savejoBrunasR1+= cilveks2.brunas;
+                        }
+
+                        //sadursme
+
+                        double resnums=calculations.konstantes.Fizikas.resnumaKoefic*cilveks.hpmax;
+                        double resnumsJ=calculations.konstantes.Fizikas.resnumaKoefic* cilveks2.hpmax;
+
+                        if(distance>(resnums+resnumsJ)/2) {continue;} else { //zemâk tikai kas saskarâs
+
+                            double fiTemp= Formulas.lenkaNoteiksana(cilveks.xyz.x,cilveks.xyz.y,
+                                    cilveks2.xyz.x, cilveks2.xyz.y);
+                            //cilvekiList.get(i).xyz.fi=fiTemp;
+                            cilveks.xyz.x-=(resnums+resnumsJ-distance)/4*Math.cos(Math.toRadians(fiTemp));
+                            cilveks.xyz.y-=(resnums+resnumsJ-distance)/4*Math.sin(Math.toRadians(fiTemp));
+                            cilveks2.xyz.x+=(resnums+resnumsJ-distance)/4*Math.cos(Math.toRadians(fiTemp));
+                            cilveks2.xyz.y+=(resnums+resnumsJ-distance)/4*Math.sin(Math.toRadians(fiTemp));
+
+                            if (!cilveks.komanda.equals(cilveks2.komanda) || cilveks.komanda.equals("Anarhija")) {//cîòa
+                                double stiprums = cilveks.stiprums, stiprumsJ = cilveks2.stiprums;
+
+                                CilvekuDarbibas.trauma(cilveks2,stiprums*hpRatio2, 1); //sadod pretiniekam
+                                CilvekuDarbibas.trauma(cilveks,stiprumsJ*hpRatio2, 1); //saòem pretî
+
+                            } else { //ja ir vienâ komandâ - pârbauda tirdzniecîbu
+
+                                if(apjomsTirgo>0) {
+
+                                    //apskata pârdevçju
+                                    int zeltsNrTemp=-1,preceNrTemp2=-1;
+
+                                    for(int w = 0; w< Cilveks.getPlayer(pardodBiedrs.chunkXY, pardodBiedrs.i).inventory.size(); w++) {
+                                        if (preceNrTemp2>=0 && zeltsNrTemp>=0) break;
+                                        if (Cilveks.getPlayer(pardodBiedrs.chunkXY, pardodBiedrs.i).inventory.get(w).nosaukums==preceTirgo) {
+                                            Cilveks.getPlayer(pardodBiedrs.chunkXY, pardodBiedrs.i).inventory.get(w).daudzums-=apjomsTirgo;
+                                            preceNrTemp2=w;
+                                        }
+                                        if (Cilveks.getPlayer(pardodBiedrs.chunkXY, pardodBiedrs.i).inventory.get(w).nosaukums=="Zelts") {
+                                            zeltsNrTemp=w;
+                                        }
                                     }
 
+                                    if (zeltsNrTemp<0) { //ja sâkumâ pârdevçjam nav naudas vispâr, uztaisa tukðu elementu
+                                        Lieta samaksa = new Lieta();
+                                        samaksa.x= Cilveks.getPlayer(pardodBiedrs.chunkXY, pardodBiedrs.i).xyz.x;
+                                        samaksa.y= Cilveks.getPlayer(pardodBiedrs.chunkXY, pardodBiedrs.i).xyz.y;
+                                        samaksa.nosaukums="Zelts";
+                                        samaksa.daudzums=0;
+                                        samaksa.zelts=1;
+                                        samaksa.paika=0;
+                                        samaksa.masa=1;
+                                        samaksa.attack=0;
+                                        samaksa.defence=0;
+                                        samaksa.condition=1;
+
+                                        zeltsNrTemp= Cilveks.getPlayer(pardodBiedrs.chunkXY, pardodBiedrs.i).inventory.size();
+                                        Cilveks.getPlayer(pardodBiedrs.chunkXY, pardodBiedrs.i).inventory.add(samaksa);
+                                    }
+
+                                    Cilveks.getPlayer(pardodBiedrs.chunkXY, pardodBiedrs.i).inventory.get(zeltsNrTemp).daudzums+=apjomsTirgo*cenaTirgo; //pieliek naudu pârdevçjam
+                                    Cilveks.getPlayer(pardodBiedrs.chunkXY, pardodBiedrs.i).orderi.get(orderisPardodNr).daudzums-=apjomsTirgo; //samazina orderi
+
+                                    //apskata pircçju
+                                    int preceNrTemp=-1;
+                                    for(int w = 0; w< Cilveks.getPlayer(perkBiedrs.chunkXY, perkBiedrs.i).inventory.size(); w++) {
+                                        if (Cilveks.getPlayer(perkBiedrs.chunkXY, perkBiedrs.i).inventory.get(w).nosaukums=="Zelts") {
+                                            Cilveks.getPlayer(perkBiedrs.chunkXY, perkBiedrs.i).inventory.get(w).daudzums-=apjomsTirgo*cenaTirgo;
+                                        }
+                                        if (Cilveks.getPlayer(perkBiedrs.chunkXY, perkBiedrs.i).inventory.get(w).nosaukums==preceTirgo) {
+                                            preceNrTemp=w;
+                                        }
+                                    }
+
+                                    //System.out.println("pârbauda preceNrTemp:"+preceNrTemp+" preceNrTemp2:"+preceNrTemp2+"  apjomsTirgo:"+apjomsTirgo+" preceTirgo:"+preceTirgo);
+                                    if (preceNrTemp<0) { //ja sâkumâ pircçjam vispâr nav tâdas preces, uztaisa tukðu elementu
+
+                                        Lieta pirkums = new Lieta(); //jânokopç detaïas
+
+                                        pirkums.x= Cilveks.getPlayer(perkBiedrs.chunkXY, perkBiedrs.i).xyz.x;
+                                        pirkums.y= Cilveks.getPlayer(perkBiedrs.chunkXY, perkBiedrs.i).xyz.y;
+                                        pirkums.daudzums=0;
+
+
+                                        pirkums.nosaukums= Cilveks.getPlayer(pardodBiedrs.chunkXY, pardodBiedrs.i).inventory.get(preceNrTemp2).nosaukums; //jâkopç manuâli, jo Java neïauj kopçt objektu (var bet tas bûs tas pats objekts, nevis 2 daþâdi)
+                                        pirkums.zelts= Cilveks.getPlayer(pardodBiedrs.chunkXY, pardodBiedrs.i).inventory.get(preceNrTemp2).zelts;
+                                        pirkums.paika= Cilveks.getPlayer(pardodBiedrs.chunkXY, pardodBiedrs.i).inventory.get(preceNrTemp2).paika;
+                                        pirkums.masa= Cilveks.getPlayer(pardodBiedrs.chunkXY, pardodBiedrs.i).inventory.get(preceNrTemp2).masa;
+                                        pirkums.attack= Cilveks.getPlayer(pardodBiedrs.chunkXY, pardodBiedrs.i).inventory.get(preceNrTemp2).attack;
+                                        pirkums.defence= Cilveks.getPlayer(pardodBiedrs.chunkXY, pardodBiedrs.i).inventory.get(preceNrTemp2).defence;
+                                        pirkums.condition= Cilveks.getPlayer(pardodBiedrs.chunkXY, pardodBiedrs.i).inventory.get(preceNrTemp2).condition;
+
+
+                                        preceNrTemp= Cilveks.getPlayer(perkBiedrs.chunkXY, perkBiedrs.i).inventory.size();
+                                        Cilveks.getPlayer(perkBiedrs.chunkXY, perkBiedrs.i).inventory.add(pirkums);
+                                    }
+
+
+                                    Cilveks.getPlayer(perkBiedrs.chunkXY, perkBiedrs.i).inventory.get(preceNrTemp).daudzums+=apjomsTirgo;
+                                    Cilveks.getPlayer(perkBiedrs.chunkXY, perkBiedrs.i).orderi.get(orderisPerkNr).daudzums-=apjomsTirgo; //samazina orderi
+
+
+
+                                    //reseto temporary lielumus, jo tirdznieciba jau notikusi
+                                    perkBiedrs.i=-1;
+                                    pardodBiedrs.i=-1;
+                                    perkBiedrs.chunkXY=new int[]{0,0};
+                                    pardodBiedrs.chunkXY=new int[]{0,0};
+
+                                    apjomsTirgo=0;
+                                    jTirgoXY[0]=0;
+                                    jTirgoXY[1]=0;
+
+                                    //vçrlreiz saskaita paiku un zeltu, arî vçlreiz izdzçð tukðos
+                                    zeltsNr=cilveks.countInventory("Zelts", true);
+                                    zeltsSum=0;
+                                    if (zeltsNr>=0) zeltsSum=cilveks.inventory.get(zeltsNr).daudzums;
+
+                                    paikaNr=cilveks.countInventory("Paika", true);
+                                    paikaSum=0;
+                                    if (paikaNr>=0) paikaSum=cilveks.inventory.get(paikaNr).daudzums;
+
                                 }
                             }
                         }
-                        // partneris atrasts, prece noskaidrota;
                     }
                 }
 
 
-                if(distance>cilveks.R1) continue; //lai nesalîdzina sîkâk, ko nevajag
-                //sâkas R1
-
-                if (cilveks.komanda!= Cilveks.getPlayer(chunkXY, j).komanda ||
-                        Cilveks.getPlayer(chunkXY, j).komanda == "Anarhija") {
-                    pretiniekuSkaitsR1++;
-                    pretiniekuXR1+= Cilveks.getPlayer(chunkXY, j).xyz.x;
-                    pretiniekuYR1+= Cilveks.getPlayer(chunkXY, j).xyz.y;
-                    pretiniekuStiprumsR1+= Cilveks.getPlayer(chunkXY, j).stiprums*hpRatioJ;
-                    pretiniekuBrunasR1+= Cilveks.getPlayer(chunkXY, j).brunas;
-                }
-
-                if (cilveks.komanda== Cilveks.getPlayer(chunkXY, j).komanda &&
-                        cilveks.komanda != "Anarhija") {
-                    savejoSkaitsR1++;
-                    savejoXR1+= Cilveks.getPlayer(chunkXY, j).xyz.x;
-                    savejoYR1+= Cilveks.getPlayer(chunkXY, j).xyz.y;
-                    savejoStiprumsR1+= Cilveks.getPlayer(chunkXY, j).stiprums*hpRatioJ;
-                    savejoBrunasR1+= Cilveks.getPlayer(chunkXY, j).brunas;
-                }
-
-                //sadursme
-
-                double resnumsJ=resnumaKoefic* Cilveks.getPlayer(chunkXY, j).hpmax;
-
-                if(distance>(resnums+resnumsJ)/2||i==j) {continue;} else { //zemâk tikai kas saskarâs
-
-                    double fiTemp= Formulas.lenkaNoteiksana(cilveks.xyz.x,cilveks.xyz.y,
-                            Cilveks.getPlayer(chunkXY, j).xyz.x, Cilveks.getPlayer(chunkXY, j).xyz.y);
-                    //cilvekiList.get(i).xyz.fi=fiTemp;
-                    cilveks.xyz.x-=(resnums+resnumsJ-distance)/4*Math.cos(Math.toRadians(fiTemp));
-                    cilveks.xyz.y-=(resnums+resnumsJ-distance)/4*Math.sin(Math.toRadians(fiTemp));
-                    Cilveks.getPlayer(chunkXY, j).xyz.x+=(resnums+resnumsJ-distance)/4*Math.cos(Math.toRadians(fiTemp));
-                    Cilveks.getPlayer(chunkXY, j).xyz.y+=(resnums+resnumsJ-distance)/4*Math.sin(Math.toRadians(fiTemp));
-
-                    if (cilveks.komanda!= Cilveks.getPlayer(chunkXY, j).komanda || cilveks.komanda=="Anarhija") {//cîòa
-                        double stiprums = cilveks.stiprums, stiprumsJ = Cilveks.getPlayer(chunkXY, j).stiprums;
-
-                        if (i>j) {
-                            CilvekuDarbibas.trauma(chunkXY, i,stiprumsJ*hpRatioJ, 1);
-                            CilvekuDarbibas.trauma(chunkXY, j,stiprums*hpRatioJ, 1);
-                        } else {
-                            CilvekuDarbibas.trauma(chunkXY, j,stiprums*hpRatioJ, 1);
-                            CilvekuDarbibas.trauma(chunkXY, i,stiprumsJ*hpRatioJ, 1);
-                        }
-                    } else { //ja ir vienâ komandâ - pârbauda tirdzniecîbu
-
-                        if(apjomsTirgo>0) {
-                            System.out.println(i+" - "+cilveks.vards+" gatavs tirgot"+preceTirgo+", pârbauda daudzumu, jâbût:"+apjomsTirgo);
-
-                            //apskata pârdevçju
-                            int zeltsNrTemp=-1,preceNrTemp2=-1;
-
-                            System.out.println(pardodNr+" lietas ir "+ Cilveks.getPlayer(chunkXY, pardodNr).inventory.size());
-                            for(int w = 0; w< Cilveks.getPlayer(chunkXY, pardodNr).inventory.size(); w++) {
-                                if (preceNrTemp2>=0 && zeltsNrTemp>=0) break;
-                                if (Cilveks.getPlayer(chunkXY, pardodNr).inventory.get(w).nosaukums==preceTirgo) {
-                                    Cilveks.getPlayer(chunkXY, pardodNr).inventory.get(w).daudzums-=apjomsTirgo;
-                                    preceNrTemp2=w;
-                                }
-                                if (Cilveks.getPlayer(chunkXY, pardodNr).inventory.get(w).nosaukums=="Zelts") {
-                                    zeltsNrTemp=w;
-                                }
-                            }
-                            System.out.println("pardodNr:"+pardodNr+" preceTemp2 "+preceNrTemp2);
-
-                            if (zeltsNrTemp<0) { //ja sâkumâ pârdevçjam nav naudas vispâr, uztaisa tukðu elementu
-                                Lieta samaksa = new Lieta();
-                                samaksa.x= Cilveks.getPlayer(chunkXY, pardodNr).xyz.x;
-                                samaksa.y= Cilveks.getPlayer(chunkXY, pardodNr).xyz.y;
-                                samaksa.nosaukums="Zelts";
-                                samaksa.daudzums=0;
-                                samaksa.zelts=1;
-                                samaksa.paika=0;
-                                samaksa.masa=1;
-                                samaksa.attack=0;
-                                samaksa.defence=0;
-                                samaksa.condition=1;
-
-                                zeltsNrTemp= Cilveks.getPlayer(chunkXY, pardodNr).inventory.size();
-                                Cilveks.getPlayer(chunkXY, pardodNr).inventory.add(samaksa);
-                            }
-
-                            Cilveks.getPlayer(chunkXY, pardodNr).inventory.get(zeltsNrTemp).daudzums+=apjomsTirgo*cenaTirgo; //pieliek naudu pârdevçjam
-                            Cilveks.getPlayer(chunkXY, pardodNr).orderi.get(orderisPardodNr).daudzums-=apjomsTirgo; //samazina orderi
-
-                            //apskata pircçju
-                            int preceNrTemp=-1;
-                            for(int w = 0; w< Cilveks.getPlayer(chunkXY, perkNr).inventory.size(); w++) {
-                                if (Cilveks.getPlayer(chunkXY, perkNr).inventory.get(w).nosaukums=="Zelts") {
-                                    Cilveks.getPlayer(chunkXY, perkNr).inventory.get(w).daudzums-=apjomsTirgo*cenaTirgo;
-                                }
-                                if (Cilveks.getPlayer(chunkXY, perkNr).inventory.get(w).nosaukums==preceTirgo) {
-                                    preceNrTemp=w;
-                                }
-                            }
-
-                            //System.out.println("pârbauda preceNrTemp:"+preceNrTemp+" preceNrTemp2:"+preceNrTemp2+"  apjomsTirgo:"+apjomsTirgo+" preceTirgo:"+preceTirgo);
-                            if (preceNrTemp<0) { //ja sâkumâ pircçjam vispâr nav tâdas preces, uztaisa tukðu elementu
-
-                                Lieta pirkums = new Lieta(); //jânokopç detaïas
-
-                                pirkums.x= Cilveks.getPlayer(chunkXY, perkNr).xyz.x;
-                                pirkums.y= Cilveks.getPlayer(chunkXY, perkNr).xyz.y;
-                                pirkums.daudzums=0;
-
-
-                                pirkums.nosaukums= Cilveks.getPlayer(chunkXY, pardodNr).inventory.get(preceNrTemp2).nosaukums; //jâkopç manuâli, jo Java neïauj kopçt objektu (var bet tas bûs tas pats objekts, nevis 2 daþâdi)
-                                pirkums.zelts= Cilveks.getPlayer(chunkXY, pardodNr).inventory.get(preceNrTemp2).zelts;
-                                pirkums.paika= Cilveks.getPlayer(chunkXY, pardodNr).inventory.get(preceNrTemp2).paika;
-                                pirkums.masa= Cilveks.getPlayer(chunkXY, pardodNr).inventory.get(preceNrTemp2).masa;
-                                pirkums.attack= Cilveks.getPlayer(chunkXY, pardodNr).inventory.get(preceNrTemp2).attack;
-                                pirkums.defence= Cilveks.getPlayer(chunkXY, pardodNr).inventory.get(preceNrTemp2).defence;
-                                pirkums.condition= Cilveks.getPlayer(chunkXY, pardodNr).inventory.get(preceNrTemp2).condition;
-
-
-                                preceNrTemp= Cilveks.getPlayer(chunkXY, perkNr).inventory.size();
-                                Cilveks.getPlayer(chunkXY, perkNr).inventory.add(pirkums);
-                            }
-
-
-                            Cilveks.getPlayer(chunkXY, perkNr).inventory.get(preceNrTemp).daudzums+=apjomsTirgo;
-                            Cilveks.getPlayer(chunkXY, perkNr).orderi.get(orderisPerkNr).daudzums-=apjomsTirgo; //samazina orderi
-
-
-
-                            perkNr=-1; //reseto temporary lielumus, jo tirdznieciba jau notikusi
-                            pardodNr=-1;
-                            apjomsTirgo=0;
-                            jTirgoXY[0]=0;
-                            jTirgoXY[1]=0;
-
-                            //vçrlreiz saskaita paiku un zeltu, arî vçlreiz izdzçð tukðos
-                            zeltsNr=cilveks.countInventory("Zelts", true);
-                            zeltsSum=0;
-                            if (zeltsNr>=0) zeltsSum=cilveks.inventory.get(zeltsNr).daudzums;
-
-                            paikaNr=cilveks.countInventory("Paika", true);
-                            paikaSum=0;
-                            if (paikaNr>=0) paikaSum=cilveks.inventory.get(paikaNr).daudzums;
-
-                        }
-                    }
-                }
             }
         }
 
         if (savejoSkaitsR1<=2 && savejoSkaitsR2<=5){ //vairoðanâs, bet privâti
-            vairosanasParbaude();
+            vairosanasParbaude(biedrs.chunkXY, biedrs.i,  zeltsSum, paikaSum);
         }
-
 
     }
 
@@ -582,9 +608,8 @@ public class CilvekuAI {
         }
     }
 
-    protected static void komanduMaina(int[] chunkXY, int numurs,
+    protected static void komanduMaina(Cilveks cilveks,
                                        double paikaMaina, double zeltsMaina, double anarchyChance, double orderChance) {
-        Cilveks cilveks= Cilveks.getPlayer(chunkXY,numurs);
 
         int zeltsNr=cilveks.countInventory("Zelts", false);
         double zeltsSum=0;
@@ -604,26 +629,26 @@ public class CilvekuAI {
         }
     }
 
-    protected static void mekletZeltu(int[] chunkXY, int numurs, int i, double hpKoef, double vKoef) {
+    protected static void mekletZeltu(int[] chunkXY, int numurs, int i, double hpRatio, double vKoef) {
         Cilveks cilveks = Cilveks.getPlayer(chunkXY, numurs);
 
         cilveks.darbiba="meklet zeltu";
 
-        CilvekuDarbibas.tuvoties(chunkXY, numurs,
+        CilvekuDarbibas.tuvoties(cilveks,
                 new double[] {Main.laukums.get(chunkXY[0]).get(chunkXY[1]).lietas.get(i).x,
                         Main.laukums.get(chunkXY[0]).get(chunkXY[1]).lietas.get(i).y},
-                hpKoef, vKoef);
+                hpRatio, vKoef);
     }
 
-    protected static void mekletPaiku(int[] chunkXY, int numurs, int i, double hpKoef, double vKoef) {
+    protected static void mekletPaiku(int[] chunkXY, int numurs, int i, double hpRatio, double vKoef) {
         Cilveks cilveks = Cilveks.getPlayer(chunkXY, numurs);
 
         cilveks.darbiba="meklet paiku";
 
-        CilvekuDarbibas.tuvoties(chunkXY, numurs,
-                new double[] {Main.laukums.get(chunkXY[0]).get(chunkXY[1]).lietas.get(i).x,
-                        Main.laukums.get(chunkXY[0]).get(chunkXY[1]).lietas.get(i).y},
-                hpKoef, vKoef);
+        CilvekuDarbibas.tuvoties(cilveks,
+                new double[] { Main.laukums.get(chunkXY[0]).get(chunkXY[1]).lietas.get(i).x,
+                        Main.laukums.get(chunkXY[0]).get(chunkXY[1]).lietas.get(i).y },
+                hpRatio, vKoef);
     }
 
 }

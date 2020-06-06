@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import calculations.Main;
-import calculations.MapChunk;
 import calculations.cilveki.Cilveks;
 import calculations.komandas.Biedrs;
 import grafika.player.centerPanel.DrawCenterPanel;

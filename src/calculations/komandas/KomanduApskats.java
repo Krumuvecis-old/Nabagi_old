@@ -4,11 +4,9 @@ import java.awt.Color;
 import java.util.Arrays;
 import java.util.Random;
 
-import calculations.MapChunk;
 import calculations.konstantes.Formulas;
 import calculations.Main;
 import calculations.cilveki.Cilveks;
-import calculations.cilveki.CilvekuApskats;
 import calculations.konstantes.Grafiskie;
 import calculations.konstantes.Komandu;
 

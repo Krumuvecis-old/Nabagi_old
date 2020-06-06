@@ -1,7 +1,6 @@
 package grafika.main;
 
 import calculations.Main;
-import calculations.MapChunk;
 import calculations.cilveki.Cilveks;
 import calculations.komandas.Biedrs;
 import grafika.KonstantesGrafikai;
