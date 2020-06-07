@@ -3,15 +3,15 @@ package grafika.player;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import calculations.Location;
 import calculations.Main;
 import calculations.cilveki.Cilveks;
-import calculations.komandas.Biedrs;
 import grafika.player.centerPanel.DrawCenterPanel;
 import grafika.player.sidePanels.DrawSidePanels;
 
 public class Dati {
 	public calculations.CalculationTimeCalculator calculationTimeCalculator = new calculations.CalculationTimeCalculator();
-	protected ArrayList<Biedrs> cilvekuPilnaisList;
+	protected ArrayList<Location> cilvekuPilnaisList;
 
 	public boolean lobby=false;
 

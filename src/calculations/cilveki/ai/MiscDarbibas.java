@@ -1,5 +1,6 @@
 package calculations.cilveki.ai;
 
+import calculations.Location;
 import calculations.cilveki.Cilveks;
 import calculations.cilveki.Darbibas;
 import calculations.konstantes.Cilveku;
@@ -8,7 +9,7 @@ import java.util.Random;
 
 public class MiscDarbibas {
 
-    protected static void main(Cilveks cilveks){
+    protected static void main(Cilveks cilveks, Location location){
         int[] numuriTemp = cilveks.searchInventory("Zelts",false);
         double zeltsSum = cilveks.countItemAmount(numuriTemp);
         cilveks.darbibas.darbiba=""; //reseto aili

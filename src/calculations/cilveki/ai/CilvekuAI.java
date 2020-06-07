@@ -17,15 +17,15 @@ public class CilvekuAI {
 
     private static Location perkBiedrs, pardodBiedrs;
 
-    protected  static void main(int numurs){
+    public static void main(int numurs){
         Location location = Cilveks.cilvekuListPilnais.get(numurs);
         Cilveks cilveks = Cilveks.getPlayer(location);
 
         //secîgi pârbauda visus attâlumus
         if (!CloseRange.main(cilveks, location))
             if(!MediumRange.main(cilveks, location))
-                if(!FarRange.main(cilveks))
-                    MiscDarbibas.main(cilveks);
+                if(!FarRange.main(cilveks, location))
+                    MiscDarbibas.main(cilveks, location);
 
 
     }

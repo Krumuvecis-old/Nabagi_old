@@ -1,8 +1,8 @@
 package grafika.main;
 
+import calculations.Location;
 import calculations.Main;
 import calculations.cilveki.Cilveks;
-import calculations.komandas.Biedrs;
 import grafika.KonstantesGrafikai;
 
 import java.awt.Color;
@@ -17,7 +17,7 @@ class Dati {
 	
 	protected int nosaukumsX=5, nosaukumsY=15;
 
-	protected ArrayList<Biedrs> cilvekuPilnaisList;
+	protected ArrayList<Location> cilvekuPilnaisList;
 	protected ArrayList<Button> buttonList;
 	
 	protected String playerFocusName;
@@ -131,7 +131,7 @@ class Dati {
 	}
 
 	private void getPlayerTotalList(){
-		cilvekuPilnaisList = new ArrayList<Biedrs>();
+		cilvekuPilnaisList = new ArrayList<Location>();
 
 		for(int[] chunkXY = {0, 0}; chunkXY[0]< Main.laukums.size(); chunkXY[0]++) {
 			for( ; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
@@ -140,7 +140,7 @@ class Dati {
 
 				for (int i=0; i<Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
 
-					Biedrs cilveks = new Biedrs();
+					Location cilveks = new Location();
 					cilveks.chunkXY=chunkXY;
 					cilveks.i=i;
 					cilvekuPilnaisList.add(cilveks);

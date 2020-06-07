@@ -6,6 +6,8 @@ import calculations.Main;
 import calculations.cilveki.Cilveks;
 import calculations.cilveki.Orderis;
 import calculations.konstantes.Cilveku;
+import calculations.konstantes.Formulas;
+import calculations.lietas.Lieta;
 
 import java.util.ArrayList;
 
@@ -113,17 +115,32 @@ public class CloseRange {
                     double x2=cilveks2.xyz.x + dChunkXY[0] * KonstantesUniversal.mapChunkW,
                             y2=cilveks2.xyz.y + dChunkXY[1] * KonstantesUniversal.mapChunkW;
 
-                    double distance = Math.hypot(x2-cilveks.xyz.x, y2-cilveks.xyz.y);
+                    double distance = Math.hypot(x2-cilveks.xyz.x, y2-cilveks.xyz.y),
+                            resnums=calculations.konstantes.Fizikas.resnumaKoefic * cilveks.hpmax,
+                            resnumsJ=calculations.konstantes.Fizikas.resnumaKoefic * cilveks2.hpmax;
+
+                    if(distance<(resnums+resnumsJ)/2){ //pilnîga sadursme
+                        double fiTemp= Formulas.lenkaNoteiksana(cilveks.xyz.x,cilveks.xyz.y,
+                                cilveks2.xyz.x, cilveks2.xyz.y, dChunkXY);
+                        //cilvekiList.get(i).xyz.fi=fiTemp;
+                        cilveks.xyz.x-=(resnums+resnumsJ-distance)/4*Math.cos(Math.toRadians(fiTemp));
+                        cilveks.xyz.y-=(resnums+resnumsJ-distance)/4*Math.sin(Math.toRadians(fiTemp));
+                        cilveks2.xyz.x+=(resnums+resnumsJ-distance)/4*Math.cos(Math.toRadians(fiTemp));
+                        cilveks2.xyz.y+=(resnums+resnumsJ-distance)/4*Math.sin(Math.toRadians(fiTemp));
+                    }
 
 
-                    int tradeDistance = 40, attackDistance=40;
+                    int tradeDistance = 40, attackDistance=20;
                     if(distance < tradeDistance && cilveks.komanda.equals(cilveks2.komanda)){
                         tradingCheck(cilveks, cilveks2);
                     }
 
-                    if(distance < attackDistance && !cilveks.komanda.equals(cilveks2.komanda)){
+                    if((distance < resnums + attackDistance) &&
+                            (!cilveks.komanda.equals(cilveks2.komanda) ||
+                                    (cilveks.komanda.equals("Anarhija")) ) ){
                         attack(cilveks, cilveks2);
                     }
+
 
                     //te var pievienot vçl funkcijas
 
@@ -148,47 +165,112 @@ public class CloseRange {
 
     }
 
-
-
     private static void trading(Cilveks pircejs, int pircejaOrderaNr,
                                Cilveks pardevejs, int pardevejaOrderaNr){
 
-        //jâsalîdzina tradeorders
-        //jâatòem nauda pircçjam (inventory cleanup?)
-        //jâpieliek produkts pircçjam
-        //jâpieliek nauda pârdevçjam
-        //jânoòem produkkts pârdevçjam (inventory cleanup?)
-
-        //updatetradeorders?
-
-
-        pardevejs.inventory.get(zeltsNrTemp).daudzums+=apjomsTirgo*cenaTirgo; //pieliek naudu pârdevçjam
-        //jânoòem produkts pârdevçjam!
-        pardevejs.orderi.get(orderisPardodNr).daudzums-=apjomsTirgo; //samazina pârdevçja orderi
-
-        pircejs.inventory.get(preceNrTemp).daudzums+=apjomsTirgo;
-        pircejs.orderi.get(orderisPerkNr).daudzums-=apjomsTirgo; //samazina orderi
-
-        //reseto temporary lielumus, jo tirdznieciba jau notikusi
-
-        perkBiedrs.i=-1;
-        pardodBiedrs.i=-1;
-        perkBiedrs.chunkXY=new int[]{0,0};
-        pardodBiedrs.chunkXY=new int[]{0,0};
-
-        apjomsTirgo=0;
-        jTirgoXY[0]=0;
-        jTirgoXY[1]=0;
-
-        //vçrlreiz saskaita paiku un zeltu, arî vçlreiz izdzçð tukðos
-        zeltsNr=pardevejs.countInventory("Zelts", true);
-        zeltsSum=0;
-        if (zeltsNr>=0) zeltsSum=pardevejs.inventory.get(zeltsNr).daudzums;
-
-        String preceName = pircejs.inventory.get(paikaNr).nosaukums;
-        paikaNr=pircejs.countInventory(preceName, true);
-        paikaSum=0;
-        if (paikaNr>=0) paikaSum=pircejs.inventory.get(paikaNr).daudzums;
+//        //jâsalîdzina tradeorders
+//        double apjoms = Math.max(0,
+//                Math.min(pircejs.orderi.get(pircejaOrderaNr).daudzums,
+//                        pardevejs.orderi.get(pardevejaOrderaNr).daudzums));
+//
+//        //jâatòem nauda pircçjam (inventory cleanup?)
+//        //jâpieliek produkts pircçjam
+//        //jâpieliek nauda pârdevçjam
+//        //jânoòem produkkts pârdevçjam (inventory cleanup?)
+//
+//        Cilveks pardevejs = Cilveks.getPlayer(pardodBiedrs.chunkXY, pardodBiedrs.i),
+//                pircejs = Cilveks.getPlayer(perkBiedrs.chunkXY, perkBiedrs.i);
+//
+//        //apskata pârdevçju
+//        int zeltsNrTemp=-1, preceNrTemp=-1;
+//
+//        for(int w = 0; w< pardevejs.inventory.size(); w++) {
+//            if (preceNrTemp>=0 && zeltsNrTemp>=0) break;
+//            if (pardevejs.inventory.get(w).nosaukums==preceTirgo) {
+//                pardevejs.inventory.get(w).daudzums-=apjomsTirgo;
+//                preceNrTemp=w;
+//            }
+//            if (pardevejs.inventory.get(w).nosaukums=="Zelts") {
+//                zeltsNrTemp=w;
+//            }
+//        }
+//
+//        if (zeltsNrTemp<0) { //ja sâkumâ pârdevçjam nav naudas vispâr, uztaisa tukðu elementu
+//            Lieta samaksa = new Lieta();
+//            samaksa.x= pardevejs.xyz.x;
+//            samaksa.y= pardevejs.xyz.y;
+//            samaksa.nosaukums="Zelts";
+//            samaksa.daudzums=0;
+//            samaksa.zelts=1;
+//            samaksa.paika=0;
+//            samaksa.masa=1;
+//            samaksa.attack=0;
+//            samaksa.defence=0;
+//            samaksa.condition=1;
+//
+//            zeltsNrTemp= pardevejs.inventory.size();
+//            pardevejs.inventory.add(samaksa);
+//        }
+//
+//        //apskata pircçju
+//        int preceNrTemp=-1;
+//        for(int w = 0; w< pircejs.inventory.size(); w++) {
+//            if (pircejs.inventory.get(w).nosaukums=="Zelts") {
+//                pircejs.inventory.get(w).daudzums-=apjomsTirgo*cenaTirgo;
+//            }
+//            if (pircejs.inventory.get(w).nosaukums==preceTirgo) {
+//                preceNrTemp=w;
+//            }
+//        }
+//
+//        if (preceNrTemp<0) { //ja sâkumâ pircçjam vispâr nav tâdas preces, uztaisa tukðu elementu
+//
+//            Lieta pirkums = new Lieta(); //jânokopç detaïas
+//
+//            pirkums.x= pircejs.xyz.x;
+//            pirkums.y= pircejs.xyz.y;
+//            pirkums.daudzums=0;
+//
+//
+//            pirkums.nosaukums= pardevejs.inventory.get(preceNrTemp2).nosaukums; //jâkopç manuâli, jo Java neïauj kopçt objektu (var bet tas bûs tas pats objekts, nevis 2 daþâdi)
+//            pirkums.zelts= pardevejs.inventory.get(preceNrTemp2).zelts;
+//            pirkums.paika= pardevejs.inventory.get(preceNrTemp2).paika;
+//            pirkums.masa= pardevejs.inventory.get(preceNrTemp2).masa;
+//            pirkums.attack= pardevejs.inventory.get(preceNrTemp2).attack;
+//            pirkums.defence= pardevejs.inventory.get(preceNrTemp2).defence;
+//            pirkums.condition= pardevejs.inventory.get(preceNrTemp2).condition;
+//
+//
+//            preceNrTemp= pircejs.inventory.size();
+//            pircejs.inventory.add(pirkums);
+//        }
+//
+//
+//        pardevejs.inventory.get(zeltsNrTemp).daudzums+=apjomsTirgo*cenaTirgo; //pieliek naudu pârdevçjam
+//        //jânoòem produkts pârdevçjam!
+//        pardevejs.orderi.get(orderisPardodNr).daudzums-=apjomsTirgo; //samazina pârdevçja orderi
+//
+//        pircejs.inventory.get(preceNrTemp).daudzums+=apjomsTirgo;
+//        pircejs.orderi.get(orderisPerkNr).daudzums-=apjomsTirgo; //samazina orderi
+//
+//        //reseto temporary lielumus, jo tirdznieciba jau notikusi
+//
+//        perkBiedrs.i=-1;
+//        pardodBiedrs.i=-1;
+//        perkBiedrs.chunkXY=new int[]{0,0};
+//        pardodBiedrs.chunkXY=new int[]{0,0};
+//
+//        apjomsTirgo=0;
+//        jTirgoXY[0]=0;
+//        jTirgoXY[1]=0;
+//
+//        //vçrlreiz saskaita paiku un zeltu, arî vçlreiz izdzçð tukðos
+//        pardevejs.searchInventory("Zelts", false);
+//        pardevejs.orderuCleanup();
+//
+//        String preceName = pircejs.orderi.get(pircejaOrderaNr).prece;
+//        pircejs.searchInventory(preceName, false);
+//        pardevejs.orderuCleanup();
 
     }
 
