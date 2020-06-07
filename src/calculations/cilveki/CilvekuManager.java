@@ -6,6 +6,7 @@ import java.util.Random;
 import calculations.KonstantesUniversal;
 import calculations.Location;
 import calculations.MapChunk;
+import calculations.cilveki.ai.CilvekuAI;
 import calculations.konstantes.Cilveku;
 import calculations.Main;
 import calculations.komandas.Komanda;
@@ -20,8 +21,6 @@ public class CilvekuManager {
 
 		Cilveks.getCilvekuList(); //vajadzîgs cilvçku apskatam, bet pçc tam vairs nav lietojams, jo netiek updeitots
 		for (int i = 0; i< Cilveks.cilvekuListPilnais.size(); i++) galvenaisApskats(i);
-
-
 
 		DefaultDarbibas.main();
 

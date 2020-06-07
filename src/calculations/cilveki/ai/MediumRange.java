@@ -1,7 +1,9 @@
-package calculations.cilveki;
+package calculations.cilveki.ai;
 
 import calculations.Location;
 import calculations.Main;
+import calculations.cilveki.Cilveks;
+import calculations.cilveki.Darbibas;
 import calculations.konstantes.Cilveku;
 import calculations.konstantes.Formulas;
 import calculations.lietas.Lieta;
@@ -9,253 +11,36 @@ import calculations.lietas.Lieta;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class CilvekuAI {
+public class MediumRange {
 
-    private static Location perkBiedrs, pardodBiedrs;
-
-    protected  static void main(int numurs){
-        Location location = Cilveks.cilvekuListPilnais.get(numurs);
-        Cilveks cilveks = Cilveks.getPlayer(location);
-        double hpRatio=cilveks.hp/cilveks.hpmax;
-
-        if (!checkCloseRange()) if(!checkMediumRange()) if(!checkFarRange()) miscDarbibas(cilveks, zeltsSum);
-
-
-
-
-        //errori var bût zemâk
-
-
-        //viss kas tâlâk ðajâ metodç ir jâpârvieto prom sadalot pa attâlumiem un prioritâtçm
-        lootApskatsMeklesanai(numurs);
-
-
-
-        cilvekuSalidzinajums(numurs);
-
-        boolean gatavsTirgot=false;
-        if(perkBiedrs.i>=0||pardodBiedrs.i>=0) gatavsTirgot=true;
-
-        //atkârtota saskaite un papildus cleanup
-        int zeltsNr=cilveks.countInventory("Zelts", true);
-        double zeltsSum=0;
-        if (zeltsNr>=0) zeltsSum=cilveks.inventory.get(zeltsNr).daudzums;
-
-        int paikaNr=cilveks.countInventory("Paika", true); //çdot no inventory jau bija viens cleanup
-        double paikaSum=0;
-        if (paikaNr>=0) paikaSum=cilveks.inventory.get(paikaNr).daudzums;
-
-
-
-        boolean mukt=false, atkapties=false, uzbrukt=false, tuvoties=false;
-        double minDrosme=0.1, maxDrosme=0.9;
-        cilveks.drosme=Math.max(cilveks.drosme, minDrosme);
-        cilveks.drosme=Math.min(cilveks.drosme, maxDrosme);
-
-
-        double  drosmesKoefic=2;
-
-        if(pretiniekuSkaitsR1>0 && savejoSkaitsR1>0) {
-            if( ( (pretiniekuBrunasR1/pretiniekuSkaitsR1)*cilveks.hp / (cilveks.stiprums) /
-                    ((savejoBrunasR1/savejoSkaitsR1)*cilveks.hp / (pretiniekuStiprumsR1/pretiniekuSkaitsR1)) >
-                    drosmesKoefic/cilveks.drosme+drosmesKoefic*cilveks.drosme)) {
-                mukt=true;
-            }
-        }
-
-        lootApskatsMeklesanai(numurs);
-
-        if(!cilveks.navKoEst || paikaTuvakaDist<0) { //ja ir ko est vai neredz paiku
-            if( pretiniekuSkaitsR1>0 && savejoSkaitsR1>0) {
-                if((pretiniekuBrunasR1/pretiniekuSkaitsR1)*cilveks.hp / (cilveks.stiprums) /
-                        ((savejoBrunasR1/savejoSkaitsR1)*cilveks.hp / (pretiniekuStiprumsR1/pretiniekuSkaitsR1)) <
-                        drosmesKoefic/cilveks.drosme+drosmesKoefic*cilveks.drosme) {
-                    uzbrukt=true;
-                }
-            } else if( pretiniekuSkaitsR2>0 && savejoSkaitsR2>0) {
-                if(pretiniekuSkaitsR2/savejoSkaitsR2 >
-                        drosmesKoefic/cilveks.drosme+drosmesKoefic*cilveks.drosme) {
-                    atkapties=true;
-                } else tuvoties=true;
-            }
-        }
-
-        if(mukt) {
-            if(cilveks.darbibas.darbiba!="mukt"&&cilveks.gataviba>=Cilveku.maxGataviba/10) {
-                cilveks.darbibas.darbiba="mukt";
-                cilveks.gataviba=0;
-            }
-
-            if(cilveks.darbibas.darbiba=="mukt") {
-                Darbibas.atkapties(cilveks,pretiniekuXYR1,chunkXY,1);
-
-                cilveks.drosme-=cilveks.drosme*0.1; //atòem drosmi
-            }
-
-        } else if(uzbrukt) {
-            if(!cilveks.darbibas.darbiba.equals("uzbrukt") && cilveks.gataviba>=Cilveku.maxGataviba) {
-                cilveks.gataviba=0;
-            }
-
-            if(cilveks.darbibas.darbiba.equals("uzbrukt")) {
-                Darbibas.tuvoties(cilveks,pretiniekuXYR1,chunkXY,0.9);
-
-                cilveks.drosme+=cilveks.drosme*0.1; //pieskaita  drosmi
-            }
-
-        } else if(paikaSum<Cilveku.paikaNepiec && paikaTuvakaDist>0) {
-            mekletPaiku(cilveks,paikaTuvakaXY,chunkXY,0.7);
-
-        } else if(zeltsTuvakaisDist>0) {
-            mekletZeltu(cilveks,zeltsTuvakaisXY,chunkXY,0.6);
-
-        } else if(atkapties) {
-            if(!cilveks.darbibas.darbiba.equals("atkapties") && cilveks.gataviba>=Cilveku.maxGataviba/2) {
-                cilveks.darbibas.darbiba="atkapties";
-                cilveks.gataviba=0;
-            }
-
-            if(cilveks.darbibas.darbiba.equals("atkapties")) {
-                Darbibas.atkapties(cilveks,pretiniekuXYR2,chunkXY,0.8);
-
-                cilveks.drosme-=cilveks.drosme*0.05;
-            }
-
-
-        } else if(tuvoties) {
-            if(!cilveks.darbibas.darbiba.equals("tuvoties") && cilveks.gataviba>=Cilveku.maxGataviba) {
-                cilveks.darbibas.darbiba="tuvoties";
-                cilveks.gataviba=0;
-            }
-
-            if(cilveks.darbibas.darbiba.equals("tuvoties")) {
-                Darbibas.tuvoties(cilveks,pretiniekuXYR2,chunkXY,0.6);
-
-                cilveks.drosme+=cilveks.drosme*0.05;
-            }
-
-
-        } else if(gatavsTirgot){
-            cilveks.darbibas.darbiba="tirgojas";
-            tuvoties(cilveks,jTirgoXY,chunkXY[],0.6);
-
-        } else if(paikaTuvakaDist>0) { //savâkt redzamo paiku pat ja nevajag
-            mekletPaiku(cilveks, XY[], chunkXY[], 0.6);
-
-        } else {
-            //misc darbibas
-        }
-
-
-
-    }
-
-    private static boolean checkCloseRange(){
-        boolean nolemts=false;
-
-        //      updateTradeOrders (ar cleanup)
-        updateTradeOrders(numurs); //orderu apskats
-        //      tradingRange check for trading (varbût vçl viens trade order cleanup?)
-        //      melee combat range check for attack/defence
-        //      citas opcijas nâkotnei
-
-
-        return nolemts;
-    }
-
-    private static boolean checkMediumRange(){
+    protected static boolean main(Cilveks cilveks, Location location){
         boolean nolemts=false;
 
         //      spçlçtâju apskats, lai novçrtçtu savçjos&pretiniekus
-        //      vairoðanâs pârbaude
+        cilvekuSalidzinajums(numurs);
+
+        double zeltsSum=cilveks.countItemAmount(cilveks.searchInventory("Zelts", false));
+        double paikaSum=cilveks.countItemAmount(cilveks.searchInventory("Paika", false));
+
+        komanduMaina(cilveks, zeltsSum, paikaSum,1.5, 5, 0.01, 0.01);
+        vairosanasParbaude(location, zeltsSum, paikaSum);
+
         //      loot vâkðanas apskats
+        lootApskatsMeklesanai(numurs);
+
         //      tirdzniecîbas partneru meklçðana
+
         //      citas opcijas nâkotnei
 
 
         return nolemts;
-    }
-
-    private static boolean checkFarRange(){
-        boolean nolemts=false;
-
-        //      cilvçku apskats
-        //      loot apskats
-
-        return nolemts;
-    }
-
-    private static void miscDarbibas(Cilveks cilveks, double zeltsSum){
-        cilveks.darbibas.darbiba=""; //reseto aili
-
-        komanduMaina(cilveks, 1.5, 5, 0.01, 0.01);
-
-
-
-        buvniecibasParbaude(cilveks, zeltsSum);
-
-        double dDrosme=0.001; //normalizç drosmi
-        if(cilveks.drosme<=0.5) cilveks.drosme+=dDrosme;
-        if(cilveks.drosme>0.5) cilveks.drosme-=dDrosme;
-
-        if(cilveks.drosme>1) cilveks.drosme=1;
-        if(cilveks.drosme<0) cilveks.drosme=0;
-
-        atputa(cilveks); //ja nekas nenotiek un neko nevar izdarît
-
-        //gatavîbas update
-        double dGataviba=1;
-        if(cilveks.gataviba<=Cilveku.maxGataviba-dGataviba) cilveks.gataviba+=dGataviba;
-    }
-
-
-    //private static int zeltsTuvakaisNr, paikaTuvakaNr;
-    //private static double zeltsTuvakaisDist, paikaTuvakaDist;
-
-    private static void lootApskatsMeklesanai(int numurs) {
-        Biedrs biedrs = Cilveks.cilvekuListPilnais.get(numurs);
-        Cilveks cilveks = Cilveks.getPlayer(biedrs.chunkXY,  biedrs.i);
-
-        //double resnums=resnumaKoefic*cilveks.hpmax;
-
-
-        zeltsTuvakaisNr = 0; //numurs J
-        paikaTuvakaNr = 0;
-
-        zeltsTuvakaisDist=-1; //distance
-        paikaTuvakaDist=-1;
-
-        for(int i = 0; i< Main.laukums.get(biedrs.chunkXY[0]).get(biedrs.chunkXY[1]).lietas.size(); i++){
-            double distance = Math.hypot(cilveks.xyz.x- Main.laukums.get(biedrs.chunkXY[0]).get(biedrs.chunkXY[1]).lietas.get(i).x,
-                    cilveks.xyz.y- Main.laukums.get(biedrs.chunkXY[0]).get(biedrs.chunkXY[1]).lietas.get(i).y);
-
-			/*double resnumsJ; //nosaka lietas resnumu
-			if (Main.lietas.get(j).nosaukums=="Zelts") { resnumsJ = zeltaResnums;
-			} else if (Main.lietas.get(j).nosaukums=="Paika") { resnumsJ = paikasResnums;
-			} else resnumsJ = lietasResnums;*/
-
-            if(Main.laukums.get(biedrs.chunkXY[0]).get(biedrs.chunkXY[1]).lietas.get(i).nosaukums=="Zelts") {
-                if (distance<zeltsTuvakaisDist || (zeltsTuvakaisDist<0 && distance<=cilveks.R2)) {
-                    zeltsTuvakaisDist = distance;
-                    zeltsTuvakaisNr=i;
-                }
-            }
-
-            if(Main.laukums.get(biedrs.chunkXY[0]).get(biedrs.chunkXY[1]).lietas.get(i).nosaukums=="Paika") {
-                if (distance<paikaTuvakaDist || (paikaTuvakaDist<0 && distance<=cilveks.R2)) {
-                    paikaTuvakaDist = distance;
-                    paikaTuvakaNr=i;
-                }
-            }
-
-        }
     }
 
     private static void cilvekuSalidzinajums(int numurs){
         //apskata pârçjos spçlçtâjus
 
-        Biedrs biedrs = Cilveks.cilvekuListPilnais.get(numurs);
-        Cilveks cilveks = Cilveks.getPlayer(biedrs.chunkXY, biedrs.i);
+        Location location = Cilveks.cilvekuListPilnais.get(numurs);
+        Cilveks cilveks = Cilveks.getPlayer(location);
         double hpRatio=cilveks.hp/cilveks.hpmax;
 
         int savejoSkaitsR1=1, pretiniekuSkaitsR1=0, savejoSkaitsR2=1, pretiniekuSkaitsR2=0;
@@ -490,7 +275,7 @@ public class CilvekuAI {
                                     }
 
                                     AsortiDarbibas.trading(pircejs, zeltsNrPerk,
-                                    pardevejs, preceNr, kurss, apjoms);
+                                            pardevejs, preceNr, kurss, apjoms);
 
                                 }
                             }
@@ -508,102 +293,9 @@ public class CilvekuAI {
 
     }
 
-    //errori var bût augstâk
 
-    private static void vairosanasParbaude(Location location, double zeltsSum, double paikaSum){
-
-        double cenaCilvekam=Cilveku.cenaCilvekam,
-                mantojumsCilvekamZelts=Cilveku.mantojumsCilvekamZelts,
-                mantojumsCilvekamPaika=Cilveku.mantojumsCilvekamPaika;
-
-        if (zeltsSum>=(cenaCilvekam+mantojumsCilvekamZelts) &&
-                paikaSum>=mantojumsCilvekamPaika*2) { //paikas  mantojums x2 lai paðam arî paliktu
-
-            Darbibas.vairosanas(location);
-        }
-    }
-
-    //errori var bût zemâk
-
-    protected static void updateTradeOrders(Cilveks cilveks) {
-
-        //tirdzniecîbas orderu pârskats
-
-        double defaultCena=Cilveku.paikaPriceDefault; //cenas apskats no atmiòas vçl nav ieviests
-        //double apjomsMin=0.01;
-
-
-        String nosaukums="";
-        double sellLimit, buyLimit; //pârdod virs sellLimit, pârdod zem buyLimit
-        for(int i=0;i<cilveks.inventory.size();i++) { //apskata katru lietu inventorijâ, pieòemot, ka dublikâtu vairs nav
-
-            nosaukums = cilveks.inventory.get(i).nosaukums;
-            if(nosaukums.equals("Zelts")) continue; //zeltu nevar pârdot un nevar arî nopirkt
-
-            if(nosaukums.equals("Paika")) {
-                sellLimit=Cilveku.sellLimitPaika;
-                buyLimit=Cilveku.buyLimitPaika;
-            } else { //neklasificçtiem objektiem
-                sellLimit=Cilveku.sellLimitDefault;
-                buyLimit=Cilveku.buyLimitDefault;
-            }
-
-            boolean tirgos=false, pirks=false;
-            double apjoms=0;
-
-            int[] zeltaNumuri=cilveks.searchInventory("Zelts", false);
-            double zeltsTirgum=cilveks.countItemAmount(zeltaNumuri);
-
-
-            if(cilveks.inventory.get(i).daudzums>sellLimit) { //pârdoðana
-                apjoms=cilveks.inventory.get(i).daudzums-sellLimit;
-                tirgos=true;
-                pirks=false;
-            } else if(cilveks.inventory.get(i).daudzums<buyLimit && zeltsTirgum>0) { //pirkðana
-                apjoms=Math.min(buyLimit-cilveks.inventory.get(i).daudzums, zeltsTirgum/defaultCena);
-                tirgos=true;
-                pirks=true;
-            }
-
-            int orderNumberTemp=-1;
-            for(int j=0;j<cilveks.orderi.size();j++){ //apskata visus orderus - order cleanup
-                if(cilveks.orderi.get(j).prece.equals(nosaukums)) {
-                    if (tirgos) { orderNumberTemp=j; } else {
-                        if(cilveks.orderi.get(j).daudzums<=0) { //izdzçð tukðos orderus
-                            cilveks.orderi.remove(j);
-                            j--;
-                            //continue;
-                        }
-                    }
-                }
-            }
-
-            if (tirgos) {
-                if(orderNumberTemp<0) { //ja ordera vçl nav, uztaisa jaunu
-                    Orderis orderis=new Orderis();
-                    orderis.prece=nosaukums;
-
-                    orderNumberTemp=cilveks.orderi.size();
-                    cilveks.orderi.add(orderis);
-                }
-                cilveks.orderi.get(orderNumberTemp).daudzums=apjoms;
-                cilveks.orderi.get(orderNumberTemp).perk=pirks;
-
-                cilveks.orderi.get(orderNumberTemp).cena=defaultCena;
-            }
-        }
-    }
-
-    protected static void komanduMaina(Cilveks cilveks,
+    protected static void komanduMaina(Cilveks cilveks, double zeltsSum, double paikaSum,
                                        double paikaMaina, double zeltsMaina, double anarchyChance, double orderChance) {
-
-        int zeltsNr=cilveks.countInventory("Zelts", false);
-        double zeltsSum=0;
-        if (zeltsNr>=0) zeltsSum=cilveks.inventory.get(zeltsNr).daudzums;
-
-        int paikaNr=cilveks.countInventory("Paika", false);
-        double paikaSum=0;
-        if (paikaNr>=0) paikaSum=cilveks.inventory.get(paikaNr).daudzums;
 
         Random r = new Random();
         if (cilveks.rangs[1]==0 && paikaSum<paikaMaina && zeltsSum<zeltsMaina) { //tikai pirmâ lîmeòa spçlçtâji varçs mainît komandu
@@ -615,42 +307,97 @@ public class CilvekuAI {
         }
     }
 
-    protected static void mekletZeltu(Cilveks cilveks, double[] XY, int[] chunkXY, double vKoef) {
-        cilveks.darbibas.darbiba="meklet zeltu";
-        cilveks.darbibas.vKoef=vKoef;
-        cilveks.darbibas.fi = Formulas.lenkaNoteiksana(cilveks.xyz.x, cilveks.xyz.y, XY[0], XY[1], chunkXY);
-    }
+    private static void vairosanasParbaude(Location location, double zeltsSum, double paikaSum){
 
-    protected static void mekletPaiku(Cilveks cilveks, double[] XY, int[] chunkXY, double vKoef) {
-        cilveks.darbibas.darbiba="meklet paiku";
-        cilveks.darbibas.vKoef=vKoef;
-        cilveks.darbibas.fi = Formulas.lenkaNoteiksana(cilveks.xyz.x, cilveks.xyz.y, XY[0], XY[1], chunkXY);
-    }
+        double cenaCilvekam= Cilveku.cenaCilvekam,
+                mantojumsCilvekamZelts=Cilveku.mantojumsCilvekamZelts,
+                mantojumsCilvekamPaika=Cilveku.mantojumsCilvekamPaika;
 
-    protected static void atkapties(Cilveks cilveks, double[] XY, int[] chunkXY, double vKoef){
-        cilveks.darbibas.darbiba="atkapties";
-        cilveks.darbibas.vKoef=vKoef;
-        cilveks.darbibas.fi = 180 + Formulas.lenkaNoteiksana(cilveks.xyz.x, cilveks.xyz.y, XY[0], XY[1], chunkXY);
-    }
+        if (zeltsSum>=(cenaCilvekam+mantojumsCilvekamZelts) &&
+                paikaSum>=mantojumsCilvekamPaika*2) { //paikas  mantojums x2 lai paðam arî paliktu
 
-    public static void atputa(Cilveks cilveks) {
-        cilveks.darbibas.darbiba="atputa";
-        cilveks.darbibas.vKoef=0.4;
-        Random r = new Random();
-        if (r.nextDouble()<Cilveku.omChangeRate) { //periodiski nomaina kustîbas virzienu
-            cilveks.darbibas.fi = cilveks.xyz.fi + cilveks.omega*2*(-0.5+r.nextDouble());
+            Darbibas.vairosanas(location);
         }
     }
 
-    private static void buvniecibasParbaude(Cilveks cilveks, double zeltsSum){
-        double buildingChance=0.1, majasCena=30;
 
-        Random r=new Random();
-        if (r.nextDouble()<buildingChance) { //iespçja, ka kaut ko taisîs
-            if(zeltsSum>=majasCena) {
-                System.out.println(cilveks.vards+" zelts: "+(int)zeltsSum+" - gatavs bûvçt mâju!!!");
-                Darbibas.buveMaju();
+    private static void lootApskatsMeklesanai(int numurs) {
+        Biedrs biedrs = Cilveks.cilvekuListPilnais.get(numurs);
+        Cilveks cilveks = Cilveks.getPlayer(biedrs.chunkXY,  biedrs.i);
 
+        //double resnums=resnumaKoefic*cilveks.hpmax;
+
+
+        zeltsTuvakaisNr = 0; //numurs J
+        paikaTuvakaNr = 0;
+
+        zeltsTuvakaisDist=-1; //distance
+        paikaTuvakaDist=-1;
+
+        for(int i = 0; i< Main.laukums.get(biedrs.chunkXY[0]).get(biedrs.chunkXY[1]).lietas.size(); i++){
+            double distance = Math.hypot(cilveks.xyz.x- Main.laukums.get(biedrs.chunkXY[0]).get(biedrs.chunkXY[1]).lietas.get(i).x,
+                    cilveks.xyz.y- Main.laukums.get(biedrs.chunkXY[0]).get(biedrs.chunkXY[1]).lietas.get(i).y);
+
+			/*double resnumsJ; //nosaka lietas resnumu
+			if (Main.lietas.get(j).nosaukums=="Zelts") { resnumsJ = zeltaResnums;
+			} else if (Main.lietas.get(j).nosaukums=="Paika") { resnumsJ = paikasResnums;
+			} else resnumsJ = lietasResnums;*/
+
+            if(Main.laukums.get(biedrs.chunkXY[0]).get(biedrs.chunkXY[1]).lietas.get(i).nosaukums=="Zelts") {
+                if (distance<zeltsTuvakaisDist || (zeltsTuvakaisDist<0 && distance<=cilveks.R2)) {
+                    zeltsTuvakaisDist = distance;
+                    zeltsTuvakaisNr=i;
+                }
+            }
+
+            if(Main.laukums.get(biedrs.chunkXY[0]).get(biedrs.chunkXY[1]).lietas.get(i).nosaukums=="Paika") {
+                if (distance<paikaTuvakaDist || (paikaTuvakaDist<0 && distance<=cilveks.R2)) {
+                    paikaTuvakaDist = distance;
+                    paikaTuvakaNr=i;
+                }
+            }
+
+        }
+    }
+
+
+
+
+
+    private static void lootApskatsMeklesanai(int numurs) {
+        Biedrs biedrs = Cilveks.cilvekuListPilnais.get(numurs);
+        Cilveks cilveks = Cilveks.getPlayer(biedrs.chunkXY,  biedrs.i);
+
+        //double resnums=resnumaKoefic*cilveks.hpmax;
+
+
+        zeltsTuvakaisNr = 0; //numurs J
+        paikaTuvakaNr = 0;
+
+        zeltsTuvakaisDist=-1; //distance
+        paikaTuvakaDist=-1;
+
+        for(int i = 0; i< Main.laukums.get(biedrs.chunkXY[0]).get(biedrs.chunkXY[1]).lietas.size(); i++){
+            double distance = Math.hypot(cilveks.xyz.x- Main.laukums.get(biedrs.chunkXY[0]).get(biedrs.chunkXY[1]).lietas.get(i).x,
+                    cilveks.xyz.y- Main.laukums.get(biedrs.chunkXY[0]).get(biedrs.chunkXY[1]).lietas.get(i).y);
+
+			/*double resnumsJ; //nosaka lietas resnumu
+			if (Main.lietas.get(j).nosaukums=="Zelts") { resnumsJ = zeltaResnums;
+			} else if (Main.lietas.get(j).nosaukums=="Paika") { resnumsJ = paikasResnums;
+			} else resnumsJ = lietasResnums;*/
+
+            if(Main.laukums.get(biedrs.chunkXY[0]).get(biedrs.chunkXY[1]).lietas.get(i).nosaukums=="Zelts") {
+                if (distance<zeltsTuvakaisDist || (zeltsTuvakaisDist<0 && distance<=cilveks.R2)) {
+                    zeltsTuvakaisDist = distance;
+                    zeltsTuvakaisNr=i;
+                }
+            }
+
+            if(Main.laukums.get(biedrs.chunkXY[0]).get(biedrs.chunkXY[1]).lietas.get(i).nosaukums=="Paika") {
+                if (distance<paikaTuvakaDist || (paikaTuvakaDist<0 && distance<=cilveks.R2)) {
+                    paikaTuvakaDist = distance;
+                    paikaTuvakaNr=i;
+                }
             }
 
         }
