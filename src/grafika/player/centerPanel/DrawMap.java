@@ -12,7 +12,6 @@ import calculations.konstantes.Grafiskie;
 import calculations.lietas.Lieta;
 import calculations.komandas.Komanda;
 import calculations.cilveki.Cilveks;
-import calculations.cilveki.CilvekuApskats;
 
 import grafika.KonstantesGrafikai;
 import grafika.player.Dati;

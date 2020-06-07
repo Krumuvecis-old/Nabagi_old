@@ -13,7 +13,7 @@ import calculations.konstantes.Formulas;
 import calculations.cilveki.Cilveks;
 import calculations.komandas.Komanda;
 import calculations.konstantes.Grafiskie;
-import calculations.konstantes.Lietu;
+import calculations.lietas.LietuPreseti;
 import calculations.lietas.Lieta;
 import grafika.KonstantesGrafikai;
 
@@ -51,9 +51,9 @@ class MiniMap {
 					x0+5, y0+15+(int)(laukumaAugstums*merogs));
 			g.drawString("kartes platums: "+(int)(laukumaPlatums*merogs)+" kartes augstums: "+(int)(laukumaAugstums*merogs)+" merogs: "+(new DecimalFormat("#.##").format(merogs)),
 					x0+5, y0+30+(int)(laukumaAugstums*merogs));
-			g.drawString("overallGenRate: "+(new DecimalFormat("#.###").format(Lietu.goldGenRate))+
-					"  goldGenRate: "+(new DecimalFormat("#.###").format(Lietu.goldGenRate))+
-					"  paikaGenRate: "+(new DecimalFormat("#.###").format(Lietu.paikaGenRate)),
+			g.drawString("overallGenRate: "+(new DecimalFormat("#.###").format(LietuPreseti.goldGenRate))+
+					"  goldGenRate: "+(new DecimalFormat("#.###").format(LietuPreseti.goldGenRate))+
+					"  paikaGenRate: "+(new DecimalFormat("#.###").format(LietuPreseti.paikaGenRate)),
 					x0+5, y0+45+(int)(laukumaAugstums*merogs));
 		}
 		

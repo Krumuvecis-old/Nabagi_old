@@ -1,5 +1,6 @@
 package calculations.komandas;
 
+import calculations.Location;
 import calculations.Main;
 import calculations.cilveki.Cilveks;
 
@@ -14,7 +15,7 @@ public class Komanda {
 	public String galvenais;
 	public Color krasa;
 
-	public ArrayList<Biedrs> biedruList = new ArrayList<Biedrs>();
+	public ArrayList<Location> biedruList = new ArrayList<Location>();
 	public int karalis=-1, bagatakais=-1, rekords=0;
 
 	void getBiedruList(int numurs){
@@ -26,7 +27,7 @@ public class Komanda {
 
 				for (int i=0; i<cilvekiList.size(); i++){
 					if(Main.komandasList.get(numurs).nosaukums == cilvekiList.get(i).komanda){
-						Biedrs biedrs = new Biedrs();
+						Location biedrs = new Location();
 						biedrs.chunkXY=chunkXY;
 						biedrs.i=i;
 						biedruList.add(biedrs);
@@ -51,10 +52,8 @@ public class Komanda {
 					karalis=i;
 				}
 
-
-				int zeltsNr = cilveks.countInventory("Zelts", false);
-				double zeltsSum=0;
-				if (zeltsNr>=0) zeltsSum=cilveks.inventory.get(zeltsNr).daudzums;
+				double zeltsSum = cilveks.countItemAmount(
+						cilveks.searchInventory("Zelts", true) );
 
 				if(bagatakais<0||bagatiba<zeltsSum) {
 					bagatiba=zeltsSum;

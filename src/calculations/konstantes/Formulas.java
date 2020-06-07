@@ -1,13 +1,22 @@
 package calculations.konstantes;
 
+import calculations.KonstantesUniversal;
+
 import java.awt.Color;
 import java.util.Random;
 
 public class Formulas {
 	
-	public static double lenkaNoteiksana(double x1, double y1, double x2, double y2) {
-		double alfa, distance=Math.hypot(x1-x2, y1-y2);
-		
+	public static double lenkaNoteiksana(double x1, double y1, double x2, double y2, int[] dChunkXY) {
+		int chunkPlatums = KonstantesUniversal.mapChunkW;
+		double x2Temp=x2 + dChunkXY[0] * chunkPlatums,
+				y2Temp=y2 + dChunkXY[1] * chunkPlatums;
+
+		return tangensi(x1, y1, x2Temp, y2Temp);
+	}
+
+	private static double tangensi(double x1, double y1, double x2, double y2){
+		double dx = x2 - x1, dy = y2 - y1, distance=Math.hypot(dx, dy), alfa;
 		if(y2>y1) {
 			alfa=Math.toDegrees(Math.acos((x2-x1)/distance));
 		} else if(y2==y1) {
@@ -15,7 +24,6 @@ public class Formulas {
 		} else {
 			alfa=180+Math.toDegrees(Math.acos((x1-x2)/distance));
 		}
-		
 		return alfa;
 	}
 	

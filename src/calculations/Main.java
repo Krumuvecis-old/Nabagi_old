@@ -1,15 +1,12 @@
 package calculations;
 
-import calculations.konstantes.*;
-import calculations.lietas.Lieta;
 import calculations.lietas.LietuApskats;
 import calculations.komandas.Komanda;
 import calculations.komandas.KomanduApskats;
 
 import java.util.ArrayList;
 
-import calculations.cilveki.Cilveks;
-import calculations.cilveki.CilvekuApskats;
+import calculations.cilveki.CilvekuManager;
 
 public class Main {
 
@@ -34,7 +31,7 @@ public class Main {
 				//LaukumaApskats.main(); //te jâbût arî kartes un reljefa ciklam
 				LietuApskats.main(); //viss kas saistîts ar pa  zemi izmçtâtajâm lietâm
 				KomanduApskats.main(); //viss kas saistîts ar komandâm
-				CilvekuApskats.main(); //viss kas saistîts ar cilvçkiem
+				CilvekuManager.main(); //viss kas saistîts ar cilvçkiem
 				
 			}
 			

@@ -1,7 +1,8 @@
 package calculations;
 
-import calculations.cilveki.CilvekuApskats;
+import calculations.cilveki.CilvekuManager;
 import calculations.konstantes.*;
+import calculations.lietas.LietuPreseti;
 
 import java.util.ArrayList;
 
@@ -11,7 +12,7 @@ class InitializeManager {
         initializeLaukums();
         initializeKomandas();
 
-        CilvekuApskats.setup(); //initialize + jaunie spçlçtâji
+        CilvekuManager.initialize(); //initialize + jaunie spçlçtâji
 
         newSetupWindow();
 
@@ -21,7 +22,7 @@ class InitializeManager {
 
         KonstantesUniversal.initialize();
 
-        Lietu.initialize();
+        LietuPreseti.initialize();
 
         Komandu.initialize();
         Cilveku.initialize();

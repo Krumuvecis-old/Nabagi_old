@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.Arrays;
 import java.util.Random;
 
+import calculations.Location;
 import calculations.konstantes.Formulas;
 import calculations.Main;
 import calculations.cilveki.Cilveks;
@@ -72,7 +73,7 @@ public class KomanduApskats {
 
 		Komanda jaunaKomanda=new Komanda();
 
-		jaunaKomanda.nosaukums=Komandu.komandaNosaukumsDefault+Komanda.maxKomanda;
+		jaunaKomanda.nosaukums = Komandu.komandaNosaukumsDefault + Komanda.maxKomanda;
 		jaunaKomanda.galvenais=galvenais;
 
 		jaunaKomanda.krasa=assignColor();
@@ -161,8 +162,7 @@ public class KomanduApskats {
 
 			for (int i = 0; i< komanda.biedruList.size(); i++) { //visus komandasbiedrus pârliek 0.komandâ
 
-				Biedrs biedrs = komanda.biedruList.get(i);
-				Cilveks cilveks = Cilveks.getPlayer(biedrs.chunkXY, biedrs.i);
+				Cilveks cilveks = Cilveks.getPlayer(komanda.biedruList.get(i));
 
 				cilveks.komanda=Main.komandasList.get(0).nosaukums; //visus ieliek 0.komandâ
 
@@ -177,8 +177,7 @@ public class KomanduApskats {
 
 			komanda.karalis=komanda.bagatakais;
 
-			Biedrs biedrs = komanda.biedruList.get(komanda.karalis);
-			Cilveks cilveks = Cilveks.getPlayer(biedrs.chunkXY, biedrs.i);
+			Cilveks cilveks = Cilveks.getPlayer(komanda.biedruList.get(komanda.karalis));
 
 			cilveks.rangs = new int[]{0, 3};
 			komanda.galvenais = cilveks.vards;

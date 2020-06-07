@@ -1,40 +1,39 @@
 package calculations.cilveki;
 
 import calculations.KonstantesUniversal;
+import calculations.Location;
 import calculations.Main;
-import calculations.komandas.Biedrs;
 
 class Kustiba {
 	
-	protected static void main(Cilveks cilveks, int i) {
+	protected static void main(Cilveks cilveks, Location location) {
 		
 		lenkuParbaude(cilveks);
 		kustiba(cilveks);
-		maluParbaude(i);
-
+		maluParbaude(location);
 	}
 	
-	private static void lenkuParbaude(Cilveks cilveks) { //leòíu noîsinâðana
-		for( ; cilveks.xyz.fi<0; cilveks.xyz.fi+=360) {}
-		for( ; cilveks.xyz.fi>=360; cilveks.xyz.fi-=360) {}
+	private static void lenkuParbaude(Cilveks cilveks) {
+		//leòíu noîsinâðana, lai bûtu diapazonâ
+		while (cilveks.xyz.fi<0) cilveks.xyz.fi+=360;
+		while (cilveks.xyz.fi>=360) cilveks.xyz.fi-=360;
 	}
 
-	private static void kustiba(Cilveks cilveks) { //koordinâtu nomaiòa
+	private static void kustiba(Cilveks cilveks) {
 
 		//âtruma  projekcijas
-		double vx=cilveks.xyz.v*Math.cos(Math.toRadians(cilveks.xyz.fi));
-		double vy=cilveks.xyz.v*Math.sin(Math.toRadians(cilveks.xyz.fi));
+		double vx = cilveks.xyz.v * Math.cos(Math.toRadians(cilveks.xyz.fi)),
+				vy = cilveks.xyz.v * Math.sin(Math.toRadians(cilveks.xyz.fi));
 
 		//kustîba pa asîm
 		cilveks.xyz.x+=vx;
 		cilveks.xyz.y+=vy;
 	}
 
-	private static void maluParbaude(int numurs) { //situâcijas pie laukuma malâm
-		Biedrs biedrs = Cilveks.cilvekuListPilnais.get(numurs);
-		Cilveks cilveks = Cilveks.getPlayer(biedrs.chunkXY, biedrs.i);
+	private static void maluParbaude(Location location) { //situâcijas pie laukuma malâm
+		Cilveks cilveks = Cilveks.getPlayer(location);
 
-		int platums=KonstantesUniversal.mapChunkW, chunkX=biedrs.chunkXY[0], chunkY=biedrs.chunkXY[0];
+		int platums=KonstantesUniversal.mapChunkW, chunkX=location.chunkXY[0], chunkY=location.chunkXY[0];
 
 		if (cilveks.xyz.x < 0 ) { //rietumi
 			cilveks.xyz.x+=platums;
@@ -57,18 +56,18 @@ class Kustiba {
 			if (chunkY >= KonstantesUniversal.mapChunkCountY) chunkY = 0;
 		}
 
-		int chunkX0=biedrs.chunkXY[0], chunkY0=biedrs.chunkXY[0];
+		int chunkX0=location.chunkXY[0], chunkY0=location.chunkXY[0];
 		if(chunkX!=chunkX0 || chunkY!=chunkY0){ //jâizòem no vienas tabulas un jâieliek otrâ
 
 			Main.laukums.get(chunkX).get(chunkY).cilvekiList.add(cilveks);
-			Main.laukums.get(chunkX0).get(chunkY0).cilvekiList.remove(biedrs.i);
+			Main.laukums.get(chunkX0).get(chunkY0).cilvekiList.remove(location.i);
 		}
 
 	}
 
 	private static void maluParbaudeVecais(){
 
-		// zemâk atdurðanâs pret malâm
+		// zemâk atdurðanâs pret malâm - ðo vçlâk varçs izmantot, kad pievienos çkas un sienas
 
 //		int augstums= KonstantesUniversal.laukumaAugstumsSum, platums=KonstantesUniversal.laukumaPlatumsSum, mala=KonstantesUniversal.mala;
 //		double resnums= Fizikas.resnumaKoefic*cilveks.hpmax;
