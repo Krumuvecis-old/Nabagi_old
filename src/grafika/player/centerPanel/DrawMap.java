@@ -6,6 +6,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import calculations.KonstantesUniversal;
+import calculations.Main;
 import calculations.konstantes.Fizikas;
 import calculations.konstantes.Formulas;
 import calculations.konstantes.Grafiskie;
@@ -72,50 +73,28 @@ class DrawMap {
 					if (Math.hypot(dx, dy) > R2) continue; //lai atmet tos kas par tâlu
 
 					double[] koord;
-					koord=getAbsoluteCoordinates(false, dx, dy);
-					double resnums;
-					Color krasa1, krasa2=Color.black;; //iekða un kontûra
+					koord = getAbsoluteCoordinates(false, dx, dy);
+					double resnums = KonstantesUniversal.defaultLietas.get(0).izmers * merogs;
+					Color krasa1 = KonstantesUniversal.defaultLietas.get(0).krasa, krasa2=Color.black; //iekða un kontûra
 
-					if(lieta.nosaukums=="Zelts") {
-						resnums = Fizikas.zeltaResnums*merogs;
-						krasa1=Grafiskie.lietasColorZelts; //iekða
-
-
-						if(drawInfo==true) {
-							g.setColor(krasa1);
-							String nosaukums=""+new DecimalFormat("#.#").format(lieta.daudzums);
-							g.drawString(nosaukums, (int)(koord[0]+resnums/2+3), (int)(koord[1]+7));
+					for(int j=1; j < KonstantesUniversal.defaultLietas.size(); j++){
+						if(lieta.nosaukums.equals(KonstantesUniversal.defaultLietas.get(j).nosaukums)){
+							resnums = KonstantesUniversal.defaultLietas.get(j).izmers * merogs;
+							krasa1=KonstantesUniversal.defaultLietas.get(j).krasa; //iekða
 						}
-
-					} else if(lieta.nosaukums=="Paika") {
-						resnums=Fizikas.paikasResnums*merogs;
-						krasa1 = Grafiskie.lietasColorPaika;
-
-						if(drawInfo==true) {
-							g.setColor(krasa1);
-							String nosaukums=""+new DecimalFormat("#.#").format(lieta.daudzums);
-							g.drawString(nosaukums, (int)(koord[0]-7), (int)(koord[1]+resnums/2+15));
-						}
-
-					} else { //neklasificçti objekti
-						resnums=Fizikas.lietasResnums*merogs;
-
-						krasa1 = Grafiskie.lietasColorDefault; //iekða
-
-						if(drawInfo==true) {
-							g.setColor(krasa1);
-							String nosaukums=lieta.nosaukums+"-"+(int)lieta.daudzums;
-							g.drawString(nosaukums, (int)(koord[0]-15), (int)(koord[1]+resnums/2+15));
-						}
-
-						g.setColor(krasa1); //iekða
-						g.fillOval((int)(koord[0]-resnums/2), (int)(koord[1]-resnums/2), (int)resnums, (int)resnums);
-
-						g.setColor(krasa2); //kontûra
-						g.drawOval((int)(koord[0]-resnums/2), (int)(koord[1]-resnums/2), (int)resnums, (int)resnums);
-
 					}
 
+					if(drawInfo==true) {
+						g.setColor(krasa2);
+						String nosaukums=""+new DecimalFormat("#.#").format(lieta.daudzums);
+						g.drawString(nosaukums, (int)(koord[0]+resnums/2+3), (int)(koord[1]+7));
+					}
+
+					g.setColor(krasa1); //iekða
+					g.fillOval((int)(koord[0]-resnums/2), (int)(koord[1]-resnums/2), (int)resnums, (int)resnums);
+
+					g.setColor(krasa2); //kontûra
+					g.drawOval((int)(koord[0]-resnums/2), (int)(koord[1]-resnums/2), (int)resnums, (int)resnums);
 
 				}
 
@@ -325,13 +304,8 @@ class DrawMap {
 	private void playerDrawInfo(Graphics g, int i, Cilveks player, double[] koord, double resnums) {
 		
 		//saskaita cik kuram paika un zelts, lai varçtu izvadît
-		int zeltsNr=player.countInventory("Zelts", false);
-		double zeltsSum=0;
-		if (zeltsNr>=0) zeltsSum=player.inventory.get(zeltsNr).daudzums;
-		
-		int paikaNr=player.countInventory("Paika", false);
-		double paikaSum=0;
-		if (paikaNr>=0) paikaSum=player.inventory.get(paikaNr).daudzums;
+		double zeltsSum=player.countItemAmount(player.searchInventory("Zelts", false));
+		double paikaSum=player.countItemAmount(player.searchInventory("Paika", false));
 		
 		//g.setColor(new Color(255,100,200)); //default krâsa?
 		int textSize=15;
