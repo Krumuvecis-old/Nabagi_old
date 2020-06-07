@@ -132,7 +132,7 @@ class Grafika extends JPanel {
 		
 		for(int i=(-1)*w;i<thread.dati.cilvekuPilnaisList.size();i++) { //cikls, lai iziet caur cilvçkiem
 			g.setColor(thread.dati.tablo2krasaDefault);
-			Cilveks cilveks = Cilveks.getPlayer(thread.dati.cilvekuPilnaisList.get(i).chunkXY,thread.dati.cilvekuPilnaisList.get(i).i);
+			Cilveks cilveks = Cilveks.getPlayer(thread.dati.cilvekuPilnaisList.get(i));
 
 			int invSize=0;
 			

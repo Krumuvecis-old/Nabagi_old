@@ -140,10 +140,10 @@ class Dati {
 
 				for (int i=0; i<Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
 
-					Location cilveks = new Location();
-					cilveks.chunkXY=chunkXY;
-					cilveks.i=i;
-					cilvekuPilnaisList.add(cilveks);
+					Location location = new Location();
+					location.chunkXY=chunkXY;
+					location.i=i;
+					cilvekuPilnaisList.add(location);
 				}
 
 			}
@@ -153,7 +153,7 @@ class Dati {
 	protected void playerFocusFind() {
 		int number=-1;
 		for (int i = 0; i< cilvekuPilnaisList.size(); i++) {
-			if (Cilveks.getPlayer(cilvekuPilnaisList.get(i).chunkXY,cilvekuPilnaisList.get(i).i).vards==playerFocusName) {
+			if (Cilveks.getPlayer(cilvekuPilnaisList.get(i)).vards==playerFocusName) {
 				number=i;
 				break;
 			}
@@ -170,7 +170,7 @@ class Dati {
 		if (randomize) i=(new java.util.Random()).nextInt(cilvekuPilnaisList.size());
 		
 		grafika.player.PlayerThread threadTemp=new grafika.player.PlayerThread(); //jauns spçlçtâja logs
-		String playerName = Cilveks.getPlayer(cilvekuPilnaisList.get(i).chunkXY,cilvekuPilnaisList.get(i).i).vards;
+		String playerName = Cilveks.getPlayer(cilvekuPilnaisList.get(i)).vards;
 		threadTemp.initialize(playerName);
 		
 		if(!playerFocused) { //ja nav fokusa, fokusçjas uz spçlçtâju

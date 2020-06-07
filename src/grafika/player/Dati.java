@@ -133,14 +133,14 @@ public class Dati {
 		playerDead=false;
 		
 		if (!primary) {
-			playerName = Cilveks.getPlayer(cilvekuPilnaisList.get(0).chunkXY,cilvekuPilnaisList.get(0).i).vards;
+			playerName = Cilveks.getPlayer(cilvekuPilnaisList.get(0)).vards;
 		}
 
 		windowTitle=windowTitleDefault+" ("+playerName+")"; //nomaina loga nosaukumu
 	}
 
 	private void getPlayerTotalList(){
-		cilvekuPilnaisList = new ArrayList<Biedrs>();
+		cilvekuPilnaisList = new ArrayList<Location>();
 
 		for(int[] chunkXY = {0, 0}; chunkXY[0]< Main.laukums.size(); chunkXY[0]++) {
 			for( ; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
@@ -149,7 +149,7 @@ public class Dati {
 
 				for (int i=0; i<Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
 
-					Biedrs cilveks = new Biedrs();
+					Location cilveks = new Location();
 					cilveks.chunkXY=chunkXY;
 					cilveks.i=i;
 					cilvekuPilnaisList.add(cilveks);

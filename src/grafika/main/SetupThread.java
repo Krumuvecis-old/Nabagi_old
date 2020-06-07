@@ -1,5 +1,6 @@
 package grafika.main;
 
+import calculations.KonstantesUniversal;
 import calculations.lietas.LietuPreseti;
 
 public class SetupThread implements Runnable{
@@ -97,12 +98,10 @@ public class SetupThread implements Runnable{
 					dati.colorPanelDraw=!dati.colorPanelDraw;
 					
 				} else if (i==8) { //devîtâ poga
-					LietuPreseti.overallGenRate+=0.01;
-					LietuPreseti.updateGenRates();
+					KonstantesUniversal.overallGenRate+=0.01;
 					
 				} else if (i==9) { //desmitâ poga
-					LietuPreseti.overallGenRate-=0.01;
-					LietuPreseti.updateGenRates();
+					KonstantesUniversal.overallGenRate-=0.01;
 					
 				}
 				

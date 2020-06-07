@@ -51,9 +51,22 @@ class MiniMap {
 					x0+5, y0+15+(int)(laukumaAugstums*merogs));
 			g.drawString("kartes platums: "+(int)(laukumaPlatums*merogs)+" kartes augstums: "+(int)(laukumaAugstums*merogs)+" merogs: "+(new DecimalFormat("#.##").format(merogs)),
 					x0+5, y0+30+(int)(laukumaAugstums*merogs));
-			g.drawString("overallGenRate: "+(new DecimalFormat("#.###").format(LietuPreseti.goldGenRate))+
-					"  goldGenRate: "+(new DecimalFormat("#.###").format(LietuPreseti.goldGenRate))+
-					"  paikaGenRate: "+(new DecimalFormat("#.###").format(LietuPreseti.paikaGenRate)),
+
+			double goldGenRate=0;
+			for(int i=0; i<KonstantesUniversal.defaultLietas.size(); i++){
+				if(KonstantesUniversal.defaultLietas.get(i).equals("Zelts"))
+					goldGenRate = KonstantesUniversal.defaultLietas.get(i).genKoef * KonstantesUniversal.overallGenRate;
+			}
+
+			double paikaGenRate=0;
+			for(int i=0; i<KonstantesUniversal.defaultLietas.size(); i++){
+				if(KonstantesUniversal.defaultLietas.get(i).equals("Paika"))
+					paikaGenRate = KonstantesUniversal.defaultLietas.get(i).genKoef * KonstantesUniversal.overallGenRate;
+			}
+
+			g.drawString("overallGenRate: "+(new DecimalFormat("#.###").format(goldGenRate))+
+					"  goldGenRate: "+(new DecimalFormat("#.###").format(goldGenRate))+
+					"  paikaGenRate: "+(new DecimalFormat("#.###").format(paikaGenRate)),
 					x0+5, y0+45+(int)(laukumaAugstums*merogs));
 		}
 		
@@ -68,7 +81,7 @@ class MiniMap {
 		double resnumaKoefic = Fizikas.resnumaKoefic;
 		for(int i=0;i<thread.dati.cilvekuPilnaisList.size();i++) {
 			
-			Cilveks cilveks = Cilveks.getPlayer(thread.dati.cilvekuPilnaisList.get(i).chunkXY,thread.dati.cilvekuPilnaisList.get(i).i); //pats apskatâmais spçlçtâjs
+			Cilveks cilveks = Cilveks.getPlayer(thread.dati.cilvekuPilnaisList.get(i)); //pats apskatâmais spçlçtâjs
 			
 			double resnums=resnumaKoefic*cilveks.hpmax*merogs;
 			
@@ -127,23 +140,17 @@ class MiniMap {
 
 				for(int i=0;i<lietasList.size();i++) { //zîmç lietas, kas izmçtâtas pa karti
 
-					double x=x0+lietasList.get(i).x*merogs, y=y0+lietasList.get(i).y*merogs, resnums;
-					Color krasa1, krasa2=Color.black; //iekðai un kontûrai
+					double x=x0+lietasList.get(i).x*merogs, y=y0+lietasList.get(i).y*merogs,
+							resnums=KonstantesUniversal.defaultLietas.get(0).izmers;
+					Color krasa1=KonstantesUniversal.defaultLietas.get(0).krasa, krasa2=Color.black; //iekðai un kontûrai
 
-					if(lietasList.get(i).nosaukums=="Zelts") {
-						resnums = Fizikas.zeltaResnums * merogs;
-						krasa1 = Grafiskie.lietasColorZelts;
-
-					} else if(lietasList.get(i).nosaukums=="Paika") {
-						resnums = Fizikas.paikasResnums * merogs;
-						krasa1 = Grafiskie.lietasColorPaika;
-
-					} else { //neklasificçti objekti
-						resnums = Fizikas.lietasResnums * merogs;
-						krasa1 = Grafiskie.lietasColorDefault;
-
+					for(int j=1; j<KonstantesUniversal.defaultLietas.size(); j++){
+						if(lietasList.get(i).nosaukums.equals(KonstantesUniversal.defaultLietas.get(j).nosaukums)) {
+							krasa1 = KonstantesUniversal.defaultLietas.get(j).krasa;
+							resnums = KonstantesUniversal.defaultLietas.get(j).izmers * merogs;
+							break;
+						}
 					}
-
 					g.setColor(krasa1); //iekða
 					g.fillOval((int)(x-resnums/2), (int)(y-resnums/2), (int)resnums, (int)resnums);
 					g.setColor(krasa2); //kontûra
