@@ -26,7 +26,7 @@ public class CilvekuAI {
         //errori var bût zemâk
 
 
-
+        //viss kas tâlâk ðajâ metodç ir jâpârvieto prom sadalot pa attâlumiem un prioritâtçm
         lootApskatsMeklesanai(numurs);
 
 
