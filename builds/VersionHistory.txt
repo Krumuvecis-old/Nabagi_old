@@ -25,17 +25,23 @@ versija X (planned)
 
 versija 0.12 (planned)
 
-versija 0.11 (planned) - june 2020
-    changes to file system
-
     planned:
+        add changing terrain and trees
+
+        fix multithreading for playerView
 	    singleplayer character control (planned)
 	    add minimap (bigMap?) to playerView window
-	    big map cells to divide map for faster computing and bigger map support
-        map wrapping around edges
-        add fading view depending on R1 and R2
-	    add small grid for map cells, add changing terrain and trees
-	    fix multithreading for playerView
+
+
+versija 0.11 (planned) - june 2020
+    changes to file system
+    map divided into map chunks for faster computing and bigger map support
+    map wrapping around edges
+    map chunks divided into smaller map cells for terrain
+    fading view depending on distance
+
+    planned:
+        repair the errors
 
 versija 0.10 - may/june 2020
 	added key/mouse listener
