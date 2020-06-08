@@ -21,12 +21,12 @@ public class Lieta {
 
 	public static Lieta newLieta(int tips, double daudzums, double x, double y){
 
-		Lieta lieta = new Lieta();
+		Lieta lieta = new Lieta(); //uztaisa jaunu lietu
 		lieta.daudzums = daudzums;
 		lieta.x=x;
 		lieta.y=y;
 
-		LietuPreseti preset = KonstantesUniversal.defaultLietas.get(tips);
+		LietuPreseti preset = KonstantesUniversal.defaultLietas.get(tips); //salîdzina ar presetiem
 		lieta.nosaukums = preset.nosaukums;
 		lieta.izmers = preset.izmers;
 		lieta.masa = preset.masa;
@@ -37,6 +37,6 @@ public class Lieta {
 		lieta.defence = preset.defence;
 		lieta.condition = preset.condition;
 
-		return lieta;
+		return lieta; //padod  atpakaï jau gatavu
 	}
 }

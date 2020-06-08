@@ -10,22 +10,20 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import calculations.CalculationTimeCalculator;
-import calculations.Main;
-import calculations.MapChunk;
 import calculations.cilveki.Cilveks;
 import calculations.komandas.Komanda;
 import calculations.komandas.KomanduApskats;
 import calculations.konstantes.Cilveku;
-import calculations.lietas.Lieta;
+import grafika.main.map.Map;
 
 @SuppressWarnings("serial")
-class Grafika extends JPanel {
+public class Grafika extends JPanel {
 	protected JFrame ekrans;
-	private Grafika grafika;
+	public Grafika grafika;
 	
 	private static SetupThread thread; //temporary lielums zîmçðanas funkcijâm
 
-	protected ArrayList<Komanda> komandasList = calculations.Main.komandasList;
+	public ArrayList<Komanda> komandasList = calculations.Main.komandasList;
 
 	
 	//te nelikt mainîgos!!! (var likt pie thread.dati)
@@ -57,7 +55,8 @@ class Grafika extends JPanel {
 		
 		drawFons(g);
 		drawButtons(g);
-		if (thread.dati.miniMapDraw) MiniMap.drawMiniMap(g, thread, this); //karte
+
+		if (thread.dati.miniMapDraw) Map.main(g, thread, this); //karte
 		
 		if (thread.dati.tablo1Draw) drawTablo1(g); //galvenais komandu panelis sânâ
 		if (thread.dati.tablo2Draw) drawTablo2(g); //centrâlais panelis diagnostikai

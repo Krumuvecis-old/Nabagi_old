@@ -8,7 +8,7 @@ public class SetupThread implements Runnable{
 	private static String threadName;
 	public boolean running, minimized, windowActive;
 	
-	protected Dati dati;
+	public Dati dati;
 	protected Grafika grafika;
 	protected Input input;
 	
@@ -41,9 +41,9 @@ public class SetupThread implements Runnable{
 		
 		while (running) {
 			dati.calculationTimeCalculator.time(true);
-			
+
 			if (!minimized) {
-				dati.playerFocusFind();
+				dati.update();
 				
 				buttonActions();
 				

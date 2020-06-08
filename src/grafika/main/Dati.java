@@ -8,7 +8,7 @@ import grafika.KonstantesGrafikai;
 import java.awt.Color;
 import java.util.ArrayList;
 
-class Dati {
+public class Dati {
 	protected calculations.CalculationTimeCalculator calculationTimeCalculator = new calculations.CalculationTimeCalculator();
 	
 	protected String windowTitle = KonstantesGrafikai.ekranaNosaukums + ", SetupWindow";
@@ -17,12 +17,12 @@ class Dati {
 	
 	protected int nosaukumsX=5, nosaukumsY=15;
 
-	protected ArrayList<Location> cilvekuPilnaisList;
+	public ArrayList<Location> cilvekuPilnaisList;
 	protected ArrayList<Button> buttonList;
-	
-	protected String playerFocusName;
-	protected boolean playerFocused=false;
-	protected int playerFocusNumber;
+
+	public String playerFocusName;
+	public boolean playerFocused=false;
+	public int playerFocusNumber;
 	
 	// --------------------
 	//zemâk par input testa paneli
@@ -66,18 +66,13 @@ class Dati {
 	// --------------------
 	//zemâk par kartes zîmçðanu
 	
-	protected boolean miniMapDraw=true, miniMapDrawInfo=true; //kartes zîmçðana vispâr un informâcija tai apakðâ
-	protected int miniMapX=tablo2x0, miniMapY=tablo2y0-15,
+	public boolean miniMapDraw=true, miniMapDrawInfo=true; //kartes zîmçðana vispâr un informâcija tai apakðâ
+	public int miniMapX=tablo2x0, miniMapY=tablo2y0-15,
 			miniMapPlatums=ekranaPlatums-miniMapX-50,
 			miniMapAugstums=ekranaAugstums-miniMapY-50;
 	
 	
 	protected void initialize() {
-
-		//par spçlçtâjiem
-
-		getPlayerTotalList();
-
 
 		// --------------------
 		//par pogâm
@@ -91,7 +86,7 @@ class Dati {
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"PlayerView(rand)",10); w++;
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Tablo1",0); w++;
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Tablo2",0); w++;
-		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"MiniMap",0); w++;
+		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Map",0); w++;
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"InputPanel",3); w++;
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"ColorPanel",2); w++;
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"GenRate +0.01",3); w++;
@@ -130,6 +125,11 @@ class Dati {
 		
 	}
 
+	public void update(){
+		getPlayerTotalList();
+		playerFocusFind();
+	}
+
 	private void getPlayerTotalList(){
 		cilvekuPilnaisList = new ArrayList<Location>();
 
@@ -141,7 +141,7 @@ class Dati {
 				for (int i=0; i<Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
 
 					Location location = new Location();
-					location.chunkXY=chunkXY;
+					location.chunkXY=new int[]{chunkXY[0], chunkXY[1]};
 					location.i=i;
 					cilvekuPilnaisList.add(location);
 				}
@@ -150,9 +150,10 @@ class Dati {
 		}
 	}
 
-	protected void playerFocusFind() {
+	private void playerFocusFind() {
+
 		int number=-1;
-		for (int i = 0; i< cilvekuPilnaisList.size(); i++) {
+		for (int i = 0; i < cilvekuPilnaisList.size(); i++) {
 			if (Cilveks.getPlayer(cilvekuPilnaisList.get(i)).vards==playerFocusName) {
 				number=i;
 				break;
@@ -162,7 +163,7 @@ class Dati {
 		if(number<0) {
 			playerFocused=false;
 		}
-		playerFocusNumber=number;
+		playerFocusNumber=number; //izdod cilvekuPilnaisList numuru (vai -1, ja neatrod)
 	}
 	
 	protected void startPlayerView(boolean randomize) {
@@ -173,7 +174,7 @@ class Dati {
 		String playerName = Cilveks.getPlayer(cilvekuPilnaisList.get(i)).vards;
 		threadTemp.initialize(playerName);
 		
-		if(!playerFocused) { //ja nav fokusa, fokusçjas uz spçlçtâju
+		if(!playerFocused) { //ja iepriekð nav fokusa, tad fokusçjas uz spçlçtâju
 			playerFocused=true;
 			playerFocusName=playerName;
 		}

@@ -52,6 +52,7 @@ public class LietuPreseti {
         lieta.attack=attack;
         lieta.defence=defence;
         lieta.condition=condition;
+        lieta.krasa=krasa;
 
         KonstantesUniversal.defaultLietas.add(lieta);
     }
