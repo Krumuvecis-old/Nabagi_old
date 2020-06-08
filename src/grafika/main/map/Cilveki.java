@@ -34,9 +34,10 @@ class Cilveki {
 
             double hpRatio=cilveks.hp/cilveks.hpmax;
 
-            Color krasa = new Color(Color.HSBtoRGB((float) Formulas.getHue(komandasList.get(komanda).krasa),
-                    (float) KonstantesGrafikai.cilvekiKrasaSaturation,
-                    (float)(KonstantesGrafikai.cilvekiKrasaBrightnessMin+(KonstantesGrafikai.cilvekiKrasaBrightnessMax-KonstantesGrafikai.cilvekiKrasaBrightnessMin)*hpRatio)));
+            Color krasa = new Color(Color.HSBtoRGB( (float)Formulas.getHue(komandasList.get(komanda).krasa),
+                    (float)KonstantesGrafikai.cilvekiKrasaSaturation,
+                    (float)(KonstantesGrafikai.cilvekiKrasaBrightnessMin + hpRatio *
+                            (KonstantesGrafikai.cilvekiKrasaBrightnessMax - KonstantesGrafikai.cilvekiKrasaBrightnessMin)) ));
 
             //rumpis
 

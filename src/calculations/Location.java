@@ -5,8 +5,8 @@ public class Location {
     public int i;
 
     public static int[] normalizeXY(int[] chunkXY){
-        if(chunkXY[0]<0) chunkXY[0]=KonstantesUniversal.mapChunkCountX-1; //rietumi
-        if(chunkXY[1]<0) chunkXY[1]=KonstantesUniversal.mapChunkCountY-1; //ziemeïi
+        if(chunkXY[0]<0) chunkXY[0]+=KonstantesUniversal.mapChunkCountX; //rietumi
+        if(chunkXY[1]<0) chunkXY[1]+=KonstantesUniversal.mapChunkCountY; //ziemeïi
         if(chunkXY[0]>=KonstantesUniversal.mapChunkCountX) chunkXY[0]-=KonstantesUniversal.mapChunkCountX; //austrumi
         if(chunkXY[1]>=KonstantesUniversal.mapChunkCountY) chunkXY[1]-=KonstantesUniversal.mapChunkCountY; //dienvidi
 
