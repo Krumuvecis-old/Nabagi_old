@@ -53,6 +53,23 @@ public class Map {
 		if(threadTemp.dati.miniMapDrawInfo) { //informâcija apakðâ par paðu karti
 			drawInfo(g, x0, y0, merogs, laukumaPlatums, laukumaAugstums);
 		}
+
+		//laukuma diagnostikas panelis
+		int x1=350, y1=200, wx=150, wy=50, tekstaPlatums=15;
+		g.setColor(Color.black);
+		for(int[] chunkXY = {0,0}; chunkXY[0]<Main.laukums.size(); chunkXY[0]++){
+			for(chunkXY[1]=0; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++){
+				int x = x1 + chunkXY[0] * wx,
+						y = y1 + chunkXY[1] * wy;
+				int w=0;
+				g.drawString("lietas: "+Main.laukums.get(chunkXY[0]).get(chunkXY[1]).lietas.size(),
+						x,y + w * tekstaPlatums); w++;
+				g.drawString("players: "+Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(),
+						x,y + w * tekstaPlatums); w++;
+			}
+		}
+
+
 		
 	}
 

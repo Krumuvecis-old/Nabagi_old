@@ -4,7 +4,6 @@ import calculations.KonstantesUniversal;
 import calculations.Location;
 import calculations.Main;
 import calculations.lietas.Lieta;
-import calculations.lietas.LietuApskats;
 
 import java.util.Random;
 

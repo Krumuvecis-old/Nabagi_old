@@ -59,7 +59,7 @@ public class KomanduApskats {
 		//numurs un skaits nekad nebûs 0, jo tie tiek atsijâti jau ieprekğ
 		Komanda komanda=Main.komandasList.get(numurs);
 		
-		komanda.mekleKarali(numurs);
+		komanda.mekleKarali();
 		
 		if (komanda.karalis<0) navKaralis(numurs); //ja komandâ nav atrodams galvenais
 

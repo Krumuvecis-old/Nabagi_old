@@ -19,17 +19,21 @@ public class LootGenerator {
         double genRate = KonstantesUniversal.defaultLietas.get(tips).genKoef * KonstantesUniversal.overallGenRate;
         Random r=new Random();
 
+        int reizes = (int)Math.floor(genRate);
+        if (r.nextDouble() < (genRate - reizes)) reizes++;
+
         //iziet cauri visiem chunkiem
-        for (int[] chunkXY = {0,0}; chunkXY[0]< Main.laukums.size(); chunkXY[0]++){
-            for( ; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++){
+        if (reizes>0) {
+            for (int[] chunkXY = {0,0}; chunkXY[0]< Main.laukums.size(); chunkXY[0]++){
+                for(chunkXY[1]=0; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++){
 
-                int reizes = (int)Math.floor(genRate);
-                if ((r.nextDouble() * (genRate - reizes)) < 1) reizes++;
 
-                for (int i=0; i<reizes; i++) {
-                    createLoot(tips, chunkXY);
+
+                    for (int i=0; i<reizes; i++) {
+                        createLoot(tips, chunkXY);
+                    }
+
                 }
-
             }
         }
     }

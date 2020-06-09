@@ -20,7 +20,7 @@ public class Komanda {
 
 	void getBiedruList(int numurs){
 		for(int[] chunkXY = {0, 0}; chunkXY[0]< Main.laukums.size(); chunkXY[0]++) {
-			for( ; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
+			for(chunkXY[1]=0; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
 
 				ArrayList<calculations.cilveki.Cilveks> cilvekiList =
 						Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList;
@@ -38,13 +38,13 @@ public class Komanda {
 		}
 	}
 
-	protected void mekleKarali(int numurs) {
+	protected void mekleKarali() {
 		karalis=-1;
 		bagatakais = -1;
 		double bagatiba=0;
 
 		for (int i = 0; i< biedruList.size(); i++) {
-			Cilveks cilveks = Main.laukums.get(biedruList.get(i).chunkXY[0]).get(biedruList.get(i).chunkXY[1]).cilvekiList.get(i);
+			Cilveks cilveks = Cilveks.getPlayer(biedruList.get(i));
 
 			if(cilveks.komanda.equals(nosaukums)) {//apskata  visus komandas locekïus
 

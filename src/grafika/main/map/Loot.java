@@ -11,7 +11,7 @@ public class Loot {
 
     protected static void main(Graphics g, int x0, int y0, double merogs, ArrayList<ArrayList<MapChunk>> laukums) {
         for(int[] chunkXY={0,0}; chunkXY[0]<laukums.size(); chunkXY[0]++){
-            for( ; chunkXY[1]<laukums.get(chunkXY[0]).size(); chunkXY[1]++){
+            for(chunkXY[1]=0; chunkXY[1]<laukums.get(chunkXY[0]).size(); chunkXY[1]++){
 
                 ArrayList<Lieta> lietasList = laukums.get(chunkXY[0]).get(chunkXY[1]).lietas;
 

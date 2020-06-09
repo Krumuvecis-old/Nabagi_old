@@ -20,7 +20,7 @@ public class CilvekuManager {
 	public static void main() {
 
 		Cilveks.getCilvekuList(); //vajadzîgs cilvçku apskatam, bet pçc tam vairs nav lietojams, jo netiek updeitots
-		for (int i = 0; i< Cilveks.cilvekuListPilnais.size(); i++) galvenaisApskats(i);
+		//for (int i = 0; i< Cilveks.cilvekuListPilnais.size(); i++) galvenaisApskats(i);
 
 		DefaultDarbibas.main();
 
@@ -51,7 +51,7 @@ public class CilvekuManager {
 
 		int chunkViewDistance=1; //0 - redz tikai savu chunk, 1 - redz 1 uz visâm pusçm
 		for(int[] dChunkXY={-chunkViewDistance,-chunkViewDistance}; dChunkXY[0]<=chunkViewDistance; dChunkXY[0]++){
-			for( ; dChunkXY[1]<=chunkViewDistance; dChunkXY[1]++){
+			for(dChunkXY[1]=-chunkViewDistance; dChunkXY[1]<=chunkViewDistance; dChunkXY[1]++){
 				MapChunk chunk = Main.laukums.get(location.chunkXY[0]+dChunkXY[0]).get(location.chunkXY[1]+dChunkXY[1]);
 
 				for(int i = 0; i < chunk.lietas.size(); i++){
@@ -112,7 +112,7 @@ public class CilvekuManager {
 		for(int i=0;i<skaits;i++) {
 			Cilveks.maxCilveks++;
 			String vards=Cilveku.vardsDefault+Cilveks.maxCilveks;
-			int[] chunkXY = {r.nextInt(KonstantesUniversal.mapChunkCountX),
+			int[] chunkXY = new int[]{r.nextInt(KonstantesUniversal.mapChunkCountX),
 					r.nextInt(KonstantesUniversal.mapChunkCountY)};
 			Koord xyz = new Koord();
 			xyz.x = KonstantesUniversal.mapChunkW * r.nextDouble();

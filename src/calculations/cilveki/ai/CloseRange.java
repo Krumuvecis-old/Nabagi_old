@@ -100,7 +100,7 @@ public class CloseRange {
 
         int chunkViewRange = 1;
         for(int[] dChunkXY = {-chunkViewRange,-chunkViewRange}; dChunkXY[0]<=chunkViewRange; dChunkXY[0]++){
-            for( ; dChunkXY[0]<=chunkViewRange; dChunkXY[0]++){
+            for(dChunkXY[1]=0 ; dChunkXY[0]<=chunkViewRange; dChunkXY[0]++){
                 int[] chunkXY2 = Location.normalizeXY(new int[]{location.chunkXY[0] + dChunkXY[0], location.chunkXY[1] + dChunkXY[1]});
 
                 ArrayList<Cilveks> cilvekiList = Main.laukums.get(chunkXY2[0]).get(chunkXY2[1]).cilvekiList;

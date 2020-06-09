@@ -9,8 +9,8 @@ import calculations.konstantes.Formulas;
 import java.util.Random;
 
 public class Darbibas {
-
-    public double vKoef=0, fi=0; //vçlamais kustîbas virziens un âtrums
+    Random r = new Random();
+    public double vKoef = 1, fi = 360 * r.nextDouble(); //vçlamais kustîbas virziens un âtrums
     public String darbiba; //animâcijai un testiem
 
     protected void main(Cilveks cilveks){

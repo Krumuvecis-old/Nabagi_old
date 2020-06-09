@@ -25,12 +25,12 @@ public class MapChunk {
         int mapCellCount = KonstantesUniversal.mapCellCount;
         mapCells =  new  ArrayList<ArrayList<MapCell>>();
 
-        for (int i=0; i<mapCellCount;i++){
+        for (int[] cellXY={0,0}; cellXY[0]<mapCellCount; cellXY[0]++){
             mapCells.add(new ArrayList<MapCell>());
-            for (int j=0; j<mapCellCount;j++){
+            for (cellXY[1]=0; cellXY[1]<mapCellCount;cellXY[1]++){
                 MapCell cell = new MapCell();
-                mapCells.get(i).add(cell);
-                mapCells.get(i).get(j).initialize();
+                mapCells.get(cellXY[0]).add(cell);
+                mapCells.get(cellXY[0]).get(cellXY[1]).initialize();
 
             }
         }

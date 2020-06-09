@@ -1,5 +1,7 @@
 package grafika.main.map;
 
+import calculations.KonstantesUniversal;
+import calculations.Location;
 import calculations.MapChunk;
 import calculations.cilveki.Cilveks;
 import calculations.komandas.Komanda;
@@ -19,7 +21,8 @@ class Cilveki {
         double resnumaKoefic = Fizikas.resnumaKoefic;
         for(int i=0;i<thread.dati.cilvekuPilnaisList.size();i++) {
 
-            Cilveks cilveks = Cilveks.getPlayer(thread.dati.cilvekuPilnaisList.get(i)); //pats apskatâmais spçlçtâjs
+            Location location = thread.dati.cilvekuPilnaisList.get(i);
+            Cilveks cilveks = Cilveks.getPlayer(location); //pats apskatâmais spçlçtâjs
 
             double resnums=resnumaKoefic*cilveks.hpmax*merogs;
 
@@ -41,7 +44,8 @@ class Cilveki {
 
             //rumpis
 
-            double x=x0+cilveks.xyz.x*merogs, y=y0+cilveks.xyz.y*merogs;
+            double x = x0 + merogs * (cilveks.xyz.x + location.chunkXY[0] * KonstantesUniversal.mapChunkW),
+                    y = y0 + merogs * (cilveks.xyz.y + location.chunkXY[1] * KonstantesUniversal.mapChunkW);
 
             g.setColor(krasa); //iekða
             g.fillOval((int)(x-resnums/2),

@@ -18,7 +18,7 @@ public class Cilveks extends CilvekaParametri {
 	protected static void getCilvekuList(){
 		cilvekuListPilnais = new ArrayList<Location>(); //nodzçð veco sarakstu
 		for(int[] chunkXY = {0, 0}; chunkXY[0]< Main.laukums.size(); chunkXY[0]++) {
-			for( ; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
+			for(chunkXY[1]=0; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
 				for (int i=0; i<Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
 					Location location = new Location();
 					location.chunkXY=chunkXY;

@@ -33,37 +33,45 @@ class Kustiba {
 	private static void maluParbaude(Location location) { //situâcijas pie laukuma malâm
 		Cilveks cilveks = Cilveks.getPlayer(location);
 
-		int platums=KonstantesUniversal.mapChunkW, chunkX=location.chunkXY[0], chunkY=location.chunkXY[0];
+		int platums = KonstantesUniversal.mapChunkW,
+				chunkX = location.chunkXY[0], //playera momentânais chunks
+				chunkY = location.chunkXY[1];
 
 		if (cilveks.xyz.x < 0 ) { //rietumi
 			cilveks.xyz.x+=platums;
 			chunkX--;
-			if (chunkX < 0) chunkX = KonstantesUniversal.mapChunkCountX - 1;
+			if (chunkX < 0) chunkX += KonstantesUniversal.mapChunkCountX;
 		}
 		if (cilveks.xyz.y < 0 ) { //ziemeïi
 			cilveks.xyz.y+=platums;
 			chunkY--;
-			if (chunkY < 0) chunkY = KonstantesUniversal.mapChunkCountY - 1;
+			if (chunkY < 0) chunkY += KonstantesUniversal.mapChunkCountY;
 		}
 		if (cilveks.xyz.x >= platums) { //austrumi
 			cilveks.xyz.x-=platums;
 			chunkX++;
-			if (chunkX >= KonstantesUniversal.mapChunkCountX) chunkX = 0;
+			if (chunkX >= KonstantesUniversal.mapChunkCountX) chunkX -= KonstantesUniversal.mapChunkCountX;
 		}
 		if (cilveks.xyz.y >= platums) { //dienvidi
 			cilveks.xyz.y-=platums;
 			chunkY++;
-			if (chunkY >= KonstantesUniversal.mapChunkCountY) chunkY = 0;
+			if (chunkY >= KonstantesUniversal.mapChunkCountY) chunkY -= KonstantesUniversal.mapChunkCountY;
 		}
 
-		int chunkX0=location.chunkXY[0], chunkY0=location.chunkXY[0];
+		int chunkX0=location.chunkXY[0], chunkY0=location.chunkXY[1];
 		if(chunkX!=chunkX0 || chunkY!=chunkY0){ //jâizòem no vienas tabulas un jâieliek otrâ
 
 			Main.laukums.get(chunkX).get(chunkY).cilvekiList.add(cilveks);
 			Main.laukums.get(chunkX0).get(chunkY0).cilvekiList.remove(location.i);
+			Cilveks.getCilvekuList();
 		}
 
 	}
+
+	/*private static void updateCilvekuList(int[] chunkXY, int iznemtais){
+		for(int i=iznemtais; i<)
+
+	}*/
 
 	private static void maluParbaudeVecais(){
 

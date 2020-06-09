@@ -11,7 +11,7 @@ public class DefaultDarbibas {
     protected static void main(){
 
         for(int[] chunkXY = {0,0}; chunkXY[0]< Main.laukums.size(); chunkXY[0]++) {
-            for (; chunkXY[1] < Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
+            for (chunkXY[1]=0; chunkXY[1] < Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
                 ArrayList<Cilveks> cilvekiList = Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList;
                 for (int i = 0; i < cilvekiList.size(); i++) {
 
@@ -20,7 +20,7 @@ public class DefaultDarbibas {
                     location.i = i;
 
                     Cilveks cilveks = Cilveks.getPlayer(location);
-                    esanaNoInventory(cilveks);
+                    /*esanaNoInventory(cilveks);
 
                     //te var ielikt arî citas darbîbas
 
@@ -30,7 +30,7 @@ public class DefaultDarbibas {
                         //pârbaudç izdzçð, ja vajag
                         i--;
                         continue;
-                    }
+                    }*/
 
                     //ideâlai kustîbai pietrûkst paâtrinâjums
                     cilveks.darbibas.kustibasParametri(cilveks);

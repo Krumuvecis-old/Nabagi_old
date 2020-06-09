@@ -36,12 +36,12 @@ class InitializeManager {
         int mapChunkCountX = KonstantesUniversal.mapChunkCountX,
                 mapChunkCountY = KonstantesUniversal.mapChunkCountY;
 
-        for (int i=0; i<mapChunkCountX;i++){ //ìenerç laukumu
+        for (int[] chunkXY={0,0}; chunkXY[0]<mapChunkCountX;chunkXY[0]++){ //ìenerç laukumu
             Main.laukums.add(new ArrayList<MapChunk>());
-            for (int j=0; j<mapChunkCountY;j++){
+            for (chunkXY[1]=0; chunkXY[1]<mapChunkCountY;chunkXY[1]++){
                 MapChunk chunk = new MapChunk();
-                Main.laukums.get(i).add(chunk);
-                Main.laukums.get(i).get(j).initialize();
+                Main.laukums.get(chunkXY[0]).add(chunk);
+                Main.laukums.get(chunkXY[0]).get(chunkXY[1]).initialize();
 
             }
         }

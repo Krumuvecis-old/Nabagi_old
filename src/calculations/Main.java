@@ -1,19 +1,18 @@
 package calculations;
 
+import calculations.cilveki.CilvekuManager;
+import calculations.komandas.KomanduApskats;
 import calculations.lietas.LietuApskats;
 import calculations.komandas.Komanda;
-import calculations.komandas.KomanduApskats;
 
 import java.util.ArrayList;
-
-import calculations.cilveki.CilvekuManager;
 
 public class Main {
 
 	public static ArrayList<Komanda> komandasList = new ArrayList<Komanda>(); //komandu datubâze
 	public static ArrayList<ArrayList<MapChunk>> laukums = new  ArrayList<ArrayList<MapChunk>>(); //laukums-karte
 	
-	public static boolean pauze=true;//, patsStarts=true;
+	public static boolean pauze=false;//, patsStarts=true;
 	public static CalculationTimeCalculator calculationTimeCalculator = new CalculationTimeCalculator();
 	
 	
@@ -27,17 +26,18 @@ public class Main {
 			calculationTimeCalculator.time(true);
 			
 			if (!pauze) {
-				
 				//LaukumaApskats.main(); //te jâbût arî kartes un reljefa ciklam
 				LietuApskats.main(); //viss kas saistîts ar pa  zemi izmçtâtajâm lietâm
 				KomanduApskats.main(); //viss kas saistîts ar komandâm
 				CilvekuManager.main(); //viss kas saistîts ar cilvçkiem
+
 				
 			}
 			
 			calculationTimeCalculator.time(false);
 			try{
-				Thread.sleep(calculationTimeCalculator.sleepT());
+				Thread.sleep(50+calculationTimeCalculator.sleepT());
+
 			}catch (Exception e){
 				e.printStackTrace();
 			}
