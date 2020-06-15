@@ -122,54 +122,54 @@ public class Grafika extends JPanel {
 		//ðis logs pagaidâm nedarbojas
 
 		//tekoðâ informâcija par cilvçkiem
-		
-		int nobideY=thread.dati.tablo2y0, rindasPlatums=thread.dati.tablo2rindasPlatums,
-				kolonna1x=thread.dati.tablo2x0, kolonna2x=kolonna1x+thread.dati.tablo2platums1,
-				kolonnaNx=kolonna2x+thread.dati.tablo2platums2, kolonnaNplatums=thread.dati.tablo2platumsN;
-		
-		int w=1; //virsraksta rindu skaits
-		
-		String teksts1="Nosaukums (komanda), ...";
-		String teksts2="invertory + orderi";
-		String teksts3="Inventory";
-		
-		for(int i=(-1)*w;i<thread.dati.cilvekuPilnaisList.size();i++) { //cikls, lai iziet caur cilvçkiem
-			g.setColor(thread.dati.tablo2krasaDefault);
-			Cilveks cilveks = Cilveks.getPlayer(thread.dati.cilvekuPilnaisList.get(i));
 
-			int invSize=0;
-			
-			if(!(i<0)) {
-				teksts1=cilveks.vards + " (" + cilveks.komanda+") "+
-						//"HP: "+(new DecimalFormat("#.##").format(cilveks.hp/cilveks.hpmax)+" ; "+
-						"HP: " + (int)(cilveks.hp/cilveks.hpmax*100) + "% "+
-						"paika: " + (int)(cilveks.paika/cilveks.paikaMax*100) + "% ";
-				
-				teksts2="invSize:"+cilveks.inventory.size()+" ; "+
-						"orderi:"+cilveks.orderi.size();
-				
-				invSize=cilveks.inventory.size();
-				
-				
-				if (cilveks.paika<cilveks.paikaMin- Cilveku.paikaReductionDefault) {
-					g.setColor(thread.dati.tablo2krasaCritical);
-				}
-			}
-			
-			g.drawString(teksts1, kolonna1x, nobideY+rindasPlatums*(i+w));
-			g.drawString(teksts2, kolonna2x, nobideY+rindasPlatums*(i+w));
-			
-			for(int j=0;j<Math.max(1,invSize);j++) { //iziet caur visu inventory
-				
-				
-				if (!(i<0)) {
-					if (invSize>0) {
-						teksts3=cilveks.inventory.get(j).nosaukums+" "+(new DecimalFormat("#.##").format(cilveks.inventory.get(j).daudzums) );
-					} else { teksts3=""; }
-				}
-				g.drawString(teksts3,kolonnaNx+kolonnaNplatums*j,nobideY+rindasPlatums*(i+w));
-			}
-		}
+//		int nobideY=thread.dati.tablo2y0, rindasPlatums=thread.dati.tablo2rindasPlatums,
+//				kolonna1x=thread.dati.tablo2x0, kolonna2x=kolonna1x+thread.dati.tablo2platums1,
+//				kolonnaNx=kolonna2x+thread.dati.tablo2platums2, kolonnaNplatums=thread.dati.tablo2platumsN;
+//
+//		int w=1; //virsraksta rindu skaits
+//
+//		String teksts1="Nosaukums (komanda), ...";
+//		String teksts2="invertory + orderi";
+//		String teksts3="Inventory";
+//
+//		for(int i=(-1)*w;i<thread.dati.cilvekuPilnaisList.size();i++) { //cikls, lai iziet caur cilvçkiem
+//			g.setColor(thread.dati.tablo2krasaDefault);
+//			Cilveks cilveks = Cilveks.getPlayer(thread.dati.cilvekuPilnaisList.get(i));
+//
+//			int invSize=0;
+//
+//			if(!(i<0)) {
+//				teksts1=cilveks.vards + " (" + cilveks.komanda+") "+
+//						//"HP: "+(new DecimalFormat("#.##").format(cilveks.hp/cilveks.hpmax)+" ; "+
+//						"HP: " + (int)(cilveks.hp/cilveks.hpmax*100) + "% "+
+//						"paika: " + (int)(cilveks.paika/cilveks.paikaMax*100) + "% ";
+//
+//				teksts2="invSize:"+cilveks.inventory.size()+" ; "+
+//						"orderi:"+cilveks.orderi.size();
+//
+//				invSize=cilveks.inventory.size();
+//
+//
+//				if (cilveks.paika<cilveks.paikaMin- Cilveku.paikaReductionDefault) {
+//					g.setColor(thread.dati.tablo2krasaCritical);
+//				}
+//			}
+//
+//			g.drawString(teksts1, kolonna1x, nobideY+rindasPlatums*(i+w));
+//			g.drawString(teksts2, kolonna2x, nobideY+rindasPlatums*(i+w));
+//
+//			for(int j=0;j<Math.max(1,invSize);j++) { //iziet caur visu inventory
+//
+//
+//				if (!(i<0)) {
+//					if (invSize>0) {
+//						teksts3=cilveks.inventory.get(j).nosaukums+" "+(new DecimalFormat("#.##").format(cilveks.inventory.get(j).daudzums) );
+//					} else { teksts3=""; }
+//				}
+//				g.drawString(teksts3,kolonnaNx+kolonnaNplatums*j,nobideY+rindasPlatums*(i+w));
+//			}
+//		}
 	}
 
 	private void drawTablo3(Graphics g){

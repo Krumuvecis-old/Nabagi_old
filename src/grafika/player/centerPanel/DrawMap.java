@@ -46,16 +46,15 @@ class DrawMap {
 	}
 	
 	private void drawLaukums(Graphics g) {
-		int mala= KonstantesUniversal.mala;
 		int kartePlatums=thread.dati.kartePlatums;
 		
 		g.setColor(Grafiskie.malasKrasa); //laukuma mala
 		g.fillRect(nobideX, nobideY, kartePlatums, kartePlatums);
 		
 		g.setColor(Grafiskie.laukumaKrasa); //laukums
-		g.fillRect(nobideX+mala, nobideY+mala, kartePlatums-(mala*2), kartePlatums-(mala*2));
+		g.fillRect(nobideX, nobideY, kartePlatums, kartePlatums);
 		g.setColor(Color.black); //laukuma kontûra
-		g.drawRect(nobideX+mala, nobideY+mala, kartePlatums-(mala*2), kartePlatums-(mala*2));
+		g.drawRect(nobideX, nobideY, kartePlatums, kartePlatums);
 	}
 	
 	private void drawLoot(Graphics g, boolean drawInfo) {

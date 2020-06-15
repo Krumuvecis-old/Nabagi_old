@@ -15,16 +15,12 @@ public class Dati {
 	protected Color fonaKrasa=Color.black, nosaukumaKrasa=Color.gray;
 	protected int ekranaPlatums=1000, ekranaAugstums=700;
 
-
-	
 	protected int nosaukumsX=5, nosaukumsY=15;
 
-	public ArrayList<Location> cilvekuPilnaisList;
 	protected ArrayList<Button> buttonList;
 
-	public String playerFocusName;
+	public String playerFocusName="nav";
 	public boolean playerFocused=false;
-	public int playerFocusNumber;
 	
 	// --------------------
 	//zemâk par input testa paneli
@@ -137,53 +133,67 @@ public class Dati {
 	}
 
 	public void update(){
-		getPlayerTotalList();
 		playerFocusFind();
-	}
 
-	private void getPlayerTotalList(){
-		cilvekuPilnaisList = new ArrayList<Location>();
-
-		for(int[] chunkXY = {0, 0}; chunkXY[0]< Main.laukums.size(); chunkXY[0]++) {
-			for(chunkXY[1]=0; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
-
-
-
-				for (int i=0; i<Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
-
-					Location location = new Location();
-					location.chunkXY=new int[]{chunkXY[0], chunkXY[1]};
-					location.i=i;
-					cilvekuPilnaisList.add(location);
-				}
-
-			}
-		}
 	}
 
 	private void playerFocusFind() {
 
-		int number=-1;
-		for (int i = 0; i < cilvekuPilnaisList.size(); i++) {
-			if (Cilveks.getPlayer(cilvekuPilnaisList.get(i)).vards==playerFocusName) {
-				number=i;
-				break;
+		playerFocused = false;
+		if(!(playerFocusName.equals("nav"))){
+			String[] playerNamesList = playerNamesList(); //vârdu saraksts salîdzinâjumam
+
+			for (int i = 0; i < playerNamesList.length; i++) {
+				if (playerNamesList[i].equals(playerFocusName)){
+					playerFocused = true;
+					break;
+				}
+			}
+
+			if(!playerFocused) {
+				playerFocusName="nav";
 			}
 		}
-		
-		if(number<0) {
-			playerFocused=false;
+
+	}
+
+	private String[] playerNamesList(){
+
+		String[] namesList = new String[]{};
+
+		for(int[] chunkXY = {0, 0}; chunkXY[0]< Main.laukums.size(); chunkXY[0]++) {
+			for(chunkXY[1]=0; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
+				for (int i=0; i<Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
+
+					String[] namesListTemp = new String[namesList.length + 1];
+					for(int j=0; j<namesList.length; j++){
+						namesListTemp[j]=namesList[j];
+
+					}
+					namesListTemp[namesListTemp.length - 1] = Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.get(i).vards;
+					namesList = namesListTemp;
+
+				}
+
+			}
 		}
-		playerFocusNumber=number; //izdod cilvekuPilnaisList numuru (vai -1, ja neatrod)
+
+		return namesList;
 	}
 	
 	protected void startPlayerView(boolean randomize) {
+		String[] playerList = playerNamesList();
+
 		int i=0;
-		if (randomize) i=(new java.util.Random()).nextInt(cilvekuPilnaisList.size());
-		String playerName = Cilveks.getPlayer(cilvekuPilnaisList.get(i)).vards; //iegûst fokusçtâ spçlçtâja vârdu
+		if (randomize) {
+			i=(new java.util.Random()).nextInt(playerList.length);
+		}
+
+		String playerName = playerList[i]; //iegûst fokusçtâ spçlçtâja vârdu
 		
 		//grafika.player.PlayerThread threadTemp=new grafika.player.PlayerThread(); //jauns spçlçtâja logs
 		//threadTemp.initialize(playerName); //palaiþ spçlçtâja logu
+		playerFocusName=playerName; //ðî rinda jâòem ârâ
 		
 		if(!playerFocused) { //ja iepriekð nav fokusa, tad fokusçjas uz spçlçtâju
 			playerFocused=true;
