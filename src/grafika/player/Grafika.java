@@ -15,6 +15,8 @@ class Grafika extends JPanel {
 	
 	protected JFrame ekrans;
 	private Grafika grafika;
+	private DrawCenterPanel centerPanel;
+	private DrawSidePanels sidePanels;
 	
 	private static PlayerThread thread; //temporary lielums zîmçðanas funkcijâm
 	
@@ -38,6 +40,9 @@ class Grafika extends JPanel {
 		ekrans.setVisible(true);
 		
 		if (thread.dati.fullscreen) ekrans.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+		centerPanel = new DrawCenterPanel();
+		sidePanels = new DrawSidePanels();
 	}
 	
 	void main (PlayerThread threadTemp) {
@@ -50,8 +55,8 @@ class Grafika extends JPanel {
 		
 		drawFons(g);
 		
-		DrawCenterPanel.main(g, thread);
-		DrawSidePanels.main(g, thread);
+		centerPanel.main(g, thread);
+		sidePanels.main(g, thread);
 		
 		
 	}

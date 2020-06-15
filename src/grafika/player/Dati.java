@@ -102,7 +102,8 @@ public class Dati {
 		
 		buttonList = new ArrayList<Button>();
 		
-		int pogasX0=karteNobideX*2+kartePlatums, pogasY0=karteNobideY, pogasPlatums=100, pogasAugstums=30, pogasSpraugaY=5, w=0;
+		int pogasX0=karteNobideX*2+kartePlatums, pogasY0=karteNobideY,
+				pogasPlatums=100, pogasAugstums=30, pogasSpraugaY=5, w=0;
 		
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSpraugaY)*w,pogasPlatums,pogasAugstums,"Pauze",0); w++;
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSpraugaY)*w,pogasPlatums,pogasAugstums,"Cilveku info",10); w++;

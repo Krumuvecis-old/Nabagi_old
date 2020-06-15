@@ -190,15 +190,15 @@ public class Dati {
 		}
 
 		String playerName = playerList[i]; //iegûst fokusçtâ spçlçtâja vârdu
-		
-		//grafika.player.PlayerThread threadTemp=new grafika.player.PlayerThread(); //jauns spçlçtâja logs
-		//threadTemp.initialize(playerName); //palaiþ spçlçtâja logu
-		playerFocusName=playerName; //ðî rinda jâòem ârâ
-		
+
 		if(!playerFocused) { //ja iepriekð nav fokusa, tad fokusçjas uz spçlçtâju
 			playerFocused=true;
 			playerFocusName=playerName;
 		}
+
+		grafika.player.PlayerThread threadTemp=new grafika.player.PlayerThread(); //jauns spçlçtâja logs
+		threadTemp.initialize(playerName); //palaiþ spçlçtâja logu
+
 	}
 	
 }

@@ -10,9 +10,9 @@ import grafika.player.Dati;
 
 public class DrawSidePanels {
 	
-	private static PlayerThread thread;
+	private PlayerThread thread;
 	
-	public static void main(Graphics g, PlayerThread threadTemp) {
+	public void main(Graphics g, PlayerThread threadTemp) {
 		thread=threadTemp;
 		
 		//te vajadzçtu grafisku noformçjumu
@@ -27,7 +27,7 @@ public class DrawSidePanels {
 	}
 	
 	
-	private static void drawButtons(Graphics g) {
+	private void drawButtons(Graphics g) {
 		
 		@SuppressWarnings("unused")
 		Color
@@ -62,7 +62,7 @@ public class DrawSidePanels {
 		
 	}
 	
-	private static void drawDiagnosticsPanel(Graphics g) {
+	private void drawDiagnosticsPanel(Graphics g) {
 		int panelPlatums=Dati.diagnosticPanelPlatums, panelAugstums=Dati.diagnosticPanelAugstums,
 				x0=Math.min(thread.dati.ekranaPlatums-panelPlatums, thread.dati.kartePlatums+2*Dati.karteNobideX),
 				y0=Math.max(0, thread.dati.ekranaAugstums-Dati.karteAtstatumsY-panelAugstums),

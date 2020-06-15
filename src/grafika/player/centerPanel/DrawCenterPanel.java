@@ -3,26 +3,24 @@ package grafika.player.centerPanel;
 import java.awt.Graphics;
 
 import grafika.player.PlayerThread;
+import grafika.player.centerPanel.lobby.Lobby;
+import grafika.player.centerPanel.map.Map;
 
 public class DrawCenterPanel {
 	
 	static PlayerThread thread;
-	protected DrawMap drawMap = new DrawMap();
+	private Map map = new Map();
+	private Lobby lobby = new Lobby();
 	
-	public static void main(Graphics g, PlayerThread threadTemp) {
+	public void main(Graphics g, PlayerThread threadTemp) {
 		thread = threadTemp;
-		
+
 		if (thread.dati.lobby) { //sadalîjums vçl nav gatavs
-			drawLobby(g);
+			lobby.main(g);
 		} else {
-			thread.dati.drawCenterPanel.drawMap.main(g, thread);
+			map.main(g, thread);
 		}
 	}
-	
-	private static void drawLobby(Graphics g) {
-		
-		//vçl nav gatavs
-		
-	}
+
 	
 }
