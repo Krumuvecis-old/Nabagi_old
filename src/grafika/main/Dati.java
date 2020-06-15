@@ -73,7 +73,7 @@ public class Dati {
 	// --------------------
 	//zemâk par centrâlâ (kartes diagnostikas) tablo Parametriem
 
-	protected boolean tablo3Draw=true;
+	protected boolean tablo3Draw=false;
 	protected Color tablo3krasa=Color.white;
 
 
@@ -164,13 +164,13 @@ public class Dati {
 		for(int[] chunkXY = {0, 0}; chunkXY[0]< Main.laukums.size(); chunkXY[0]++) {
 			for(chunkXY[1]=0; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
 				for (int i=0; i<Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
-
+					String vards = Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.get(i).vards;
 					String[] namesListTemp = new String[namesList.length + 1];
 					for(int j=0; j<namesList.length; j++){
 						namesListTemp[j]=namesList[j];
 
 					}
-					namesListTemp[namesListTemp.length - 1] = Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.get(i).vards;
+					namesListTemp[namesListTemp.length - 1] = vards;
 					namesList = namesListTemp;
 
 				}

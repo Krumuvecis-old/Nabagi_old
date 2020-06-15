@@ -32,7 +32,7 @@ public class Cilveku {
 
     //vairoðanâs parametri
 
-    public static int sakumaCilveki=1000; //sâkuma spçlçtâju skaits
+    public static int sakumaCilveki=10000; //sâkuma spçlçtâju skaits
     public static boolean randomKomandas=false; //vai spçles sâkumâ cilvçki bûs pa komandâm (false -> visi anarhijâ)
 
     public static double dzimstotDefectionChance=0.02;
