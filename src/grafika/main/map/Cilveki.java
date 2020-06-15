@@ -79,11 +79,10 @@ class Cilveki {
     private static Color noteiktKrasuCilvekam(Cilveks cilveks, int komanda){
         double hpRatio=cilveks.hp/cilveks.hpmax;
 
-        Color krasa = new Color(Color.HSBtoRGB( (float)Formulas.getHue(Main.komandasList.get(komanda).krasa),
+        return new Color(Color.HSBtoRGB( (float)Formulas.getHue(Main.komandasList.get(komanda).krasa),
                 (float)KonstantesGrafikai.cilvekiKrasaSaturation,
                 (float)(KonstantesGrafikai.cilvekiKrasaBrightnessMin + hpRatio *
                         (KonstantesGrafikai.cilvekiKrasaBrightnessMax - KonstantesGrafikai.cilvekiKrasaBrightnessMin)) ));
 
-        return krasa;
     }
 }
