@@ -43,21 +43,8 @@ public class PlayerThread implements Runnable{
 		
 		while (running) {
 			dati.calculationTimeCalculator.time(true);
-			
-			//if (dati.k>=Dati.kmax) running=false; //izbeidz ciklu, kad k sasniedz kmax
-			
-			
-			if (!minimized) {
-				if (dati.findPlayer(this)<0) {
-					dati.playerDead();
-				}
-				
-				buttonActions();
-				
-				if (windowActive) {} //aprçíini
-				
-				grafika.main(this); //tikai zîmçðana, nekâdi aprçíini
-			}
+
+			if (!minimized) galvenaisCikls(); //galvenais cikls, kad nav minimizçts
 			
 			dati.calculationTimeCalculator.time(true);
 			try{
@@ -69,39 +56,26 @@ public class PlayerThread implements Runnable{
 		
 		grafika.ekrans.dispose();
 	}
-	
-	private void buttonActions() {
-		
-		for (int i=0; i<dati.buttonList.size();i++) {
-			
-			dati.buttonList.get(i).actions(this); //pârbauda katras pogas statusu
-			
-			if (dati.buttonList.get(i).result) { //ja poga nostrâdâjusi
-				
-				if(i==0) { //pirmâ poga
-					calculations.Main.pauze=!calculations.Main.pauze;
-					
-				} else if (i==1) { //otrâ poga
-					dati.cilvekiDrawInfo=!dati.cilvekiDrawInfo;
-					
-				} else if (i==2) { //treðâ poga
-					dati.cilvekiDrawR=!dati.cilvekiDrawR;
-					
-				} else if (i==3) { //ceturtâ poga
-					dati.lietasDrawInfo=!dati.lietasDrawInfo;
-					
-				} else if (i==4) { //piektâ poga
-					if (dati.playerDead) {
-						dati.playerInitialize(this, false);
-					}
-					
-				}
-				
-				dati.buttonList.get(i).result=false; //reseto nostrâdâjuðas pogas statusu
-			}
+
+	private void galvenaisCikls(){
+		//ðis visu laiku atkârtojas, kad nav minimizçts
+
+		if (dati.findPlayer(this)<0) {
+			dati.playerDead();
 		}
+
+		userInput();
+		dati.update();
+		//ðeit jâpievieno ekrâna izmçru maiòas (resize) pârbaude
+
+		if (windowActive) {} //vieta kaut kâdiem aprçíiniem (tikai aktîvajam window)
+
+		grafika.main(this); //tikai zîmçðana, nekâdi aprçíini
 	}
-	
-	
-	
+
+	private void userInput() {
+		ButtonActions.main(this, dati.buttonList); //uz ekrâna redzamo pogu notikumi
+		KeyboardActions.main(input.pogas); //keyboard nospiesto pogu notikumi
+	}
+
 }

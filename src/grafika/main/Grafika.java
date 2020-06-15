@@ -100,7 +100,7 @@ public class Grafika extends JPanel {
 		
 		//tekoðâ informâcija par komandâm
 		g.drawString("vislielâkâ komanda: "+KomanduApskats.komanduVestureLielakaKomanda+" ("+KomanduApskats.komanduVestureMaksimums+")",nobideX,w*tekstaPlatums+nobideY);w++;
-		g.drawString("tagad kopâ spçlçtâji: "+thread.dati.cilvekuPilnaisList.size(),nobideX,w*tekstaPlatums+nobideY);w++;
+		g.drawString("tagad kopâ spçlçtâji: "+Cilveks.cilvekuListPilnais.size(),nobideX,w*tekstaPlatums+nobideY);w++;
 		g.drawString("---------------",nobideX,w*tekstaPlatums+nobideY);w++;
 		
 		for (int i=0;i<komandasList.size();i++) {
@@ -119,7 +119,7 @@ public class Grafika extends JPanel {
 	}
 
 	private void drawTablo2(Graphics g) { //lielais cilvçku diagnostikas logs
-
+		//ðis logs pagaidâm nedarbojas
 
 		//tekoðâ informâcija par cilvçkiem
 		

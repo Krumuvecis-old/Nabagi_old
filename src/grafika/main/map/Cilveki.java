@@ -51,7 +51,7 @@ class Cilveki {
                         drawKronis(g, x, y, resnums);
                     }
 
-                    if(true /*cilveks.vards.equals(thread.dati.playerFocusName)*/) { //fokusçtâ spçlçtâja redzesloks
+                    if(cilveks.vards.equals(thread.dati.playerFocusName)) { //fokusçtâ spçlçtâja redzesloks
                         drawRedzesloks(g, x, y, merogs, cilveks, krasa);
 
                     }

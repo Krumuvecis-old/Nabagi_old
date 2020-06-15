@@ -180,10 +180,10 @@ public class Dati {
 	protected void startPlayerView(boolean randomize) {
 		int i=0;
 		if (randomize) i=(new java.util.Random()).nextInt(cilvekuPilnaisList.size());
+		String playerName = Cilveks.getPlayer(cilvekuPilnaisList.get(i)).vards; //iegûst fokusçtâ spçlçtâja vârdu
 		
-		grafika.player.PlayerThread threadTemp=new grafika.player.PlayerThread(); //jauns spçlçtâja logs
-		String playerName = Cilveks.getPlayer(cilvekuPilnaisList.get(i)).vards;
-		threadTemp.initialize(playerName);
+		//grafika.player.PlayerThread threadTemp=new grafika.player.PlayerThread(); //jauns spçlçtâja logs
+		//threadTemp.initialize(playerName); //palaiþ spçlçtâja logu
 		
 		if(!playerFocused) { //ja iepriekð nav fokusa, tad fokusçjas uz spçlçtâju
 			playerFocused=true;

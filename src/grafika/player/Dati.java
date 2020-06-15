@@ -159,8 +159,11 @@ public class Dati {
 		}
 	}
 
-	int findPlayer(PlayerThread thread){
+	void update(){
 
+	}
+
+	int findPlayer(PlayerThread thread){
 
 //		i=-1;
 //
@@ -168,9 +171,6 @@ public class Dati {
 //
 //
 //		int[] chunkXY
-//
-//
-//
 //
 //
 //		return i;
