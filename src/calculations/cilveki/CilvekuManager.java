@@ -19,8 +19,8 @@ public class CilvekuManager {
 	
 	public static void main() {
 
-		Cilveks.getCilvekuList(); //vajadzîgs cilvçku apskatam, bet pçc tam vairs nav lietojams, jo netiek updeitots
-		//for (int i = 0; i< Cilveks.cilvekuListPilnais.size(); i++) galvenaisApskats(i);
+		Cilveks.getCilvekuList(); //vajadzîgs cilvçku apskatam, bet pçc tam vairs nav lietojams, jo netiek updeitots (neizmantot grafikai!!!)
+		for (int i = 0; i< Cilveks.cilvekuListPilnais.size(); i++) galvenaisApskats(i);
 
 		DefaultDarbibas.main();
 
@@ -31,9 +31,9 @@ public class CilvekuManager {
 		Random r=new Random();
 
 
-		lootApskatsSadursmei(numurs);
+		//lootApskatsSadursmei(numurs);
 
-		if (cilveks.autoPilot) {
+		if (!cilveks.autoPilot) {
 			//spçlçtâjs kontrolç cilvçku
 			System.out.println("spçlçtâja paðvadîbas funkcija vçl nav gatava");
 

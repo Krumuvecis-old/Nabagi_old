@@ -21,12 +21,21 @@ public class Cilveks extends CilvekaParametri {
 			for(chunkXY[1]=0; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
 				for (int i=0; i<Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
 					Location location = new Location();
-					location.chunkXY=chunkXY;
+					location.chunkXY = new int[]{chunkXY[0], chunkXY[1]};
 					location.i=i;
 					cilvekuListPilnais.add(location);
 				}
 			}
 		}
+
+//		//izvade testam
+//
+//		System.out.println("Cilveks.cilvekuListPilnais: ");
+//		for(int i=0; i<cilvekuListPilnais.size(); i++){
+//			System.out.println("chunk: ["+cilvekuListPilnais.get(i).chunkXY[0]+"/"+cilvekuListPilnais.get(i).chunkXY[1]+"]"
+//					+" i: "+cilvekuListPilnais.get(i).i);
+//		}
+
 		if(cilvekuListPilnais.size() > rekords) rekords = cilvekuListPilnais.size(); //rekorda update
 	}
 	

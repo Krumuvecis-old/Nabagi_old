@@ -14,6 +14,8 @@ public class Dati {
 	protected String windowTitle = KonstantesGrafikai.ekranaNosaukums + ", SetupWindow";
 	protected Color fonaKrasa=Color.black, nosaukumaKrasa=Color.gray;
 	protected int ekranaPlatums=1000, ekranaAugstums=700;
+
+
 	
 	protected int nosaukumsX=5, nosaukumsY=15;
 
@@ -53,8 +55,8 @@ public class Dati {
 	protected int tablo2platumsN=80; //platumsN
 	
 	protected Color tablo2krasaDefault, tablo2krasaCritical; //paðas krâsas nosaka initialize() ciklâ
-	
-	
+
+
 	// --------------------
 	//zemâk par atïauto krâsu paneli
 	
@@ -66,12 +68,20 @@ public class Dati {
 	// --------------------
 	//zemâk par kartes zîmçðanu
 	
-	public boolean miniMapDraw=true, miniMapDrawInfo=true; //kartes zîmçðana vispâr un informâcija tai apakðâ
+	public boolean miniMapDraw=false, miniMapDrawInfo=true; //kartes zîmçðana vispâr un informâcija tai apakðâ
 	public int miniMapX=tablo2x0, miniMapY=tablo2y0-15,
 			miniMapPlatums=ekranaPlatums-miniMapX-50,
 			miniMapAugstums=ekranaAugstums-miniMapY-50;
-	
-	
+
+
+	// --------------------
+	//zemâk par centrâlâ (kartes diagnostikas) tablo Parametriem
+
+	protected boolean tablo3Draw=true;
+	protected Color tablo3krasa=Color.white;
+
+
+
 	protected void initialize() {
 
 		// --------------------
@@ -86,6 +96,7 @@ public class Dati {
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"PlayerView(rand)",10); w++;
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Tablo1",0); w++;
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Tablo2",0); w++;
+		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Tablo3",0); w++;
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Map",0); w++;
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"InputPanel",3); w++;
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"ColorPanel",2); w++;

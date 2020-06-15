@@ -19,6 +19,7 @@ public class Komanda {
 	public int karalis=-1, bagatakais=-1, rekords=0;
 
 	void getBiedruList(int numurs){
+		biedruList = new ArrayList<Location>();
 		for(int[] chunkXY = {0, 0}; chunkXY[0]< Main.laukums.size(); chunkXY[0]++) {
 			for(chunkXY[1]=0; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
 

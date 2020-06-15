@@ -22,20 +22,14 @@ public class LootGenerator {
         int reizes = (int)Math.floor(genRate);
         if (r.nextDouble() < (genRate - reizes)) reizes++;
 
-        //iziet cauri visiem chunkiem
-        if (reizes>0) {
-            for (int[] chunkXY = {0,0}; chunkXY[0]< Main.laukums.size(); chunkXY[0]++){
-                for(chunkXY[1]=0; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++){
+        for (int i=0; i<reizes; i++) {
+            int[] chunkXY = new int[2];
+            chunkXY[0] = r.nextInt(Main.laukums.size());
+            chunkXY[1] = r.nextInt(Main.laukums.get(chunkXY[0]).size());
 
-
-
-                    for (int i=0; i<reizes; i++) {
-                        createLoot(tips, chunkXY);
-                    }
-
-                }
-            }
+            createLoot(tips, chunkXY);
         }
+
     }
 
     private static void createLoot(int tips, int[] chunkXY) { //uztaisa un iemet laukumâ vienu lietu

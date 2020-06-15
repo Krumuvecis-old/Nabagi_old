@@ -7,13 +7,18 @@ public class SetupThread implements Runnable{
 	private static Thread thread;
 	private static String threadName;
 	public boolean running, minimized, windowActive;
-	
+
+	public LayoutDati layout;
 	public Dati dati;
 	protected Grafika grafika;
 	protected Input input;
 	
 	
 	public void start() {
+		//inicializâcija
+
+		layout = new LayoutDati();
+		layout.initialize();
 		dati = new Dati();
 		dati.initialize(); //zîmçðana var bût atkarîga no datiem
 		
@@ -34,6 +39,8 @@ public class SetupThread implements Runnable{
 		
 		
 		thread.start();
+
+		System.out.println("Setup thread initialized - running.");
 	}
 
 	@Override
@@ -42,15 +49,7 @@ public class SetupThread implements Runnable{
 		while (running) {
 			dati.calculationTimeCalculator.time(true);
 
-			if (!minimized) {
-				dati.update();
-				
-				userInput();
-				
-				if (windowActive) {} //aprçíini
-				
-				grafika.main(this); //tikai zîmçðana, nekâdi aprçíini
-			}
+			if (!minimized) galvenaisCikls();
 			
 			dati.calculationTimeCalculator.time(false);
 			try{
@@ -59,86 +58,27 @@ public class SetupThread implements Runnable{
 				e.printStackTrace();
 			}
 		}
-		
+
+		System.out.println("Setup thread finished");
 		grafika.ekrans.dispose();
-		System.out.println("thread finished");
-		
+	}
+
+	private void galvenaisCikls(){
+		//ðis visu laiku atkârtojas, kad nav minimizçts
+
+		userInput();
+		dati.update();
+		//ðeit jâpievieno ekrâna izmçru maiòas (resize) pârbaude
+
+		if (windowActive) {} //vieta kaut kâdiem aprçíiniem (tikai aktîvajam window)
+
+		grafika.main(this); //tikai zîmçðana, nekâdi aprçíini
 	}
 
 	private void userInput() {
-
-		buttonActions(); //uz ekrâna redzamo pogu notikumi
-		keyboardActions(); //keyboard nospiesto pogu notikumi
-
+		ButtonActions.main(this, dati.buttonList); //uz ekrâna redzamo pogu notikumi
+		KeyboardActions.main(input.pogas); //keyboard nospiesto pogu notikumi
 	}
 
-	private void buttonActions() {
-		
-		for (int i=0; i<dati.buttonList.size();i++) {
-			
-			dati.buttonList.get(i).actions(this); //pârbauda katras pogas statusu
-			
-			if (dati.buttonList.get(i).result) { //ja poga nostrâdâjusi
-				
-				buttonActionsSpecific(i);
-				
-				dati.buttonList.get(i).result=false; //reseto pogas statusu
-			}
-		}
-	}
 
-	private void buttonActionsSpecific(int i){
-		if (i==0) { //pirmâ poga
-			calculations.Main.pauze=!calculations.Main.pauze;
-
-		} else if (i==1) { //otrâ poga
-			dati.startPlayerView(false);
-
-		} else if (i==2) { //treðâ poga
-			dati.startPlayerView(true);
-
-		} else if (i==3) { //ceturtâ poga
-			dati.tablo1Draw=!dati.tablo1Draw;
-
-		} else if (i==4) { //piektâ poga
-			dati.tablo2Draw=!dati.tablo2Draw;
-
-		} else if (i==5) { //sestâ poga
-			dati.miniMapDraw=!dati.miniMapDraw;
-
-		} else if (i==6) { //septîtâ poga
-			dati.inputPanelDraw=!dati.inputPanelDraw;
-
-		} else if (i==7) { //astotâ poga
-			dati.colorPanelDraw=!dati.colorPanelDraw;
-
-		} else if (i==8) { //devîtâ poga
-			KonstantesUniversal.overallGenRate+=0.01;
-
-		} else if (i==9) { //desmitâ poga
-			KonstantesUniversal.overallGenRate-=0.01;
-
-		}
-	}
-
-	private void keyboardActions(){
-		//te var nolasît piespiestâs keyboard pogas notikumiem
-		//piemçram ja pogas[i]==xx notiek kaut kas - piemçram main.cilvekuList.cilveks.darbibas.kautkas
-		//	vai focusfind=player+1, zoom++ / zoom--
-
-//		for (int i=0; i<input.pogas.length;i++) {
-//
-//			//dati.buttonList.get(i).actions(this); //pârbauda katras pogas statusu
-//
-//			if (result) { //ja poga nostrâdâjusi
-//
-//				keyboardActionsSpecific(i);
-//
-//				result=false; //reseto pogas statusu
-//			}
-//		}
-
-	}
-	
-	
 }

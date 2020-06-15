@@ -2,6 +2,7 @@ package grafika.main.map;
 
 import calculations.KonstantesUniversal;
 import calculations.Location;
+import calculations.Main;
 import calculations.MapChunk;
 import calculations.cilveki.Cilveks;
 import calculations.komandas.Komanda;
@@ -26,21 +27,8 @@ class Cilveki {
 
             double resnums=resnumaKoefic*cilveks.hpmax*merogs;
 
-
-            int komanda=0; //pçc  komandas nosaka krâsu
-            for (int j=0;j<komandasList.size();j++) {
-                if(cilveks.komanda==komandasList.get(j).nosaukums) {
-                    komanda=j;
-                    break;
-                }
-            }
-
-            double hpRatio=cilveks.hp/cilveks.hpmax;
-
-            Color krasa = new Color(Color.HSBtoRGB( (float)Formulas.getHue(komandasList.get(komanda).krasa),
-                    (float)KonstantesGrafikai.cilvekiKrasaSaturation,
-                    (float)(KonstantesGrafikai.cilvekiKrasaBrightnessMin + hpRatio *
-                            (KonstantesGrafikai.cilvekiKrasaBrightnessMax - KonstantesGrafikai.cilvekiKrasaBrightnessMin)) ));
+            int komanda=noteiktKomandu(cilveks); //krâsas noteikðanai
+            Color krasa = noteiktKrasuCilvekam(cilveks, komanda);
 
             //rumpis
 
@@ -75,4 +63,27 @@ class Cilveki {
 
     }
 
+    private static int noteiktKomandu(Cilveks cilveks){
+        int komanda=0;
+
+        for (int i = 0; i< Main.komandasList.size(); i++) {
+            if(cilveks.komanda.equals(Main.komandasList.get(i).nosaukums)) {
+                komanda=i;
+                break;
+            }
+        }
+
+        return komanda;
+    }
+
+    private static Color noteiktKrasuCilvekam(Cilveks cilveks, int komanda){
+        double hpRatio=cilveks.hp/cilveks.hpmax;
+
+        Color krasa = new Color(Color.HSBtoRGB( (float)Formulas.getHue(Main.komandasList.get(komanda).krasa),
+                (float)KonstantesGrafikai.cilvekiKrasaSaturation,
+                (float)(KonstantesGrafikai.cilvekiKrasaBrightnessMin + hpRatio *
+                        (KonstantesGrafikai.cilvekiKrasaBrightnessMax - KonstantesGrafikai.cilvekiKrasaBrightnessMin)) ));
+
+        return krasa;
+    }
 }

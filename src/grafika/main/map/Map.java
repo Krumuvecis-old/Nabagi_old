@@ -8,14 +8,8 @@ import java.util.ArrayList;
 import calculations.KonstantesUniversal;
 import calculations.Main;
 import calculations.MapChunk;
-import calculations.konstantes.Fizikas;
-import calculations.konstantes.Formulas;
-import calculations.cilveki.Cilveks;
 import calculations.komandas.Komanda;
 import calculations.konstantes.Grafiskie;
-import calculations.lietas.LietuPreseti;
-import calculations.lietas.Lieta;
-import grafika.KonstantesGrafikai;
 import grafika.main.Grafika;
 import grafika.main.SetupThread;
 
@@ -33,16 +27,17 @@ public class Map {
 		
 		thread = threadTemp;
 		
-		int x0=threadTemp.dati.miniMapX, y0=threadTemp.dati.miniMapY,
-				platumsMax=Math.max(0, threadTemp.dati.miniMapPlatums),
+		int x0=threadTemp.dati.miniMapX, y0=threadTemp.dati.miniMapY, //zîmçðanas pamatpunkts
+				platumsMax=Math.max(0, threadTemp.dati.miniMapPlatums), //zîmçðanas maksimumi
 				augstumsMax=Math.max(0, threadTemp.dati.miniMapAugstums);
 		
-		int laukumaPlatums = KonstantesUniversal.laukumaPlatumsSum,
-				laukumaAugstums=KonstantesUniversal.laukumaAugstumsSum;
+		int laukumaPlatums = KonstantesUniversal.laukumaPlatumsSum, //reâlie laukuma izmçri
+				laukumaAugstums = KonstantesUniversal.laukumaAugstumsSum;
+
 		double merogs=Math.min((double)platumsMax/laukumaPlatums, (double)augstumsMax/laukumaAugstums);
 
 		int kartesPlatums = (int)(laukumaPlatums*merogs),
-				kartesAugstums = (int)(laukumaAugstums*merogs);
+				kartesAugstums = (int)(laukumaAugstums*merogs); //zîmçðanas izmçri
 
 		Terrain.main(g, x0, y0, kartesPlatums, kartesAugstums, merogs);
 		Cilveki.main(g, thread, x0, y0, merogs, laukums, komandasList);
@@ -54,23 +49,7 @@ public class Map {
 			drawInfo(g, x0, y0, merogs, laukumaPlatums, laukumaAugstums);
 		}
 
-		//laukuma diagnostikas panelis
-		int x1=350, y1=200, wx=150, wy=50, tekstaPlatums=15;
-		g.setColor(Color.black);
-		for(int[] chunkXY = {0,0}; chunkXY[0]<Main.laukums.size(); chunkXY[0]++){
-			for(chunkXY[1]=0; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++){
-				int x = x1 + chunkXY[0] * wx,
-						y = y1 + chunkXY[1] * wy;
-				int w=0;
-				g.drawString("lietas: "+Main.laukums.get(chunkXY[0]).get(chunkXY[1]).lietas.size(),
-						x,y + w * tekstaPlatums); w++;
-				g.drawString("players: "+Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(),
-						x,y + w * tekstaPlatums); w++;
-			}
-		}
 
-
-		
 	}
 
 	private static void overPanels(Graphics g, int x0, int y0, int kartesPlatums, int kartesAugstums){

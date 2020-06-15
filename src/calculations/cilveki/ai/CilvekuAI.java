@@ -21,12 +21,16 @@ public class CilvekuAI {
         Location location = Cilveks.cilvekuListPilnais.get(numurs);
         Cilveks cilveks = Cilveks.getPlayer(location);
 
+        /* - citu funkciju pârbaudes nolûkos AI pagaidâm ir izòemts
+
         //secîgi pârbauda visus attâlumus
         if (!CloseRange.main(cilveks, location))
             if(!MediumRange.main(cilveks, location))
                 if(!FarRange.main(cilveks, location))
                     MiscDarbibas.main(cilveks, location);
 
+
+         */
 
     }
 

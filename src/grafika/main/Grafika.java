@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import calculations.CalculationTimeCalculator;
+import calculations.KonstantesUniversal;
+import calculations.Main;
 import calculations.cilveki.Cilveks;
 import calculations.komandas.Komanda;
 import calculations.komandas.KomanduApskats;
@@ -59,7 +61,8 @@ public class Grafika extends JPanel {
 		if (thread.dati.miniMapDraw) Map.main(g, thread, this); //karte
 		
 		if (thread.dati.tablo1Draw) drawTablo1(g); //galvenais komandu panelis sânâ
-		if (thread.dati.tablo2Draw) drawTablo2(g); //centrâlais panelis diagnostikai
+		if (thread.dati.tablo2Draw) drawTablo2(g); //centrâlais panelis cilvçku diagnostikai
+		if (thread.dati.tablo3Draw) drawTablo3(g); //centrâlais panelis kartes diagnostikai
 		
 		if (thread.dati.colorPanelDraw) drawColorPanel(g); //komandu krâsu diagnostika
 		if (thread.dati.inputPanelDraw) drawInputTest(g); //ievades diagnostikas panelis
@@ -114,9 +117,10 @@ public class Grafika extends JPanel {
 		g.drawString("kopâ bijuði spçlçtâji: "+Cilveks.maxCilveks,nobideX,w*tekstaPlatums+nobideY);w++;
 
 	}
-	
-	private void drawTablo2(Graphics g) { //lielais diagnostikas logs
-		
+
+	private void drawTablo2(Graphics g) { //lielais cilvçku diagnostikas logs
+
+
 		//tekoðâ informâcija par cilvçkiem
 		
 		int nobideY=thread.dati.tablo2y0, rindasPlatums=thread.dati.tablo2rindasPlatums,
@@ -167,7 +171,40 @@ public class Grafika extends JPanel {
 			}
 		}
 	}
-	
+
+	private void drawTablo3(Graphics g){
+		//laukuma diagnostikas panelis
+		int x0 = 10 + thread.dati.miniMapX,
+				y0 = 13 + thread.dati.miniMapY,
+				platumsMax=Math.max(0, thread.dati.miniMapPlatums),
+				augstumsMax=Math.max(0, thread.dati.miniMapAugstums);
+
+		int laukumaPlatums = KonstantesUniversal.laukumaPlatumsSum,
+				laukumaAugstums=KonstantesUniversal.laukumaAugstumsSum;
+		double merogs = Math.min((double)platumsMax/laukumaPlatums,
+				(double)augstumsMax/laukumaAugstums);
+
+		int wx = (int)(KonstantesUniversal.mapChunkW * merogs),
+				wy = (int)(KonstantesUniversal.mapChunkW * merogs),
+				tekstaPlatums = 15;
+		g.setColor(thread.dati.tablo3krasa);
+		for(int[] chunkXY = {0,0}; chunkXY[0]< Main.laukums.size(); chunkXY[0]++){
+			for(chunkXY[1]=0; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++){
+				int x = x0 + chunkXY[0] * wx,
+						y = y0 + chunkXY[1] * wy;
+				int w=0;
+				g.drawString("lietas: "+Main.laukums.get(chunkXY[0]).get(chunkXY[1]).lietas.size(),
+						x,y + w * tekstaPlatums); w++;
+				g.drawString("players: "+Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(),
+						x,y + w * tekstaPlatums); w++;
+				for (int i=0; i<Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
+					g.drawString(Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.get(i).vards,
+							x,y + w * tekstaPlatums); w++;
+				}
+			}
+		}
+	}
+
 	private void drawInputTest(Graphics g) { //ieavades pârbaude un grafiskâ informâcija
 		
 		int x0=thread.dati.inputPanelX, y0=thread.dati.inputPanelY, yw=15, w=0;
@@ -190,8 +227,7 @@ public class Grafika extends JPanel {
 		g.drawString("x: "+thread.input.xPele+" y: "+thread.input.yPele, x0, y0+w*yw); w++; //peles x un y
 		g.drawString("windowActive: " + thread.windowActive, x0, y0+w*yw); w++;
 		
-		
-		//piespiesto pogu izvade
+		//piespiesto pogu izvade (klaviatûrai)
 		String teksts;
 		for (int i=0; i<thread.input.pogas.length; i++) {
 			teksts="poga "+i+" = "+thread.input.pogas[i];
@@ -254,6 +290,5 @@ public class Grafika extends JPanel {
 		}
 		
 	}
-	
-	
+
 }

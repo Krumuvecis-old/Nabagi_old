@@ -18,7 +18,7 @@ public class KomanduApskats {
 	public static String komanduVestureLielakaKomanda="0";
 	
 	public static void main() {
-		for(int i=0;i<Main.komandasList.size();i++) { //apskata visas komandas
+		for(int i=0; i<Main.komandasList.size(); i++) { //apskata visas komandas
 
 			Main.komandasList.get(i).getBiedruList(i); //atjauno biedru sarakstu tâlâkiem aprçíiniem
 

@@ -63,15 +63,19 @@ class Kustiba {
 
 			Main.laukums.get(chunkX).get(chunkY).cilvekiList.add(cilveks);
 			Main.laukums.get(chunkX0).get(chunkY0).cilvekiList.remove(location.i);
-			Cilveks.getCilvekuList();
+			updateCilvekuList(new int[]{chunkX0,chunkY0}, location.i); //temporary salabojums
 		}
 
 	}
 
-	/*private static void updateCilvekuList(int[] chunkXY, int iznemtais){
-		for(int i=iznemtais; i<)
-
-	}*/
+	private static void updateCilvekuList(int[] chunkXY, int iznemtais){
+		for(int i=0; i<Cilveks.cilvekuListPilnais.size(); i++){
+			Location location = Cilveks.cilvekuListPilnais.get(i);
+			if (location.chunkXY==chunkXY && location.i >= iznemtais){
+				Cilveks.cilvekuListPilnais.get(i).i--;
+			}
+		}
+	}
 
 	private static void maluParbaudeVecais(){
 
