@@ -11,7 +11,7 @@ public class Cilveku {
     public static double vmax=3, ommax=30,
             omChangeRate=0.1; //grieðanâs atpûðoties
 
-    public static double RMax=400; //maksimâlais redzesloks (jaunus ìenerçjot)
+    public static double RMax=200; //maksimâlais redzesloks (jaunus ìenerçjot)
     public static double R2koefic=0.3; //minimâlâ redzesloka daïas koefic
 
     public static double hpmax=20; //(jaunus ìenerçjot)

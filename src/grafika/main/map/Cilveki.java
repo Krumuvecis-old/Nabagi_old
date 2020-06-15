@@ -51,10 +51,9 @@ class Cilveki {
                         drawKronis(g, x, y, resnums);
                     }
 
-                    if(i == thread.dati.playerFocusNumber) { //fokusçtâ spçlçtâja redzesloks
-                        g.setColor(krasa);
-                        double R2temp=cilveks.R2*merogs;
-                        g.drawOval((int)(x-R2temp), (int)(y-R2temp), (int)(R2temp*2),(int)(R2temp*2)); //R2 - tâlais
+                    if(true /*cilveks.vards.equals(thread.dati.playerFocusName)*/) { //fokusçtâ spçlçtâja redzesloks
+                        drawRedzesloks(g, x, y, merogs, cilveks, krasa);
+
                     }
 
                 }
@@ -94,5 +93,12 @@ class Cilveki {
                 (int)kronaResnums, (int)kronaResnums); //kronis
     }
 
+    private static void drawRedzesloks(Graphics g, double x, double y, double merogs, Cilveks cilveks, Color krasa){
+        g.setColor(krasa);
+        double R2temp=cilveks.R2*merogs;
+        g.drawOval((int)(x-R2temp), (int)(y-R2temp), (int)(R2temp*2),(int)(R2temp*2)); //R2 - tuvais
 
+        double R1temp=cilveks.R1*merogs;
+        g.drawOval((int)(x-R1temp), (int)(y-R1temp), (int)(R1temp*2),(int)(R1temp*2)); //R1 - tâlais
+    }
 }

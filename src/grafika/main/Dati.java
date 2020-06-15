@@ -68,7 +68,7 @@ public class Dati {
 	// --------------------
 	//zemâk par kartes zîmçðanu
 	
-	public boolean miniMapDraw=false, miniMapDrawInfo=true; //kartes zîmçðana vispâr un informâcija tai apakðâ
+	public boolean miniMapDraw=true, miniMapDrawInfo=true; //kartes zîmçðana vispâr un informâcija tai apakðâ
 	public int miniMapX=tablo2x0, miniMapY=tablo2y0-15,
 			miniMapPlatums=ekranaPlatums-miniMapX-50,
 			miniMapAugstums=ekranaAugstums-miniMapY-50;

@@ -126,7 +126,7 @@ public class CilvekuManager {
 					hp=hpmax*(0.5+0.5*r.nextDouble());
 			double paika=Cilveku.paikaMax;
 			double R1=Cilveku.RMax*(0.5+0.5*r.nextDouble()),
-					R2=Cilveku.RMax/Cilveku.R2koefic*(0.5+0.5*r.nextDouble());
+					R2=Cilveku.RMax*Cilveku.R2koefic*(0.5+0.5*r.nextDouble());
 			double brunas=Cilveku.brunasMin+(Cilveku.brunasMax-Cilveku.brunasMin)*r.nextDouble(),
 					stiprums=Cilveku.stiprumsMin+(Cilveku.stiprumsMax-Cilveku.stiprumsMin)*r.nextDouble(),
 					gataviba=100,

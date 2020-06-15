@@ -19,7 +19,7 @@ public class CilvekaParametri {
     public Darbibas darbibas = new Darbibas();
 
     //sensorie parametri
-    public double R1, R2; //redzesloks
+    public double R1, R2; //redzesloks (R1-tâlais, R2-tuvais)
 
     //cîòas parametri
     public ArrayList<Lieta> inventory = new ArrayList<Lieta>();
