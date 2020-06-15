@@ -1,7 +1,6 @@
 package grafika.main.map;
 
 import calculations.KonstantesUniversal;
-import calculations.Location;
 import calculations.Main;
 import calculations.MapChunk;
 import calculations.cilveki.Cilveks;
@@ -18,52 +17,53 @@ class Cilveki {
 
     protected static void main(Graphics g, SetupThread thread, int x0, int y0, double merogs, ArrayList<ArrayList<MapChunk>> laukums, ArrayList<Komanda> komandasList) { //papildinâjums kartei
 
-
         double resnumaKoefic = Fizikas.resnumaKoefic;
-        for(int i=0;i<thread.dati.cilvekuPilnaisList.size();i++) {
 
-            Location location = thread.dati.cilvekuPilnaisList.get(i);
-            Cilveks cilveks = Cilveks.getPlayer(location); //pats apskatâmais spçlçtâjs
+        //iziet cauri visiem chunkiem
+        for(int[] chunkXY={0,0}; chunkXY[0]<laukums.size(); chunkXY[0]++){
+            for(chunkXY[1]=0; chunkXY[1]<laukums.get(chunkXY[0]).size(); chunkXY[1]++){
 
-            double resnums=resnumaKoefic*cilveks.hpmax*merogs;
+                //pârbauda visus spçlçtâjus konkrçtajâ chunkâ
+                for(int i = 0; i<laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
 
-            int komanda=noteiktKomandu(cilveks); //krâsas noteikðanai
-            Color krasa = noteiktKrasuCilvekam(cilveks, komanda);
+                    Cilveks cilveks = laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.get(i); //pats apskatâmais spçlçtâjs
 
-            //rumpis
+                    double resnums=resnumaKoefic*cilveks.hpmax*merogs;
 
-            double x = x0 + merogs * (cilveks.xyz.x + location.chunkXY[0] * KonstantesUniversal.mapChunkW),
-                    y = y0 + merogs * (cilveks.xyz.y + location.chunkXY[1] * KonstantesUniversal.mapChunkW);
+                    int komanda=noteiktKomandasNumuru(cilveks); //krâsas noteikðanai
+                    Color krasa = noteiktKrasuCilvekam(cilveks, komanda);
 
-            g.setColor(krasa); //iekða
-            g.fillOval((int)(x-resnums/2),
-                    (int)(y-resnums/2),
-                    (int)resnums, (int)resnums);
-            g.setColor(Color.black);//kontûra
-            g.drawOval((int)(x-resnums/2),
-                    (int)(y-resnums/2),
-                    (int)resnums, (int)resnums);
+                    //rumpis
 
-            if(cilveks.vards==komandasList.get(komanda).galvenais) { //karalis
-                g.setColor(new Color(0,0,0)); //kroòa krâsa - melns punkts
-                double kronaResnums=resnums/2;
-                g.fillOval((int)(x-kronaResnums/2),
-                        (int)(y-kronaResnums/2),
-                        (int)kronaResnums, (int)kronaResnums); //kronis
+                    double x = x0 + merogs * (cilveks.xyz.x + chunkXY[0] * KonstantesUniversal.mapChunkW),
+                            y = y0 + merogs * (cilveks.xyz.y + chunkXY[1] * KonstantesUniversal.mapChunkW);
+
+                    g.setColor(krasa); //iekða
+                    g.fillOval((int)(x-resnums/2),
+                            (int)(y-resnums/2),
+                            (int)resnums, (int)resnums);
+                    g.setColor(Color.black);//kontûra
+                    g.drawOval((int)(x-resnums/2),
+                            (int)(y-resnums/2),
+                            (int)resnums, (int)resnums);
+
+                    if(cilveks.vards.equals(komandasList.get(komanda).galvenais)) { //karalis
+                        drawKronis(g, x, y, resnums);
+                    }
+
+                    if(i == thread.dati.playerFocusNumber) { //fokusçtâ spçlçtâja redzesloks
+                        g.setColor(krasa);
+                        double R2temp=cilveks.R2*merogs;
+                        g.drawOval((int)(x-R2temp), (int)(y-R2temp), (int)(R2temp*2),(int)(R2temp*2)); //R2 - tâlais
+                    }
+
+                }
             }
-
-
-            if(i==thread.dati.playerFocusNumber) { //fokusçtâ spçlçtâja redzesloks
-                g.setColor(krasa);
-                double R2temp=cilveks.R2*merogs;
-                g.drawOval((int)(x-R2temp), (int)(y-R2temp), (int)(R2temp*2),(int)(R2temp*2)); //R2 - tâlais
-            }
-
         }
 
     }
 
-    private static int noteiktKomandu(Cilveks cilveks){
+    private static int noteiktKomandasNumuru(Cilveks cilveks){
         int komanda=0;
 
         for (int i = 0; i< Main.komandasList.size(); i++) {
@@ -85,4 +85,14 @@ class Cilveki {
                         (KonstantesGrafikai.cilvekiKrasaBrightnessMax - KonstantesGrafikai.cilvekiKrasaBrightnessMin)) ));
 
     }
+
+    private static void drawKronis(Graphics g, double x, double y, double resnums){
+        g.setColor(new Color(0,0,0)); //kroòa krâsa - melns punkts
+        double kronaResnums=resnums/2;
+        g.fillOval((int)(x-kronaResnums/2),
+                (int)(y-kronaResnums/2),
+                (int)kronaResnums, (int)kronaResnums); //kronis
+    }
+
+
 }
