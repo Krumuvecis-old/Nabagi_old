@@ -8,6 +8,7 @@ public class PlayerThread implements Runnable{
 	
 	public Dati dati;
 	public Grafika grafika;
+	public GrafikaSupplement grafika2;
 	public Input input;
 	
 	public void initialize(String playerName) {
@@ -28,7 +29,9 @@ public class PlayerThread implements Runnable{
 		running = true;
 		minimized = false;
 		windowActive = true;
-		
+
+		grafika2 = new GrafikaSupplement();
+		grafika2.initialize(this);
 		grafika = new Grafika();
 		grafika.initialize(this); //zîmçðana
 		
@@ -60,12 +63,12 @@ public class PlayerThread implements Runnable{
 	private void galvenaisCikls(){
 		//ðis visu laiku atkârtojas, kad nav minimizçts
 
-		if (dati.findPlayer(this)<0) {
-			dati.playerDead();
+		if (dati.findPlayer()==null) { //ja neatrod spçlçtâju ar atbilstoðu vârdu, tad miris
+			dati.playerDead=true;
 		}
 
 		userInput();
-		dati.update();
+
 		//ðeit jâpievieno ekrâna izmçru maiòas (resize) pârbaude
 
 		if (windowActive) {} //vieta kaut kâdiem aprçíiniem (tikai aktîvajam window)

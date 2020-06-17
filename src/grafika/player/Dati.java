@@ -160,31 +160,20 @@ public class Dati {
 		}
 	}
 
-	void update(){
+	public Cilveks findPlayer(){
+		Cilveks cilveks = null;
+		for(int[] chunkXY = {0,0}; chunkXY[0]<Main.laukums.size(); chunkXY[0]++){
+			for(chunkXY[1]=0; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++){
+				for(int i=0; i<Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
+					if(Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.get(i).vards.equals(playerName)){
+						cilveks = Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.get(i);
+					}
+				}
+			}
+		}
+
+		return cilveks; //pagaidâm
 
 	}
 
-	int findPlayer(PlayerThread thread){
-
-//		i=-1;
-//
-//		jânomaina spçlçtâja parametri fokusam
-//
-//
-//		int[] chunkXY
-//
-//
-//		return i;
-		return 0; //pagaidâm
-
-	}
-	
-	protected void playerDead() {
-		playerDead=true;
-	}
-	
-	protected void updateGraphicsValues() {
-		
-	}
-	
 }

@@ -15,13 +15,9 @@ class Grafika extends JPanel {
 	
 	protected JFrame ekrans;
 	private Grafika grafika;
-	private DrawCenterPanel centerPanel;
-	private DrawSidePanels sidePanels;
-	
+
 	private static PlayerThread thread; //temporary lielums zîmçðanas funkcijâm
-	
-	
-	
+
 	//te nelikt mainîgos!!! (var likt pie thread.dati)
 	
 	protected void initialize(PlayerThread threadTemp) {
@@ -41,8 +37,8 @@ class Grafika extends JPanel {
 		
 		if (thread.dati.fullscreen) ekrans.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-		centerPanel = new DrawCenterPanel();
-		sidePanels = new DrawSidePanels();
+
+
 	}
 	
 	void main (PlayerThread threadTemp) {
@@ -55,21 +51,16 @@ class Grafika extends JPanel {
 		
 		drawFons(g);
 		
-		centerPanel.main(g, thread);
-		sidePanels.main(g, thread);
-		
-		
+		thread.grafika2.main(g, thread); //zîmç sânu un centra paneïus
+
 	}
 	
 	private void drawFons(Graphics g) {
-		g.setColor(Color.black); // vispârçjs default fons
+		g.setColor(Color.black); // vispârçjs default fons apakðâ pilnîgi visam
 		g.fillRect(0, 0, getWidth(), getHeight());
 		
 		g.setColor(Dati.nosaukumaKrasa);
 		g.drawString(thread.dati.windowTitle, Dati.nosaukumsX, Dati.nosaukumsY);
 	}
-	
-	
-	
-	
+
 }

@@ -7,13 +7,11 @@ import grafika.player.centerPanel.lobby.Lobby;
 import grafika.player.centerPanel.map.Map;
 
 public class DrawCenterPanel {
+
+	private Map map;
+	private Lobby lobby;
 	
-	static PlayerThread thread;
-	private Map map = new Map();
-	private Lobby lobby = new Lobby();
-	
-	public void main(Graphics g, PlayerThread threadTemp) {
-		thread = threadTemp;
+	public void main(Graphics g, PlayerThread thread) {
 
 		if (thread.dati.lobby) { //sadalîjums vçl nav gatavs
 			lobby.main(g);
@@ -22,5 +20,10 @@ public class DrawCenterPanel {
 		}
 	}
 
+	public void initialize(PlayerThread threadTemp){
+		map = new Map();
+
+		lobby = new Lobby();
+	}
 	
 }
