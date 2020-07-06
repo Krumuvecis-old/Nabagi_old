@@ -1,45 +1,26 @@
 package calculations.cilveki;
 
-import calculations.Location;
 import calculations.Main;
 import calculations.konstantes.Cilveku;
-
-import java.util.ArrayList;
 
 public class DefaultDarbibas {
 
     protected static void main(){
+        for(String vards : Main.cilvekuList.keySet()){
+            Cilveks cilveks = Main.cilvekuList.get(vards);
 
-        for(int[] chunkXY = {0,0}; chunkXY[0]< Main.laukums.size(); chunkXY[0]++) {
-            for (chunkXY[1]=0; chunkXY[1] < Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
-                ArrayList<Cilveks> cilvekiList = Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList;
-                for (int i = 0; i < cilvekiList.size(); i++) {
+            //esanaNoInventory(cilveks);
 
-                    Location location = new Location();
-                    location.chunkXY = chunkXY;
-                    location.i = i;
+            //te var ielikt arî citas darbîbas
 
-                    Cilveks cilveks = Cilveks.getPlayer(location);
-                    /*esanaNoInventory(cilveks);
+            //healingAndHunger(cilveks);
 
-                    //te var ielikt arî citas darbîbas
+            if (Naave.naavesPaarbaude(vards)) continue; //pârbaudç izdzçð, ja vajag
 
-                    healingAndHunger(cilveks);
-
-                    if (Naave.naavesPaarbaude(location)) {
-                        //pârbaudç izdzçð, ja vajag
-                        i--;
-                        continue;
-                    }*/
-
-                    //ideâlai kustîbai pietrûkst paâtrinâjums
-                    cilveks.darbibas.kustibasParametri(cilveks);
-                    Kustiba.main(cilveks, location);
-
-                }
-            }
+            //ideâlai kustîbai pietrûkst paâtrinâjums
+            cilveks.darbibas.kustibasParametri(cilveks);
+            Kustiba.main(vards);
         }
-
     }
 
     private static void esanaNoInventory(Cilveks cilveks) {
@@ -59,8 +40,6 @@ public class DefaultDarbibas {
             } else cilveks.navKoEst = true;
         }
     }
-
-
 
     private static void healingAndHunger(Cilveks cilveks) {
         double dHpRegen=Cilveku.healingRateDefault,

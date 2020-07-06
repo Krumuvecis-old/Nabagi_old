@@ -2,31 +2,28 @@ package calculations.konstantes;
 
 public class Cilveku {
 
-    public static double resnumaKoefic; //cilvçka resnuma koeficients (noteikðanai pçc hpMax)
-    //public static double vKoefic=0.1;
+    public static String vardsDefault = "S";
+    public static int maxGataviba = 100;
 
-    public static String vardsDefault="S";
-    public static int maxGataviba=100;
+    public static double vmax = 3, ommax = 30,
+            omChangeRate = 0.1; //grieðanâs atpûðoties
 
-    public static double vmax=3, ommax=30,
-            omChangeRate=0.1; //grieðanâs atpûðoties
+    public static double RMax = 200; //maksimâlais redzesloks (jaunus ìenerçjot)
+    public static double R2koefic = 0.3; //minimâlâ redzesloka daïas koefic
 
-    public static double RMax=200; //maksimâlais redzesloks (jaunus ìenerçjot)
-    public static double R2koefic=0.3; //minimâlâ redzesloka daïas koefic
+    public static double hpmax = 20; //(jaunus ìenerçjot)
 
-    public static double hpmax=20; //(jaunus ìenerçjot)
+    public static double dRDzimstot = 0.1, //redzesloka procentuâla izmaiòa vairojoties
+            dvMaxDzimstot = 0.1,
+            dommaxDzimstot = 0.1; //procentuâlâs izmaiòas dzimstot
 
-    public static double dRDzimstot=0.1, //redzesloka procentuâla izmaiòa vairojoties
-            dvMaxDzimstot=0.1,
-            dommaxDzimstot=0.1; //procentuâlâs izmaiòas dzimstot
+    public static double healingRateDefault = 0.01,
+            healthReductionRate = 0.03,
+            paikaReductionDefault = 0.2; //viens - healing rate, otrs - konstanti samazinâs cilveki.get(i).paika
 
-    public static double healingRateDefault=0.01,
-            healthReductionRate=0.03,
-            paikaReductionDefault=0.2; //viens - healing rate, otrs - konstanti samazinâs cilveki.get(i).paika
+    public static int paikaMax = 100, paikaMin = 40;
 
-    public static int paikaMax=100, paikaMin=40;
-
-    public static double esanasDaudzums=1; //par vienu pilnu paikaMax
+    public static double esanasDaudzums = 1; //par vienu pilnu paikaMax
 
     public static double paikaNepiec = 4; //daudzums lîdz kuram mçìinâs savâkt paiku, tad skraidît apkârt
 
@@ -53,10 +50,6 @@ public class Cilveku {
             buyLimitPaika=paikaNepiec*0.8,
             sellLimitDefault=20,
             buyLimitDefault=2;
-
-    public static void initialize(){
-
-    }
 
 
 }

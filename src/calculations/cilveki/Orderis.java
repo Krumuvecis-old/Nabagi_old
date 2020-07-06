@@ -11,9 +11,7 @@ public class Orderis {
 	}
 
 	public void decreaseAmount(double delta){
-		daudzums-=delta;
+		daudzums -= delta;
 	}
-
-
 
 }

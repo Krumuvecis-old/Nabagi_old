@@ -1,16 +1,19 @@
 package calculations;
 
+import calculations.cilveki.Cilveks;
 import calculations.cilveki.CilvekuManager;
 import calculations.komandas.KomanduApskats;
 import calculations.lietas.LietuApskats;
 import calculations.komandas.Komanda;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
 
-	public static ArrayList<Komanda> komandasList = new ArrayList<Komanda>(); //komandu datubâze
-	public static ArrayList<ArrayList<MapChunk>> laukums = new  ArrayList<ArrayList<MapChunk>>(); //laukums-karte
+	public static Map<String, Komanda> komandasList = new HashMap<>(); //komandu datubâze
+	public static Map<String, Cilveks> cilvekuList = new HashMap<>(); //spçlçtâju datubâze
+	public static Map<int[], MapChunk> laukums = new HashMap<>(); //laukums-karte
 	
 	public static boolean pauze=false;//, patsStarts=true;
 	public static CalculationTimeCalculator calculationTimeCalculator = new CalculationTimeCalculator();
@@ -23,12 +26,11 @@ public class Main {
 		while (true){ //ðis visu laiku atkârtojas -- galvenais cikls
 			calculationTimeCalculator.time(true);
 			
-			if (!pauze) { galvenaisCikls(); }
+			if (!pauze) galvenaisCikls();
 
 			calculationTimeCalculator.time(false);
 			try{
 				Thread.sleep(50+calculationTimeCalculator.sleepT());
-
 			}catch (Exception e){
 				e.printStackTrace();
 			}
@@ -36,8 +38,6 @@ public class Main {
 	}
 
 	private static void galvenaisCikls(){
-		//ðis visu laiku atkârtojas, kad nav pauze
-
 
 		//LaukumaApskats.main(); //te jâbût arî kartes un reljefa ciklam
 		LietuApskats.main(); //viss kas saistîts ar pa zemi izmçtâtajâm lietâm

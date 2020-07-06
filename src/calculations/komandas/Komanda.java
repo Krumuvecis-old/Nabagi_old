@@ -1,67 +1,162 @@
 package calculations.komandas;
 
-import calculations.Location;
 import calculations.Main;
 import calculations.cilveki.Cilveks;
+import calculations.konstantes.Cilveku;
+import calculations.konstantes.Formulas;
+import calculations.konstantes.Grafiskie;
+import calculations.konstantes.Komandu;
 
 import java.awt.Color;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 public class Komanda {
 	
 	public static int maxKomanda=0; //numerâcija nosaukuma doðanai, lai neatkârtotos nosaukumi
 
-	public String nosaukums;
 	public String galvenais;
 	public Color krasa;
 
-	public ArrayList<Location> biedruList = new ArrayList<Location>();
-	public int karalis=-1, bagatakais=-1, rekords=0;
+	public Map<String, Biedrs> biedri = new HashMap<>();
+	public String karalis="", bagatakais="";
+	public int rekords=0;
 
-	void getBiedruList(int numurs){
-		biedruList = new ArrayList<Location>();
-		for(int[] chunkXY = {0, 0}; chunkXY[0]< Main.laukums.size(); chunkXY[0]++) {
-			for(chunkXY[1]=0; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
+	public Komanda(String _galvenais){
+		galvenais = _galvenais;
 
-				ArrayList<calculations.cilveki.Cilveks> cilvekiList =
-						Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList;
+		if(Main.komandasList.size() == 0){ //pati pirmâ komanda
+			krasa = Grafiskie.komandasColorDefault;
+		} else {
+			biedri.put(_galvenais, new Biedrs(new int[]{1, 3}));
+			krasa = assignColor();
+		}
 
-				for (int i=0; i<cilvekiList.size(); i++){
-					if(Main.komandasList.get(numurs).nosaukums == cilvekiList.get(i).komanda){
-						Location biedrs = new Location();
-						biedrs.chunkXY=chunkXY;
-						biedrs.i=i;
-						biedruList.add(biedrs);
-					}
+
+		maxKomanda++;
+	}
+
+	public static String jaunaKomanda(String _galvenais){
+		String nosaukums;
+		if(Main.komandasList.size()==0) nosaukums = Komandu.komandaNosaukumsFirst;
+		else nosaukums = Komandu.komandaNosaukumsDefault + maxKomanda;
+
+		Main.komandasList.put(nosaukums, new Komanda(_galvenais));
+		return nosaukums;
+	}
+
+	public void pievienotiesKomandai(String vards){
+		biedri.put(vards, new Biedrs(new int[]{0, 0}));
+	}
+
+	public void pamestKomandu(String vards){
+		biedri.remove(vards);
+	}
+
+	void playerCleanup(String nosaukums){
+		for(String vards : biedri.keySet())
+			if ((!Main.cilvekuList.containsKey(vards)) || (!Main.cilvekuList.get(vards).komanda.equals(nosaukums)))
+				pamestKomandu(vards);
+	}
+
+	void mekleKarali(String komandasNosaukums) {
+		karalis = "";
+		bagatakais = "";
+		double bagatiba = 0;
+
+		for (String vards : biedri.keySet()) {
+			Cilveks cilveks = Main.cilvekuList.get(vards);
+
+			if(cilveks.komanda.equals(komandasNosaukums)) { //pârbauda vai cilvçks tieðâm ir biedrs
+
+				if (vards.equals(galvenais)) { // meklç galveno un atrod
+					karalis = vards;
 				}
 
+				double zeltsSum = cilveks.countItemAmount(
+						cilveks.searchInventory("Zelts", true));
+
+				if(bagatakais.equals("") || bagatiba<zeltsSum) {
+					bagatiba = zeltsSum;
+					bagatakais = vards;
+				}
 			}
 		}
 	}
 
-	protected void mekleKarali() {
-		karalis=-1;
-		bagatakais = -1;
-		double bagatiba=0;
+	public static double[] komandasTakenColors() { //jâbût public, lai varçtu izvadît grafiski (saglabâ tikai hue vçrtîbas)
+		//pârbauda kuras krâsas komandâm ir nepieejamas
 
-		for (int i = 0; i< biedruList.size(); i++) {
-			Cilveks cilveks = Cilveks.getPlayer(biedruList.get(i));
+		double[] bannedList; //komandâm pavisam aizliegtâs krâsas
+		if (Grafiskie.komandasBannedColors) {
+			Random rand=new Random();
+			bannedList = Grafiskie.komandasBannedColorList;
+			bannedList[0]=rand.nextDouble(); //lai èakarçtu visu sadalîjumu
+			bannedList[1]=rand.nextDouble(); //lai èakarçtu visu sadalîjumu
+			bannedList[2]=rand.nextDouble(); //lai èakarçtu visu sadalîjumu
+		} else bannedList = new double[0];
 
-			if(cilveks.komanda.equals(nosaukums)) {//apskata  visus komandas locekïus
 
-				if (cilveks.vards.equals(galvenais)) { // meklç galveno un atrod
-					karalis=i;
-				}
-
-				double zeltsSum = cilveks.countItemAmount(
-						cilveks.searchInventory("Zelts", true) );
-
-				if(bagatakais<0||bagatiba<zeltsSum) {
-					bagatiba=zeltsSum;
-					bagatakais=i;
-				}
-			}
+		double[] colorList = new double[Main.komandasList.size() + bannedList.length]; //kopçjais nepieejamo krâsu saraksts
+		int j = 0;
+		for (String nosaukums : Main.komandasList.keySet()) { //nolasa visu esoðo komandu krâsas un saliek sarakstâ
+			Color krasa = Main.komandasList.get(nosaukums).krasa;
+			colorList[j] = Formulas.getHue(krasa);
+			j++;
 		}
+
+		for (int i=0; i<bannedList.length; i++) { //saliek sarakstâ visas pavisam aizliegtâs krâsas
+			colorList[i + Main.komandasList.size()] = bannedList[i];
+		}
+
+		return colorList;
+	}
+
+	private static Color assignColor() { //izdod jaunas komandas krâsu
+		double[] colorList=komandasTakenColors();
+
+		double hue;
+
+		if (colorList.length==1) { //ja ir tikai 1 aizliegtâ krâsa, paòem tieði pretçjo krâsu
+			hue = 0.5 + colorList[0];
+		} else { //ja vairâk par 1 krâsu
+			Arrays.sort(colorList); //sarindo augoðâ secîbâ
+
+			int nr1=0, nr2=1;
+			double distance=0;
+
+			for (int i=0; i<colorList.length; i++) { //salîdzina visu komandu krâsas (konkrçti hue vçrtîbas)
+
+				int nr1temp=i, nr2temp=i+1;
+				if(i>=colorList.length-1) nr2temp=0;
+
+				double distanceTemp;
+				if (nr2temp>nr1temp) {
+					distanceTemp=colorList[nr2temp]-colorList[nr1temp];
+				} else {
+					distanceTemp=1+colorList[nr2temp]-colorList[nr1temp];
+				}
+
+				if (distanceTemp>distance) {
+					distance=distanceTemp;
+					nr1=nr1temp;
+					nr2=nr2temp;
+				}
+
+			}
+
+			if (nr2>nr1) { //standarts
+				hue = (colorList[nr1]+colorList[nr2])/2;
+			} else { //ja lielâkais attâlums ir starp pçdçjo un pirmo
+				hue = (colorList[nr1]+1+colorList[nr2])/2;
+			}
+
+		}
+		if (hue >= 1) hue -= 1; //nepiecieðams apgriezt lai nav OutOfRange
+
+		return new Color(Color.HSBtoRGB((float)hue, 1, 1));
 	}
 
 }

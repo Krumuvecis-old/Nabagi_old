@@ -1,46 +1,39 @@
 package calculations.cilveki;
 
-import calculations.KonstantesUniversal;
-import calculations.Location;
 import calculations.Main;
 import calculations.konstantes.Cilveku;
 import calculations.lietas.Lieta;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 public class Cilveks extends CilvekaParametri {
 
-	public static int maxCilveks=0; //numerâcija vârdu doðanai
-	public static ArrayList<Location> cilvekuListPilnais;
-	public static int rekords=0;
+	public static int maxCilveks = 0, //numerâcija vârdu doðanai
+			rekords = 0;
 
-	protected static void getCilvekuList(){
-		cilvekuListPilnais = new ArrayList<Location>(); //nodzçð veco sarakstu
-		for(int[] chunkXY = {0, 0}; chunkXY[0]< Main.laukums.size(); chunkXY[0]++) {
-			for(chunkXY[1]=0; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
-				for (int i=0; i<Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
-					Location location = new Location();
-					location.chunkXY = new int[]{chunkXY[0], chunkXY[1]};
-					location.i=i;
-					cilvekuListPilnais.add(location);
-				}
-			}
-		}
+	public Cilveks(String vards, Koord _xyz, double _vmax, double _omega,
+				   double _hp, double _hpmax, double _paika, double _R1, double _R2,
+				   double _brunas, double _stiprums, double _gataviba, double _drosme,
+				   String _komanda){
+		xyz = _xyz;
+		Main.laukums.get(xyz.chunkXY).cilvekiList.add(vards); //pievieno spçlçtâju arî laukumam
+		vmax = _vmax;
+		omega = _omega;
 
-//		//izvade testam
-//
-//		System.out.println("Cilveks.cilvekuListPilnais: ");
-//		for(int i=0; i<cilvekuListPilnais.size(); i++){
-//			System.out.println("chunk: ["+cilvekuListPilnais.get(i).chunkXY[0]+"/"+cilvekuListPilnais.get(i).chunkXY[1]+"]"
-//					+" i: "+cilvekuListPilnais.get(i).i);
-//		}
+		hp = _hp;
+		hpmax = _hpmax;
+		paika = _paika;
+		R1 = _R1;
+		R2 = _R2;
 
-		if(cilvekuListPilnais.size() > rekords) rekords = cilvekuListPilnais.size(); //rekorda update
-	}
-	
-	public static Cilveks getPlayer(Location location){
-		return Main.laukums.get(location.chunkXY[0]).get(location.chunkXY[1]).cilvekiList.get(location.i);
+		generateStartingInventory();
+
+		brunas = _brunas;
+		stiprums = _stiprums;
+		gataviba = _gataviba;
+		drosme = _drosme;
+
+		komanda = _komanda;
+
+		maxCilveks++;
 	}
 
 	public void trauma(double stiprums, double precizitate) {
@@ -51,67 +44,11 @@ public class Cilveks extends CilvekaParametri {
 		}
 	}
 
-	public static void dzemdibas(String vards,
-								 int[] chunkXY, Koord xyz, double vmax, double omega,
-								 double hp, double hpmax, double paika, double R1, double R2,
-								 double brunas, double stiprums, double gataviba, double drosme,
-								 String komanda, int[] rangs) {
-
-		Cilveks cilveks = new Cilveks();
-
-		cilveks.xyz=xyz;
-		cilveks.vards=vards;
-
-		cilveks.vmax=vmax;				//primârie Parametri
-		cilveks.omega=omega;
-		cilveks.hp=hp;
-		cilveks.hpmax=hpmax;
-		cilveks.paika=paika;
-		cilveks.paikaMax=Cilveku.paikaMax;
-		cilveks.paikaMin=Cilveku.paikaMin;
-
-		cilveks.R1=R1;					//redzesloks
-		cilveks.R2=R2;
-
-		cilveks.generateStartingInventory();
-
-		cilveks.brunas=brunas;			//cîòas parametri
-		cilveks.stiprums=stiprums;
-		cilveks.gataviba=gataviba;
-		cilveks.drosme=drosme;
-
-		cilveks.rangs = rangs;
-		cilveks.komanda=komanda;
-
-		Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.add(cilveks);
-	}
-
 	public void generateStartingInventory(){
-
-		Random r=new Random();
 		double x = xyz.x, y = xyz.y;
 
-		// zemâk sâkuma zelts
-		String nosaukums = "Zelts";
-		double daudzums = Cilveku.mantojumsCilvekamZelts;
-		int tips=0;
-		for (int i=1; i< KonstantesUniversal.defaultLietas.size(); i++){
-			if (KonstantesUniversal.defaultLietas.get(i).nosaukums.equals(nosaukums)){
-				tips=i;
-			}
-		}
-		inventory.add(Lieta.newLieta(tips, daudzums, x, y));
-
-		// zemâk sâkuma paika
-		nosaukums = "Paika";
-		daudzums = Cilveku.mantojumsCilvekamZelts;
-		tips=0;
-		for (int i=1; i< KonstantesUniversal.defaultLietas.size(); i++){
-			if (KonstantesUniversal.defaultLietas.get(i).nosaukums.equals(nosaukums)){
-				tips=i;
-			}
-		}
-		inventory.add(Lieta.newLieta(tips, daudzums, x, y));
+		inventory.add(new Lieta("Zelts", Cilveku.mantojumsCilvekamZelts, x, y));
+		inventory.add(new Lieta("Paika", Cilveku.mantojumsCilvekamPaika, x, y));
 
 	}
 
@@ -126,7 +63,7 @@ public class Cilveks extends CilvekaParametri {
 			}
 			//tâlâk tikai tie, kam daudzums>0
 
-			if(inventory.get(i).nosaukums.equals(nosaukums)) { //ja sakrît nosaukumi
+			if(inventory.get(i).tips.equals(nosaukums)) { //ja sakrît nosaukumi
 
 				if (numuri.length==0){ //ja tâds ir pirmais
 					numuri=new int[]{i};
