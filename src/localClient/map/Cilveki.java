@@ -2,7 +2,7 @@ package localClient.map;
 
 class Cilveki {
 
-//    protected static void main(Graphics g, SetupThread thread, int x0, int y0, double merogs, ArrayList<ArrayList<MapChunk>> laukums, ArrayList<Komanda> komandasList) { //papildinâjums kartei
+//    protected static void main(Graphics g, ClientThread thread, int x0, int y0, double merogs, ArrayList<ArrayList<MapChunk>> laukums, ArrayList<Komanda> komandasList) { //papildinâjums kartei
 //
 //        double resnumaKoefic = Fizikas.resnumaKoefic;
 //

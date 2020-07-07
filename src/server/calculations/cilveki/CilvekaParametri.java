@@ -4,7 +4,7 @@ import server.calculations.lietas.Lieta;
 
 import java.util.ArrayList;
 
-public class CilvekaParametri {
+public abstract class CilvekaParametri {
 
     public Koord xyz; // (x,y,v,fi) - visi double + chunkXY - int[2]
 

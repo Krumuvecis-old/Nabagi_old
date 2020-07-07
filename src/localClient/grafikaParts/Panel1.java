@@ -1,9 +1,9 @@
 package localClient.grafikaParts;
 
 import localClient.CalculationTimeCalculator;
+import localClient.ClientThread;
 import localClient.Layout;
 import localClient.Button;
-import localClient.SetupThread;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class Panel1 {
                 buttonNames);
     }
 
-    void draw(Graphics g, SetupThread thread){
+    void draw(Graphics g, ClientThread thread){
         update(thread.dati.layout);
         samplePanel.drawFons(g, thread.dati.colorPalette.pair2[0], Color.black);
 
@@ -61,7 +61,7 @@ public class Panel1 {
         g.drawString(text, textXY[0], textXY[1]);
     }
 
-    private void drawInputDiagnosticsInfo(Graphics g, SetupThread thread, Color textColor) { //ieavades pārbaude un grafiskā informācija
+    private void drawInputDiagnosticsInfo(Graphics g, ClientThread thread, Color textColor) { //ieavades pārbaude un grafiskā informācija
 
         int[] textOffset = {5, 190};
 

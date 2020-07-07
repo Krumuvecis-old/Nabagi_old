@@ -5,9 +5,9 @@ public class Map {
 //	private static Map<String, Komanda> komandasList;
 //	protected static ArrayList<ArrayList<MapChunk>> laukums;
 //
-//	private static SetupThread thread;
+//	private static ClientThread thread;
 //
-//	public static void main(Graphics g, SetupThread threadTemp, Grafika localClient.grafika) { //pilnîgi visa karte
+//	public static void main(Graphics g, ClientThread threadTemp, Grafika localClient.grafika) { //pilnîgi visa karte
 //
 //		komandasList = Main.komandasList;
 //		laukums = Main.laukums;

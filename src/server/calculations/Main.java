@@ -20,8 +20,6 @@ public class Main {
 	public static CalculationTimeCalculator calculationTimeCalculator = new CalculationTimeCalculator();
 
 	public static void main() {
-		InitializeManager.main(); //galvenâ inicializâcija - sagatavo pilnîgi visu tâlâkam darbam
-
 		System.out.println("CalculationsThread: Running.");
 		while (true){ //ðis visu laiku atkârtojas -- galvenais cikls
 			calculationTimeCalculator.time(true);

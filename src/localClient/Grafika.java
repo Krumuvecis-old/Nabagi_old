@@ -7,13 +7,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Grafika extends JPanel {
-	public static SetupThread thread; //temporary lielums zîmçðanas funkcijâm
+	public static ClientThread thread; //temporary lielums zîmçðanas funkcijâm
 	public JFrame ekrans;
 	public Grafika grafika;
 
 	//te nelikt mainîgos!!! (var likt pie thread.dati)
 
-	void initialize(SetupThread threadTemp) {
+	void initialize(ClientThread threadTemp) {
 		thread=threadTemp;
 		ekrans = new JFrame(thread.dati.windowTitle);
 		ekrans.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,7 +28,7 @@ public class Grafika extends JPanel {
 		ekrans.setVisible(true);
 	}
 
-	void main (SetupThread threadTemp) {
+	void main (ClientThread threadTemp) {
 		thread=threadTemp; //temporary update zîmçðanas cikliem, jo repaint() nepieòem argumentus
 		ekrans.repaint();
 	}

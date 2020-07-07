@@ -92,7 +92,7 @@ public class Button {
 
 	}
 
-	public static void checkButtonActions(SetupThread thread){
+	public static void checkButtonActions(ClientThread thread){
 		checkButtonList(thread, thread.dati.drawManager.header.samplePanel);
 		checkButtonList(thread, thread.dati.drawManager.footer.samplePanel);
 		checkButtonList(thread, thread.dati.drawManager.panel1.samplePanel);
@@ -100,7 +100,7 @@ public class Button {
 		checkButtonList(thread, thread.dati.drawManager.panel3.samplePanel);
 	}
 
-	private static void checkButtonList(SetupThread thread, SamplePanel samplePanel){
+	private static void checkButtonList(ClientThread thread, SamplePanel samplePanel){
 		for (int i = 0; i<samplePanel.buttonList.size(); i++) {
 			samplePanel.buttonList.get(i).activityCheck(thread, samplePanel.XY, samplePanel.size); //pârbauda katras pogas statusu
 			if (samplePanel.buttonList.get(i).result) { //ja poga nostrâdâjusi
@@ -110,7 +110,7 @@ public class Button {
 		}
 	}
 
-	private void activityCheck(SetupThread thread, int[] panelOffset, int[] panelSize) {
+	private void activityCheck(ClientThread thread, int[] panelOffset, int[] panelSize) {
 		int[] pogaXY = new int[]{panelOffset[0], panelOffset[1]};
 
 		if (leftAlignment) pogaXY[0] += x;
@@ -130,7 +130,7 @@ public class Button {
 	}
 
 
-	private static void buttonActions(String reference, SetupThread thread){
+	private static void buttonActions(String reference, ClientThread thread){
 		switch (reference) {
 
 			//zemâk header pogu notikumi

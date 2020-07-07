@@ -72,8 +72,8 @@ public class Dati {
 	//zemâk jaunâs funkcijas paòemtas no TimeScheduler
 
 	public HashMap<String, Image> images = new HashMap<>();
-	static final String imageLocation = "src/localClient.grafika/main/samplePictures/",
-			settingsFileLocation = "src/localClient.grafika/main/",
+	static final String imageLocation = "src/localClient/samplePictures/",
+			settingsFileLocation = "src/localClient/",
 			settingsFileName = "Settings.txt";
 
 	public String playerFocusName="nav";
@@ -93,7 +93,7 @@ public class Dati {
 		FileHandler.loadSprites(images, imageNames, imageLocation);
 		drawManager = new DrawManager(layout);
 
-		System.out.println("SetupThread: dati initialized");
+		System.out.println("ClientThread: dati initialized");
 	}
 
 	public void update(Grafika grafika){

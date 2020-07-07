@@ -1,6 +1,6 @@
 package server.calculations;
 
-import localClient.SetupThread;
+import localClient.ClientThread;
 import server.calculations.cilveki.CilvekuManager;
 import server.calculations.komandas.Komanda;
 import server.calculations.konstantes.Cilveku;
@@ -9,8 +9,9 @@ import server.calculations.lietas.LietuTips;
 import java.util.ArrayList;
 import java.util.List;
 
-class InitializeManager {
-    static void main(){
+public class Initializator {
+    public static void main(String versija){
+        KonstantesUniversal.versija = versija;
         LietuTips.generateLietuTipi();
 
         initializeLaukums();
@@ -18,8 +19,9 @@ class InitializeManager {
 
         CilvekuManager.pirmieSpeletaji(Cilveku.sakumaCilveki, Cilveku.randomKomandas); //jauno spçlçtâju ìenerçðana
 
-        System.out.println("CalculationsThread: Initialized.");
-        new SetupThread(); //palaiþ grafisko daïu
+        System.out.println("CalculationsThread: Initialization complete.");
+
+        new ClientThread(); //palaiþ grafisko daïu
     }
 
     private static void initializeLaukums() {

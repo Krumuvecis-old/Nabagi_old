@@ -1,14 +1,14 @@
 package localClient;
 
-public class SetupThread implements Runnable{
+public class ClientThread implements Runnable{
 	public boolean running, minimized, windowActive;
 
 	public Dati dati;
 	public Grafika grafika;
 	public Input input;
 	
-	public SetupThread() {
-		System.out.println("SetupThread: Starting initialization");
+	public ClientThread() {
+		System.out.println("ClientThread: Starting initialization");
 		running = true;
 		minimized = false;
 		windowActive = true;
@@ -24,7 +24,7 @@ public class SetupThread implements Runnable{
 		input = new Input(this); //nav jâzîmç, tâpçc pçc grafikas
 
 		new Thread(this, "Setup thread").start();
-		System.out.println("SetupThread: initialized - running.");
+		System.out.println("ClientThread: initialized - running.");
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class SetupThread implements Runnable{
 				e.printStackTrace();
 			}
 		}
-		System.out.println("SetupThread: finished - closed.");
+		System.out.println("ClientThread: finished - closed.");
 		grafika.ekrans.dispose();
 	}
 

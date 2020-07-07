@@ -22,7 +22,6 @@ public class FileHandler {
                                 valueSeparator = " : ";
 
     private static boolean checkFileStatus(String filePath){
-        System.out.println("Checking file status at " + filePath);
         File fileToCheck = new File(filePath);
 
         if (!fileToCheck.exists()) System.out.println("File not found");
@@ -49,6 +48,7 @@ public class FileHandler {
 
     public static void loadSettings(Dati dati, JFrame ekrans){
         String filePath = Dati.settingsFileLocation + Dati.settingsFileName;
+        System.out.println("Loading settings from " + filePath);
         if (checkFileStatus(filePath)) {
             List<String> readLines = readFile(filePath);
             if (readLines != null) {
@@ -56,7 +56,7 @@ public class FileHandler {
                 setLoadedSettings(settingsLines, dati, ekrans);
             }
         }
-        System.out.println("File loading complete.");
+        System.out.println("Finished loading settings.");
     }
 
     private static String[][] separateContents(List<String> linesRead){
@@ -110,6 +110,7 @@ public class FileHandler {
                 footerLines = new String[]{};
 
         //nolasa esoðos header&footer, ja tâdi ir
+        System.out.println("Saving settings at " + filePath);
         if (checkFileStatus(filePath)){
             List<String> readLines = readFile(filePath);
             if (readLines != null) {
@@ -157,9 +158,9 @@ public class FileHandler {
                                    String imageLocation){
         for(int i=0; i<imageNames.length; i++){
             String imagePath = imageLocation + imageNames[i][0];
+            System.out.println("Loading " + imagePath);
             if (checkFileStatus(imagePath)){
                 imageList.put(imageNames[i][1], readSingleImage(imagePath));
-                System.out.println("Finished loading: " + imageNames[i][0]);
             }
         }
         System.out.println("Image loading complete.");

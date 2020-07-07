@@ -16,19 +16,19 @@ public class Input {
 	public boolean peleClick = false;
 	public int[] pogas = new int[] {};
 
-	Input(SetupThread thread) {
+	Input(ClientThread thread) {
 
 		thread.grafika.ekrans.addWindowListener(new WindowListener() {
 
 			@Override
 			public void windowOpened(WindowEvent e) {
-				System.out.println("SetupThread: window open.");
+				System.out.println("ClientThread: window open.");
 
 			}
 
 			@Override
 			public void windowClosing(WindowEvent e) {
-				System.out.println("SetupThread: window closed.");
+				System.out.println("ClientThread: window closed.");
 				thread.running=false;
 			}
 
