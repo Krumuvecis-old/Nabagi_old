@@ -5,7 +5,7 @@ import calculations.cilveki.Cilveks;
 
 public class FarRange {
 
-    protected static boolean main(Cilveks cilveks, Location location){
+    static boolean main(Cilveks cilveks, Location location){
         boolean nolemts=false;
 
         //      cilvçku apskats

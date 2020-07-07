@@ -17,9 +17,7 @@ public class CilvekuAI {
 
     private static Location perkBiedrs, pardodBiedrs;
 
-    public static void main(int numurs){
-        Location location = Cilveks.cilvekuListPilnais.get(numurs);
-        Cilveks cilveks = Cilveks.getPlayer(location);
+    public static void main(String vards){
 
         /* - citu funkciju pârbaudes nolûkos AI pagaidâm ir izòemts
 

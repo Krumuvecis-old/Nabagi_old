@@ -21,19 +21,18 @@ public class CilvekuManager {
 	}
 	
 	private static void galvenaisApskats(String vards) {
-		Random r = new Random();
 
-		//lootApskatsSadursmei(vards);
+		lootApskatsSadursmei(vards);
 
 		if (!Main.cilvekuList.get(vards).autoPilot) {
 			//spçlçtâjs kontrolç cilvçku
 			System.out.println("spçlçtâja paðvadîbas funkcija vçl nav gatava");
 
-		} else ;//CilvekuAI.main(vards); //autopilots
+		} else CilvekuAI.main(vards); //autopilots
 
 	}
 
-	private static void lootApskatsSadursmei(int numurs) { //cilvçks apskata lietas, kas izmçtâtas pa karti
+	private static void lootApskatsSadursmei(String vards) { //cilvçks apskata lietas, kas izmçtâtas pa karti
 //		Location location = Cilveks.cilvekuListPilnais.get(numurs);
 //		Cilveks cilveks = Cilveks.getPlayer(location);
 //
