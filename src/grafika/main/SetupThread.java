@@ -1,14 +1,11 @@
 package grafika.main;
 
-import userInterface.Button;
-
 public class SetupThread implements Runnable{
 	public boolean running, minimized, windowActive;
 
 	public Dati dati;
-	protected Grafika grafika;
-	protected Input input;
-	
+	public Grafika grafika;
+	public Input input;
 	
 	public SetupThread() {
 		running = true;
@@ -57,7 +54,7 @@ public class SetupThread implements Runnable{
 	}
 
 	private void userInput() {
-		ButtonActions.checkButtonActions(this); //uz ekrâna redzamo pogu notikumi
+		Button.checkButtonActions(this); //uz ekrâna redzamo pogu notikumi
 		KeyboardActions.main(input.pogas); //keyboard nospiesto pogu notikumi
 	}
 

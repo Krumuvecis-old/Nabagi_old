@@ -1,8 +1,8 @@
 package grafika.main.grafikaParts;
 
-import server.userInterface.Button;
-import server.userInterface.Dati;
-import server.userInterface.Layout;
+import grafika.main.Button;
+import grafika.main.Dati;
+import grafika.main.Layout;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class Panel2 {
         int[] buttonOffset = {buttonSpacing, buttonSpacing},
                 buttonSize = {100, 30};
 
-        server.userInterface.Button.addButtonList(samplePanel, true,
+        Button.addButtonList(samplePanel, true,
                 buttonOffset, false, false,
                 buttonSize, buttonSpacing,
                 buttonNames);

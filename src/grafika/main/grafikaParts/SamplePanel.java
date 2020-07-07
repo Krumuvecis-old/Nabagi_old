@@ -1,5 +1,7 @@
 package grafika.main.grafikaParts;
 
+import grafika.main.Button;
+
 import java.awt.*;
 import java.util.ArrayList;
 

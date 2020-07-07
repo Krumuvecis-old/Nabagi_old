@@ -1,7 +1,8 @@
 package grafika.main.grafikaParts;
 
-import server.userInterface.Dati;
-import server.userInterface.Layout;
+import grafika.main.Dati;
+import grafika.main.Layout;
+import grafika.main.Button;
 
 import java.awt.*;
 import java.util.ArrayList;

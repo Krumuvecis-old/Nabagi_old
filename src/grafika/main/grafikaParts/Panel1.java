@@ -1,9 +1,9 @@
 package grafika.main.grafikaParts;
 
-import server.userInterface.Button;
-import server.userInterface.CalculationTimeCalculator;
-import server.userInterface.Layout;
-import server.userInterface.ServerUIThread;
+import grafika.main.CalculationTimeCalculator;
+import grafika.main.Layout;
+import grafika.main.Button;
+import grafika.main.SetupThread;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -35,20 +35,20 @@ public class Panel1 {
         int[] buttonOffset = {buttonSpacing, buttonSpacing + 15},
                 buttonSize = {100, 30};
 
-        server.userInterface.Button.addButtonList(samplePanel, true,
+        Button.addButtonList(samplePanel, true,
                 buttonOffset,  true, true,
                 buttonSize, buttonSpacing,
                 buttonNames);
     }
 
-    void draw(Graphics g, ServerUIThread thread){
+    void draw(Graphics g, SetupThread thread){
         update(thread.dati.layout);
         samplePanel.drawFons(g, thread.dati.colorPalette.pair2[0], Color.black);
 
         drawSampleText(g, thread.dati.colorPalette.pair2[1]);
         //te var likt papildus funkcijas
 
-        if (thread.dati.drawDiagnosticsPanel) drawDiagnosticsInfo(g, thread, thread.dati.colorPalette.pair2[1]);
+        if (thread.dati.drawInputDiagnosticsPanel) drawInputDiagnosticsInfo(g, thread, thread.dati.colorPalette.pair2[1]);
         Button.drawButtons(g, samplePanel);
     }
 
@@ -61,7 +61,7 @@ public class Panel1 {
         g.drawString(text, textXY[0], textXY[1]);
     }
 
-    private void drawDiagnosticsInfo(Graphics g, ServerUIThread thread, Color textColor) { //ieavades pārbaude un grafiskā informācija
+    private void drawInputDiagnosticsInfo(Graphics g, SetupThread thread, Color textColor) { //ieavades pārbaude un grafiskā informācija
 
         int[] textOffset = {5, 190};
 

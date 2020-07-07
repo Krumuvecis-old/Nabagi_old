@@ -1,11 +1,10 @@
 package grafika.main;
 
-import userInterface.Grafika;
-
 public class Layout {
     static int[] ekransLocation = {10,10};
+    private static final int[] ekransCorrection = {0, 0};
 
-    public int ekranaPlatums = 1000, ekranaAugstums = 700,
+    public int ekranaPlatums = 1000 + ekransCorrection[0], ekranaAugstums = 700 + ekransCorrection[1],
             headerY = 0, //starting point of header (in pixels to offset title bar)
             headerAugstums = 40, //header height (in pixels)
 

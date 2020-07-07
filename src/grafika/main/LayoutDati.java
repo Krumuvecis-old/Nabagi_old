@@ -1,10 +1,10 @@
 package grafika.main;
 
-public class LayoutDati {
+class LayoutDati {
 
-    //ðî klase vçl netiek izmantota, bet ideja nodalît layout parametrus ir laba
+    //ðî klase ir pârpalikums no vecâ varianta
 
-    public int wx=1000, wy=700, x0=0,
+    private static int wx=1000, wy=700, x0=0,
             wy1=30, y01=0, //header
 
             wy2, y02, //body
@@ -19,19 +19,13 @@ public class LayoutDati {
 
             wy3=50, y03; //footer
 
-    protected void initialize(){
-        initializeHeader();
-        initializeBody();
-        initializeFooter();
-    }
-
-    private void initializeHeader(){
+    private static void initializeHeader(){
 
 
 
     }
 
-    private void initializeBody(){
+    private static void initializeBody(){
 
         //galvenâ inicializâcija
         y02 = y01 + wy1;
@@ -50,7 +44,7 @@ public class LayoutDati {
 
     }
 
-    private void initializeFooter(){
+    private static void initializeFooter(){
 
         wy3 = Math.max( 0, wy - (wy1 + wy3) );
         y03 = y02 + wy3;

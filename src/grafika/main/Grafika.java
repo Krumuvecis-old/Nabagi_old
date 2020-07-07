@@ -1,23 +1,15 @@
 package grafika.main;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import calculations.CalculationTimeCalculator;
-import calculations.KonstantesUniversal;
-import calculations.Main;
-import calculations.cilveki.Cilveks;
-import calculations.komandas.KomanduApskats;
-import grafika.main.map.Map;
-
 public class Grafika extends JPanel {
 	public static SetupThread thread; //temporary lielums zîmçðanas funkcijâm
 	public JFrame ekrans;
-	public userInterface.Grafika grafika;
+	public Grafika grafika;
 
 	//te nelikt mainîgos!!! (var likt pie thread.dati)
 

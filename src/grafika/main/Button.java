@@ -1,9 +1,8 @@
 package grafika.main;
 
-import calculations.KonstantesUniversal;
 import grafika.main.grafikaParts.SamplePanel;
 
-import javax.swing.*;
+import javax.swing.*;;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -154,7 +153,10 @@ public class Button {
 
 			//zemâk pirmâ paneïa pogu notikumi
 
-			case "panel1poga1" -> newClient(); //jauns klients
+			case "panel1poga1" -> {
+				//newClient(); //jauns klients
+				System.out.println("neweClient placeholder");
+			}
 			case "panel1poga2" -> System.out.println("nospiesta panel1 otrâ poga");
 			case "panel1poga3" -> System.out.println("nospiesta panel1 treðâ poga");
 			case "panel1poga4" -> System.out.println("nospiesta panel1 ceturtâ poga");

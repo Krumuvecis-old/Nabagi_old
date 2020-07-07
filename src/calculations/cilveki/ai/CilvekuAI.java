@@ -1,17 +1,8 @@
 package calculations.cilveki.ai;
 
-import calculations.KonstantesUniversal;
 import calculations.Location;
-import calculations.Main;
 import calculations.cilveki.Cilveks;
-import calculations.cilveki.Darbibas;
-import calculations.cilveki.Orderis;
-import calculations.konstantes.Cilveku;
 import calculations.konstantes.Formulas;
-import calculations.lietas.Lieta;
-
-import java.util.ArrayList;
-import java.util.Random;
 
 public class CilvekuAI {
 

@@ -1,7 +1,7 @@
 package grafika.main.grafikaParts;
 
-import server.userInterface.Layout;
-import server.userInterface.ServerUIThread;
+import grafika.main.Layout;
+import grafika.main.SetupThread;
 
 import java.awt.*;
 
@@ -21,7 +21,7 @@ public class DrawManager {
         panel3 = new Panel3(layout);
     }
 
-    public void main(Graphics g, ServerUIThread thread){
+    public void main(Graphics g, SetupThread thread){
         drawFons(g, thread);
 
         if(thread.dati.drawPanel3) panel3.draw(g, thread.dati);
@@ -36,7 +36,7 @@ public class DrawManager {
 
     }
 
-    private void drawFons(Graphics g, ServerUIThread thread) {
+    private void drawFons(Graphics g, SetupThread thread) {
         g.setColor(thread.dati.backgroundColor);
         g.fillRect(0, 0, thread.grafika.grafika.getWidth(), thread.grafika.grafika.getHeight());
     }
