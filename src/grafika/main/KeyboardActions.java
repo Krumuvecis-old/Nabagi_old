@@ -2,7 +2,6 @@ package grafika.main;
 
 class KeyboardActions {
 
-
     protected static void main(int[] pogas){
         //nospiesto keyboard pogu nolasîğanai notikumiem
 
@@ -15,26 +14,15 @@ class KeyboardActions {
     //private static int debounceTimer=5;
 
     private static void keyboardNotikums(int  numurs){
+        //numurs - klaviatûrâ nospiestâs pogas numurs
 
-        //te piemçram ja numurs==xx notiek kaut kas - piemçram main.cilvekuList.cilveks.darbibas.kautkas
-        //	vai focusfind=player+1, zoom++ / zoom--
-
-        if (numurs==32){ //Space
-            System.out.println("piespiests Space");
-
-        } else if(numurs==87){ //W
-            System.out.println("piespiests W");
-
-        } else if(numurs==65){ //A
-            System.out.println("piespiests A");
-
-        } else if(numurs==83){ //S
-            System.out.println("piespiests S");
-
-        } else if(numurs==68){ //D
-            System.out.println("piespiests D");
-
+        switch (numurs) {
+            case 32 -> System.out.println("piespiests Space");
+            case 87 -> System.out.println("piespiests W");
+            case 65 -> System.out.println("piespiests A");
+            case 83 -> System.out.println("piespiests S");
+            case 68 -> System.out.println("piespiests D");
+            default -> System.out.println("piespiesta nedefinçta keyboard poga");
         }
-
     }
 }

@@ -14,7 +14,7 @@ class InitializeManager {
 
         CilvekuManager.pirmieSpeletaji(Cilveku.sakumaCilveki, Cilveku.randomKomandas); //jauno spçlçtâju ìenerçðana
 
-        newSetupWindow();
+        new grafika.main.SetupThread(); //palaiþ grafisko daïu
     }
 
     private static void initializeLaukums() {
@@ -32,11 +32,6 @@ class InitializeManager {
         Komanda.jaunaKomanda("Nulle"); //pati pirmâ komanda
 
         //te var uzlikt arî pârçjo komandu ìenerçðanu, ja "randomKomandas"
-    }
-
-    private static void newSetupWindow(){
-        grafika.main.SetupThread setupThread = new grafika.main.SetupThread(); //palaiþ grafisko daïu
-        setupThread.start();
     }
 
 }

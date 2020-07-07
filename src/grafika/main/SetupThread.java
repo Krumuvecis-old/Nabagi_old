@@ -1,56 +1,39 @@
 package grafika.main;
 
-import calculations.KonstantesUniversal;
-import calculations.lietas.LietuPreseti;
+import userInterface.Button;
 
 public class SetupThread implements Runnable{
-	private static Thread thread;
-	private static String threadName;
 	public boolean running, minimized, windowActive;
 
-	public LayoutDati layout;
 	public Dati dati;
 	protected Grafika grafika;
 	protected Input input;
 	
 	
-	public void start() {
-		//inicializâcija
-
-		layout = new LayoutDati();
-		layout.initialize();
-		dati = new Dati();
-		dati.initialize(); //zîmçðana var bût atkarîga no datiem
-		
-		int maxFrameRate=50; //kadri sekundç
-		dati.calculationTimeCalculator.delayMin=1000/maxFrameRate; //simulâcijas solis
-		
-		threadName=dati.windowTitle;
-		thread = new Thread(this, threadName);
+	public SetupThread() {
 		running = true;
 		minimized = false;
 		windowActive = true;
-		
+
+		dati = new Dati();
+
+		int maxFrameRate=50; //kadri sekundç
+		dati.calculationTimeCalculator.delayMin=1000/maxFrameRate; //simulâcijas solis
+
 		grafika = new Grafika();
 		grafika.initialize(this); //zîmçðana
 		
-		input = new Input();
-		input.initialize(this); //nav jâzîmç, tâpçc pçc grafikas
-		
-		
-		thread.start();
+		input = new Input(this); //nav jâzîmç, tâpçc pçc grafikas
 
+		new Thread(this, "Setup thread").start();
 		System.out.println("Setup thread initialized - running.");
 	}
 
 	@Override
 	public void run() {
-		
 		while (running) {
 			dati.calculationTimeCalculator.time(true);
-
 			if (!minimized) galvenaisCikls();
-			
 			dati.calculationTimeCalculator.time(false);
 			try{
 				Thread.sleep(dati.calculationTimeCalculator.sleepT());
@@ -58,7 +41,6 @@ public class SetupThread implements Runnable{
 				e.printStackTrace();
 			}
 		}
-
 		System.out.println("Setup thread finished");
 		grafika.ekrans.dispose();
 	}
@@ -67,8 +49,7 @@ public class SetupThread implements Runnable{
 		//ðis visu laiku atkârtojas, kad nav minimizçts
 
 		userInput();
-		dati.update();
-		//ðeit jâpievieno ekrâna izmçru maiòas (resize) pârbaude
+		dati.update(grafika.grafika);
 
 		if (windowActive) {} //vieta kaut kâdiem aprçíiniem (tikai aktîvajam window)
 
@@ -76,7 +57,7 @@ public class SetupThread implements Runnable{
 	}
 
 	private void userInput() {
-		ButtonActions.main(this, dati.buttonList); //uz ekrâna redzamo pogu notikumi
+		ButtonActions.checkButtonActions(this); //uz ekrâna redzamo pogu notikumi
 		KeyboardActions.main(input.pogas); //keyboard nospiesto pogu notikumi
 	}
 
