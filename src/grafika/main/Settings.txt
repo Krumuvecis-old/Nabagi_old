@@ -1,17 +1,10 @@
-2 456 123
-asdasd ðis teksts  netiks nolasîts
-te var likt kaut kâdus ievada paskaidrojoðos komentârus
-teirtexc
-asdasd
-fghfgh
-uuuu
-arî ðis texc netiks nolasîts
+ðis ir header
+ðo tekstu nenolasîs
 READSEPARATOR
 ekranaPlatums : 1000
 ekranaAugstums : 700
 palette : 0
 READSEPARATOR
-arî so vairs nenolasîs
-te var ielikt kaut kâdu summary
-dfgdfg
+ðis ir footer
+arî ðo tekstu nenolasîs
 
