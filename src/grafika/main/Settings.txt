@@ -8,7 +8,7 @@ uuuu
 arî ðis texc netiks nolasîts
 READSEPARATOR
 ekranaPlatums : 1000
-ekranaAugstums : 600
+ekranaAugstums : 700
 palette : 0
 READSEPARATOR
 arî so vairs nenolasîs

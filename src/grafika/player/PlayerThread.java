@@ -19,7 +19,7 @@ public class PlayerThread implements Runnable{
 	
 	public void start() {
 		dati.initialize(this);
-		dati.playerInitialize(this, true);
+		//dati.playerInitialize(this, true);
 		
 		int maxFrameRate=50; //kadri sekundç
 		dati.calculationTimeCalculator.delayMin=1000/maxFrameRate; //simulâcijas solis
@@ -63,9 +63,9 @@ public class PlayerThread implements Runnable{
 	private void galvenaisCikls(){
 		//ðis visu laiku atkârtojas, kad nav minimizçts
 
-		if (dati.findPlayer()==null) { //ja neatrod spçlçtâju ar atbilstoðu vârdu, tad miris
-			dati.playerDead=true;
-		}
+//		if (dati.findPlayer()==null) { //ja neatrod spçlçtâju ar atbilstoðu vârdu, tad miris
+//			dati.playerDead=true;
+//		}
 
 		userInput();
 

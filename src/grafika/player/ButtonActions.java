@@ -34,7 +34,7 @@ class ButtonActions {
 
         } else if (i==4) { //piektâ poga
             if (dati.playerDead) {
-                dati.playerInitialize(thread, false);
+//                dati.playerInitialize(thread, false);
             }
         }
 

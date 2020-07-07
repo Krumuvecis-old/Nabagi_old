@@ -1,5 +1,7 @@
 package calculations.cilveki;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import calculations.KonstantesUniversal;
@@ -82,14 +84,16 @@ public class CilvekuManager {
 		for(int i=0; i<skaits; i++) {
 			String vards = Cilveku.vardsDefault + (Cilveks.maxCilveks + 1);
 
-			Koord xyz = new Koord(
-					KonstantesUniversal.mapChunkW * r.nextDouble(),
-					KonstantesUniversal.mapChunkW * r.nextDouble(),
-					0,
-					360 * r.nextDouble(),
-					new int[]{
-							r.nextInt(KonstantesUniversal.mapChunkCountX),
-							r.nextInt(KonstantesUniversal.mapChunkCountY)});
+			double x = KonstantesUniversal.mapChunkW * r.nextDouble(),
+					y = KonstantesUniversal.mapChunkW * r.nextDouble(),
+					v = 0,
+					fi = 360 * r.nextDouble();
+
+			List<Integer> chunkXY = new ArrayList<>();
+			chunkXY.add(r.nextInt(KonstantesUniversal.mapChunkCountX)); //x
+			chunkXY.add(r.nextInt(KonstantesUniversal.mapChunkCountY)); //y
+
+			Koord xyz = new Koord(x, y, v, fi, chunkXY);
 
 			double vmax = Cilveku.vmax,
 					omega = Cilveku.ommax;

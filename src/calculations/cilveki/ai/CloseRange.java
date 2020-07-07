@@ -1,7 +1,6 @@
 package calculations.cilveki.ai;
 
 import calculations.KonstantesUniversal;
-import calculations.Location;
 import calculations.Main;
 import calculations.cilveki.Cilveks;
 import calculations.cilveki.Orderis;

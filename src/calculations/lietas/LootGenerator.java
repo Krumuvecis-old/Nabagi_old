@@ -2,6 +2,8 @@ package calculations.lietas;
 
 import calculations.KonstantesUniversal;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class LootGenerator {
@@ -22,16 +24,16 @@ public class LootGenerator {
         if (r.nextDouble() < (genRate - reizes)) reizes++;
 
         for (int i=0; i<reizes; i++) {
-            int[] chunkXY = new int[2];
-            chunkXY[0] = r.nextInt(KonstantesUniversal.mapChunkCountX);
-            chunkXY[1] = r.nextInt(KonstantesUniversal.mapChunkCountY);
+            List<Integer> chunkXY = new ArrayList<>();
+            chunkXY.add(r.nextInt(KonstantesUniversal.mapChunkCountX)); //x
+            chunkXY.add(r.nextInt(KonstantesUniversal.mapChunkCountY)); //y
 
             createLoot(tips, chunkXY);
         }
 
     }
 
-    private static void createLoot(String tips, int[] chunkXY) { //uztaisa un iemet laukumâ vienu lietu
+    private static void createLoot(String tips, List<Integer> chunkXY) { //uztaisa un iemet laukumâ vienu lietu
         Random r = new Random();
         double x = r.nextDouble() * KonstantesUniversal.mapChunkW,
                 y = r.nextDouble() * KonstantesUniversal.mapChunkW;

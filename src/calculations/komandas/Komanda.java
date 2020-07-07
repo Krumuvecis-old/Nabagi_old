@@ -2,9 +2,7 @@ package calculations.komandas;
 
 import calculations.Main;
 import calculations.cilveki.Cilveks;
-import calculations.konstantes.Cilveku;
 import calculations.konstantes.Formulas;
-import calculations.konstantes.Grafiskie;
 import calculations.konstantes.Komandu;
 
 import java.awt.Color;
@@ -28,7 +26,7 @@ public class Komanda {
 		galvenais = _galvenais;
 
 		if(Main.komandasList.size() == 0){ //pati pirmâ komanda
-			krasa = Grafiskie.komandasColorDefault;
+			krasa = Komandu.komandasColorDefault;
 		} else {
 			biedri.put(_galvenais, new Biedrs(new int[]{1, 3}));
 			krasa = assignColor();
@@ -90,9 +88,9 @@ public class Komanda {
 		//pârbauda kuras krâsas komandâm ir nepieejamas
 
 		double[] bannedList; //komandâm pavisam aizliegtâs krâsas
-		if (Grafiskie.komandasBannedColors) {
+		if (Komandu.komandasBannedColors) {
 			Random rand=new Random();
-			bannedList = Grafiskie.komandasBannedColorList;
+			bannedList = Komandu.komandasBannedColorList;
 			bannedList[0]=rand.nextDouble(); //lai èakarçtu visu sadalîjumu
 			bannedList[1]=rand.nextDouble(); //lai èakarçtu visu sadalîjumu
 			bannedList[2]=rand.nextDouble(); //lai èakarçtu visu sadalîjumu

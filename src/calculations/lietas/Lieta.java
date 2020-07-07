@@ -2,6 +2,8 @@ package calculations.lietas;
 
 import calculations.Main;
 
+import java.util.List;
+
 public class Lieta {
 
 	public double x, y;
@@ -22,7 +24,7 @@ public class Lieta {
 		condition = defaultCondition;
 	}
 
-	public void drop(int[] chunkXY){
+	public void drop(List<Integer> chunkXY){
 		Main.laukums.get(chunkXY).lietas.add(this);
 	}
 

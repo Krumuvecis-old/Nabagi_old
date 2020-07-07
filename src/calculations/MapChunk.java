@@ -8,7 +8,7 @@ import java.util.*;
 public class MapChunk {
     public Set<String> cilvekiList; //cilvçku saraksts
     public List<Lieta> lietas; //loot datubâze
-    public Map<int[], MapCell> mapCells; //mazâs rûtiòas
+    public Map<List<Integer>, MapCell> mapCells; //mazâs rûtiòas
 
     public MapChunk(){
         generateMapCells();
@@ -18,13 +18,16 @@ public class MapChunk {
     }
 
     private void generateMapCells(){
-        int mapCellCount = KonstantesUniversal.mapCellCount;
         mapCells = new HashMap<>();
+        int mapCellCount = KonstantesUniversal.mapCellCount;
 
-        for (int[] cellXY={0,0}; cellXY[0]<mapCellCount; cellXY[0]++){
-            for (cellXY[1]=0; cellXY[1]<mapCellCount; cellXY[1]++){
-                MapCell cell = new MapCell();
-                mapCells.put(cellXY, cell);
+        int x, y;
+        for (x = 0; x < mapCellCount; x++){
+            for (y = 0; y < mapCellCount; y++){
+                List<Integer> xy = new ArrayList<>();
+                xy.add(x);
+                xy.add(y);
+                mapCells.put(xy, new MapCell());
             }
         }
     }

@@ -8,6 +8,7 @@ public class SetupThread implements Runnable{
 	public Input input;
 	
 	public SetupThread() {
+		System.out.println("SetupThread: Starting initialization");
 		running = true;
 		minimized = false;
 		windowActive = true;
@@ -23,7 +24,7 @@ public class SetupThread implements Runnable{
 		input = new Input(this); //nav jâzîmç, tâpçc pçc grafikas
 
 		new Thread(this, "Setup thread").start();
-		System.out.println("Setup thread initialized - running.");
+		System.out.println("SetupThread: initialized - running.");
 	}
 
 	@Override
@@ -38,7 +39,7 @@ public class SetupThread implements Runnable{
 				e.printStackTrace();
 			}
 		}
-		System.out.println("Setup thread finished");
+		System.out.println("SetupThread: finished - closed.");
 		grafika.ekrans.dispose();
 	}
 

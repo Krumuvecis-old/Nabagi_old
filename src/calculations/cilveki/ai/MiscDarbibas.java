@@ -1,6 +1,5 @@
 package calculations.cilveki.ai;
 
-import calculations.Location;
 import calculations.cilveki.Cilveks;
 import calculations.cilveki.Darbibas;
 import calculations.konstantes.Cilveku;

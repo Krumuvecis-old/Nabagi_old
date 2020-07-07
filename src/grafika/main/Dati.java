@@ -94,7 +94,7 @@ public class Dati {
 		FileHandler.loadSprites(images, imageNames, imageLocation);
 		drawManager = new DrawManager(layout);
 
-		System.out.println("ServerUI dati initialized");
+		System.out.println("SetupThread: dati initialized");
 	}
 
 	public void update(Grafika grafika){

@@ -1,12 +1,11 @@
 package calculations.cilveki.ai;
 
-import calculations.Location;
 import calculations.cilveki.Cilveks;
 import calculations.konstantes.Formulas;
 
 public class CilvekuAI {
 
-    private static Location perkBiedrs, pardodBiedrs;
+    //private static Location perkBiedrs, pardodBiedrs;
 
     public static void main(String vards){
 

@@ -1,14 +1,9 @@
 package calculations.komandas;
 
-import java.awt.Color;
-import java.util.Arrays;
 import java.util.Random;
 
-import calculations.Location;
-import calculations.konstantes.Formulas;
 import calculations.Main;
 import calculations.cilveki.Cilveks;
-import calculations.konstantes.Grafiskie;
 import calculations.konstantes.Komandu;
 
 
@@ -87,6 +82,8 @@ public class KomanduApskats {
 	}
 
 	private static void nakotnesKomanduApskats(Komanda komanda){
+		//komandas izaugsme un citas darbîbas nâkotnç
+
 //		if(!(komanda.karalis<0)) {//vçlreiz apskata visus, ja jauns karalis atrasts
 //
 //			for (int i = 0; i< komanda.biedruList.size(); i++) { //vçlreiz apskata visus komandasbiedrus

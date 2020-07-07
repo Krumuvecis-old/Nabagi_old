@@ -22,13 +22,13 @@ public class Input {
 
 			@Override
 			public void windowOpened(WindowEvent e) {
-				System.out.println("ServerUI window open.");
+				System.out.println("SetupThread: window open.");
 
 			}
 
 			@Override
 			public void windowClosing(WindowEvent e) {
-				System.out.println("ServerUI window closed.");
+				System.out.println("SetupThread: window closed.");
 				thread.running=false;
 			}
 

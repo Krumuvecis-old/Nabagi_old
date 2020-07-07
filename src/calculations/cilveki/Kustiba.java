@@ -1,8 +1,10 @@
 package calculations.cilveki;
 
 import calculations.KonstantesUniversal;
-import calculations.Location;
 import calculations.Main;
+
+import java.util.ArrayList;
+import java.util.List;
 
 class Kustiba {
 	
@@ -34,9 +36,12 @@ class Kustiba {
 		Cilveks cilveks = Main.cilvekuList.get(vards);
 
 		int platums = KonstantesUniversal.mapChunkW,
-				chunkX = cilveks.xyz.chunkXY[0], //playera momentânais chunks
-				chunkY = cilveks.xyz.chunkXY[1];
-		int[] chunkXY0 = new int[]{chunkX, chunkY}; //sâkuma pozîcija
+				chunkX = cilveks.xyz.chunkXY.get(0), //playera momentânais chunks
+				chunkY = cilveks.xyz.chunkXY.get(1);
+
+		List<Integer> chunk0 = new ArrayList<>();
+		chunk0.add(chunkX);
+		chunk0.add(chunkY);
 
 		if (cilveks.xyz.x < 0 ) { //rietumi
 			cilveks.xyz.x += platums;
@@ -59,9 +64,14 @@ class Kustiba {
 			if (chunkY >= KonstantesUniversal.mapChunkCountY) chunkY -= KonstantesUniversal.mapChunkCountY;
 		}
 
-		if(chunkX != chunkXY0[0] || chunkY != chunkXY0[1]){ //jâizòem no vienas tabulas un jâieliek otrâ
-			Main.laukums.get(chunkXY0).cilvekiList.remove(vards);
-			Main.laukums.get(new int[]{chunkX,chunkY}).cilvekiList.add(vards);
+		if(chunkX != chunk0.get(0) || chunkY != chunk0.get(1)){
+
+			Main.laukums.get(chunk0).cilvekiList.remove(vards); //jâizòem no vienas tabulas
+
+			List<Integer> chunkXY = new ArrayList<>();
+			chunkXY.add(chunkX);
+			chunkXY.add(chunkY);
+			Main.laukums.get(chunkXY).cilvekiList.add(vards); //jâieliek otrâ tabulâ
 		}
 
 	}

@@ -37,7 +37,7 @@ public class Cilveks extends CilvekaParametri {
 	}
 
 	public void trauma(double stiprums, double precizitate) {
-		boolean  blockChance = brunas > ( stiprums * precizitate );
+		boolean  blockChance = brunas > (stiprums * precizitate);
 		if (!blockChance) {
 			double hpLoss = stiprums * precizitate - brunas;
 			hp -= hpLoss;
@@ -55,7 +55,7 @@ public class Cilveks extends CilvekaParametri {
 	public int[] searchInventory(String nosaukums, boolean firstOnly) {
 		int[] numuri=new int[]{};
 
-		for (int i=0;i<inventory.size();i++) { //iet cauri visam inventory
+		for (int i=0; i<inventory.size(); i++) { //iet cauri visam inventory
 			if (inventory.get(i).daudzums <= 0) { //izdzçð tukðos elementus
 				inventory.remove(i);
 				i--;

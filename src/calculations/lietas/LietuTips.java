@@ -1,6 +1,7 @@
 package calculations.lietas;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class LietuTips {
 
@@ -27,7 +28,7 @@ public class LietuTips {
         defence = _defence;
     }
 
-    public static HashMap<String, LietuTips> lietuTipi;
+    public static Map<String, LietuTips> lietuTipi = new HashMap<>();
 
     public static void generateLietuTipi(){
         double defaultMasa = 1,

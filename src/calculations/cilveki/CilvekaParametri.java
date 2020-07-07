@@ -20,11 +20,12 @@ public class CilvekaParametri {
     //sensorie parametri
     public double R1, R2; //redzesloks (R1-tâlais, R2-tuvais)
 
-    //cîòas parametri
-    public ArrayList<Lieta> inventory = new ArrayList<Lieta>();
-    public ArrayList<Orderis> orderi = new ArrayList<Orderis>(); // (prece,perk(boolean),cena)
+    //inventory un tirdzniecîbas parametri
+    public ArrayList<Lieta> inventory = new ArrayList<>();
+    public ArrayList<Orderis> orderi = new ArrayList<>(); // (prece,perk(boolean),cena)
     //public ArrayList<Orderis> atminas = new ArrayList<Orderis>(); //atmiòas par tirdzniecîbas cenâm
 
+    //cîòas parametri
     public double brunas, stiprums;
     public double gataviba;
     public double drosme;

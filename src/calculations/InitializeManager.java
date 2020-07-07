@@ -5,6 +5,9 @@ import calculations.komandas.Komanda;
 import calculations.konstantes.Cilveku;
 import calculations.lietas.LietuTips;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class InitializeManager {
     static void main(){
         LietuTips.generateLietuTipi();
@@ -14,14 +17,18 @@ class InitializeManager {
 
         CilvekuManager.pirmieSpeletaji(Cilveku.sakumaCilveki, Cilveku.randomKomandas); //jauno spçlçtâju ìenerçðana
 
+        System.out.println("CalculationsThread: Initialized.");
         new grafika.main.SetupThread(); //palaiþ grafisko daïu
     }
 
     private static void initializeLaukums() {
-        for (int[] chunkXY={0,0}; chunkXY[0]<KonstantesUniversal.mapChunkCountX; chunkXY[0]++){
-            for (chunkXY[1]=0; chunkXY[1]<KonstantesUniversal.mapChunkCountY;chunkXY[1]++){
-                MapChunk chunk = new MapChunk();
-                Main.laukums.put(chunkXY, chunk);
+        int x, y;
+        for (x = 0; x < KonstantesUniversal.mapChunkCountX; x++){
+            for (y = 0; y < KonstantesUniversal.mapChunkCountY; y++){
+                List<Integer> xy = new ArrayList<>();
+                xy.add(x);
+                xy.add(y);
+                Main.laukums.put(xy, new MapChunk());
             }
         }
 

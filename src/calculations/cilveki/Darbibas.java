@@ -1,9 +1,7 @@
 package calculations.cilveki;
 
-import calculations.Location;
 import calculations.Main;
 import calculations.komandas.Komanda;
-import calculations.komandas.KomanduApskats;
 import calculations.konstantes.Cilveku;
 import calculations.konstantes.Formulas;
 import calculations.lietas.LietuTips;

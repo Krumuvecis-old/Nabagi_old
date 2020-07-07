@@ -16,7 +16,7 @@ public class DrawCenterPanel {
 		if (thread.dati.lobby) { //sadalîjums vçl nav gatavs
 			lobby.main(g);
 		} else {
-			map.main(g, thread);
+//			map.main(g, thread);
 		}
 	}
 

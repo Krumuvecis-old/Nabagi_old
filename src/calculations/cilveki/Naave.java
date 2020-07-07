@@ -31,7 +31,10 @@ class Naave {
 
             Random r = new Random();
 
+            //
             //pagaidâm lietu nomet tikai savâ chunkâ ----- !!!!!
+            //
+
             lieta.x = Math.max(0, Math.min(KonstantesUniversal.mapChunkW,
                     cilveks.xyz.x + lootDropDistance*(r.nextDouble()-0.5)*2 ));
             lieta.y = Math.max(0, Math.min(KonstantesUniversal.mapChunkW,

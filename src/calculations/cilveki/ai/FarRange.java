@@ -1,22 +1,21 @@
 package calculations.cilveki.ai;
 
-import calculations.Location;
 import calculations.cilveki.Cilveks;
 
 public class FarRange {
 
-    static boolean main(Cilveks cilveks, Location location){
+    static boolean main(String vards){
         boolean nolemts=false;
 
         //      cilvçku apskats
-        cilvekuApskats(cilveks);
+        cilvekuApskats(vards);
         //      loot apskats
-        lietuApskats(cilveks, location);
+        lietuApskats(vards);
 
         return nolemts;
     }
 
-    private static boolean cilvekuApskats(Cilveks cilveks){
+    private static boolean cilvekuApskats(String vards){
         boolean nolemts=false;
 
 
@@ -101,7 +100,7 @@ public class FarRange {
         return nolemts;
     }
 
-    private static boolean lietuApskats(Cilveks cilveks, Location location){
+    private static boolean lietuApskats(String vards){
         boolean nolemts = false;
 
             //ðeit paredzams lielâ  redzesloka virspusçjais redzesloks
