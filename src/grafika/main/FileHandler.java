@@ -1,7 +1,5 @@
 package grafika.main;
 
-import userInterface.Dati;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -49,8 +47,8 @@ public class FileHandler {
         return null;
     }
 
-    public static void loadSettings(userInterface.Dati dati, JFrame ekrans){
-        String filePath = userInterface.Dati.settingsFileLocation + userInterface.Dati.settingsFileName;
+    public static void loadSettings(Dati dati, JFrame ekrans){
+        String filePath = Dati.settingsFileLocation + Dati.settingsFileName;
         if (checkFileStatus(filePath)) {
             List<String> readLines = readFile(filePath);
             if (readLines != null) {
@@ -87,7 +85,7 @@ public class FileHandler {
         };
     }
 
-    private static void setLoadedSettings(String[] settingsList, userInterface.Dati dati, JFrame ekrans){
+    private static void setLoadedSettings(String[] settingsList, Dati dati, JFrame ekrans){
         System.out.println("Number of relevant lines: " + settingsList.length);
         for (int i=0; i<settingsList.length; i++){
             String[] splitString = settingsList[i].split(valueSeparator);
@@ -105,8 +103,8 @@ public class FileHandler {
         }
     }
 
-    public static void saveSettings(userInterface.Dati dati){
-        String filePath = userInterface.Dati.settingsFileLocation + Dati.settingsFileName;
+    public static void saveSettings(Dati dati){
+        String filePath = Dati.settingsFileLocation + Dati.settingsFileName;
 
         String[] headerLines = new String[]{},
                 footerLines = new String[]{};

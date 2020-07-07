@@ -1,11 +1,9 @@
 package grafika.main;
 
-import calculations.Main;
 import grafika.KonstantesGrafikai;
 import grafika.main.grafikaParts.DrawManager;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Dati {
@@ -31,51 +29,52 @@ public class Dati {
 			drawPanel3 = true,
 			drawSampleImages = false;
 
-
-	// --------------------
-	//zemâk par centrâlâ cilvçku tablo Parametriem (no vecâ varianta)
-
-	protected boolean tablo2Draw=false;
-
-	protected int tablo2x0=280, tablo2y0=tablo1y0, tablo2rindasPlatums=14;
-
-	protected int tablo2platums1=200; //platums1
-	protected int tablo2platums2=130; //platums2
-	protected int tablo2platumsN=80; //platumsN
-
-	protected Color tablo2krasaDefault, tablo2krasaCritical; //paðas krâsas nosaka initialize() ciklâ
-
-
-	// --------------------
-	//zemâk par atïauto krâsu paneli
-
-	protected boolean colorPanelDraw=false;
-	protected Color colorPanelColor=Color.lightGray; //krâsu apïa kontûras krâsa
-	protected int colorPanelX0=10, colorPanelY0=380, colorPanelRadiuss=50;
-
-
-	// --------------------
-	//zemâk par kartes zîmçðanu
-
-	public boolean miniMapDraw=true, miniMapDrawInfo=true; //kartes zîmçðana vispâr un informâcija tai apakðâ
-	public int miniMapX=tablo2x0, miniMapY=tablo2y0-15,
-			miniMapPlatums=ekranaPlatums-miniMapX-50,
-			miniMapAugstums=ekranaAugstums-miniMapY-50;
-
-
-	// --------------------
-	//zemâk par centrâlâ (kartes diagnostikas) tablo Parametriem
-
-	protected boolean tablo3Draw=false;
-	protected Color tablo3krasa=Color.white;
-
+//	//zemâk vecie parametri
+//	// --------------------
+//	//zemâk par centrâlâ cilvçku tablo Parametriem (no vecâ varianta)
+//
+//	protected boolean tablo2Draw=false;
+//
+//	protected int tablo2x0=280, tablo2y0=tablo1y0, tablo2rindasPlatums=14;
+//
+//	protected int tablo2platums1=200; //platums1
+//	protected int tablo2platums2=130; //platums2
+//	protected int tablo2platumsN=80; //platumsN
+//
+//	protected Color tablo2krasaDefault, tablo2krasaCritical; //paðas krâsas nosaka initialize() ciklâ
+//
+//
+//	// --------------------
+//	//zemâk par atïauto krâsu paneli
+//
+//	protected boolean colorPanelDraw=false;
+//	protected Color colorPanelColor=Color.lightGray; //krâsu apïa kontûras krâsa
+//	protected int colorPanelX0=10, colorPanelY0=380, colorPanelRadiuss=50;
+//
+//
+//	// --------------------
+//	//zemâk par kartes zîmçðanu
+//
+//	public boolean miniMapDraw=true, miniMapDrawInfo=true; //kartes zîmçðana vispâr un informâcija tai apakðâ
+//	public int miniMapX=tablo2x0, miniMapY=tablo2y0-15,
+//			miniMapPlatums=ekranaPlatums-miniMapX-50,
+//			miniMapAugstums=ekranaAugstums-miniMapY-50;
+//
+//
+//	// --------------------
+//	//zemâk par centrâlâ (kartes diagnostikas) tablo Parametriem
+//
+//	protected boolean tablo3Draw=false;
+//	protected Color tablo3krasa=Color.white;
+//
+//	//augstâk vecie parametri
 
 	// --------------------
 	//zemâk jaunâs funkcijas paòemtas no TimeScheduler
 
 	public HashMap<String, Image> images = new HashMap<>();
-	static final String imageLocation = "src/server/userInterface/samplePictures/",
-			settingsFileLocation = "src/server/userInterface/",
+	static final String imageLocation = "src/grafika/main/samplePictures/",
+			settingsFileLocation = "src/grafika/main/",
 			settingsFileName = "Settings.txt";
 
 	public String playerFocusName="nav";
