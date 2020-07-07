@@ -49,7 +49,7 @@ versija 0.10 - may/june 2020
 		separate windows for setup and player view
 		option to set pause
 		good framerate calculator class added to each thread
-	all main calculations brought to separate package
+	all main server.calculations brought to separate package
 	graphics updates
 		map in setup/diagnostics window
 		fixed playerview window layout and graphics (merogs & focus (shifting view depending on location))
