@@ -20,7 +20,7 @@ public class Grafika extends JPanel {
 
 		grafika = new Grafika();
 
-		ekrans.getContentPane().add(BorderLayout.CENTER, grafika);
+		ekrans.getContentPane().add(grafika);
 		ekrans.setResizable(true);
 		ekrans.setSize(thread.dati.layout.ekranaPlatums, thread.dati.layout.ekranaAugstums);
 		ekrans.setLocation(Layout.ekransLocation[0], Layout.ekransLocation[1]);
@@ -73,7 +73,7 @@ public class Grafika extends JPanel {
 //
 //		int w=0; //uzrakstîto rindu skaits
 //
-//		CalculationTimeCalculator calculationTimeCalculatorTemp=server.calculations.Main.calculationTimeCalculator; //informâcija par galvenâ thread statusu
+//		CalculationTimeCalculator calculationTimeCalculatorTemp=server.calculations.CalculationsThread.calculationTimeCalculator; //informâcija par galvenâ thread statusu
 //		if (thread.dati.drawCalculationTime) {
 //			g.drawString("Par aprçíinu Thread:", nobideX,w*tekstaPlatums+nobideY); w++;
 //			g.drawString("CalcTimeMax("+calculationTimeCalculatorTemp.timeCalculationFrequency+"): "+
@@ -81,7 +81,7 @@ public class Grafika extends JPanel {
 //			g.drawString("TotalFrameTime("+calculationTimeCalculatorTemp.timeCalculationFrequency+"): "+
 //					calculationTimeCalculatorTemp.totalFrameTimeMax, nobideX,w*tekstaPlatums+nobideY); w++;
 //		}
-//		g.drawString("Pauze: "+server.calculations.Main.pauze,nobideX,w*tekstaPlatums+nobideY);w++;
+//		g.drawString("Pauze: "+server.calculations.CalculationsThread.pauze,nobideX,w*tekstaPlatums+nobideY);w++;
 //		g.drawString("---------------",nobideX,w*tekstaPlatums+nobideY);w++;
 //
 //		//tekoðâ informâcija par komandâm
@@ -137,7 +137,7 @@ public class Grafika extends JPanel {
 ////				invSize=cilveks.inventory.size();
 ////
 ////
-////				if (cilveks.paika<cilveks.paikaMin- Cilveku.paikaReductionDefault) {
+////				if (cilveks.paika<cilveks.paikaMin- CilvekuKonstantes.paikaReductionDefault) {
 ////					g.setColor(thread.dati.tablo2krasaCritical);
 ////				}
 ////			}
@@ -174,17 +174,17 @@ public class Grafika extends JPanel {
 //				wy = (int)(KonstantesUniversal.mapChunkW * merogs),
 //				tekstaPlatums = 15;
 //		g.setColor(thread.dati.tablo3krasa);
-//		for(int[] chunkXY = {0,0}; chunkXY[0]< Main.laukums.size(); chunkXY[0]++){
-//			for(chunkXY[1]=0; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++){
+//		for(int[] chunkXY = {0,0}; chunkXY[0]< CalculationsThread.laukums.size(); chunkXY[0]++){
+//			for(chunkXY[1]=0; chunkXY[1]<CalculationsThread.laukums.get(chunkXY[0]).size(); chunkXY[1]++){
 //				int x = x0 + chunkXY[0] * wx,
 //						y = y0 + chunkXY[1] * wy;
 //				int w=0;
-//				g.drawString("lietas: "+Main.laukums.get(chunkXY[0]).get(chunkXY[1]).lietas.size(),
+//				g.drawString("lietas: "+CalculationsThread.laukums.get(chunkXY[0]).get(chunkXY[1]).lietas.size(),
 //						x,y + w * tekstaPlatums); w++;
-//				g.drawString("players: "+Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(),
+//				g.drawString("players: "+CalculationsThread.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(),
 //						x,y + w * tekstaPlatums); w++;
-//				for (int i=0; i<Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
-//					g.drawString(Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.get(i).vards,
+//				for (int i=0; i<CalculationsThread.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
+//					g.drawString(CalculationsThread.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.get(i).vards,
 //							x,y + w * tekstaPlatums); w++;
 //				}
 //			}

@@ -1,37 +1,35 @@
 package server.calculations;
 
-import localClient.ClientThread;
 import server.calculations.cilveki.CilvekuManager;
 import server.calculations.komandas.Komanda;
-import server.calculations.konstantes.Cilveku;
+import server.calculations.cilveki.CilvekuKonstantes;
 import server.calculations.lietas.LietuTips;
+import server.dataBase.DataBase;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Initializator {
     public static void main(String versija){
-        KonstantesUniversal.versija = versija;
+        DataBase.versija = versija;
         LietuTips.generateLietuTipi();
 
         initializeLaukums();
         initializeKomandas();
 
-        CilvekuManager.pirmieSpeletaji(Cilveku.sakumaCilveki, Cilveku.randomKomandas); //jauno spçlçtâju ìenerçðana
+        CilvekuManager.pirmieSpeletaji(CilvekuKonstantes.sakumaCilveki, CilvekuKonstantes.randomKomandas); //jauno spçlçtâju ìenerçðana
 
         System.out.println("CalculationsThread: Initialization complete.");
-
-        new ClientThread(); //palaiþ grafisko daïu
     }
 
     private static void initializeLaukums() {
         int x, y;
-        for (x = 0; x < KonstantesUniversal.mapChunkCountX; x++){
-            for (y = 0; y < KonstantesUniversal.mapChunkCountY; y++){
+        for (x = 0; x < DataBase.mapChunkCountX; x++){
+            for (y = 0; y < DataBase.mapChunkCountY; y++){
                 List<Integer> xy = new ArrayList<>();
                 xy.add(x);
                 xy.add(y);
-                Main.laukums.put(xy, new MapChunk());
+                DataBase.laukums.put(xy, new MapChunk());
             }
         }
 

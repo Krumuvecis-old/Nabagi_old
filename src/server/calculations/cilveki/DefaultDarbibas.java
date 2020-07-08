@@ -1,13 +1,12 @@
 package server.calculations.cilveki;
 
-import server.calculations.Main;
-import server.calculations.konstantes.Cilveku;
+import server.dataBase.DataBase;
 
 public class DefaultDarbibas {
 
     protected static void main(){
-        for(String vards : Main.cilvekuList.keySet()){
-            Cilveks cilveks = Main.cilvekuList.get(vards);
+        for(String vards : DataBase.cilvekuList.keySet()){
+            Cilveks cilveks = DataBase.cilvekuList.get(vards);
 
             //esanaNoInventory(cilveks);
 
@@ -31,20 +30,20 @@ public class DefaultDarbibas {
 
             if (paikaNumuri.length>0) {
 
-                double apests=Math.min(Cilveku.esanasDaudzums, cilveks.inventory.get(paikaNumuri[0]).daudzums);
+                double apests=Math.min(CilvekuKonstantes.esanasDaudzums, cilveks.inventory.get(paikaNumuri[0]).daudzums);
                 cilveks.inventory.get(paikaNumuri[0]).daudzums-=apests;
 
                 cilveks.paika = Math.min(cilveks.paikaMax,
-                        cilveks.paika + apests * (cilveks.paikaMax / Cilveku.esanasDaudzums));
+                        cilveks.paika + apests * (cilveks.paikaMax / CilvekuKonstantes.esanasDaudzums));
 
             } else cilveks.navKoEst = true;
         }
     }
 
     private static void healingAndHunger(Cilveks cilveks) {
-        double dHpRegen=Cilveku.healingRateDefault,
-                dHpHungry=Cilveku.healthReductionRate,
-                paikaD=Cilveku.paikaReductionDefault;
+        double dHpRegen= CilvekuKonstantes.healingRateDefault,
+                dHpHungry= CilvekuKonstantes.healthReductionRate,
+                paikaD= CilvekuKonstantes.paikaReductionDefault;
 
         if (cilveks.paika>=cilveks.paikaMin) { //ja pietiek pârtika, veseïojas
             if(cilveks.hp<cilveks.hpmax) cilveks.hp+=dHpRegen;

@@ -104,7 +104,7 @@ public class Dati {
 				pogasPlatums=100, pogasAugstums=30, pogasSpraugaY=5, w=0;
 
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSpraugaY)*w,pogasPlatums,pogasAugstums,"Pauze",0); w++;
-		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSpraugaY)*w,pogasPlatums,pogasAugstums,"Cilveku info",10); w++;
+		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSpraugaY)*w,pogasPlatums,pogasAugstums,"CilvekuKonstantes info",10); w++;
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSpraugaY)*w,pogasPlatums,pogasAugstums,"Redzesloki",3); w++;
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSpraugaY)*w,pogasPlatums,pogasAugstums,"Loot info",5); w++;
 		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSpraugaY)*w,pogasPlatums,pogasAugstums,"Reset",0); w++;
@@ -141,12 +141,12 @@ public class Dati {
 //	private void getPlayerTotalList(){
 //		cilvekuPilnaisList = new ArrayList<Location>();
 //
-//		for(int[] chunkXY = {0, 0}; chunkXY[0]< Main.laukums.size(); chunkXY[0]++) {
-//			for( ; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
+//		for(int[] chunkXY = {0, 0}; chunkXY[0]< CalculationsThread.laukums.size(); chunkXY[0]++) {
+//			for( ; chunkXY[1]<CalculationsThread.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
 //
 //
 //
-//				for (int i=0; i<Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
+//				for (int i=0; i<CalculationsThread.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
 //
 //					Location cilveks = new Location();
 //					cilveks.chunkXY=chunkXY;
@@ -160,11 +160,11 @@ public class Dati {
 
 //	public Cilveks findPlayer(){
 //		Cilveks cilveks = null;
-//		for(int[] chunkXY = {0,0}; chunkXY[0]<Main.laukums.size(); chunkXY[0]++){
-//			for(chunkXY[1]=0; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++){
-//				for(int i=0; i<Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
-//					if(Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.get(i).vards.equals(playerName)){
-//						cilveks = Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.get(i);
+//		for(int[] chunkXY = {0,0}; chunkXY[0]<CalculationsThread.laukums.size(); chunkXY[0]++){
+//			for(chunkXY[1]=0; chunkXY[1]<CalculationsThread.laukums.get(chunkXY[0]).size(); chunkXY[1]++){
+//				for(int i=0; i<CalculationsThread.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
+//					if(CalculationsThread.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.get(i).vards.equals(playerName)){
+//						cilveks = CalculationsThread.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.get(i);
 //					}
 //				}
 //			}

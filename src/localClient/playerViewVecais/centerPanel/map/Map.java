@@ -2,8 +2,8 @@ package localClient.playerViewVecais.centerPanel.map;
 
 public class Map {
 
-//    private ArrayList<Komanda> komandasList = server.calculations.Main.komandasList;
-//    private ArrayList<ArrayList<server.calculations.MapChunk>> laukums = server.calculations.Main.laukums;
+//    private ArrayList<Komanda> komandasList = server.calculations.CalculationsThread.komandasList;
+//    private ArrayList<ArrayList<server.calculations.MapChunk>> laukums = server.calculations.CalculationsThread.laukums;
 //
 //    private Terrain drawTerrain = new Terrain();
 //    private Loot drawLoot = new Loot();

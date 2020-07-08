@@ -1,6 +1,6 @@
 package server.calculations.lietas;
 
-import server.calculations.Main;
+import server.dataBase.DataBase;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class Lieta {
 	}
 
 	public void drop(List<Integer> chunkXY){
-		Main.laukums.get(chunkXY).lietas.add(this);
+		DataBase.laukums.get(chunkXY).lietas.add(this);
 	}
 
 }

@@ -20,7 +20,7 @@ public class MiscDarbibas {
 //
 //        //gatavîbas update
 //        double dGataviba=1;
-//        if(cilveks.gataviba<= Cilveku.maxGataviba-dGataviba) cilveks.gataviba+=dGataviba;
+//        if(cilveks.gataviba<= CilvekuKonstantes.maxGataviba-dGataviba) cilveks.gataviba+=dGataviba;
 //    }
 //
 //
@@ -28,7 +28,7 @@ public class MiscDarbibas {
 //        cilveks.darbibas.darbiba="atputa";
 //        cilveks.darbibas.vKoef=0.4;
 //        Random r = new Random();
-//        if (r.nextDouble()<Cilveku.omChangeRate) { //periodiski nomaina kustîbas virzienu
+//        if (r.nextDouble()<CilvekuKonstantes.omChangeRate) { //periodiski nomaina kustîbas virzienu
 //            cilveks.darbibas.fi = cilveks.xyz.fi + cilveks.omega*2*(-0.5+r.nextDouble());
 //        }
 //    }

@@ -1,9 +1,8 @@
 package server.calculations.komandas;
 
-import server.calculations.Main;
 import server.calculations.cilveki.Cilveks;
-import server.calculations.konstantes.Formulas;
-import server.calculations.konstantes.Komandu;
+import server.calculations.Formulas;
+import server.dataBase.DataBase;
 
 import java.awt.Color;
 import java.util.Arrays;
@@ -25,8 +24,8 @@ public class Komanda {
 	public Komanda(String _galvenais){
 		galvenais = _galvenais;
 
-		if(Main.komandasList.size() == 0){ //pati pirmâ komanda
-			krasa = Komandu.komandasColorDefault;
+		if(DataBase.komandasList.size() == 0){ //pati pirmâ komanda
+			krasa = KomanduKonstantes.komandasColorDefault;
 		} else {
 			biedri.put(_galvenais, new Biedrs(new int[]{1, 3}));
 			krasa = assignColor();
@@ -38,10 +37,10 @@ public class Komanda {
 
 	public static String jaunaKomanda(String _galvenais){
 		String nosaukums;
-		if(Main.komandasList.size()==0) nosaukums = Komandu.komandaNosaukumsFirst;
-		else nosaukums = Komandu.komandaNosaukumsDefault + maxKomanda;
+		if(DataBase.komandasList.size()==0) nosaukums = KomanduKonstantes.komandaNosaukumsFirst;
+		else nosaukums = KomanduKonstantes.komandaNosaukumsDefault + maxKomanda;
 
-		Main.komandasList.put(nosaukums, new Komanda(_galvenais));
+		DataBase.komandasList.put(nosaukums, new Komanda(_galvenais));
 		return nosaukums;
 	}
 
@@ -55,7 +54,7 @@ public class Komanda {
 
 	void playerCleanup(String nosaukums){
 		for(String vards : biedri.keySet())
-			if ((!Main.cilvekuList.containsKey(vards)) || (!Main.cilvekuList.get(vards).komanda.equals(nosaukums)))
+			if ((!DataBase.cilvekuList.containsKey(vards)) || (!DataBase.cilvekuList.get(vards).komanda.equals(nosaukums)))
 				pamestKomandu(vards);
 	}
 
@@ -65,7 +64,7 @@ public class Komanda {
 		double bagatiba = 0;
 
 		for (String vards : biedri.keySet()) {
-			Cilveks cilveks = Main.cilvekuList.get(vards);
+			Cilveks cilveks = DataBase.cilvekuList.get(vards);
 
 			if(cilveks.komanda.equals(komandasNosaukums)) { //pârbauda vai cilvçks tieðâm ir biedrs
 
@@ -88,25 +87,25 @@ public class Komanda {
 		//pârbauda kuras krâsas komandâm ir nepieejamas
 
 		double[] bannedList; //komandâm pavisam aizliegtâs krâsas
-		if (Komandu.komandasBannedColors) {
+		if (KomanduKonstantes.komandasBannedColors) {
 			Random rand=new Random();
-			bannedList = Komandu.komandasBannedColorList;
+			bannedList = KomanduKonstantes.komandasBannedColorList;
 			bannedList[0]=rand.nextDouble(); //lai èakarçtu visu sadalîjumu
 			bannedList[1]=rand.nextDouble(); //lai èakarçtu visu sadalîjumu
 			bannedList[2]=rand.nextDouble(); //lai èakarçtu visu sadalîjumu
 		} else bannedList = new double[0];
 
 
-		double[] colorList = new double[Main.komandasList.size() + bannedList.length]; //kopçjais nepieejamo krâsu saraksts
+		double[] colorList = new double[DataBase.komandasList.size() + bannedList.length]; //kopçjais nepieejamo krâsu saraksts
 		int j = 0;
-		for (String nosaukums : Main.komandasList.keySet()) { //nolasa visu esoðo komandu krâsas un saliek sarakstâ
-			Color krasa = Main.komandasList.get(nosaukums).krasa;
+		for (String nosaukums : DataBase.komandasList.keySet()) { //nolasa visu esoðo komandu krâsas un saliek sarakstâ
+			Color krasa = DataBase.komandasList.get(nosaukums).krasa;
 			colorList[j] = Formulas.getHue(krasa);
 			j++;
 		}
 
 		for (int i=0; i<bannedList.length; i++) { //saliek sarakstâ visas pavisam aizliegtâs krâsas
-			colorList[i + Main.komandasList.size()] = bannedList[i];
+			colorList[i + DataBase.komandasList.size()] = bannedList[i];
 		}
 
 		return colorList;

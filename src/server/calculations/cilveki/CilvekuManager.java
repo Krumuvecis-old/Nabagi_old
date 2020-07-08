@@ -4,20 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import server.calculations.KonstantesUniversal;
 import server.calculations.cilveki.ai.CilvekuAI;
-import server.calculations.konstantes.Cilveku;
-import server.calculations.Main;
-import server.calculations.konstantes.Komandu;
+import server.calculations.komandas.KomanduKonstantes;
+import server.dataBase.DataBase;
 
 
 public class CilvekuManager {
 
 	public static void main() {
-		if(Main.cilvekuList.size() > Cilveks.rekords)
-			Cilveks.rekords = Main.cilvekuList.size(); //rekorda update
+		if(DataBase.cilvekuList.size() > Cilveks.rekords)
+			Cilveks.rekords = DataBase.cilvekuList.size(); //rekorda update
 
-		for (String vards : Main.cilvekuList.keySet()) galvenaisApskats(vards); //sadursmes un kontrolçjamâs darbîbas
+		for (String vards : DataBase.cilvekuList.keySet()) galvenaisApskats(vards); //sadursmes un kontrolçjamâs darbîbas
 
 		DefaultDarbibas.main(); //healing&hunger, nâvespârbaude, kustîba utml
 	}
@@ -26,7 +24,7 @@ public class CilvekuManager {
 
 		lootApskatsSadursmei(vards);
 
-		if (!Main.cilvekuList.get(vards).autoPilot) {
+		if (!DataBase.cilvekuList.get(vards).autoPilot) {
 			//spçlçtâjs kontrolç cilvçku
 			System.out.println("spçlçtâja paðvadîbas funkcija vçl nav gatava");
 
@@ -38,12 +36,12 @@ public class CilvekuManager {
 //		Location location = Cilveks.cilvekuListPilnais.get(numurs);
 //		Cilveks cilveks = Cilveks.getPlayer(location);
 //
-//		double resnums=Cilveku.resnumaKoefic*cilveks.hpmax;
+//		double resnums=CilvekuKonstantes.resnumaKoefic*cilveks.hpmax;
 //
 //		int chunkViewDistance=1; //0 - redz tikai savu chunk, 1 - redz 1 uz visâm pusçm
 //		for(int[] dChunkXY={-chunkViewDistance,-chunkViewDistance}; dChunkXY[0]<=chunkViewDistance; dChunkXY[0]++){
 //			for(dChunkXY[1]=-chunkViewDistance; dChunkXY[1]<=chunkViewDistance; dChunkXY[1]++){
-//				MapChunk chunk = Main.laukums.get(location.chunkXY[0]+dChunkXY[0]).get(location.chunkXY[1]+dChunkXY[1]);
+//				MapChunk chunk = CalculationsThread.laukums.get(location.chunkXY[0]+dChunkXY[0]).get(location.chunkXY[1]+dChunkXY[1]);
 //
 //				for(int i = 0; i < chunk.lietas.size(); i++){
 //					Lieta lieta = chunk.lietas.get(i);
@@ -82,31 +80,31 @@ public class CilvekuManager {
 		Random r = new Random();
 
 		for(int i=0; i<skaits; i++) {
-			String vards = Cilveku.vardsDefault + (Cilveks.maxCilveks + 1);
+			String vards = CilvekuKonstantes.vardsDefault + (Cilveks.maxCilveks + 1);
 
-			double x = KonstantesUniversal.mapChunkW * r.nextDouble(),
-					y = KonstantesUniversal.mapChunkW * r.nextDouble(),
+			double x = DataBase.mapChunkW * r.nextDouble(),
+					y = DataBase.mapChunkW * r.nextDouble(),
 					v = 0,
 					fi = 360 * r.nextDouble();
 
 			List<Integer> chunkXY = new ArrayList<>();
-			chunkXY.add(r.nextInt(KonstantesUniversal.mapChunkCountX)); //x
-			chunkXY.add(r.nextInt(KonstantesUniversal.mapChunkCountY)); //y
+			chunkXY.add(r.nextInt(DataBase.mapChunkCountX)); //x
+			chunkXY.add(r.nextInt(DataBase.mapChunkCountY)); //y
 
 			Koord xyz = new Koord(x, y, v, fi, chunkXY);
 
-			double vmax = Cilveku.vmax,
-					omega = Cilveku.ommax;
+			double vmax = CilvekuKonstantes.vmax,
+					omega = CilvekuKonstantes.ommax;
 
-			double hpmax = Cilveku.hpmax,
+			double hpmax = CilvekuKonstantes.hpmax,
 					hp = hpmax * (0.5 + 0.5 * r.nextDouble()),
-					paika = Cilveku.paikaMax;
+					paika = CilvekuKonstantes.paikaMax;
 
-			double R1 = Cilveku.RMax * (0.5 + 0.5 * r.nextDouble()),
-					R2 = Cilveku.RMax * Cilveku.R2koefic * (0.5 + 0.5 * r.nextDouble());
+			double R1 = CilvekuKonstantes.RMax * (0.5 + 0.5 * r.nextDouble()),
+					R2 = CilvekuKonstantes.RMax * CilvekuKonstantes.R2koefic * (0.5 + 0.5 * r.nextDouble());
 
-			double brunas = Cilveku.brunasMin + (Cilveku.brunasMax - Cilveku.brunasMin) * r.nextDouble(),
-					stiprums = Cilveku.stiprumsMin + (Cilveku.stiprumsMax - Cilveku.stiprumsMin) * r.nextDouble(),
+			double brunas = CilvekuKonstantes.brunasMin + (CilvekuKonstantes.brunasMax - CilvekuKonstantes.brunasMin) * r.nextDouble(),
+					stiprums = CilvekuKonstantes.stiprumsMin + (CilvekuKonstantes.stiprumsMax - CilvekuKonstantes.stiprumsMin) * r.nextDouble(),
 					gataviba = 100,
 					drosme = 0.5 + r.nextDouble() / 2;
 
@@ -116,19 +114,19 @@ public class CilvekuManager {
 //
 //				double randomChance=0.5;
 //
-//				if (Main.komandasList.size()==0 || r.nextDouble()<randomChance) { // iespçja ka jauns spçlçtâjs taisîs  jaunu  komandu
+//				if (CalculationsThread.komandasList.size()==0 || r.nextDouble()<randomChance) { // iespçja ka jauns spçlçtâjs taisîs  jaunu  komandu
 //					KomanduApskats.jaunaKomanda(vards);
-//					komanda = Main.komandasList.get(Main.komandasList.size()-1).nosaukums;
+//					komanda = CalculationsThread.komandasList.get(CalculationsThread.komandasList.size()-1).nosaukums;
 //				} else { //pievienojas kâdai no jau esoðajâm
-//					komanda = Main.komandasList.get(1 + r.nextInt(Main.komandasList.size()-1)).nosaukums;
+//					komanda = CalculationsThread.komandasList.get(1 + r.nextInt(CalculationsThread.komandasList.size()-1)).nosaukums;
 //				}
 //			} else { // ja visi sâk nulles komandâ
-				komanda = Komandu.komandaNosaukumsFirst;
-				Main.komandasList.get(komanda).pievienotiesKomandai(vards);
+				komanda = KomanduKonstantes.komandaNosaukumsFirst;
+				DataBase.komandasList.get(komanda).pievienotiesKomandai(vards);
 				//te jâbût funkcijai kur katram anarhistam komandâ izveido biedra statusu
 //			}
 
-			Main.cilvekuList.put(vards,
+			DataBase.cilvekuList.put(vards,
 					new Cilveks(vards,
 							xyz, vmax, omega,
 							hp, hpmax, paika,

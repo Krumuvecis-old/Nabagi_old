@@ -9,8 +9,8 @@ public class Map {
 //
 //	public static void main(Graphics g, ClientThread threadTemp, Grafika localClient.grafika) { //pilnîgi visa karte
 //
-//		komandasList = Main.komandasList;
-//		laukums = Main.laukums;
+//		komandasList = CalculationsThread.komandasList;
+//		laukums = CalculationsThread.laukums;
 //
 //		thread = threadTemp;
 //

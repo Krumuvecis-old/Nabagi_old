@@ -1,8 +1,7 @@
 package server.calculations.cilveki;
 
-import server.calculations.Main;
-import server.calculations.konstantes.Cilveku;
 import server.calculations.lietas.Lieta;
+import server.dataBase.DataBase;
 
 public class Cilveks extends CilvekaParametri {
 
@@ -14,7 +13,7 @@ public class Cilveks extends CilvekaParametri {
 				   double _brunas, double _stiprums, double _gataviba, double _drosme,
 				   String _komanda){
 		xyz = _xyz;
-		Main.laukums.get(xyz.chunkXY).cilvekiList.add(vards); //pievieno spçlçtâju arî laukumam
+		DataBase.laukums.get(xyz.chunkXY).cilvekiList.add(vards); //pievieno spçlçtâju arî laukumam
 		vmax = _vmax;
 		omega = _omega;
 
@@ -47,8 +46,8 @@ public class Cilveks extends CilvekaParametri {
 	public void generateStartingInventory(){
 		double x = xyz.x, y = xyz.y;
 
-		inventory.add(new Lieta("Zelts", Cilveku.mantojumsCilvekamZelts, x, y));
-		inventory.add(new Lieta("Paika", Cilveku.mantojumsCilvekamPaika, x, y));
+		inventory.add(new Lieta("Zelts", CilvekuKonstantes.mantojumsCilvekamZelts, x, y));
+		inventory.add(new Lieta("Paika", CilvekuKonstantes.mantojumsCilvekamPaika, x, y));
 
 	}
 

@@ -1,7 +1,6 @@
 package server.calculations.cilveki;
 
-import server.calculations.KonstantesUniversal;
-import server.calculations.Main;
+import server.dataBase.DataBase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,25 +16,25 @@ class Kustiba {
 	
 	private static void lenkuParbaude(String vards) {
 		//leòíu noîsinâðana, lai bûtu optimâlâ diapazonâ no 0 lîdz 360
-		while (Main.cilvekuList.get(vards).xyz.fi < 0) Main.cilvekuList.get(vards).xyz.fi += 360;
-		while (Main.cilvekuList.get(vards).xyz.fi >= 360) Main.cilvekuList.get(vards).xyz.fi -= 360;
+		while (DataBase.cilvekuList.get(vards).xyz.fi < 0) DataBase.cilvekuList.get(vards).xyz.fi += 360;
+		while (DataBase.cilvekuList.get(vards).xyz.fi >= 360) DataBase.cilvekuList.get(vards).xyz.fi -= 360;
 	}
 
 	private static void kustiba(String vards) {
 
 		//âtruma  projekcijas
-		double vx = Main.cilvekuList.get(vards).xyz.v * Math.cos(Math.toRadians(Main.cilvekuList.get(vards).xyz.fi)),
-				vy = Main.cilvekuList.get(vards).xyz.v * Math.sin(Math.toRadians(Main.cilvekuList.get(vards).xyz.fi));
+		double vx = DataBase.cilvekuList.get(vards).xyz.v * Math.cos(Math.toRadians(DataBase.cilvekuList.get(vards).xyz.fi)),
+				vy = DataBase.cilvekuList.get(vards).xyz.v * Math.sin(Math.toRadians(DataBase.cilvekuList.get(vards).xyz.fi));
 
 		//kustîba pa asîm
-		Main.cilvekuList.get(vards).xyz.x += vx;
-		Main.cilvekuList.get(vards).xyz.y += vy;
+		DataBase.cilvekuList.get(vards).xyz.x += vx;
+		DataBase.cilvekuList.get(vards).xyz.y += vy;
 	}
 
 	private static void maluParbaude(String vards) { //situâcijas pie laukuma malâm
-		Cilveks cilveks = Main.cilvekuList.get(vards);
+		Cilveks cilveks = DataBase.cilvekuList.get(vards);
 
-		int platums = KonstantesUniversal.mapChunkW,
+		int platums = DataBase.mapChunkW,
 				chunkX = cilveks.xyz.chunkXY.get(0), //playera momentânais chunks
 				chunkY = cilveks.xyz.chunkXY.get(1);
 
@@ -46,32 +45,32 @@ class Kustiba {
 		if (cilveks.xyz.x < 0 ) { //rietumi
 			cilveks.xyz.x += platums;
 			chunkX--;
-			if (chunkX < 0) chunkX += KonstantesUniversal.mapChunkCountX;
+			if (chunkX < 0) chunkX += DataBase.mapChunkCountX;
 		}
 		if (cilveks.xyz.y < 0 ) { //ziemeïi
 			cilveks.xyz.y += platums;
 			chunkY--;
-			if (chunkY < 0) chunkY += KonstantesUniversal.mapChunkCountY;
+			if (chunkY < 0) chunkY += DataBase.mapChunkCountY;
 		}
 		if (cilveks.xyz.x >= platums) { //austrumi
 			cilveks.xyz.x -= platums;
 			chunkX++;
-			if (chunkX >= KonstantesUniversal.mapChunkCountX) chunkX -= KonstantesUniversal.mapChunkCountX;
+			if (chunkX >= DataBase.mapChunkCountX) chunkX -= DataBase.mapChunkCountX;
 		}
 		if (cilveks.xyz.y >= platums) { //dienvidi
 			cilveks.xyz.y -= platums;
 			chunkY++;
-			if (chunkY >= KonstantesUniversal.mapChunkCountY) chunkY -= KonstantesUniversal.mapChunkCountY;
+			if (chunkY >= DataBase.mapChunkCountY) chunkY -= DataBase.mapChunkCountY;
 		}
 
 		if(chunkX != chunk0.get(0) || chunkY != chunk0.get(1)){
 
-			Main.laukums.get(chunk0).cilvekiList.remove(vards); //jâizòem no vienas tabulas
+			DataBase.laukums.get(chunk0).cilvekiList.remove(vards); //jâizòem no vienas tabulas
 
 			List<Integer> chunkXY = new ArrayList<>();
 			chunkXY.add(chunkX);
 			chunkXY.add(chunkY);
-			Main.laukums.get(chunkXY).cilvekiList.add(vards); //jâieliek otrâ tabulâ
+			DataBase.laukums.get(chunkXY).cilvekiList.add(vards); //jâieliek otrâ tabulâ
 		}
 
 	}
@@ -81,7 +80,7 @@ class Kustiba {
 		// zemâk atdurðanâs pret malâm - ðo vçlâk varçs izmantot, kad pievienos çkas un sienas
 
 //		int augstums= KonstantesUniversal.laukumaAugstumsSum, platums=KonstantesUniversal.laukumaPlatumsSum, mala=KonstantesUniversal.mala;
-//		double resnums= Fizikas.resnumaKoefic*cilveks.hpmax;
+//		double resnums= FizikasKonstantes.resnumaKoefic*cilveks.hpmax;
 //
 //		if(cilveks.xyz.x<=mala+resnums/2) { //kreisâ mala
 //			cilveks.xyz.x=mala+resnums/2;

@@ -1,7 +1,6 @@
 package localClient.map;
 
-import server.calculations.KonstantesUniversal;
-import server.calculations.konstantes.Grafiskie;
+import server.dataBase.DataBase;
 
 import java.awt.*;
 
@@ -18,7 +17,7 @@ public class Terrain {
     }
 
     private static void drawLaukumaFons(Graphics g, int x0, int y0, int kartesPlatums, int kartesAugstums){
-        g.setColor(Grafiskie.laukumaKrasa); //uzzîmç laukumu
+        g.setColor(DataBase.laukumaKrasa); //uzzîmç laukumu
         g.fillRect(x0, y0, kartesPlatums, kartesAugstums);
     }
 
@@ -28,21 +27,21 @@ public class Terrain {
 
         if(drawChunks){ //uzzîmç chunk rûtiòas
 
-            int chunkCountX=KonstantesUniversal.mapChunkCountX,
-                    chunkCountY=KonstantesUniversal.mapChunkCountY;
+            int chunkCountX= DataBase.mapChunkCountX,
+                    chunkCountY= DataBase.mapChunkCountY;
 
             for(int i=0; i <= chunkCountY; i++){ //horizontâlâs lînijas
 
                 g.setColor(chunkColor);
-                int dyChunk=(int)(i * KonstantesUniversal.mapChunkW * merogs);
+                int dyChunk=(int)(i * DataBase.mapChunkW * merogs);
                 g.drawLine(x0, y0+dyChunk, x0+kartesPlatums, y0+dyChunk);
 
                 if(drawCells && i<chunkCountY ){
                     g.setColor(cellColor);
                     //uzzîmç cell rûtiòas
-                    for(int j=1; j < KonstantesUniversal.mapCellCount; j++){
+                    for(int j = 1; j < DataBase.mapCellCount; j++){
 
-                        int dyCell=dyChunk + (int)(j * KonstantesUniversal.mapCellW * merogs);
+                        int dyCell=dyChunk + (int)(j * DataBase.mapCellW * merogs);
                         g.drawLine(x0, y0+dyCell, x0+kartesPlatums, y0+dyCell);
 
 
@@ -55,15 +54,15 @@ public class Terrain {
             for(int i=0; i <= chunkCountX; i++){ //vertikâlâs lînijas
 
                 g.setColor(chunkColor);
-                int dxChunk=(int)(i * KonstantesUniversal.mapChunkW * merogs);
+                int dxChunk=(int)(i * DataBase.mapChunkW * merogs);
                 g.drawLine(x0 + dxChunk, y0, x0 + dxChunk, y0 + kartesAugstums);
 
                 if(drawCells && i< chunkCountX){
                     g.setColor(cellColor);
                     //uzzîmç cell rûtiòas
-                    for(int j=1; j < KonstantesUniversal.mapCellCount; j++){
+                    for(int j = 1; j < DataBase.mapCellCount; j++){
 
-                        int dxCell=dxChunk + (int)(j * KonstantesUniversal.mapCellW * merogs);
+                        int dxCell=dxChunk + (int)(j * DataBase.mapCellW * merogs);
                         g.drawLine(x0 + dxCell, y0, x0 + dxCell, y0 + kartesAugstums);
 
 

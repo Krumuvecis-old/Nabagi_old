@@ -1,10 +1,9 @@
 package server.calculations.cilveki;
 
-import server.calculations.Main;
 import server.calculations.komandas.Komanda;
-import server.calculations.konstantes.Cilveku;
-import server.calculations.konstantes.Formulas;
+import server.calculations.Formulas;
 import server.calculations.lietas.LietuTips;
+import server.dataBase.DataBase;
 
 import java.util.Random;
 
@@ -34,9 +33,9 @@ public class Darbibas {
     }
 
     public static void vairosanas(String _vards) {
-        Cilveks cilveks = Main.cilvekuList.get(_vards);
+        Cilveks cilveks = DataBase.cilvekuList.get(_vards);
 
-        String vards = Cilveku.vardsDefault + Cilveks.maxCilveks + 1;
+        String vards = CilvekuKonstantes.vardsDefault + Cilveks.maxCilveks + 1;
 
         Random r = new Random();
 
@@ -45,27 +44,27 @@ public class Darbibas {
                 0, 360*r.nextDouble(),
                 cilveks.xyz.chunkXY);
 
-        double vmax=Formulas.novirzeRandom(cilveks.vmax, Cilveku.dvMaxDzimstot),
-                omega=Formulas.novirzeRandom(cilveks.omega, Cilveku.dommaxDzimstot);
+        double vmax=Formulas.novirzeRandom(cilveks.vmax, CilvekuKonstantes.dvMaxDzimstot),
+                omega=Formulas.novirzeRandom(cilveks.omega, CilvekuKonstantes.dommaxDzimstot);
 
-        double hpmax=Cilveku.hpmax, hp=hpmax,
-                paika=Cilveku.paikaMax;
+        double hpmax= CilvekuKonstantes.hpmax, hp=hpmax,
+                paika= CilvekuKonstantes.paikaMax;
 
-        double R2=Formulas.novirzeRandom(cilveks.R2, Cilveku.dRDzimstot),
-                R1=Formulas.novirzeRandom(cilveks.R1, Cilveku.dRDzimstot);
+        double R2=Formulas.novirzeRandom(cilveks.R2, CilvekuKonstantes.dRDzimstot),
+                R1=Formulas.novirzeRandom(cilveks.R1, CilvekuKonstantes.dRDzimstot);
 
-        double brunas = Formulas.novirzeRandom(cilveks.brunas, Cilveku.dBrunasDzimstot),
-                stiprums = Formulas.novirzeRandom(cilveks.stiprums, Cilveku.dStiprumsDzimstot),
-                gataviba = Cilveku.maxGataviba,
+        double brunas = Formulas.novirzeRandom(cilveks.brunas, CilvekuKonstantes.dBrunasDzimstot),
+                stiprums = Formulas.novirzeRandom(cilveks.stiprums, CilvekuKonstantes.dStiprumsDzimstot),
+                gataviba = CilvekuKonstantes.maxGataviba,
                 drosme = cilveks.drosme;
 
         for(int i=0; i<cilveks.inventory.size(); i++) {
             switch (cilveks.inventory.get(i).tips) {
                 case "Zelts" -> cilveks.inventory.get(i).daudzums -=
-                        (Cilveku.cenaCilvekam + Cilveku.mantojumsCilvekamZelts) /
+                        (CilvekuKonstantes.cenaCilvekam + CilvekuKonstantes.mantojumsCilvekamZelts) /
                                 LietuTips.lietuTipi.get(cilveks.inventory.get(i).tips).zelts;
                 case "Paika" -> cilveks.inventory.get(i).daudzums -=
-                        Cilveku.mantojumsCilvekamPaika /
+                        CilvekuKonstantes.mantojumsCilvekamPaika /
                                 LietuTips.lietuTipi.get(cilveks.inventory.get(i).tips).paika;
             }
         }
@@ -73,8 +72,8 @@ public class Darbibas {
         String komanda;
 
         if (cilveks.komanda.equals("Anarhija") ||
-                (Main.komandasList.get(cilveks.komanda).biedri.get(_vards).rangs[1] == 0 &&
-                        r.nextDouble() < Cilveku.dzimstotDefectionChance)) { //izveido savu komandu
+                (DataBase.komandasList.get(cilveks.komanda).biedri.get(_vards).rangs[1] == 0 &&
+                        r.nextDouble() < CilvekuKonstantes.dzimstotDefectionChance)) { //izveido savu komandu
 
             komanda = Komanda.jaunaKomanda(_vards); //nosauc tçva vârdâ, tçvs bûs karalis
             cilveks.komanda = komanda;
@@ -83,7 +82,7 @@ public class Darbibas {
             komanda = cilveks.komanda;
         }
 
-        Main.cilvekuList.put(vards,
+        DataBase.cilvekuList.put(vards,
                 new Cilveks(vards,
                         xyz, vmax, omega,
                         hp, hpmax, paika,
@@ -91,7 +90,7 @@ public class Darbibas {
                         brunas, stiprums, gataviba, drosme,
                         komanda));
 
-        Main.komandasList.get(komanda).pievienotiesKomandai(vards); //pievieno tai paðai komandai
+        DataBase.komandasList.get(komanda).pievienotiesKomandai(vards); //pievieno tai paðai komandai
     }
 
     public static void buveMaju(){

@@ -1,20 +1,36 @@
 package server;
 
+import server.calculations.CalculationsThread;
+import server.userInterface.ServerUIThread;
+import localClient.ClientThread;
+
 public class ServerManager {
+    private static String versija;
 
-    public static void start(String versija) {
-        System.out.println("Server starting");
+    private static final String className = "ServerManager",
+            consoleOut = className + ": ";
 
-        server.calculations.Initializator.main(versija);
-        server.calculations.Main.main();
+    public static void launch(String _versija){
+        //šī metode tiek izsaukta pašā projekta sākumā - no UI palaidīs serveri
+        versija = _versija;
+        startServer(versija);
+        new ServerUIThread();
+    }
 
-        //new PanelGUI(); //varētu uztaisīt thread?
+    private static void startServer(String versija) {
+        if(CalculationsThread.running){
+            System.out.println(consoleOut + "Server already running!");
+        } else {
+            System.out.println(consoleOut + "Starting server.");
 
+            server.calculations.Initializator.main(versija); //inicializācija un sākuma ģeneratori
+            new CalculationsThread(); //pastāvīgs apskats
+        }
     }
 
     public static void newLocalClient(){
-        //new ClientThread(); //palaiž jaunu ClientThread
-        System.out.println("jauna lokāla klienta palaišanas placeholder");
+        System.out.println(consoleOut + "Starting new localClient.");
+        new ClientThread(); //palaiž grafisko daļu
     }
 
 }

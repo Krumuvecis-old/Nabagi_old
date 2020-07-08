@@ -190,10 +190,10 @@ public class Dati {
 //
 //		String[] namesList = new String[]{};
 //
-//		for(int[] chunkXY = {0, 0}; chunkXY[0]< Main.laukums.size(); chunkXY[0]++) {
-//			for(chunkXY[1]=0; chunkXY[1]<Main.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
-//				for (int i=0; i<Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
-//					String vards = Main.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.get(i).vards;
+//		for(int[] chunkXY = {0, 0}; chunkXY[0]< CalculationsThread.laukums.size(); chunkXY[0]++) {
+//			for(chunkXY[1]=0; chunkXY[1]<CalculationsThread.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
+//				for (int i=0; i<CalculationsThread.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
+//					String vards = CalculationsThread.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.get(i).vards;
 //					String[] namesListTemp = new String[namesList.length + 1];
 //					for(int j=0; j<namesList.length; j++){
 //						namesListTemp[j]=namesList[j];

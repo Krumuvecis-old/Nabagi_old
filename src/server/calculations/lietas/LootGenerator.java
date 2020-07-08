@@ -1,6 +1,7 @@
 package server.calculations.lietas;
 
-import server.calculations.KonstantesUniversal;
+import server.calculations.FizikasKonstantes;
+import server.dataBase.DataBase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ public class LootGenerator {
     private static void checkItemGeneration(String tips){
         //ìenerç katru tipu atseviðíi
 
-        double genRate = LietuTips.lietuTipi.get(tips).genKoef * KonstantesUniversal.overallGenRate;
+        double genRate = LietuTips.lietuTipi.get(tips).genKoef * FizikasKonstantes.overallGenRate;
         Random r=new Random();
 
         int reizes = (int)Math.floor(genRate);
@@ -25,8 +26,8 @@ public class LootGenerator {
 
         for (int i=0; i<reizes; i++) {
             List<Integer> chunkXY = new ArrayList<>();
-            chunkXY.add(r.nextInt(KonstantesUniversal.mapChunkCountX)); //x
-            chunkXY.add(r.nextInt(KonstantesUniversal.mapChunkCountY)); //y
+            chunkXY.add(r.nextInt(DataBase.mapChunkCountX)); //x
+            chunkXY.add(r.nextInt(DataBase.mapChunkCountY)); //y
 
             createLoot(tips, chunkXY);
         }
@@ -35,8 +36,8 @@ public class LootGenerator {
 
     private static void createLoot(String tips, List<Integer> chunkXY) { //uztaisa un iemet laukumâ vienu lietu
         Random r = new Random();
-        double x = r.nextDouble() * KonstantesUniversal.mapChunkW,
-                y = r.nextDouble() * KonstantesUniversal.mapChunkW;
+        double x = r.nextDouble() * DataBase.mapChunkW,
+                y = r.nextDouble() * DataBase.mapChunkW;
 
         double minimums = LietuTips.lietuTipi.get(tips).genMin,
                 maksimums = LietuTips.lietuTipi.get(tips).genMax,

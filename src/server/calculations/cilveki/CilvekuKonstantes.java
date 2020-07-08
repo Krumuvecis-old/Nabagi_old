@@ -1,6 +1,6 @@
-package server.calculations.konstantes;
+package server.calculations.cilveki;
 
-public class Cilveku {
+public class CilvekuKonstantes {
 
     public static String vardsDefault = "S";
     public static int maxGataviba = 100;

@@ -1,5 +1,7 @@
 package localClient.playerViewVecais;
 
+import server.calculations.CalculationsThread;
+
 import java.util.ArrayList;
 
 class ButtonActions {
@@ -19,7 +21,7 @@ class ButtonActions {
 
     private static void buttonNotikums(int i, Dati dati, PlayerThread thread){
         if (i==0) { //pirmâ poga
-            server.calculations.Main.pauze=!server.calculations.Main.pauze;
+            CalculationsThread.pauze=!CalculationsThread.pauze;
 
         } else if (i==1) { //otrâ poga
             dati.cilvekiDrawInfo=!dati.cilvekiDrawInfo;

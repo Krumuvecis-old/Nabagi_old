@@ -4,7 +4,7 @@ class Cilveki {
 
 //    protected static void main(Graphics g, ClientThread thread, int x0, int y0, double merogs, ArrayList<ArrayList<MapChunk>> laukums, ArrayList<Komanda> komandasList) { //papildinâjums kartei
 //
-//        double resnumaKoefic = Fizikas.resnumaKoefic;
+//        double resnumaKoefic = FizikasKonstantes.resnumaKoefic;
 //
 //        //iziet cauri visiem chunkiem
 //        for(int[] chunkXY={0,0}; chunkXY[0]<laukums.size(); chunkXY[0]++){
@@ -52,8 +52,8 @@ class Cilveki {
 //    private static int noteiktKomandasNumuru(Cilveks cilveks){
 //        int komanda=0;
 //
-//        for (int i = 0; i< Main.komandasList.size(); i++) {
-//            if(cilveks.komanda.equals(Main.komandasList.get(i).nosaukums)) {
+//        for (int i = 0; i< CalculationsThread.komandasList.size(); i++) {
+//            if(cilveks.komanda.equals(CalculationsThread.komandasList.get(i).nosaukums)) {
 //                komanda=i;
 //                break;
 //            }
@@ -65,7 +65,7 @@ class Cilveki {
 //    private static Color noteiktKrasuCilvekam(Cilveks cilveks, int komanda){
 //        double hpRatio=cilveks.hp/cilveks.hpmax;
 //
-//        return new Color(Color.HSBtoRGB( (float)Formulas.getHue(Main.komandasList.get(komanda).krasa),
+//        return new Color(Color.HSBtoRGB( (float)Formulas.getHue(CalculationsThread.komandasList.get(komanda).krasa),
 //                (float)KonstantesGrafikai.cilvekiKrasaSaturation,
 //                (float)(KonstantesGrafikai.cilvekiKrasaBrightnessMin + hpRatio *
 //                        (KonstantesGrafikai.cilvekiKrasaBrightnessMax - KonstantesGrafikai.cilvekiKrasaBrightnessMin)) ));

@@ -177,13 +177,13 @@ public class Button {
 			case "zvaigznePoga" -> thread.dati.drawSampleImages = !thread.dati.drawSampleImages;
 			case "panel3poga4" -> System.out.println("nospiesta panel3 ceturtâ poga");
 			case "panel3poga5" -> System.out.println("nospiesta panel3 piektâ poga");
-			default -> System.out.println("ServerUI reìistrçts nedefinçtas pogas notikums!");
+			default -> System.out.println("ServerUIThread reìistrçts nedefinçtas pogas notikums!");
 		}
 
 		//zemâk vecâs darbîbas
 
 //		if (i==0) { //pirmâ poga
-//			server.calculations.Main.pauze=!server.calculations.Main.pauze;
+//			server.calculations.CalculationsThread.pauze=!server.calculations.CalculationsThread.pauze;
 //
 //		} else if (i==1) { //otrâ poga
 //			dati.startPlayerView(false);

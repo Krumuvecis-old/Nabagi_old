@@ -2,9 +2,8 @@ package server.calculations.komandas;
 
 import java.util.Random;
 
-import server.calculations.Main;
 import server.calculations.cilveki.Cilveks;
-import server.calculations.konstantes.Komandu;
+import server.dataBase.DataBase;
 
 
 public class KomanduApskats {
@@ -13,26 +12,26 @@ public class KomanduApskats {
 	public static String komanduVestureLielakaKomanda="0";
 	
 	public static void main() {
-		for(String nosaukums : Main.komandasList.keySet()) { //apskata visas komandas
+		for(String nosaukums : DataBase.komandasList.keySet()) { //apskata visas komandas
 
-			Main.komandasList.get(nosaukums).playerCleanup(nosaukums); //atjauno biedru sarakstu tâlâkiem aprçíiniem
+			DataBase.komandasList.get(nosaukums).playerCleanup(nosaukums); //atjauno biedru sarakstu tâlâkiem aprçíiniem
 
-			if (nosaukums.equals(Komandu.komandaNosaukumsFirst)) continue; //pirmo komandu tâlâk neapskata
+			if (nosaukums.equals(KomanduKonstantes.komandaNosaukumsFirst)) continue; //pirmo komandu tâlâk neapskata
 			
 			
-			if (Main.komandasList.get(nosaukums).biedri.size()>0){ //pârbaudu, lai nav jâmaïâs cauri tukðajâm komandâm
+			if (DataBase.komandasList.get(nosaukums).biedri.size()>0){ //pârbaudu, lai nav jâmaïâs cauri tukðajâm komandâm
 				komanduVesture(nosaukums);
 				komanduApskats(nosaukums);
 			}
 
-			if (Main.komandasList.get(nosaukums).biedri.size()<=0){ //ðis ir komandu cleanup
-				Main.komandasList.remove(nosaukums);
+			if (DataBase.komandasList.get(nosaukums).biedri.size()<=0){ //ðis ir komandu cleanup
+				DataBase.komandasList.remove(nosaukums);
 			}
 		}
 	}
 
 	private static void komanduVesture(String nosaukums) {
-		Komanda komanda = Main.komandasList.get(nosaukums);
+		Komanda komanda = DataBase.komandasList.get(nosaukums);
 		int skaits = komanda.biedri.size();
 
 		if (skaits > komanda.rekords) { //nosaka personîgo rekordu
@@ -46,7 +45,7 @@ public class KomanduApskats {
 	}
 	
 	private static void komanduApskats(String nosaukums) {
-		Komanda komanda=Main.komandasList.get(nosaukums);
+		Komanda komanda= DataBase.komandasList.get(nosaukums);
 		
 		komanda.mekleKarali(nosaukums);
 		
@@ -57,16 +56,16 @@ public class KomanduApskats {
 	}
 
 	private static void navKaralis(String nosaukums) { //jâpârtaisa
-		Komanda komanda = Main.komandasList.get(nosaukums);
+		Komanda komanda = DataBase.komandasList.get(nosaukums);
 		Random r = new Random();
 
-		if(r.nextDouble() < Komandu.komandaIzjuktChance) { //iespçja, ka mirstot karalim, izjuks komanda
+		if(r.nextDouble() < KomanduKonstantes.komandaIzjuktChance) { //iespçja, ka mirstot karalim, izjuks komanda
 
 			for(String vards : komanda.biedri.keySet()) { //visus komandasbiedrus pârliek 0.komandâ
-				Cilveks cilveks = Main.cilvekuList.get(vards);
+				Cilveks cilveks = DataBase.cilvekuList.get(vards);
 
-				cilveks.komanda = Komandu.komandaNosaukumsFirst; //visus ieliek 0.komandâ
-				Main.komandasList.get(cilveks.komanda).pievienotiesKomandai(vards);
+				cilveks.komanda = KomanduKonstantes.komandaNosaukumsFirst; //visus ieliek 0.komandâ
+				DataBase.komandasList.get(cilveks.komanda).pievienotiesKomandai(vards);
 
 				komanda.pamestKomandu(vards); //izòem no biedru saraksta
 			}

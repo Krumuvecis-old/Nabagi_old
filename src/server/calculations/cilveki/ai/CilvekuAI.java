@@ -1,7 +1,7 @@
 package server.calculations.cilveki.ai;
 
 import server.calculations.cilveki.Cilveks;
-import server.calculations.konstantes.Formulas;
+import server.calculations.Formulas;
 
 public class CilvekuAI {
 

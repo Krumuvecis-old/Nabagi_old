@@ -19,7 +19,7 @@ public class CloseRange {
 //
 //        //tirdzniecîbas orderu pârskats
 //
-//        double defaultCena= Cilveku.paikaPriceDefault; //cenas apskats no atmiòas vçl nav ieviests
+//        double defaultCena= CilvekuKonstantes.paikaPriceDefault; //cenas apskats no atmiòas vçl nav ieviests
 //        //double apjomsMin=0.01;
 //
 //
@@ -31,11 +31,11 @@ public class CloseRange {
 //            if(nosaukums.equals("Zelts")) continue; //zeltu nevar pârdot un nevar arî nopirkt
 //
 //            if(nosaukums.equals("Paika")) {
-//                sellLimit=Cilveku.sellLimitPaika;
-//                buyLimit=Cilveku.buyLimitPaika;
+//                sellLimit=CilvekuKonstantes.sellLimitPaika;
+//                buyLimit=CilvekuKonstantes.buyLimitPaika;
 //            } else { //neklasificçtiem objektiem
-//                sellLimit=Cilveku.sellLimitDefault;
-//                buyLimit=Cilveku.buyLimitDefault;
+//                sellLimit=CilvekuKonstantes.sellLimitDefault;
+//                buyLimit=CilvekuKonstantes.buyLimitDefault;
 //            }
 //
 //            boolean tirgos=false, pirks=false;
@@ -92,7 +92,7 @@ public class CloseRange {
 //            for(dChunkXY[1]=0 ; dChunkXY[0]<=chunkViewRange; dChunkXY[0]++){
 //                int[] chunkXY2 = Location.normalizeXY(new int[]{location.chunkXY[0] + dChunkXY[0], location.chunkXY[1] + dChunkXY[1]});
 //
-//                ArrayList<Cilveks> cilvekiList = Main.laukums.get(chunkXY2[0]).get(chunkXY2[1]).cilvekiList;
+//                ArrayList<Cilveks> cilvekiList = CalculationsThread.laukums.get(chunkXY2[0]).get(chunkXY2[1]).cilvekiList;
 //
 //                for(int i=0; i<cilvekiList.size(); i++){
 //                    Location location2 = new Location();
@@ -105,8 +105,8 @@ public class CloseRange {
 //                            y2=cilveks2.xyz.y + dChunkXY[1] * KonstantesUniversal.mapChunkW;
 //
 //                    double distance = Math.hypot(x2-cilveks.xyz.x, y2-cilveks.xyz.y),
-//                            resnums=server.calculations.konstantes.Fizikas.resnumaKoefic * cilveks.hpmax,
-//                            resnumsJ=server.calculations.konstantes.Fizikas.resnumaKoefic * cilveks2.hpmax;
+//                            resnums=server.calculations.FizikasKonstantes.resnumaKoefic * cilveks.hpmax,
+//                            resnumsJ=server.calculations.FizikasKonstantes.resnumaKoefic * cilveks2.hpmax;
 //
 //                    if(distance<(resnums+resnumsJ)/2){ //pilnîga sadursme
 //                        double fiTemp= Formulas.lenkaNoteiksana(cilveks.xyz.x,cilveks.xyz.y,
