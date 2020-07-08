@@ -27,9 +27,6 @@ public class ServerUIThread implements Runnable {
             skaitlis++; //temporary - pârbaudei
             System.out.println(consoleOut + "Skaitlis: " + skaitlis);
 
-            if(!CalculationsThread.pauze) CalculationsThread.pauze = true; //servera nopauzçðanas opcija - jâpârnes uz pogâm
-            if(skaitlis<50) ServerManager.newLocalClient(); //jâpârnes uz pogâm
-
             try{
                 Thread.sleep(100);
             }catch (Exception e){
