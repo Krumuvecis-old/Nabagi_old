@@ -16,7 +16,7 @@ public class Grafika extends JPanel {
 	void initialize(ClientThread threadTemp) {
 		thread=threadTemp;
 		ekrans = new JFrame(thread.dati.windowTitle);
-		ekrans.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		ekrans.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		grafika = new Grafika();
 

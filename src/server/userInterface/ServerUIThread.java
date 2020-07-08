@@ -7,11 +7,13 @@ public class ServerUIThread implements Runnable {
     private static final String threadName = "ServerUIThread",
             consoleOut = threadName + ": ";
 
-    private static boolean running = false,
-            localClientStartedOnce = false;
+    private static boolean running = false;
+
+    static int skaitlis = 0; //temporary - pârbaudei
 
     public ServerUIThread(){
         running = true;
+        UserInterface.start(threadName); //inicializç grafiku
         new Thread(this).start();
     }
 
@@ -20,21 +22,21 @@ public class ServerUIThread implements Runnable {
         System.out.println(consoleOut + "Running.");
         while (running){
 
-            if(!CalculationsThread.pauze) CalculationsThread.pauze = true; //servera nopauzçðanas opcija
-            if(!localClientStartedOnce) startLocalClient();
+            UserInterface.refresh(); //grafikas update
+
+            skaitlis++; //temporary - pârbaudei
+            System.out.println(consoleOut + "Skaitlis: " + skaitlis);
+
+            if(!CalculationsThread.pauze) CalculationsThread.pauze = true; //servera nopauzçðanas opcija - jâpârnes uz pogâm
+            if(skaitlis<50) ServerManager.newLocalClient(); //jâpârnes uz pogâm
 
             try{
-                Thread.sleep(50);
+                Thread.sleep(100);
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
         System.out.println(consoleOut + "Finished.");
-    }
-
-    private static void startLocalClient(){
-        ServerManager.newLocalClient();
-        localClientStartedOnce = true;
     }
 
 }
