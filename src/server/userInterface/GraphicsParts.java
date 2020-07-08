@@ -5,7 +5,7 @@ import java.awt.*;
 
 abstract class GraphicsParts {
 
-    static JLabel label1, label2;
+    static JLabel label1, label2, label3;
 
     static class Ekrans extends JFrame {
 
@@ -44,7 +44,7 @@ abstract class GraphicsParts {
             graphicsPanel = new GrafikasPanelis(new int[]{0,0}, new int[]{150,150}, true, true);
             getContentPane().add(BorderLayout.CENTER, graphicsPanel);
 
-            graphicsPanel2 = new GrafikasPanelis(new int[]{100,100}, new int[]{150,150}, true, true);
+            graphicsPanel2 = new GrafikasPanelis(new int[]{100,100}, new int[]{200,200}, true, true);
             //getContentPane().add(BorderLayout.CENTER, graphicsPanel2);
 
             setVisible(true);
@@ -71,6 +71,17 @@ abstract class GraphicsParts {
             setLocation(location[0],location[1]);
             setSize(size[0], size[1]);
             setBackgroundColor(transparent);
+
+            label3 = new JLabel();
+
+            label3.setPreferredSize(new Dimension(50,50));
+            label3.setBackground(Color.red);
+            label3.setForeground(Color.green);
+
+            add(label3);
+
+            label3.setLocation(50, 50);
+
             //setVisible(true);
         }
 

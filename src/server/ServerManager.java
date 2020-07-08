@@ -17,6 +17,8 @@ public class ServerManager {
         versija = _versija;
         startServer(versija);
         new ServerUIThread();
+
+        newLocalClient(); //jāpārliek uz serverUI pogām, bet serverUI pagaidām nedarbojas
     }
 
     private static void startServer(String versija) {

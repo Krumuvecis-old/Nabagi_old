@@ -25,7 +25,7 @@ public class ServerUIThread implements Runnable {
             UserInterface.refresh(); //grafikas update
 
             skaitlis++; //temporary - pârbaudei
-            System.out.println(consoleOut + "Skaitlis: " + skaitlis);
+            //System.out.println(consoleOut + "Skaitlis: " + skaitlis);
 
             try{
                 Thread.sleep(100);
