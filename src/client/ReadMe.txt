@@ -1,0 +1,1 @@
+Šī pakete domāta multiplayerizācijas testēšanai
