@@ -1,7 +1,6 @@
 package localClient.grafika;
 
 import localClient.ClientThread;
-import localClient.InputActions;
 import localClient.grafika.grafikaParts.SamplePanel;
 
 ;
@@ -12,12 +11,21 @@ public class Button {
 	
 	public int x, y, wx, wy; //koordinâtas un platums&augstums
 	public boolean topAlignment, leftAlignment;
-	public String[] title; //teksts izvadei un reference darbîbai
+	public String title; //teksts izvadei un reference darbîbai
 	public int titleCorrection;
 	public boolean active=false, pressed=false, result=false; //statusi darbîbâm
+	public ActionReference reference;
+
+	public enum ActionReference {
+		head1, head2, head3, head4, head5, head6, head7, head8, head9,
+		left1, left2, left3, left4, left5, left6, left7, left8, left9,
+		center1, center2, center3, center4, center5, center6, center7, center8, center9,
+		right1, right2, right3, right4, right5,  right6, right7, right8, right9,
+		foot1, foot2, foot3, foot4, foot5,  foot6, foot7, foot8, foot9
+	}
 
 	private Button(int[] xy, boolean alignFromTop, boolean alignFromLeft,
-				   int[] size, String buttonTitle, String actionReference, int titleCorrectionX){
+				   int[] size, ActionReference actionReference, String buttonTitle, int titleCorrectionX){
 		x = xy[0];
 		if (!alignFromLeft) x += size[0];
 		y = xy[1];
@@ -26,25 +34,37 @@ public class Button {
 		leftAlignment = alignFromLeft;
 		wx = size[0];
 		wy = size[1];
-		title = new String[]{buttonTitle, actionReference};
+		reference = actionReference;
+		title = buttonTitle;
 		titleCorrection = titleCorrectionX;
 		active = false;
 		pressed = false;
 		result = false;
 	}
 
+	public static class ButtonDetails {
+		ActionReference reference;
+		String title;
+		int correction;
+		public ButtonDetails(ActionReference actionReference, String buttonTitle, int xCorrection){
+			reference = actionReference;
+			title = buttonTitle;
+			correction = xCorrection;
+		}
+	}
+
 	public static void addButtonList(SamplePanel samplePanel, boolean vertical,
 									 int[] offsetXY, boolean alignFromTop, boolean alignFromLeft,
 									 int[] buttonSize, int spacing,
-									 String[][] namesList){
-		for (int i=0; i<namesList.length; i++){
+									 ArrayList<ButtonDetails> buttonDetailList){
+		for (int i=0; i<buttonDetailList.size(); i++){
 			int[] buttonXY = new int[]{offsetXY[0], offsetXY[1]};
 
 			if (vertical) buttonXY[1] += (buttonSize[1] + spacing) * i; //vertikâla pogu kolonna
 			else buttonXY[0] += (buttonSize[0] + spacing) * i; //horizontâla pogu rinda
 
-			samplePanel.buttonList.add(new Button(buttonXY, alignFromTop, alignFromLeft,
-					buttonSize, namesList[i][0], namesList[i][1], 0));
+			samplePanel.buttonList.add(new Button(buttonXY, alignFromTop, alignFromLeft, buttonSize,
+					buttonDetailList.get(i).reference, buttonDetailList.get(i).title, buttonDetailList.get(i).correction));
 		}
 	}
 
@@ -81,8 +101,8 @@ public class Button {
 			if (active) g.setColor(contourColorActive); else g.setColor(contourColorDefault);
 			g.drawRect(x, y, wx, wy); //zîmç kontûru
 
-			String teksts = buttonList.get(i).title[0];
-			int tekstaGarums = buttonList.get(i).title[0].length();
+			String teksts = buttonList.get(i).title;
+			int tekstaGarums = buttonList.get(i).title.length();
 			int x0 = x + wx/2 - tekstaGarums*burtaPlatums/2, y0 = y + wy/2 + burtaAugstums/2, //teksta sâkumpunkts, lai teksts bûtu pogai pa vidu
 					correction = buttonList.get(i).titleCorrection;
 
@@ -106,7 +126,7 @@ public class Button {
 		for (int i = 0; i<samplePanel.buttonList.size(); i++) {
 			samplePanel.buttonList.get(i).activityCheck(thread, samplePanel.XY, samplePanel.size); //pârbauda katras pogas statusu
 			if (samplePanel.buttonList.get(i).result) { //ja poga nostrâdâjusi
-				InputActions.buttonActions(samplePanel.buttonList.get(i).title[1], thread); //notikums
+				thread.dati.drawManagerList.get(thread.dati.modeCurrent).inputActions.buttonActions(samplePanel.buttonList.get(i).reference, thread); //notikums
 				samplePanel.buttonList.get(i).result = false; //reseto pogas statusu
 			}
 		}

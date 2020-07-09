@@ -19,8 +19,9 @@ public class PanelL extends SamplePanel {
     PanelL(SampleLayout layout, Color[] colorPair){
         super(calculateLocation(layout), calculateSize(layout), colorPair);
 
-        generateButtons(layout, new String[][]{
-                {"New client", "panel1poga1"}});
+        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.left1, "New client", 0));
+
+        generateButtons(layout);
     }
 
     private static int[] calculateLocation(SampleLayout layout){
@@ -33,20 +34,20 @@ public class PanelL extends SamplePanel {
                 Math.max(0, layout.panelAugstums)};
     }
 
-    private void generateButtons(SampleLayout layout, String[][] buttonInfo){
+    private void generateButtons(SampleLayout layout){
         buttonList = new ArrayList<>();
 
         int buttonSpacing=5;
         int[] buttonSize = {layout.panelLPlatums - buttonSpacing * 2, 30},
-                buttonOffset = {buttonSpacing, buttonSpacing + 15};
+                buttonOffset = {buttonSpacing, buttonSpacing};
 
         Button.addButtonList(this, true,
                 buttonOffset, true, true,
                 buttonSize, buttonSpacing,
-                buttonInfo);
+                buttonDetails);
     }
 
-    public void draw(Graphics g, Dati dati, SampleLayout layout, ColorPalette colorPalette, boolean sampleText, boolean diagnosticsInfo, ClientThread thread){
+    public void draw(Graphics g, Dati dati, SampleLayout layout, ColorPalette colorPalette, boolean diagnosticsInfo, ClientThread thread){
         super.draw(g,
                 calculateLocation(layout),
                 calculateSize(layout),
@@ -55,19 +56,8 @@ public class PanelL extends SamplePanel {
         //te var likt papildus funkcijas
 
         Button.drawButtons(g, this);
-
-        if (sampleText) drawSampleText(g, colorPalette.pair1[1]);
         if (diagnosticsInfo) drawInputDiagnosticsInfo(g, thread, colorPalette.pair2[1]);
 
-    }
-
-    private void drawSampleText(Graphics g, Color textColor){
-        String text = "kreisais panelis";
-        int[] textOffset = {5,15};
-
-        int[] textXY = {XY[0] + textOffset[0], XY[1] + textOffset[1]};
-        g.setColor(textColor);
-        g.drawString(text, textXY[0], textXY[1]);
     }
 
     private void drawInputDiagnosticsInfo(Graphics g, ClientThread thread, Color textColor) { //ieavades pārbaude un grafiskā informācija

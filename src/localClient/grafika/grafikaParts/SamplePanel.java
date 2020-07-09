@@ -12,6 +12,7 @@ public abstract class SamplePanel {
     Color[] colors;
 
     public ArrayList<Button> buttonList;
+    public ArrayList<Button.ButtonDetails> buttonDetails = new ArrayList<>();
 
     public SamplePanel(int[] panelXY, int[] panelSize, Color[] colorPair){
         updateValues(panelXY, panelSize, colorPair);
@@ -29,8 +30,10 @@ public abstract class SamplePanel {
     }
 
     private void drawFons(Graphics g){
-        g.setColor(colors[0]);
+        g.setColor(colors[0]); //fons
         g.fillRect(XY[0], XY[1], size[0], size[1]);
+        g.setColor(Color.black); //kontūra
+        g.drawRect(XY[0], XY[1], size[0], size[1]);
     }
 
 }

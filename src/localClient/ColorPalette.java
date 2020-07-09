@@ -57,7 +57,7 @@ public class ColorPalette {
                         new Color(3,0,0)}));
     }
 
-    void pickPreset(int number){
+    public void pickPreset(int number){
         ColorPalette presetPalette = presetPalettes.get(0); //default
         for (int i=0; i<presetPalettes.size(); i++){
             if(i == number) {

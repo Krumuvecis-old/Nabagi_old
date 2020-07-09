@@ -9,16 +9,16 @@ import java.util.HashMap;
 
 public class GrafikasDati {
 
-    public static String ekranaNosaukums="Nabagi - versija: "+ DataBase.versija;
+    public static String ekranaNosaukums = "Nabagi - versija: "+ DataBase.versija;
 
-    public String windowTitle = GrafikasDati.ekranaNosaukums + ", SetupWindow";
+    public String windowTitle = GrafikasDati.ekranaNosaukums + ", ClientWindow";
     public Color backgroundColor = Color.black;
 
     static int[] ekransLocation = {10,10};
     private static final int[] ekransCorrection = {0, 0};
     public int ekranaPlatums = 1000 + ekransCorrection[0], ekranaAugstums = 700 + ekransCorrection[1];
 
-    public boolean drawLayoutGrid = true;
+    public boolean drawLayoutGrid = false;
     public Color layoutGridColor = Color.red;
 
     public ColorPalette colorPalette;

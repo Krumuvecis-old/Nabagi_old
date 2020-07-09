@@ -9,17 +9,18 @@ import java.util.ArrayList;
 public class Header extends SamplePanel {
 
     /*
-    * šī klase raksturo default header paneli
-    *
-    */
+     * šī klase raksturo default header paneli
+     *
+     */
 
     Header(SampleLayout layout, Color[] colorPair){
         super(calculateLocation(layout), calculateSize(layout), colorPair);
 
-        generateButtons(layout, new String[][]{
-                {"Exit", "head1"},
-                {"Maximize", "head2"},
-                {"Minimize", "head3"}});
+        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.head1, "Exit1", 0));
+        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.head2, "Maximize", 0));
+        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.head3, "Minimize", 0));
+
+        generateButtons(layout);
     }
 
     private static int[] calculateLocation(SampleLayout layout){
@@ -32,17 +33,17 @@ public class Header extends SamplePanel {
                 Math.min(layout.headerAugstums, Math.max(0, layout.ekranaAugstums - layout.headerY - layout.footerOffset))};
     }
 
-    private void generateButtons(SampleLayout layout, String[][] buttonInfo){
+    private void generateButtons(SampleLayout layout){
         buttonList = new ArrayList<>();
 
-        int buttonSpacing=5;
+        int buttonSpacing = 5;
         int[] buttonSize = {150, layout.headerAugstums - buttonSpacing * 2},
                 buttonOffset = {buttonSpacing, buttonSpacing};
 
         Button.addButtonList(this, false,
                 buttonOffset, true, false,
                 buttonSize, buttonSpacing,
-                buttonInfo);
+                buttonDetails);
     }
 
     public void draw(Graphics g, Dati dati, SampleLayout layout){
@@ -52,11 +53,11 @@ public class Header extends SamplePanel {
                 dati.grafikasDati.colorPalette.pair1);
 
         Button.drawButtons(g, this);
-        drawTitle(g, dati.grafikasDati.windowTitle, dati.grafikasDati.colorPalette.pair1[1]);
+        drawTitle(g, dati.grafikasDati.windowTitle, dati.grafikasDati.colorPalette.pair1[1], String.valueOf(dati.modeCurrent));
     }
 
-    private void drawTitle(Graphics g, String windowTitle, Color textColor){
-        String text = windowTitle + " header";
+    private void drawTitle(Graphics g, String windowTitle, Color textColor, String currentMode){
+        String text = windowTitle + " - mode: " + currentMode;
         int[] textOffset = {5,15};
 
         int[] textXY = {XY[0] + textOffset[0], XY[1] + textOffset[1]};

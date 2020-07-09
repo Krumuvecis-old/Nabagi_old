@@ -16,14 +16,15 @@ public class Footer extends SamplePanel {
     Footer(SampleLayout layout, Color[] colorPair){
         super(calculateLocation(layout), calculateSize(layout), colorPair);
 
-        generateButtons(layout, new String[][]{
-                {"Layout grid", "foot1"},
-                {"Diagnostics", "foot2"},
-                {"Palette1", "palette0poga"},
-                {"Palette2", "palette1poga"},
-                {"Palette3", "palette2poga"},
-                {"Load Settings", "loadSettingsPoga"},
-                {"Save Settings", "saveSettingsPoga"}});
+        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.foot1, "Layout grid", 0));
+        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.foot2, "Diagnostics", 0));
+        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.foot3, "Palette1", 0));
+        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.foot4, "Palette2", 0));
+        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.foot5, "Palette3", 0));
+        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.foot6, "Load Settings", 0));
+        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.foot7, "Save Settings", 0));
+
+        generateButtons(layout);
     }
 
     private static int[] calculateLocation(SampleLayout layout){
@@ -36,7 +37,7 @@ public class Footer extends SamplePanel {
                 Math.min(layout.footerAugstums, Math.max(0, layout.ekranaAugstums - layout.panelY - layout.footerOffset))};
     }
 
-    private void generateButtons(SampleLayout layout, String[][] buttonInfo){
+    private void generateButtons(SampleLayout layout){
         buttonList = new ArrayList<>();
 
         int buttonSpacing=5;
@@ -46,10 +47,10 @@ public class Footer extends SamplePanel {
         Button.addButtonList(this, false,
                 buttonOffset, true, false,
                 buttonSize, buttonSpacing,
-                buttonInfo);
+                buttonDetails);
     }
 
-    public void draw(Graphics g, Dati dati, SampleLayout layout, boolean sampleText){
+    public void draw(Graphics g, Dati dati, SampleLayout layout){
         super.draw(g,
                 calculateLocation(layout),
                 calculateSize(layout),
@@ -58,18 +59,6 @@ public class Footer extends SamplePanel {
         //te var likt papildus funkcijas
 
         Button.drawButtons(g, this);
-
-        if (sampleText) drawSampleText(g, dati.grafikasDati.colorPalette.pair1[1], layout);
-
-    }
-
-    private void drawSampleText(Graphics g, Color textColor, SampleLayout layout){
-        String text = "footer y:" + layout.footerY;
-        int[] textOffset = {5,15};
-
-        int[] textXY = {XY[0] + textOffset[0], XY[1] + textOffset[1]};
-        g.setColor(textColor);
-        g.drawString(text, textXY[0], textXY[1]);
     }
 
     //te var likt papildus funkcijas (jāizsauc no draw() metodes)

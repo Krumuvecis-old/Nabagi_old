@@ -18,11 +18,12 @@ public class PanelR extends SamplePanel{
                 calculateSize(layout),
                 colorPair);
 
-        generateButtons(layout, new String[][]{
-                {"Poga1", "panel2poga1"},
-                {"Poga2", "panel2poga2"},
-                {"panel2poga3", "panel2poga3"},
-                {"poga4 yeyeye", "panel2poga4"}});
+        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.right1, "Poga1", 0));
+        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.right2, "Poga2", 0));
+        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.right3, "Right3", 0));
+        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.right4, "Poga4 yeyeye", 0));
+
+        generateButtons(layout);
     }
 
     private static int[] calculateLocation(SampleLayout layout){
@@ -35,20 +36,20 @@ public class PanelR extends SamplePanel{
                 Math.max(0, layout.panelAugstums)};
     }
 
-    private void generateButtons(SampleLayout layout, String[][] buttonInfo){
+    private void generateButtons(SampleLayout layout){
         buttonList = new ArrayList<>();
 
         int buttonSpacing=5;
         int[] buttonSize = {layout.panelRPlatums - buttonSpacing * 2, 30},
-                buttonOffset = {buttonSpacing, buttonSpacing + 15};
+                buttonOffset = {buttonSpacing, buttonSpacing};
 
         Button.addButtonList(this, true,
                 buttonOffset, true, true,
                 buttonSize, buttonSpacing,
-                buttonInfo);
+                buttonDetails);
     }
 
-    public void draw(Graphics g, Dati dati, SampleLayout layout, boolean sampleText){
+    public void draw(Graphics g, Dati dati, SampleLayout layout){
         super.draw(g,
                 calculateLocation(layout),
                 calculateSize(layout),
@@ -58,17 +59,6 @@ public class PanelR extends SamplePanel{
 
         Button.drawButtons(g, this);
 
-        if (sampleText) drawSampleText(g, dati.grafikasDati.colorPalette.pair1[1]);
-
-    }
-
-    private void drawSampleText(Graphics g, Color textColor){
-        String text = "labais panelis";
-        int[] textOffset = {5,15};
-
-        int[] textXY = {XY[0] + textOffset[0], XY[1] + textOffset[1]};
-        g.setColor(textColor);
-        g.drawString(text, textXY[0], textXY[1]);
     }
 
     //te var likt papildus funkcijas (jāizsauc no draw() metodes)

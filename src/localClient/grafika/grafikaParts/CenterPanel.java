@@ -17,10 +17,11 @@ public class CenterPanel extends SamplePanel {
     CenterPanel(SampleLayout layout, Color[] colorPair){
         super(calculateLocation(layout), calculateSize(layout), colorPair);
 
-        generateButtons(layout, new String[][]{
-                {"Zoom in", "zoomInPoga"},
-                {"Zoom out", "zoomOutPoga"},
-                {"Demo pictures", "zvaigznePoga"}});
+        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.center1, "Zoom in", 0));
+        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.center1, "Zoom out", 0));
+        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.center1, "Demo pictures", 0));
+
+        generateButtons(layout);
     }
 
     private static int[] calculateLocation(SampleLayout layout){
@@ -31,21 +32,21 @@ public class CenterPanel extends SamplePanel {
         return new int[]{layout.centerPanelPlatums, layout.panelAugstums};
     }
 
-    private void generateButtons(SampleLayout layout, String[][] buttonInfo){
+    private void generateButtons(SampleLayout layout){
         buttonList = new ArrayList<>();
 
         int buttonSpacing=5;
         int[] buttonSize = {layout.panelLPlatums - buttonSpacing * 2, 30},
-                buttonOffset = {buttonSpacing, buttonSpacing + 15};
+                buttonOffset = {buttonSpacing, buttonSpacing};
 
         Button.addButtonList(this, true,
                 buttonOffset, true, true,
                 buttonSize, buttonSpacing,
-                buttonInfo);
+                buttonDetails);
     }
 
 
-    void draw(Graphics g, Dati dati, SampleLayout layout, boolean sampleText, boolean sampleImages){
+    void draw(Graphics g, Dati dati, SampleLayout layout, boolean sampleImages){
         super.draw(g,
                 calculateLocation(layout),
                 calculateSize(layout),
@@ -55,16 +56,6 @@ public class CenterPanel extends SamplePanel {
         //te var likt papildus funkcijas
 
         Button.drawButtons(g, this);
-        if (sampleText) drawSampleText(g, dati.grafikasDati.colorPalette.pair1[1]);
-    }
-
-    private void drawSampleText(Graphics g, Color textColor){
-        String text = "centrālais panelis";
-        int[] textOffset = {5,15};
-
-        int[] textXY = {XY[0] + textOffset[0], XY[1] + textOffset[1]};
-        g.setColor(textColor);
-        g.drawString(text, textXY[0], textXY[1]);
     }
 
     //te var likt papildus funkcijas (jāizsauc no draw() metodes)

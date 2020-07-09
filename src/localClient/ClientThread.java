@@ -61,7 +61,7 @@ public class ClientThread implements Runnable{
 
 	private void userInput() {
 		Button.checkButtonActions(this); //uz ekrâna redzamo pogu notikumi
-		Input.keyboardActionCheck(input.pogas, dati.modeCurrent); //keyboard nospiesto pogu notikumi
+		Input.keyboardActionCheck(input.pogas, dati); //keyboard nospiesto pogu notikumi
 	}
 
 
