@@ -1,12 +1,15 @@
 package localClient;
 
-import localClient.grafikaParts.DrawManager;
+import localClient.grafika.Grafika;
+import localClient.grafika.KonstantesGrafikai;
+import localClient.grafika.Layout;
+import localClient.grafika.grafikaParts.DrawManager;
 
 import java.awt.*;
 import java.util.HashMap;
 
 public class Dati {
-	public CalculationTimeCalculator calculationTimeCalculator = new CalculationTimeCalculator();
+
 
 	public String windowTitle = KonstantesGrafikai.ekranaNosaukums + ", SetupWindow";
 	public Color backgroundColor = Color.black;

@@ -1,6 +1,11 @@
 package localClient;
 
+import localClient.grafika.Button;
+import localClient.grafika.Grafika;
+import localClient.grafika.Input;
+
 public class ClientThread implements Runnable{
+	public CalculationTimeCalculator calculationTimeCalculator = new CalculationTimeCalculator();
 	public boolean running, minimized, windowActive;
 
 	public Dati dati;
@@ -16,7 +21,7 @@ public class ClientThread implements Runnable{
 		dati = new Dati();
 
 		int maxFrameRate=50; //kadri sekundç
-		dati.calculationTimeCalculator.delayMin=1000/maxFrameRate; //simulâcijas solis
+		calculationTimeCalculator.delayMin=1000/maxFrameRate; //simulâcijas solis
 
 		grafika = new Grafika();
 		grafika.initialize(this); //zîmçðana
@@ -30,11 +35,11 @@ public class ClientThread implements Runnable{
 	@Override
 	public void run() {
 		while (running) {
-			dati.calculationTimeCalculator.time(true);
+			calculationTimeCalculator.time(true);
 			if (!minimized) galvenaisCikls();
-			dati.calculationTimeCalculator.time(false);
+			calculationTimeCalculator.time(false);
 			try{
-				Thread.sleep(dati.calculationTimeCalculator.sleepT());
+				Thread.sleep(calculationTimeCalculator.sleepT());
 			} catch (Exception e){
 				e.printStackTrace();
 			}
@@ -56,7 +61,7 @@ public class ClientThread implements Runnable{
 
 	private void userInput() {
 		Button.checkButtonActions(this); //uz ekrâna redzamo pogu notikumi
-		KeyboardActions.main(input.pogas); //keyboard nospiesto pogu notikumi
+		Input.keyboardActionCheck(input.pogas, "default"); //keyboard nospiesto pogu notikumi
 	}
 
 
