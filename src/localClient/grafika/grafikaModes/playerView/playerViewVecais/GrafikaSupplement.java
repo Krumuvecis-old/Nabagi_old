@@ -1,7 +1,7 @@
-package localClient.grafika.playerViewVecais;
+package localClient.grafika.grafikaModes.playerView.playerViewVecais;
 
-import localClient.grafika.playerViewVecais.centerPanel.DrawCenterPanel;
-import localClient.grafika.playerViewVecais.sidePanels.DrawSidePanels;
+import localClient.grafika.grafikaModes.playerView.playerViewVecais.centerPanel.DrawCenterPanel;
+import localClient.grafika.grafikaModes.playerView.playerViewVecais.sidePanels.DrawSidePanels;
 
 import java.awt.*;
 

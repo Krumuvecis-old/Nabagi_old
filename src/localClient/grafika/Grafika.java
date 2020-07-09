@@ -12,19 +12,19 @@ public class Grafika extends JPanel {
 	public JFrame ekrans;
 	public Grafika grafika;
 
-	//te nelikt mainîgos!!! (var likt pie thread.dati)
+	//te nelikt mainîgos!!! (var likt pie thread.dati vai thread.dati.grafikasDati)
 
 	public void initialize(ClientThread threadTemp) {
 		thread=threadTemp;
-		ekrans = new JFrame(thread.dati.windowTitle);
+		ekrans = new JFrame(thread.dati.grafikasDati.windowTitle);
 		ekrans.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		grafika = new Grafika();
 
 		ekrans.getContentPane().add(grafika);
 		ekrans.setResizable(true);
-		ekrans.setSize(thread.dati.layout.ekranaPlatums, thread.dati.layout.ekranaAugstums);
-		ekrans.setLocation(Layout.ekransLocation[0], Layout.ekransLocation[1]);
+		ekrans.setSize(thread.dati.grafikasDati.ekranaPlatums, thread.dati.grafikasDati.ekranaAugstums);
+		ekrans.setLocation(GrafikasDati.ekransLocation[0], GrafikasDati.ekransLocation[1]);
 
 		ekrans.setVisible(true);
 	}
@@ -35,10 +35,10 @@ public class Grafika extends JPanel {
 	}
 
 	protected void paintComponent(Graphics g) {
-		thread.dati.drawManager.main(g, thread);
+		thread.dati.drawManagerList.get(thread.dati.modeCurrent).main(g, thread);
 	}
 	
-	//zemâk vecâs funkcijas
+	//zemâk vecâs funkcijas, kas tagad bûtu jâsaliek pa paneïiem un reþîmiem
 	
 //	protected void paintComponent(Graphics g) {
 //

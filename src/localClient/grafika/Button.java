@@ -95,19 +95,19 @@ public class Button {
 	}
 
 	public static void checkButtonActions(ClientThread thread){
-		checkButtonList(thread, thread.dati.drawManager.header.samplePanel);
-		checkButtonList(thread, thread.dati.drawManager.footer.samplePanel);
-		checkButtonList(thread, thread.dati.drawManager.panel1.samplePanel);
-		checkButtonList(thread, thread.dati.drawManager.panel2.samplePanel);
-		checkButtonList(thread, thread.dati.drawManager.panel3.samplePanel);
+		checkButtonList(thread, thread.dati.drawManagerList.get(thread.dati.modeCurrent).header);
+		checkButtonList(thread, thread.dati.drawManagerList.get(thread.dati.modeCurrent).footer);
+		checkButtonList(thread, thread.dati.drawManagerList.get(thread.dati.modeCurrent).panelL);
+		checkButtonList(thread, thread.dati.drawManagerList.get(thread.dati.modeCurrent).panelR);
+		checkButtonList(thread, thread.dati.drawManagerList.get(thread.dati.modeCurrent).centerPanel);
 	}
 
 	private static void checkButtonList(ClientThread thread, SamplePanel samplePanel){
 		for (int i = 0; i<samplePanel.buttonList.size(); i++) {
 			samplePanel.buttonList.get(i).activityCheck(thread, samplePanel.XY, samplePanel.size); //pârbauda katras pogas statusu
 			if (samplePanel.buttonList.get(i).result) { //ja poga nostrâdâjusi
-				InputActions.buttonActions(samplePanel.buttonList.get(i).title[1], thread, "default"); //notikums
-				samplePanel.buttonList.get(i).result=false; //reseto pogas statusu
+				InputActions.buttonActions(samplePanel.buttonList.get(i).title[1], thread); //notikums
+				samplePanel.buttonList.get(i).result = false; //reseto pogas statusu
 			}
 		}
 	}

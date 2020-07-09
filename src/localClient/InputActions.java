@@ -7,10 +7,8 @@ public class InputActions {
 
     //tikai paðas darbîbas
 
-    private static final String modeDefault = "default"; //idejas kâ sataisît reþîmus, vçl jâpârnes uz Dati vai clientThread vai citur
-
-    public static void keyboardActions(int numurs, String mode){
-        if (mode.equals(modeDefault)){
+    public static void keyboardActions(int numurs, Dati.ModeOption modeOption){
+        if (modeOption == Dati.ModeOption.setup){
             switch (numurs) { //numurs - klaviatûrâ nospiestâs pogas numurs
                 case 32 -> System.out.println("piespiests Space");
                 case 87 -> System.out.println("piespiests W");
@@ -25,14 +23,14 @@ public class InputActions {
 
     }
 
-    public static void buttonActions(String reference, ClientThread thread, String mode) {
-        switch (mode) {
-            case modeDefault -> defaultButtons(reference, thread);
+    public static void buttonActions(String reference, ClientThread thread) {
+        switch (thread.dati.modeCurrent) {
+            case setup -> setupButtons(reference, thread);
             default -> System.out.println("Buttons for this mode have undefined actions!");
         }
     }
 
-    private static void defaultButtons(String reference, ClientThread thread) {
+    private static void setupButtons(String reference, ClientThread thread) {
         switch (reference) {
 
             //zemâk header pogu notikumi
@@ -47,11 +45,11 @@ public class InputActions {
 
             //zemâk footer pogu notikumi
 
-            case "foot1" -> thread.dati.drawLayoutGrid = !thread.dati.drawLayoutGrid;
-            case "foot2" -> thread.dati.drawInputDiagnosticsPanel = !thread.dati.drawInputDiagnosticsPanel;
-            case "palette0poga" -> thread.dati.colorPalette.pickPreset(0);
-            case "palette1poga" -> thread.dati.colorPalette.pickPreset(1);
-            case "palette2poga" -> thread.dati.colorPalette.pickPreset(2);
+            case "foot1" -> thread.dati.grafikasDati.drawLayoutGrid = !thread.dati.grafikasDati.drawLayoutGrid;
+            case "foot2" -> thread.dati.grafikasDati.drawInputDiagnosticsPanel = !thread.dati.grafikasDati.drawInputDiagnosticsPanel;
+            case "palette0poga" -> thread.dati.grafikasDati.colorPalette.pickPreset(0);
+            case "palette1poga" -> thread.dati.grafikasDati.colorPalette.pickPreset(1);
+            case "palette2poga" -> thread.dati.grafikasDati.colorPalette.pickPreset(2);
             case "loadSettingsPoga" -> FileHandler.loadSettings(thread.dati, thread.grafika.ekrans);
             case "saveSettingsPoga" -> FileHandler.saveSettings(thread.dati);
 
@@ -78,7 +76,7 @@ public class InputActions {
 
             case "zoomInPoga" -> System.out.println("zoom++ placeholder");
             case "zoomOutPoga" -> System.out.println("zoom-- placeholder");
-            case "zvaigznePoga" -> thread.dati.drawSampleImages = !thread.dati.drawSampleImages;
+            case "zvaigznePoga" -> thread.dati.grafikasDati.drawSampleImages = !thread.dati.grafikasDati.drawSampleImages;
             case "panel3poga4" -> System.out.println("nospiesta panel3 ceturtâ poga");
             case "panel3poga5" -> System.out.println("nospiesta panel3 piektâ poga");
             default -> System.out.println("ServerUIThread reìistrçts nedefinçtas pogas notikums!");

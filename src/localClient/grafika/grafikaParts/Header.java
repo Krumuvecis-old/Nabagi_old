@@ -1,62 +1,62 @@
 package localClient.grafika.grafikaParts;
 
 import localClient.Dati;
-import localClient.grafika.Layout;
 import localClient.grafika.Button;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Header {
+public class Header extends SamplePanel {
 
-    public SamplePanel samplePanel = new SamplePanel();
+    /*
+    * šī klase raksturo default header paneli
+    *
+    */
 
-    Header(Layout layout){
-        update(layout);
-        generateButtons(layout);
-    }
+    Header(SampleLayout layout){
+        super(new int[]{layout.panelLX, layout.headerY},
+                calculateSize(layout),
+                new Color(0,0,0,255));
 
-    private void update(Layout layout){
-        samplePanel.update(
-                new int[]{0, layout.headerY},
-                new int[]{layout.ekranaPlatums, layout.headerAugstums}
-                );
-    }
-
-    private void generateButtons(Layout layout){
-        samplePanel.buttonList = new ArrayList<>();
-
-        String[][] buttonNames = {
+        generateButtons(layout, new String[][]{
                 {"Exit", "head1"},
                 {"Maximize", "head2"},
-                {"Minimize", "head3"}
-        };
+                {"Minimize", "head3"}});
+    }
+
+    private static int[] calculateSize(SampleLayout layout){
+        return new int[]{
+                Math.max(0, layout.ekranaPlatums - layout.panelLX - layout.panelROffset),
+                Math.min(layout.headerAugstums, Math.max(0, layout.ekranaAugstums - layout.headerY - layout.footerOffset))};
+    }
+
+    private void generateButtons(SampleLayout layout, String[][] buttonInfo){
+        buttonList = new ArrayList<>();
 
         int buttonSpacing=5;
         int[] buttonSize = {150, layout.headerAugstums - buttonSpacing * 2},
                 buttonOffset = {buttonSpacing, buttonSpacing};
 
-        Button.addButtonList(samplePanel, false,
+        Button.addButtonList(this, false,
                 buttonOffset, true, false,
                 buttonSize, buttonSpacing,
-                buttonNames);
+                buttonInfo);
     }
 
-    void draw(Graphics g, Dati dati){
-        update(dati.layout);
-        samplePanel.drawFons(g, dati.colorPalette.pair1[0], Color.black);
+    public void draw(Graphics g, Dati dati, SampleLayout layout){
+        super.draw(g,
+                new int[]{0, layout.headerY},
+                calculateSize(layout));
 
-        //te var likt papildus funkcijas
-
-        Button.drawButtons(g, samplePanel);
-        drawTitle(g, dati.windowTitle, dati.colorPalette.pair1[1]);
+        Button.drawButtons(g, this);
+        drawTitle(g, dati.grafikasDati.windowTitle, dati.grafikasDati.colorPalette.pair1[1]);
     }
 
     private void drawTitle(Graphics g, String windowTitle, Color textColor){
         String text = windowTitle + " header";
         int[] textOffset = {5,15};
 
-        int[] textXY = {samplePanel.XY[0] + textOffset[0], samplePanel.XY[1] + textOffset[1]};
+        int[] textXY = {XY[0] + textOffset[0], XY[1] + textOffset[1]};
         g.setColor(textColor);
         g.drawString(text, textXY[0], textXY[1]);
     }

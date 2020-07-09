@@ -2,61 +2,67 @@ package localClient.grafika.grafikaParts;
 
 import localClient.CalculationTimeCalculator;
 import localClient.ClientThread;
-import localClient.grafika.Layout;
+import localClient.ColorPalette;
+import localClient.Dati;
 import localClient.grafika.Button;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Panel1 {
+public class PanelL extends SamplePanel {
 
-    public SamplePanel samplePanel = new SamplePanel();
+    /*
+     * šī klase raksturo default kreiso paneli
+     *
+     */
 
-    Panel1(Layout layout){
-        update(layout);
-        generateButtons();
+    PanelL(SampleLayout layout){
+        super(new int[]{layout.panelLX, layout.panelY},
+                calculateSize(layout),
+                new Color(0,0,0,255));
+
+        generateButtons(layout, new String[][]{
+                {"New client", "panel1poga1"}});
     }
 
-    private void update(Layout layout){
-        samplePanel.update(
-                new int[]{layout.panel1X, layout.panelY},
-                new int[]{layout.panel1platums, layout.panelAugstums}
-        );
+    private static int[] calculateSize(SampleLayout layout){
+        return new int[]{
+                Math.min(layout.panelLPlatums, Math.max(0, layout.ekranaPlatums - layout.panelLX - layout.panelROffset)),
+                Math.max(0, layout.panelAugstums)};
     }
 
-    private void generateButtons(){
-        samplePanel.buttonList = new ArrayList<>();
+    private void generateButtons(SampleLayout layout, String[][] buttonInfo){
+        buttonList = new ArrayList<>();
 
-        String[][] buttonNames = {
-                {"New client", "panel1poga1"}
-        };
+        int buttonSpacing=5;
+        int[] buttonSize = {layout.panelLPlatums - buttonSpacing * 2, 30},
+                buttonOffset = {buttonSpacing, buttonSpacing + 15};
 
-        int buttonSpacing = 5;
-        int[] buttonOffset = {buttonSpacing, buttonSpacing + 15},
-                buttonSize = {100, 30};
-
-        Button.addButtonList(samplePanel, true,
-                buttonOffset,  true, true,
+        Button.addButtonList(this, true,
+                buttonOffset, true, true,
                 buttonSize, buttonSpacing,
-                buttonNames);
+                buttonInfo);
     }
 
-    void draw(Graphics g, ClientThread thread){
-        update(thread.dati.layout);
-        samplePanel.drawFons(g, thread.dati.colorPalette.pair2[0], Color.black);
+    public void draw(Graphics g, Dati dati, SampleLayout layout, ColorPalette colorPalette, boolean sampleText, boolean diagnosticsInfo, ClientThread thread){
+        super.draw(g,
+                new int[]{0, layout.headerY},
+                calculateSize(layout));
 
-        drawSampleText(g, thread.dati.colorPalette.pair2[1]);
         //te var likt papildus funkcijas
 
-        if (thread.dati.drawInputDiagnosticsPanel) drawInputDiagnosticsInfo(g, thread, thread.dati.colorPalette.pair2[1]);
-        Button.drawButtons(g, samplePanel);
+        Button.drawButtons(g, this);
+
+        if (sampleText) drawSampleText(g, colorPalette.pair1[1]);
+        if (diagnosticsInfo) drawInputDiagnosticsInfo(g, thread, colorPalette.pair2[1]);
+
     }
 
     private void drawSampleText(Graphics g, Color textColor){
-        String text = "panelis1";
-        int[] textOffset = {5, 15};
+        String text = "kreisais panelis";
+        int[] textOffset = {5,15};
 
-        int[] textXY = {samplePanel.XY[0] + textOffset[0], samplePanel.XY[1] + textOffset[1]};
+        int[] textXY = {XY[0] + textOffset[0], XY[1] + textOffset[1]};
         g.setColor(textColor);
         g.drawString(text, textXY[0], textXY[1]);
     }
@@ -65,9 +71,9 @@ public class Panel1 {
 
         int[] textOffset = {5, 190};
 
-        int x0=samplePanel.XY[0] + textOffset[0],
-                y0=samplePanel.XY[1] + samplePanel.size[1] - textOffset[1],
-                yw=15, w=0;
+        int x0 = XY[0] + textOffset[0],
+                y0 = XY[1] + size[1] - textOffset[1],
+                yw = 15, w = 0;
 
         g.setColor(textColor);
 

@@ -1,6 +1,7 @@
 package localClient.grafika;
 
 import localClient.ClientThread;
+import localClient.Dati;
 import localClient.InputActions;
 
 import java.awt.event.WindowEvent;
@@ -165,7 +166,7 @@ public class Input {
 	//private static int[][] debounceList = new int[][]{};
 	//private static int debounceTimer=5;
 
-	public static void keyboardActionCheck(int[] pogas, String mode){
+	public static void keyboardActionCheck(int[] pogas, Dati.ModeOption mode){
 		for (int i=0; i<pogas.length; i++) { //iziet cauri visâm nospiestajâm keyboard pogâm
 			InputActions.keyboardActions(pogas[i], mode);
 		}

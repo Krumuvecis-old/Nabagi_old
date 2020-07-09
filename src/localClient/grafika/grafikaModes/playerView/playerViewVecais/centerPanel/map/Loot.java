@@ -1,7 +1,7 @@
-package localClient.grafika.playerViewVecais.centerPanel.map;
+package localClient.grafika.grafikaModes.playerView.playerViewVecais.centerPanel.map;
 
 import server.calculations.MapChunk;
-import localClient.grafika.playerViewVecais.PlayerThread;
+import localClient.grafika.grafikaModes.playerView.playerViewVecais.PlayerThread;
 
 import java.awt.*;
 import java.util.ArrayList;

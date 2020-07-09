@@ -1,59 +1,81 @@
 package localClient.grafika.grafikaParts;
 
-import localClient.grafika.Layout;
 import localClient.ClientThread;
 
 import java.awt.*;
 
-public class DrawManager {
+public abstract class DrawManager {
+
+    public SampleLayout layout;
 
     public Header header;
     public Footer footer;
-    public Panel1 panel1;
-    public Panel2 panel2;
-    public Panel3 panel3;
+    public PanelL panelL;
+    public PanelR panelR;
+    public CenterPanel centerPanel;
 
-    public DrawManager(Layout layout){
+    public boolean drawHeader = true, drawFooter = true,
+            drawPanelL = true,  drawPanelR = true,
+            drawCenterPanel = true,
+            drawLayoutGrid = false, drawOverPanel = true;
+
+    public DrawManager(int ekranaPlatums, int ekranaAugstums){
+        layout = new SampleLayout(ekranaPlatums, ekranaAugstums);
+
         header = new Header(layout);
         footer = new Footer(layout);
-        panel1 = new Panel1(layout);
-        panel2 = new Panel2(layout);
-        panel3 = new Panel3(layout);
+        panelL = new PanelL(layout);
+        panelR = new PanelR(layout);
+        centerPanel = new CenterPanel(layout);
     }
 
     public void main(Graphics g, ClientThread thread){
         drawFons(g, thread);
 
-        if(thread.dati.drawPanel3) panel3.draw(g, thread.dati);
+        if(drawCenterPanel) centerPanel.draw(g, thread.dati, layout, true, true);
 
-        if(thread.dati.drawPanel1) panel1.draw(g, thread);
-        if(thread.dati.drawPanel2) panel2.draw(g, thread.dati);
+        if(drawPanelL) panelL.draw(g, thread.dati, layout, thread.dati.grafikasDati.colorPalette, true, true, thread);
+        if(drawPanelR) panelR.draw(g, thread.dati, layout, true);
 
-        if(thread.dati.drawHeader) header.draw(g, thread.dati);
-        if(thread.dati.drawFooter) footer.draw(g, thread.dati);
+        if(drawHeader) header.draw(g, thread.dati, layout);
+        if(drawFooter) footer.draw(g, thread.dati, layout, true);
 
-        if(thread.dati.drawLayoutGrid) drawLayoutGrid(g, thread.dati.layout, thread.dati.layoutGridColor);
+        if(drawLayoutGrid) drawLayoutGrid(g, thread.dati.grafikasDati.layoutGridColor);
+
+        if(drawOverPanel) drawOverPanel();
 
     }
 
     private void drawFons(Graphics g, ClientThread thread) {
-        g.setColor(thread.dati.backgroundColor);
+        g.setColor(thread.dati.grafikasDati.backgroundColor);
         g.fillRect(0, 0, thread.grafika.grafika.getWidth(), thread.grafika.grafika.getHeight());
     }
 
-    private void drawLayoutGrid(Graphics g, Layout layout, Color gridColor){
+    private void drawLayoutGrid(Graphics g, Color gridColor){
         g.setColor(gridColor);
 
-        g.drawLine(0, layout.headerY, layout.ekranaPlatums, layout.headerY); //vertical divider 0-header
-        g.drawLine(0, layout.panelY, layout.ekranaPlatums, layout.panelY); //vertical divider header-panel
-        g.drawLine(0, layout.footerY, layout.ekranaPlatums, layout.footerY); //vertical divider panel-footer
-        g.drawLine(layout.panel1X, layout.panelY, layout.panel1X, layout.footerY); //horizontal divider 0-panel1
-        g.drawLine(layout.panel2X, layout.panelY, layout.panel2X, layout.footerY); //horizontal divider panel1-panel2
-        g.drawLine(layout.panel3X, layout.panelY, layout.panel3X, layout.footerY); //horizontal divider panel2-panel3
-        g.drawLine(layout.ekranaPlatums - layout.panel3RightBorder, layout.panelY, layout.ekranaPlatums - layout.panel3RightBorder, layout.footerY); //horizontal divider panel3-end
+        g.drawLine(layout.panelLX, layout.headerY,
+                layout.ekranaPlatums - layout.panelROffset, layout.headerY); //horizontal divider 0-header
+        g.drawLine(layout.panelLX, layout.panelY,
+                layout.ekranaPlatums - layout.panelROffset, layout.panelY); //horizontal divider header-panel
+        g.drawLine(layout.panelLX, layout.footerY,
+                layout.ekranaPlatums - layout.panelROffset, layout.footerY); //horizontal divider panel-footer
 
-        g.drawRect(layout.panel3ContentsX, layout.panel3ContentsY, layout.panel3contentsWX, layout.panel3contentsWY); //border for contents of panel3
+        g.drawLine(layout.panelLX, layout.panelY,
+                layout.panelLX, layout.footerY); //vertical divider 0-panelL
+        g.drawLine(layout.centerPanelX, layout.panelY,
+                layout.centerPanelX, layout.footerY); //vertical divider panelL-centerPanel
+        g.drawLine(layout.panelRX, layout.panelY,
+                layout.panelRX, layout.footerY); //vertical divider centerPanel-panelR
+        g.drawLine(layout.ekranaPlatums - layout.panelROffset, layout.panelY,
+                layout.ekranaPlatums - layout.panelROffset, layout.footerY); //vertical divider panelR-end
+
+        g.drawRect(layout.centerPanelContentsX, layout.centerPanelContentsY,
+                layout.centerPanelContentsWX, layout.centerPanelContentsWY); //border for centerPanel contents
     }
 
+    private void drawOverPanel(){
+        //overPanel not implemented yet
+    }
 
 }

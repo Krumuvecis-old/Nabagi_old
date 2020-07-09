@@ -66,9 +66,9 @@ class Cilveki {
 //        double hpRatio=cilveks.hp/cilveks.hpmax;
 //
 //        return new Color(Color.HSBtoRGB( (float)Formulas.getHue(CalculationsThread.komandasList.get(komanda).krasa),
-//                (float)KonstantesGrafikai.cilvekiKrasaSaturation,
-//                (float)(KonstantesGrafikai.cilvekiKrasaBrightnessMin + hpRatio *
-//                        (KonstantesGrafikai.cilvekiKrasaBrightnessMax - KonstantesGrafikai.cilvekiKrasaBrightnessMin)) ));
+//                (float)GrafikasDati.cilvekiKrasaSaturation,
+//                (float)(GrafikasDati.cilvekiKrasaBrightnessMin + hpRatio *
+//                        (GrafikasDati.cilvekiKrasaBrightnessMax - GrafikasDati.cilvekiKrasaBrightnessMin)) ));
 //
 //    }
 //

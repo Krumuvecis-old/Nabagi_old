@@ -9,7 +9,7 @@ public class ColorPalette {
             pair2,
             pair3;
 
-    ColorPalette(Color[] colorPair1, Color[] colorPair2, Color[] colorPair3){
+    public ColorPalette(Color[] colorPair1, Color[] colorPair2, Color[] colorPair3){
        updatePalette(colorPair1, colorPair2, colorPair3);
     }
 
@@ -19,10 +19,10 @@ public class ColorPalette {
         pair3 = new Color[]{colorPair3[0], colorPair3[1]};
     }
 
-    static ArrayList<ColorPalette> presetPalettes;
+    public static ArrayList<ColorPalette> presetPalettes;
 
-    static void generatePresetPalettes(){
-        presetPalettes = new ArrayList<ColorPalette>();
+    public static void generatePresetPalettes(){
+        presetPalettes = new ArrayList<>();
         presetPalettes.add(new ColorPalette(
                 new Color[]{
                         new Color(65,35,30),

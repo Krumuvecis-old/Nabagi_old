@@ -1,10 +1,10 @@
-package localClient.grafika.playerViewVecais.centerPanel;
+package localClient.grafika.grafikaModes.playerView.playerViewVecais.centerPanel;
 
 import java.awt.Graphics;
 
-import localClient.grafika.playerViewVecais.PlayerThread;
-import localClient.grafika.playerViewVecais.centerPanel.lobby.Lobby;
-import localClient.grafika.playerViewVecais.centerPanel.map.Map;
+import localClient.grafika.grafikaModes.playerView.playerViewVecais.PlayerThread;
+import localClient.grafika.grafikaModes.playerView.playerViewVecais.centerPanel.lobby.Lobby;
+import localClient.grafika.grafikaModes.playerView.playerViewVecais.centerPanel.map.Map;
 
 public class DrawCenterPanel {
 

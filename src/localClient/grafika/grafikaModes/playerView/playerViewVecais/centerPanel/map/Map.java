@@ -1,4 +1,4 @@
-package localClient.grafika.playerViewVecais.centerPanel.map;
+package localClient.grafika.grafikaModes.playerView.playerViewVecais.centerPanel.map;
 
 public class Map {
 

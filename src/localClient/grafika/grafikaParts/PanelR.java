@@ -1,49 +1,45 @@
 package localClient.grafika.grafikaParts;
 
-import localClient.Dati;
 import localClient.grafika.Button;
+import localClient.Dati;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Footer extends SamplePanel {
+public class PanelR extends SamplePanel{
 
     /*
-     * šī klase raksturo default footer paneli
+     * šī klase raksturo default labo paneli
      *
      */
 
-    Footer(SampleLayout layout){
-        super(new int[]{0, layout.footerY},
+    PanelR(SampleLayout layout){
+        super(new int[]{layout.panelRX, layout.panelY},
                 calculateSize(layout),
                 new Color(0,0,0,255));
 
-
         generateButtons(layout, new String[][]{
-                {"SampleLayout grid", "foot1"},
-                {"Diagnostics", "foot2"},
-                {"Palette1", "palette0poga"},
-                {"Palette2", "palette1poga"},
-                {"Palette3", "palette2poga"},
-                {"Load Settings", "loadSettingsPoga"},
-                {"Save Settings", "saveSettingsPoga"}});
+                {"Poga1", "panel2poga1"},
+                {"Poga2", "panel2poga2"},
+                {"panel2poga3", "panel2poga3"},
+                {"poga4 yeyeye", "panel2poga4"}});
     }
 
     private static int[] calculateSize(SampleLayout layout){
         return new int[]{
-                Math.max(0, layout.ekranaPlatums - layout.panelLX - layout.panelROffset),
-                Math.min(layout.footerAugstums, Math.max(0, layout.ekranaAugstums - layout.panelY - layout.footerOffset))};
+                Math.min(layout.panelRPlatums, Math.max(0, layout.ekranaPlatums - layout.panelRX)),
+                Math.max(0, layout.panelAugstums)};
     }
 
     private void generateButtons(SampleLayout layout, String[][] buttonInfo){
         buttonList = new ArrayList<>();
 
         int buttonSpacing=5;
-        int[] buttonSize = {80, layout.footerAugstums - buttonSpacing * 2},
-                buttonOffset = {buttonSpacing, buttonSpacing};
+        int[] buttonSize = {layout.panelRPlatums - buttonSpacing * 2, 30},
+                buttonOffset = {buttonSpacing, buttonSpacing + 15};
 
-        Button.addButtonList(this, false,
-                buttonOffset, true, false,
+        Button.addButtonList(this, true,
+                buttonOffset, true, true,
                 buttonSize, buttonSpacing,
                 buttonInfo);
     }
@@ -62,7 +58,7 @@ public class Footer extends SamplePanel {
     }
 
     private void drawSampleText(Graphics g, Color textColor){
-        String text = "footer";
+        String text = "labais panelis";
         int[] textOffset = {5,15};
 
         int[] textXY = {XY[0] + textOffset[0], XY[1] + textOffset[1]};
@@ -71,6 +67,5 @@ public class Footer extends SamplePanel {
     }
 
     //te var likt papildus funkcijas (jāizsauc no draw() metodes)
-
 
 }

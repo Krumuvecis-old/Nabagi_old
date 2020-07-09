@@ -1,113 +1,58 @@
 package localClient;
 
 import localClient.grafika.Grafika;
-import localClient.grafika.KonstantesGrafikai;
-import localClient.grafika.Layout;
+import localClient.grafika.GrafikasDati;
+import localClient.grafika.grafikaModes.setup.SetupDrawManager;
 import localClient.grafika.grafikaParts.DrawManager;
 
-import java.awt.*;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Dati {
 
+	public GrafikasDati grafikasDati;
 
-	public String windowTitle = KonstantesGrafikai.ekranaNosaukums + ", SetupWindow";
-	public Color backgroundColor = Color.black;
-	public Layout layout;
-
-	public boolean drawLayoutGrid = false;
-	public Color layoutGridColor = Color.red;
-
-	public ColorPalette colorPalette;
-	public DrawManager drawManager;
-
-	public boolean drawHeader = true,
-			drawFooter = true,
-			drawPanel1 = true,
-				drawCalculationTime = true,
-				drawInputDiagnosticsPanel = true,
-			drawPanel2 = true,
-				drawKomanduInfo=true,
-			drawPanel3 = true,
-			drawSampleImages = false;
-
-//	//zemâk vecie parametri
-//	// --------------------
-//	//zemâk par centrâlâ cilvçku tablo Parametriem (no vecâ varianta)
-//
-//	protected boolean tablo2Draw=false;
-//
-//	protected int tablo2x0=280, tablo2y0=tablo1y0, tablo2rindasPlatums=14;
-//
-//	protected int tablo2platums1=200; //platums1
-//	protected int tablo2platums2=130; //platums2
-//	protected int tablo2platumsN=80; //platumsN
-//
-//	protected Color tablo2krasaDefault, tablo2krasaCritical; //paðas krâsas nosaka initialize() ciklâ
-//
-//
-//	// --------------------
-//	//zemâk par atïauto krâsu paneli
-//
-//	protected boolean colorPanelDraw=false;
-//	protected Color colorPanelColor=Color.lightGray; //krâsu apïa kontûras krâsa
-//	protected int colorPanelX0=10, colorPanelY0=380, colorPanelRadiuss=50;
-//
-//
-//	// --------------------
-//	//zemâk par kartes zîmçðanu
-//
-//	public boolean miniMapDraw=true, miniMapDrawInfo=true; //kartes zîmçðana vispâr un informâcija tai apakðâ
-//	public int miniMapX=tablo2x0, miniMapY=tablo2y0-15,
-//			miniMapPlatums=ekranaPlatums-miniMapX-50,
-//			miniMapAugstums=ekranaAugstums-miniMapY-50;
-//
-//
-//	// --------------------
-//	//zemâk par centrâlâ (kartes diagnostikas) tablo Parametriem
-//
-//	protected boolean tablo3Draw=false;
-//	protected Color tablo3krasa=Color.white;
-//
-//	//augstâk vecie parametri
-
-	// --------------------
-	//zemâk jaunâs funkcijas paòemtas no TimeScheduler
-
-	public HashMap<String, Image> images = new HashMap<>();
-	static final String imageLocation = "src/localClient/samplePictures/",
-			settingsFileLocation = "src/localClient/",
+	public static final String settingsFileLocation = "src/localClient/",
 			settingsFileName = "Settings.txt";
 
-	public String playerFocusName="nav";
-	public boolean playerFocused=false;
+	public enum ModeOption {
+		setup,
+		develop,
+		settings,
+		spectate,
+		lobby,
+		playerView
+	}
+	public ModeOption modeCurrent;
+	public Map<ModeOption, DrawManager> drawManagerList = new HashMap<>();
 
 	Dati(){
-		layout = new Layout();
+		grafikasDati = new GrafikasDati();
 
-		ColorPalette.generatePresetPalettes();
-		ColorPalette defaultPalette = ColorPalette.presetPalettes.get(0);
-		colorPalette = new ColorPalette(defaultPalette.pair1, defaultPalette.pair2, defaultPalette.pair3);
+		drawManagerList.put(ModeOption.setup, new SetupDrawManager(grafikasDati.ekranaPlatums, grafikasDati.ekranaAugstums)); //setup
+		//drawManagerList.put(ModeOption.develop, ); //develop
+		//drawManagerList.put(ModeOption.settings, ); //settings
+		//drawManagerList.put(ModeOption.spectate, ); //spectate
+		//drawManagerList.put(ModeOption.lobby, ); //lobby
+		//drawManagerList.put(ModeOption.playerView, ); //playerView
 
-		String[][] imageNames = new String[][]{
-				{"Zvaigzne.png", "zvaigzne"},
-				{"Banans.png", "banana"}
-		};
-		FileHandler.loadSprites(images, imageNames, imageLocation);
-		drawManager = new DrawManager(layout);
+		modeCurrent = ModeOption.setup;
+
 
 		System.out.println("ClientThread: dati initialized");
 	}
 
 	public void update(Grafika grafika){
-		layout.update(grafika); //lai ekrânam varçtu notikt resize
+		grafikasDati.ekranaPlatums = grafika.getWidth();
+		grafikasDati.ekranaAugstums = grafika.getHeight();
+
+		drawManagerList.get(modeCurrent).layout.updateCalculatedValues(
+				grafikasDati.ekranaPlatums,
+				grafikasDati.ekranaAugstums); //lai ekrânam varçtu notikt resize
 	}
 
 
-
-
-//	// --------------------
-//	//zemâk vecâs nestrâdâjoðâs funkcijas
+//	//zemâk vecâ info par pogâm
 //
 //
 //	protected void initialize() {
@@ -148,89 +93,5 @@ public class Dati {
 //
 //	}
 //
-//	private void addButton(int x, int y, int wx, int wy, String title, int correction) {
-//
-//		int i = buttonList.size();
-//		buttonList.add(new Button());
-//		buttonList.get(i).x=x;
-//		buttonList.get(i).y=y;
-//		buttonList.get(i).wx=wx;
-//		buttonList.get(i).wy=wy;
-//		buttonList.get(i).title=title;
-//		buttonList.get(i).correction=correction;
-//		buttonList.get(i).active=false;
-//		buttonList.get(i).pressed=false;
-//		buttonList.get(i).result=false;
-//
-//	}
-//
-//	public void update(){
-//		playerFocusFind();
-//
-//	}
-//
-//	private void playerFocusFind() {
-//
-//		playerFocused = false;
-//		if(!(playerFocusName.equals("nav"))){
-//			String[] playerNamesList = playerNamesList(); //vârdu saraksts salîdzinâjumam
-//
-//			for (int i = 0; i < playerNamesList.length; i++) {
-//				if (playerNamesList[i].equals(playerFocusName)){
-//					playerFocused = true;
-//					break;
-//				}
-//			}
-//
-//			if(!playerFocused) {
-//				playerFocusName="nav";
-//			}
-//		}
-//
-//	}
-//
-//	private String[] playerNamesList(){
-//
-//		String[] namesList = new String[]{};
-//
-//		for(int[] chunkXY = {0, 0}; chunkXY[0]< CalculationsThread.laukums.size(); chunkXY[0]++) {
-//			for(chunkXY[1]=0; chunkXY[1]<CalculationsThread.laukums.get(chunkXY[0]).size(); chunkXY[1]++) {
-//				for (int i=0; i<CalculationsThread.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
-//					String vards = CalculationsThread.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.get(i).vards;
-//					String[] namesListTemp = new String[namesList.length + 1];
-//					for(int j=0; j<namesList.length; j++){
-//						namesListTemp[j]=namesList[j];
-//
-//					}
-//					namesListTemp[namesListTemp.length - 1] = vards;
-//					namesList = namesListTemp;
-//
-//				}
-//
-//			}
-//		}
-//
-//		return namesList;
-//	}
-//
-//	protected void startPlayerView(boolean randomize) {
-//		String[] playerList = playerNamesList();
-//
-//		int i=0;
-//		if (randomize) {
-//			i=(new java.util.Random()).nextInt(playerList.length);
-//		}
-//
-//		String playerName = playerList[i]; //iegûst fokusçtâ spçlçtâja vârdu
-//
-//		if(!playerFocused) { //ja iepriekð nav fokusa, tad fokusçjas uz spçlçtâju
-//			playerFocused=true;
-//			playerFocusName=playerName;
-//		}
-//
-//		localClient.grafika.player.PlayerThread threadTemp=new localClient.grafika.player.PlayerThread(); //jauns spçlçtâja logs
-//		threadTemp.initialize(playerName); //palaiþ spçlçtâja logu
-//
-//	}
 	
 }

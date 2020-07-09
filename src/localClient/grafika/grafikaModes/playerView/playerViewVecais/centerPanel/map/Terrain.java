@@ -1,6 +1,6 @@
-package localClient.grafika.playerViewVecais.centerPanel.map;
+package localClient.grafika.grafikaModes.playerView.playerViewVecais.centerPanel.map;
 
-import localClient.grafika.playerViewVecais.PlayerThread;
+import localClient.grafika.grafikaModes.playerView.playerViewVecais.PlayerThread;
 import server.dataBase.DataBase;
 
 import java.awt.*;

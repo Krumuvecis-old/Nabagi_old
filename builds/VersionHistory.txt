@@ -52,7 +52,7 @@ versija 0.10 - may/june 2020
 	all main server.calculations brought to separate package
 	graphics updates
 		map in setup/diagnostics window
-		fixed playerview window layout and graphics (merogs & focus (shifting view depending on location))
+		fixed playerview window sampleLayout and graphics (merogs & focus (shifting view depending on location))
 		added "merogs" to playerView window
 
 versija 0.9 - may 2020

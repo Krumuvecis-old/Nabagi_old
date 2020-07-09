@@ -1,12 +1,12 @@
-package localClient.grafika.playerViewVecais.sidePanels;
+package localClient.grafika.grafikaModes.playerView.playerViewVecais.sidePanels;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
 import server.calculations.CalculationTimeCalculator;
-import localClient.grafika.playerViewVecais.PlayerThread;
-import localClient.grafika.playerViewVecais.Button;
-import localClient.grafika.playerViewVecais.Dati;
+import localClient.grafika.grafikaModes.playerView.playerViewVecais.PlayerThread;
+import localClient.grafika.grafikaModes.playerView.playerViewVecais.Button;
+import localClient.grafika.grafikaModes.playerView.playerViewVecais.Dati;
 
 public class DrawSidePanels {
 	

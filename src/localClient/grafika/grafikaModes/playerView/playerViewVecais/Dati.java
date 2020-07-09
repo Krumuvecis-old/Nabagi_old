@@ -1,12 +1,12 @@
-package localClient.grafika.playerViewVecais;
+package localClient.grafika.grafikaModes.playerView.playerViewVecais;
 
 import java.awt.Color;
 import java.util.ArrayList;
 
-import localClient.grafika.KonstantesGrafikai;
+import localClient.grafika.GrafikasDati;
 import server.calculations.cilveki.Cilveks;
-import localClient.grafika.playerViewVecais.centerPanel.DrawCenterPanel;
-import localClient.grafika.playerViewVecais.sidePanels.DrawSidePanels;
+import localClient.grafika.grafikaModes.playerView.playerViewVecais.centerPanel.DrawCenterPanel;
+import localClient.grafika.grafikaModes.playerView.playerViewVecais.sidePanels.DrawSidePanels;
 
 public class Dati {
 	public server.calculations.CalculationTimeCalculator calculationTimeCalculator = new server.calculations.CalculationTimeCalculator();
@@ -17,7 +17,7 @@ public class Dati {
 	public String playerName;
 	public Cilveks player;
 
-	protected String windowTitleDefault= KonstantesGrafikai.ekranaNosaukums+", PlayerView";
+	protected String windowTitleDefault= GrafikasDati.ekranaNosaukums+", PlayerView";
 	protected String windowTitle;
 	protected static Color fonaKrasa=Color.black, nosaukumaKrasa=Color.gray;
 	protected static int nosaukumsX=5, nosaukumsY=15;

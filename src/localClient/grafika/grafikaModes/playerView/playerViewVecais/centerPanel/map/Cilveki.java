@@ -1,4 +1,4 @@
-package localClient.grafika.playerViewVecais.centerPanel.map;
+package localClient.grafika.grafikaModes.playerView.playerViewVecais.centerPanel.map;
 
 class Cilveki {
 
@@ -68,10 +68,10 @@ class Cilveki {
 //
 //        return new Color(Color.HSBtoRGB(
 //                (float) Formulas.getHue(CalculationsThread.komandasList.get(komanda).krasa),
-//                (float) KonstantesGrafikai.cilvekiKrasaSaturation,
-//                (float)(KonstantesGrafikai.cilvekiKrasaBrightnessMin +
-//                        (KonstantesGrafikai.cilvekiKrasaBrightnessMax -
-//                                KonstantesGrafikai.cilvekiKrasaBrightnessMin) * hpRatio)));
+//                (float) GrafikasDati.cilvekiKrasaSaturation,
+//                (float)(GrafikasDati.cilvekiKrasaBrightnessMin +
+//                        (GrafikasDati.cilvekiKrasaBrightnessMax -
+//                                GrafikasDati.cilvekiKrasaBrightnessMin) * hpRatio)));
 //
 //    }
 //
@@ -87,8 +87,8 @@ class Cilveki {
 ////
 ////        if(player.vards.equals( CalculationsThread.komandasList.get(komanda).galvenais )) { //karalis
 ////
-////            Color kronaKrasa = KonstantesGrafikai.kronaKrasa;
-////            double kronaKoeficients=KonstantesGrafikai.kronaKoeficients;
+////            Color kronaKrasa = GrafikasDati.kronaKrasa;
+////            double kronaKoeficients=GrafikasDati.kronaKoeficients;
 ////
 ////            g.setColor(kronaKrasa);
 ////            double kronaResnums=resnums*kronaKoeficients;
@@ -238,9 +238,9 @@ class Cilveki {
 ////        double hpRatio=cilveks.hp/cilveks.hpmax;
 ////
 ////        return new Color(Color.HSBtoRGB( (float)Formulas.getHue(CalculationsThread.komandasList.get(komanda).krasa),
-////                (float)KonstantesGrafikai.cilvekiKrasaSaturation,
-////                (float)(KonstantesGrafikai.cilvekiKrasaBrightnessMin + hpRatio *
-////                        (KonstantesGrafikai.cilvekiKrasaBrightnessMax - KonstantesGrafikai.cilvekiKrasaBrightnessMin)) ));
+////                (float)GrafikasDati.cilvekiKrasaSaturation,
+////                (float)(GrafikasDati.cilvekiKrasaBrightnessMin + hpRatio *
+////                        (GrafikasDati.cilvekiKrasaBrightnessMax - GrafikasDati.cilvekiKrasaBrightnessMin)) ));
 ////
 ////    }
 ////

@@ -96,7 +96,7 @@ public class FileHandler {
             switch (settingName) {
                 case "ekranaPlatums" -> ekrans.setSize(Integer.parseInt(settingValue), ekrans.getHeight());
                 case "ekranaAugstums" -> ekrans.setSize(ekrans.getWidth(), Integer.parseInt(settingValue));
-                case "palette" -> dati.colorPalette.pickPreset(Integer.parseInt(settingValue));
+                case "palette" -> dati.grafikasDati.colorPalette.pickPreset(Integer.parseInt(settingValue));
 
                 default -> System.out.println("Unidentified value: " + settingName);
             }
@@ -120,8 +120,8 @@ public class FileHandler {
         }
 
         String[][] settingsLines = new String[][]{
-                {"ekranaPlatums", String.valueOf(dati.layout.ekranaPlatums + 16)},
-                {"ekranaAugstums", String.valueOf(dati.layout.ekranaAugstums + 39)},
+                {"ekranaPlatums", String.valueOf(dati.grafikasDati.ekranaPlatums + 16)},
+                {"ekranaAugstums", String.valueOf(dati.grafikasDati.ekranaAugstums + 39)},
                 {"palette", "0"}
         };
 

@@ -1,4 +1,4 @@
-package localClient.grafika.playerViewVecais.centerPanel.lobby;
+package localClient.grafika.grafikaModes.playerView.playerViewVecais.centerPanel.lobby;
 
 import java.awt.*;
 

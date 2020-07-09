@@ -1,4 +1,4 @@
-package localClient.grafika.playerViewVecais;
+package localClient.grafika.grafikaModes.playerView.playerViewVecais;
 
 public class PlayerThread implements Runnable{
 	
