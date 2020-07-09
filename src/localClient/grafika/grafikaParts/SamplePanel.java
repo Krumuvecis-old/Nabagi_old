@@ -24,6 +24,11 @@ public abstract class SamplePanel {
         colors = new Color[]{colorPair[0], colorPair[1]};
     }
 
+    public void clearButtons(){
+        buttonList.clear();
+        buttonDetails.clear();
+    }
+
     public void draw(Graphics g, int[] panelXY, int[] panelSize, Color[] colorPair){
         updateValues(panelXY, panelSize, colorPair);
         drawFons(g);

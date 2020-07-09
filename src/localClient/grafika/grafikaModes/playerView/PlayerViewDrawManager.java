@@ -1,17 +1,15 @@
-package localClient.grafika.grafikaModes.setup;
+package localClient.grafika.grafikaModes.playerView;
 
 import localClient.ClientThread;
 import localClient.ColorPalette;
-import localClient.grafika.grafikaParts.*;
+import localClient.grafika.grafikaParts.DrawManager;
 
 import java.awt.*;
 
-public class SetupDrawManager extends DrawManager{
+public class PlayerViewDrawManager extends DrawManager{
 
-    public SetupDrawManager(int ekranaPlatums, int ekranaAugstums, ColorPalette colorPalette) {
+    public PlayerViewDrawManager(int ekranaPlatums, int ekranaAugstums, ColorPalette colorPalette) {
         super(ekranaPlatums, ekranaAugstums, colorPalette);
-
-        inputActions = new SetupInput();
 
         //te var piedefinçt atðíirîgu layout un fona krâsu
 

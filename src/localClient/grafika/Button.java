@@ -1,6 +1,8 @@
 package localClient.grafika;
 
 import localClient.ClientThread;
+import localClient.Dati;
+import localClient.grafika.grafikaParts.InputActions;
 import localClient.grafika.grafikaParts.SamplePanel;
 
 ;
@@ -14,18 +16,10 @@ public class Button {
 	public String title; //teksts izvadei un reference darbîbai
 	public int titleCorrection;
 	public boolean active=false, pressed=false, result=false; //statusi darbîbâm
-	public ActionReference reference;
-
-	public enum ActionReference {
-		head1, head2, head3, head4, head5, head6, head7, head8, head9,
-		left1, left2, left3, left4, left5, left6, left7, left8, left9,
-		center1, center2, center3, center4, center5, center6, center7, center8, center9,
-		right1, right2, right3, right4, right5,  right6, right7, right8, right9,
-		foot1, foot2, foot3, foot4, foot5,  foot6, foot7, foot8, foot9
-	}
+	public int reference;
 
 	private Button(int[] xy, boolean alignFromTop, boolean alignFromLeft,
-				   int[] size, ActionReference actionReference, String buttonTitle, int titleCorrectionX){
+				   int[] size, int actionReference, String buttonTitle, int titleCorrectionX){
 		x = xy[0];
 		if (!alignFromLeft) x += size[0];
 		y = xy[1];
@@ -43,10 +37,10 @@ public class Button {
 	}
 
 	public static class ButtonDetails {
-		ActionReference reference;
+		int reference;
 		String title;
 		int correction;
-		public ButtonDetails(ActionReference actionReference, String buttonTitle, int xCorrection){
+		public ButtonDetails(int actionReference, String buttonTitle, int xCorrection){
 			reference = actionReference;
 			title = buttonTitle;
 			correction = xCorrection;
@@ -115,20 +109,52 @@ public class Button {
 	}
 
 	public static void checkButtonActions(ClientThread thread){
-		checkButtonList(thread, thread.dati.drawManagerList.get(thread.dati.modeCurrent).header);
-		checkButtonList(thread, thread.dati.drawManagerList.get(thread.dati.modeCurrent).footer);
-		checkButtonList(thread, thread.dati.drawManagerList.get(thread.dati.modeCurrent).panelL);
-		checkButtonList(thread, thread.dati.drawManagerList.get(thread.dati.modeCurrent).panelR);
-		checkButtonList(thread, thread.dati.drawManagerList.get(thread.dati.modeCurrent).centerPanel);
+		checkButtonList(thread, thread.dati.drawManagerList.get(thread.dati.modeCurrent).header, PanelType.header);
+		checkButtonList(thread, thread.dati.drawManagerList.get(thread.dati.modeCurrent).footer, PanelType.footer);
+		checkButtonList(thread, thread.dati.drawManagerList.get(thread.dati.modeCurrent).panelL, PanelType.left);
+		checkButtonList(thread, thread.dati.drawManagerList.get(thread.dati.modeCurrent).panelR, PanelType.right);
+		checkButtonList(thread, thread.dati.drawManagerList.get(thread.dati.modeCurrent).centerPanel, PanelType.center);
 	}
 
-	private static void checkButtonList(ClientThread thread, SamplePanel samplePanel){
+	public enum PanelType {
+		header,
+		footer,
+		left,
+		right,
+		center
+	}
+
+	private static void checkButtonList(ClientThread thread, SamplePanel samplePanel, PanelType panelType){
 		for (int i = 0; i<samplePanel.buttonList.size(); i++) {
 			samplePanel.buttonList.get(i).activityCheck(thread, samplePanel.XY, samplePanel.size); //pârbauda katras pogas statusu
 			if (samplePanel.buttonList.get(i).result) { //ja poga nostrâdâjusi
-				thread.dati.drawManagerList.get(thread.dati.modeCurrent).inputActions.buttonActions(samplePanel.buttonList.get(i).reference, thread); //notikums
+				buttonActivitySelector(thread, samplePanel, i, panelType); //atrod atbilstoðo darbîbu pogai
 				samplePanel.buttonList.get(i).result = false; //reseto pogas statusu
 			}
+		}
+	}
+
+	private static void buttonActivitySelector(ClientThread thread, SamplePanel samplePanel, int pogasNr, PanelType panelType){
+		InputActions inputActions = thread.dati.drawManagerList.get(thread.dati.modeCurrent).inputActions;
+
+		switch (panelType){
+			case header ->
+					inputActions.headerButtonActions(
+							samplePanel.buttonList.get(pogasNr).reference, thread);
+			case footer ->
+					inputActions.footerButtonActions(
+							samplePanel.buttonList.get(pogasNr).reference, thread);
+			case left ->
+					inputActions.leftButtonActions(
+							samplePanel.buttonList.get(pogasNr).reference, thread);
+			case right ->
+					inputActions.rightButtonActions(
+							samplePanel.buttonList.get(pogasNr).reference, thread);
+			case center ->
+					inputActions.centerButtonActions(
+							samplePanel.buttonList.get(pogasNr).reference, thread);
+
+			default -> System.out.println("Undefined panel detected!");
 		}
 	}
 

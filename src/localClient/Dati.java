@@ -2,7 +2,12 @@ package localClient;
 
 import localClient.grafika.Grafika;
 import localClient.grafika.GrafikasDati;
+import localClient.grafika.grafikaModes.develop.DevelopDrawManager;
+import localClient.grafika.grafikaModes.lobby.LobbyDrawManager;
+import localClient.grafika.grafikaModes.playerView.PlayerViewDrawManager;
+import localClient.grafika.grafikaModes.settings.SettingsDrawManager;
 import localClient.grafika.grafikaModes.setup.SetupDrawManager;
+import localClient.grafika.grafikaModes.spectate.SpectateDrawManager;
 import localClient.grafika.grafikaParts.DrawManager;
 
 import java.util.HashMap;
@@ -29,18 +34,36 @@ public class Dati {
 	Dati(){
 		grafikasDati = new GrafikasDati();
 
-		drawManagerList.put(ModeOption.setup,
-				new SetupDrawManager(grafikasDati.ekranaPlatums, grafikasDati.ekranaAugstums, grafikasDati.colorPalette)); //setup
-		//drawManagerList.put(ModeOption.develop, ); //develop
-		//drawManagerList.put(ModeOption.settings, ); //settings
-		//drawManagerList.put(ModeOption.spectate, ); //spectate
-		//drawManagerList.put(ModeOption.lobby, ); //lobby
-		//drawManagerList.put(ModeOption.playerView, ); //playerView
-
+		generateDrawManagerList();
 		modeCurrent = ModeOption.setup;
 
-
 		System.out.println("ClientThread: dati initialized");
+	}
+
+	private void generateDrawManagerList(){
+		drawManagerList.put(ModeOption.setup,
+				new SetupDrawManager(grafikasDati.ekranaPlatums, grafikasDati.ekranaAugstums,
+						grafikasDati.colorPalette)); //setup
+
+		drawManagerList.put(ModeOption.develop,
+				new DevelopDrawManager(grafikasDati.ekranaPlatums, grafikasDati.ekranaAugstums,
+						grafikasDati.colorPalette)); //develop
+
+		drawManagerList.put(ModeOption.settings,
+				new SettingsDrawManager(grafikasDati.ekranaPlatums, grafikasDati.ekranaAugstums,
+						grafikasDati.colorPalette)); //settings
+
+		drawManagerList.put(ModeOption.spectate,
+				new SpectateDrawManager(grafikasDati.ekranaPlatums, grafikasDati.ekranaAugstums,
+						grafikasDati.colorPalette)); //spectate
+
+		drawManagerList.put(ModeOption.lobby,
+				new LobbyDrawManager(grafikasDati.ekranaPlatums, grafikasDati.ekranaAugstums,
+						grafikasDati.colorPalette)); //lobby
+
+		drawManagerList.put(ModeOption.playerView,
+				new PlayerViewDrawManager(grafikasDati.ekranaPlatums, grafikasDati.ekranaAugstums,
+						grafikasDati.colorPalette)); //playerView
 	}
 
 	public void update(Grafika grafika){
@@ -53,36 +76,7 @@ public class Dati {
 	}
 
 
-//	//zemâk vecâ info par pogâm
-//
-//
-//	protected void initialize() {
-//
-//		// --------------------
-//		//par pogâm
-//
-//		buttonList = new ArrayList<Button>();
-//
-//		int pogasX0=5, pogasY0=20, pogasPlatums=100, pogasAugstums=30, pogasSprauga=5, w=0;
-//
-//		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Pauze",0); w++;
-//		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"PlayerView(0)",10); w++;
-//		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"PlayerView(rand)",10); w++;
-//		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Tablo1",0); w++;
-//		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Tablo2",0); w++;
-//		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Tablo3",0); w++;
-//		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"Map",0); w++;
-//		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"InputPanel",3); w++;
-//		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"ColorPanel",2); w++;
-//		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"GenRate +0.01",3); w++;
-//		addButton(pogasX0,pogasY0+(pogasAugstums+pogasSprauga)*w,pogasPlatums,pogasAugstums,"GenRate -0.01",3); w++;
-//
-//		inputPanelY+=(pogasAugstums+pogasSprauga)*w;
-//		colorPanelY0=inputPanelY+120;
-//
-//
-//		// --------------------
-//		//par cilvçku tablo (tablo2) zîmçðanas krâsâm
+//	//zemâk vecâ info par cilvçku tablo (tablo2) zîmçðanas krâsâm
 //
 //		boolean tablo2Transparent=false; //caurspîdîgs teksts
 //		int tablo2alfa=255;
@@ -90,9 +84,6 @@ public class Dati {
 //
 //		tablo2krasaDefault=new Color(255,255,0,tablo2alfa); //dzeltens
 //		tablo2krasaCritical=new Color(255,0,0,tablo2alfa); //sarkans
-//
-//
-//	}
 //
 	
 }

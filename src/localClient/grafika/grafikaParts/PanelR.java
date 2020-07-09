@@ -18,10 +18,10 @@ public class PanelR extends SamplePanel{
                 calculateSize(layout),
                 colorPair);
 
-        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.right1, "Poga1", 0));
-        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.right2, "Poga2", 0));
-        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.right3, "Right3", 0));
-        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.right4, "Poga4 yeyeye", 0));
+        buttonDetails.add(new Button.ButtonDetails(1, "Poga1", 0));
+        buttonDetails.add(new Button.ButtonDetails(2, "Poga2", 0));
+        buttonDetails.add(new Button.ButtonDetails(3, "Right3", 0));
+        buttonDetails.add(new Button.ButtonDetails(4, "Poga4 yeyeye", 0));
 
         generateButtons(layout);
     }

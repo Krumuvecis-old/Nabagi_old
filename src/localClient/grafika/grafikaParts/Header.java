@@ -16,9 +16,9 @@ public class Header extends SamplePanel {
     Header(SampleLayout layout, Color[] colorPair){
         super(calculateLocation(layout), calculateSize(layout), colorPair);
 
-        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.head1, "Exit1", 0));
-        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.head2, "Maximize", 0));
-        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.head3, "Minimize", 0));
+        buttonDetails.add(new Button.ButtonDetails(1, "Exit1", 0));
+        buttonDetails.add(new Button.ButtonDetails(2, "Maximize", 0));
+        buttonDetails.add(new Button.ButtonDetails(3, "Minimize", 0));
 
         generateButtons(layout);
     }

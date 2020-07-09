@@ -16,13 +16,13 @@ public class Footer extends SamplePanel {
     Footer(SampleLayout layout, Color[] colorPair){
         super(calculateLocation(layout), calculateSize(layout), colorPair);
 
-        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.foot1, "Layout grid", 0));
-        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.foot2, "Diagnostics", 0));
-        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.foot3, "Palette1", 0));
-        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.foot4, "Palette2", 0));
-        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.foot5, "Palette3", 0));
-        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.foot6, "Load Settings", 0));
-        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.foot7, "Save Settings", 0));
+        buttonDetails.add(new Button.ButtonDetails(1, "Layout grid", 0));
+        buttonDetails.add(new Button.ButtonDetails(2, "Diagnostics", 0));
+        buttonDetails.add(new Button.ButtonDetails(3, "Palette1", 0));
+        buttonDetails.add(new Button.ButtonDetails(4, "Palette2", 0));
+        buttonDetails.add(new Button.ButtonDetails(5, "Palette3", 0));
+        buttonDetails.add(new Button.ButtonDetails(6, "Load Settings", 0));
+        buttonDetails.add(new Button.ButtonDetails(7, "Save Settings", 0));
 
         generateButtons(layout);
     }

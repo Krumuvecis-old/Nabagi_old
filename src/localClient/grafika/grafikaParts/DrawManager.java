@@ -8,7 +8,7 @@ import java.awt.*;
 public abstract class DrawManager {
 
     public SampleLayout layout;
-    public DefaultInput inputActions;
+    public InputActions inputActions;
 
     public Header header;
     public Footer footer;
@@ -23,7 +23,7 @@ public abstract class DrawManager {
 
     public DrawManager(int ekranaPlatums, int ekranaAugstums, ColorPalette colorPalette){
         layout = new SampleLayout(ekranaPlatums, ekranaAugstums);
-        inputActions = new DefaultInput();
+        inputActions = new InputActions();
 
         header = new Header(layout, colorPalette.pair1);
         footer = new Footer(layout, colorPalette.pair1);
@@ -55,7 +55,7 @@ public abstract class DrawManager {
     }
 
     private void drawLayoutGrid(Graphics g, Color gridColor){
-        g.setColor(new Color(0,0,0,160));
+        g.setColor(new Color(0,0,0,150));
         g.fillRect(0,0, layout.ekranaPlatums, layout.ekranaAugstums);
 
 

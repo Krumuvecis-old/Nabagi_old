@@ -17,9 +17,9 @@ public class CenterPanel extends SamplePanel {
     CenterPanel(SampleLayout layout, Color[] colorPair){
         super(calculateLocation(layout), calculateSize(layout), colorPair);
 
-        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.center1, "Zoom in", 0));
-        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.center1, "Zoom out", 0));
-        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.center1, "Demo pictures", 0));
+        buttonDetails.add(new Button.ButtonDetails(1, "Zoom in", 0));
+        buttonDetails.add(new Button.ButtonDetails(2, "Zoom out", 0));
+        buttonDetails.add(new Button.ButtonDetails(3, "Demo pictures", 0));
 
         generateButtons(layout);
     }

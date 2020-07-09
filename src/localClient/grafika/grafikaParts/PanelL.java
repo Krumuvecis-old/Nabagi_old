@@ -19,7 +19,7 @@ public class PanelL extends SamplePanel {
     PanelL(SampleLayout layout, Color[] colorPair){
         super(calculateLocation(layout), calculateSize(layout), colorPair);
 
-        buttonDetails.add(new Button.ButtonDetails(Button.ActionReference.left1, "New client", 0));
+        buttonDetails.add(new Button.ButtonDetails(1, "New client", 0));
 
         generateButtons(layout);
     }
