@@ -18,7 +18,7 @@ public class GrafikasDati {
     private static final int[] ekransCorrection = {0, 0};
     public int ekranaPlatums = 1000 + ekransCorrection[0], ekranaAugstums = 700 + ekransCorrection[1];
 
-    public boolean drawLayoutGrid = false;
+    public boolean drawLayoutGrid = true;
     public Color layoutGridColor = Color.red;
 
     public ColorPalette colorPalette;

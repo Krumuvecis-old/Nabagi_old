@@ -17,7 +17,7 @@ public abstract class DrawManager {
     public boolean drawHeader = true, drawFooter = true,
             drawPanelL = true,  drawPanelR = true,
             drawCenterPanel = true,
-            drawLayoutGrid = false, drawOverPanel = true;
+            drawOverPanel = true;
 
     public DrawManager(int ekranaPlatums, int ekranaAugstums){
         layout = new SampleLayout(ekranaPlatums, ekranaAugstums);
@@ -40,7 +40,7 @@ public abstract class DrawManager {
         if(drawHeader) header.draw(g, thread.dati, layout);
         if(drawFooter) footer.draw(g, thread.dati, layout, true);
 
-        if(drawLayoutGrid) drawLayoutGrid(g, thread.dati.grafikasDati.layoutGridColor);
+        if(thread.dati.grafikasDati.drawLayoutGrid) drawLayoutGrid(g, thread.dati.grafikasDati.layoutGridColor);
 
         if(drawOverPanel) drawOverPanel();
 

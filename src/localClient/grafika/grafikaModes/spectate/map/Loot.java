@@ -1,4 +1,4 @@
-package localClient.grafika.map;
+package localClient.grafika.grafikaModes.spectate.map;
 
 public class Loot {
 
