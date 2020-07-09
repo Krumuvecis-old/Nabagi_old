@@ -13,20 +13,21 @@ public class Footer extends SamplePanel {
      *
      */
 
-    Footer(SampleLayout layout){
-        super(new int[]{0, layout.footerY},
-                calculateSize(layout),
-                new Color(0,0,0,255));
-
+    Footer(SampleLayout layout, Color[] colorPair){
+        super(calculateLocation(layout), calculateSize(layout), colorPair);
 
         generateButtons(layout, new String[][]{
-                {"SampleLayout grid", "foot1"},
+                {"Layout grid", "foot1"},
                 {"Diagnostics", "foot2"},
                 {"Palette1", "palette0poga"},
                 {"Palette2", "palette1poga"},
                 {"Palette3", "palette2poga"},
                 {"Load Settings", "loadSettingsPoga"},
                 {"Save Settings", "saveSettingsPoga"}});
+    }
+
+    private static int[] calculateLocation(SampleLayout layout){
+        return new int[]{layout.panelLX, layout.footerY};
     }
 
     private static int[] calculateSize(SampleLayout layout){
@@ -50,19 +51,20 @@ public class Footer extends SamplePanel {
 
     public void draw(Graphics g, Dati dati, SampleLayout layout, boolean sampleText){
         super.draw(g,
-                new int[]{0, layout.headerY},
-                calculateSize(layout));
+                calculateLocation(layout),
+                calculateSize(layout),
+                dati.grafikasDati.colorPalette.pair1);
 
         //te var likt papildus funkcijas
 
         Button.drawButtons(g, this);
 
-        if (sampleText) drawSampleText(g, dati.grafikasDati.colorPalette.pair1[1]);
+        if (sampleText) drawSampleText(g, dati.grafikasDati.colorPalette.pair1[1], layout);
 
     }
 
-    private void drawSampleText(Graphics g, Color textColor){
-        String text = "footer";
+    private void drawSampleText(Graphics g, Color textColor, SampleLayout layout){
+        String text = "footer y:" + layout.footerY;
         int[] textOffset = {5,15};
 
         int[] textXY = {XY[0] + textOffset[0], XY[1] + textOffset[1]};

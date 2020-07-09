@@ -13,15 +13,17 @@ public class Header extends SamplePanel {
     *
     */
 
-    Header(SampleLayout layout){
-        super(new int[]{layout.panelLX, layout.headerY},
-                calculateSize(layout),
-                new Color(0,0,0,255));
+    Header(SampleLayout layout, Color[] colorPair){
+        super(calculateLocation(layout), calculateSize(layout), colorPair);
 
         generateButtons(layout, new String[][]{
                 {"Exit", "head1"},
                 {"Maximize", "head2"},
                 {"Minimize", "head3"}});
+    }
+
+    private static int[] calculateLocation(SampleLayout layout){
+        return new int[]{layout.panelLX, layout.headerY};
     }
 
     private static int[] calculateSize(SampleLayout layout){
@@ -45,8 +47,9 @@ public class Header extends SamplePanel {
 
     public void draw(Graphics g, Dati dati, SampleLayout layout){
         super.draw(g,
-                new int[]{0, layout.headerY},
-                calculateSize(layout));
+                calculateLocation(layout),
+                calculateSize(layout),
+                dati.grafikasDati.colorPalette.pair1);
 
         Button.drawButtons(g, this);
         drawTitle(g, dati.grafikasDati.windowTitle, dati.grafikasDati.colorPalette.pair1[1]);

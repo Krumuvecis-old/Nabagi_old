@@ -13,16 +13,20 @@ public class PanelR extends SamplePanel{
      *
      */
 
-    PanelR(SampleLayout layout){
-        super(new int[]{layout.panelRX, layout.panelY},
+    PanelR(SampleLayout layout, Color[] colorPair){
+        super(calculateLocation(layout),
                 calculateSize(layout),
-                new Color(0,0,0,255));
+                colorPair);
 
         generateButtons(layout, new String[][]{
                 {"Poga1", "panel2poga1"},
                 {"Poga2", "panel2poga2"},
                 {"panel2poga3", "panel2poga3"},
                 {"poga4 yeyeye", "panel2poga4"}});
+    }
+
+    private static int[] calculateLocation(SampleLayout layout){
+        return new int[]{layout.panelRX, layout.panelY};
     }
 
     private static int[] calculateSize(SampleLayout layout){
@@ -46,8 +50,9 @@ public class PanelR extends SamplePanel{
 
     public void draw(Graphics g, Dati dati, SampleLayout layout, boolean sampleText){
         super.draw(g,
-                new int[]{0, layout.headerY},
-                calculateSize(layout));
+                calculateLocation(layout),
+                calculateSize(layout),
+                dati.grafikasDati.colorPalette.pair2);
 
         //te var likt papildus funkcijas
 

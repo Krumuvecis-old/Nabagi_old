@@ -1,6 +1,7 @@
 package localClient.grafika.grafikaParts;
 
 import localClient.ClientThread;
+import localClient.ColorPalette;
 
 import java.awt.*;
 
@@ -19,14 +20,14 @@ public abstract class DrawManager {
             drawCenterPanel = true,
             drawOverPanel = true;
 
-    public DrawManager(int ekranaPlatums, int ekranaAugstums){
+    public DrawManager(int ekranaPlatums, int ekranaAugstums, ColorPalette colorPalette){
         layout = new SampleLayout(ekranaPlatums, ekranaAugstums);
 
-        header = new Header(layout);
-        footer = new Footer(layout);
-        panelL = new PanelL(layout);
-        panelR = new PanelR(layout);
-        centerPanel = new CenterPanel(layout);
+        header = new Header(layout, colorPalette.pair1);
+        footer = new Footer(layout, colorPalette.pair1);
+        panelL = new PanelL(layout, colorPalette.pair2);
+        panelR = new PanelR(layout, colorPalette.pair2);
+        centerPanel = new CenterPanel(layout, colorPalette.pair3);
     }
 
     public void main(Graphics g, ClientThread thread){

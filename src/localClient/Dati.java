@@ -29,7 +29,8 @@ public class Dati {
 	Dati(){
 		grafikasDati = new GrafikasDati();
 
-		drawManagerList.put(ModeOption.setup, new SetupDrawManager(grafikasDati.ekranaPlatums, grafikasDati.ekranaAugstums)); //setup
+		drawManagerList.put(ModeOption.setup,
+				new SetupDrawManager(grafikasDati.ekranaPlatums, grafikasDati.ekranaAugstums, grafikasDati.colorPalette)); //setup
 		//drawManagerList.put(ModeOption.develop, ); //develop
 		//drawManagerList.put(ModeOption.settings, ); //settings
 		//drawManagerList.put(ModeOption.spectate, ); //spectate

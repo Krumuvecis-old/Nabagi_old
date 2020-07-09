@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 public class ColorPalette {
 
-    public Color[] pair1,
-            pair2,
-            pair3;
+    public Color[] pair1, //headerim & footerim
+            pair2, //sânu paneïiem
+            pair3; //centra panelim
 
     public ColorPalette(Color[] colorPair1, Color[] colorPair2, Color[] colorPair3){
        updatePalette(colorPair1, colorPair2, colorPair3);

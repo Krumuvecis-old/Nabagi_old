@@ -14,15 +14,17 @@ public class CenterPanel extends SamplePanel {
      *
      */
 
-    CenterPanel(SampleLayout layout){
-        super(new int[]{layout.centerPanelX, layout.panelY},
-                calculateSize(layout),
-                new Color(0,0,0,255));
+    CenterPanel(SampleLayout layout, Color[] colorPair){
+        super(calculateLocation(layout), calculateSize(layout), colorPair);
 
         generateButtons(layout, new String[][]{
                 {"Zoom in", "zoomInPoga"},
                 {"Zoom out", "zoomOutPoga"},
                 {"Demo pictures", "zvaigznePoga"}});
+    }
+
+    private static int[] calculateLocation(SampleLayout layout){
+        return new int[]{layout.centerPanelX, layout.panelY};
     }
 
     private static int[] calculateSize(SampleLayout layout){
@@ -45,8 +47,9 @@ public class CenterPanel extends SamplePanel {
 
     void draw(Graphics g, Dati dati, SampleLayout layout, boolean sampleText, boolean sampleImages){
         super.draw(g,
-                new int[]{0, layout.headerY},
-                calculateSize(layout));
+                calculateLocation(layout),
+                calculateSize(layout),
+                dati.grafikasDati.colorPalette.pair3);
 
         if(sampleImages) drawSampleImages(g, dati.grafikasDati.images);
         //te var likt papildus funkcijas

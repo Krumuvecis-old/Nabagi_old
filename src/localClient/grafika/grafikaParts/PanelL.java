@@ -16,13 +16,15 @@ public class PanelL extends SamplePanel {
      *
      */
 
-    PanelL(SampleLayout layout){
-        super(new int[]{layout.panelLX, layout.panelY},
-                calculateSize(layout),
-                new Color(0,0,0,255));
+    PanelL(SampleLayout layout, Color[] colorPair){
+        super(calculateLocation(layout), calculateSize(layout), colorPair);
 
         generateButtons(layout, new String[][]{
                 {"New client", "panel1poga1"}});
+    }
+
+    private static int[] calculateLocation(SampleLayout layout){
+        return new int[]{layout.panelLX, layout.panelY};
     }
 
     private static int[] calculateSize(SampleLayout layout){
@@ -46,8 +48,9 @@ public class PanelL extends SamplePanel {
 
     public void draw(Graphics g, Dati dati, SampleLayout layout, ColorPalette colorPalette, boolean sampleText, boolean diagnosticsInfo, ClientThread thread){
         super.draw(g,
-                new int[]{0, layout.headerY},
-                calculateSize(layout));
+                calculateLocation(layout),
+                calculateSize(layout),
+                dati.grafikasDati.colorPalette.pair2);
 
         //te var likt papildus funkcijas
 
