@@ -33,15 +33,24 @@ versija 0.12 (planned)
 	    add minimap (bigMap?) to playerView window
 
 
-versija 0.11 (planned) - june 2020
-    changes to file system
-    map divided into map chunks for faster computing and bigger map support
-    map wrapping around edges
-    map chunks divided into smaller map cells for terrain
-    fading view depending on distance
-
-    planned:
-        repair the errors
+versija 0.11 (in progress) - june/july 2020
+    massive changes to file system
+        separated server from client
+    calculations improvements (not finished)
+        separated database from calculations
+        map improvements
+            map divided into map chunks for faster computing and bigger map support
+            map chunks divided into smaller map cells for terrain
+            map wrapping around edges
+        item presets added
+        player AI separated (not finished)
+        and many more...
+    better graphics engine (not finished)
+        added layout
+        added sprites
+        savable settings (not finished)
+        clientUI has graphics modes (not finished)
+    and many more...
 
 versija 0.10 - may/june 2020
 	added key/mouse listener
