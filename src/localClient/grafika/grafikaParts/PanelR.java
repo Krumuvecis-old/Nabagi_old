@@ -18,8 +18,8 @@ public class PanelR extends SamplePanel{
                 calculateSize(layout),
                 colorPair);
 
-        buttonDetails.add(new Button.ButtonDetails(1, "Poga1", 0));
-        buttonDetails.add(new Button.ButtonDetails(2, "Poga2", 0));
+        buttonDetails.add(new Button.ButtonDetails(1, "Setup mode", 0));
+        buttonDetails.add(new Button.ButtonDetails(2, "Settings mode", 0));
         buttonDetails.add(new Button.ButtonDetails(3, "Right3", 0));
         buttonDetails.add(new Button.ButtonDetails(4, "Poga4 yeyeye", 0));
 

@@ -14,7 +14,7 @@ public class CenterPanel extends SamplePanel {
      *
      */
 
-    CenterPanel(SampleLayout layout, Color[] colorPair){
+    public CenterPanel(SampleLayout layout, Color[] colorPair){
         super(calculateLocation(layout), calculateSize(layout), colorPair);
 
         buttonDetails.add(new Button.ButtonDetails(1, "Zoom in", 0));
@@ -32,7 +32,7 @@ public class CenterPanel extends SamplePanel {
         return new int[]{layout.centerPanelPlatums, layout.panelAugstums};
     }
 
-    private void generateButtons(SampleLayout layout){
+    public void generateButtons(SampleLayout layout){
         buttonList = new ArrayList<>();
 
         int buttonSpacing=5;

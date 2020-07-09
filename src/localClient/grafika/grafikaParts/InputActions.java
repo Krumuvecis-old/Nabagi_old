@@ -83,8 +83,8 @@ public class InputActions {
 
     public void rightButtonActions(int reference, ClientThread thread){
         switch (reference) {
-            case 1 -> System.out.println("nospiesta labâ paneïa pirmâ poga");
-            case 2 -> System.out.println("nospiesta labâ paneïa otrâ poga");
+            case 1 -> thread.dati.modeCurrent = Dati.ModeOption.setup;
+            case 2 -> thread.dati.modeCurrent = Dati.ModeOption.settings;
             case 3 -> System.out.println("nospiesta labâ paneïa treðâ poga");
             case 4 -> System.out.println("nospiesta labâ paneïa ceturtâ poga");
             case 5 -> System.out.println("nospiesta labâ paneïa piektâ poga");
@@ -109,7 +109,7 @@ public class InputActions {
             case 8 -> System.out.println("nospiesta centrâlâ paneïa astotâ poga");
             case 9 -> System.out.println("nospiesta centrâlâ paneïa devîtâ poga");
 
-            default -> System.out.println("ServerUIThread CenterPanel reìistrçts nedefinçtas pogas notikums!");
+            default -> System.out.println("ServerUIThread SettingsCenterPanel reìistrçts nedefinçtas pogas notikums!");
         }
     }
 
