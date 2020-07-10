@@ -27,7 +27,7 @@ public class SettingsPanelR extends PanelR {
 
     private void drawContentPlaceHolder(Graphics g, Color textColor){
         g.setColor(textColor);
-        int[] textLocation = {XY[0] + size[0] / 2, XY[1] + size[1] / 2};
+        int[] textLocation = {XY[0] + size[0] / 2 - 60, XY[1] + size[1] / 2};
         g.drawString("Contents placeholder", textLocation[0], textLocation[1]);
     }
 

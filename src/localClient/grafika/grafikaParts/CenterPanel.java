@@ -36,7 +36,7 @@ public class CenterPanel extends SamplePanel {
         buttonList = new ArrayList<>();
 
         int buttonSpacing=5;
-        int[] buttonSize = {layout.panelLPlatums - buttonSpacing * 2, 30},
+        int[] buttonSize = {100, 30},
                 buttonOffset = {buttonSpacing, buttonSpacing};
 
         Button.addButtonList(this, true,
@@ -46,13 +46,12 @@ public class CenterPanel extends SamplePanel {
     }
 
 
-    public void draw(Graphics g, Dati dati, SampleLayout layout, boolean sampleImages){
+    public void draw(Graphics g, Dati dati, SampleLayout layout){
         super.draw(g,
                 calculateLocation(layout),
                 calculateSize(layout),
                 dati.grafikasDati.colorPalette.pair3);
 
-        if(sampleImages) drawSampleImages(g, dati.grafikasDati.images);
         //te var likt papildus default funkcijas
 
         Button.drawButtons(g, this);
@@ -61,25 +60,6 @@ public class CenterPanel extends SamplePanel {
     //te var likt papildus default funkcijas (jāizsauc no draw() metodes)
 
 
-    private void drawSampleImages(Graphics g, HashMap<String, Image> images){
 
-        int[] imageXYrelative = {300, 200},
-                imageSize = {150, 150},
-                imageXY = new int[]{imageXYrelative[0] + XY[0] - imageSize[0]/2,
-                                    imageXYrelative[1] + XY[1] - imageSize[1]/2};
-        g.drawImage(images.get("zvaigzne"), imageXY[0], imageXY[1], imageSize[0], imageSize[1],null);
-
-        imageXYrelative = new int[]{500, 300};
-        imageSize = new int[]{200, 200};
-        imageXY = new int[]{imageXYrelative[0] + XY[0] - imageSize[0]/2,
-                        imageXYrelative[1] + XY[1] - imageSize[1]/2};
-        g.drawImage(images.get("banana"), imageXY[0], imageXY[1], imageSize[0], imageSize[1],null);
-
-        imageXYrelative = new int[]{150, 300};
-        imageSize = new int[]{30, 30};
-        imageXY = new int[]{imageXYrelative[0] + XY[0] - imageSize[0]/2,
-                imageXYrelative[1] + XY[1] - imageSize[1]/2};
-        g.drawImage(images.get("banana"), imageXY[0], imageXY[1], imageSize[0], imageSize[1],null);
-    }
 
 }

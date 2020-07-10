@@ -12,9 +12,9 @@ public class DevelopPanelL extends PanelL {
         super(layout, colorPair);
 
         clearButtons();
-        buttonDetails.add(new Button.ButtonDetails(1, "Button1", 0));
-        buttonDetails.add(new Button.ButtonDetails(2, "Button2", 0));
-        buttonDetails.add(new Button.ButtonDetails(3, "Button3", 0));
+        buttonDetails.add(new Button.ButtonDetails(1, "Input diagnostics", 0));
+        buttonDetails.add(new Button.ButtonDetails(2, "Calculation time", 0));
+        buttonDetails.add(new Button.ButtonDetails(3, "Sample images", 0));
 
         //buttonDetails.add(new Button.ButtonDetails(2, "Diagnostics", 0));
         //tablodraw, colorPanel

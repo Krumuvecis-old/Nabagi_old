@@ -1,8 +1,8 @@
 ðis ir header
 ðo tekstu nenolasîs
 READSEPARATOR
-ekranaPlatums : 1000
-ekranaAugstums : 700
+ekranaPlatums : 1340
+ekranaAugstums : 710
 palette : 0
 READSEPARATOR
 ðis ir footer

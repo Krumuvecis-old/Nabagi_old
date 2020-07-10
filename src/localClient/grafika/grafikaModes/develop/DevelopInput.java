@@ -21,7 +21,6 @@ public class DevelopInput extends InputActions {
         switch (reference) {
             case 1 -> thread.dati.grafikasDati.drawLayoutGrid = !thread.dati.grafikasDati.drawLayoutGrid;
             case 2 -> System.out.println("pauze setter placeholder");
-            case 3 -> thread.dati.grafikasDati.drawInputDiagnosticsPanel = !thread.dati.grafikasDati.drawInputDiagnosticsPanel;
 
             default -> System.out.println("ServerUIThread DevelopFooter reìistrçts nedefinçtas pogas notikums!");
         }
@@ -30,9 +29,9 @@ public class DevelopInput extends InputActions {
     @Override
     public void leftButtonActions(int reference, ClientThread thread){
         switch (reference) {
-            case 1 -> System.out.println("develop mode left panel button 1");
-            case 2 -> System.out.println("develop mode left panel button 2");
-            case 3 -> System.out.println("develop mode left panel button 3");
+            case 1 -> thread.dati.grafikasDati.drawInputDiagnosticsPanel = !thread.dati.grafikasDati.drawInputDiagnosticsPanel;
+            case 2 -> thread.dati.grafikasDati.drawCalculationTime = !thread.dati.grafikasDati.drawCalculationTime;
+            case 3 -> thread.dati.grafikasDati.drawSampleImages = !thread.dati.grafikasDati.drawSampleImages;
 
             default -> System.out.println("ServerUIThread DevelopLeftPanel reìistrçts nedefinçtas pogas notikums!");
         }

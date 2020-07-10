@@ -16,21 +16,15 @@ public class GrafikasDati {
 
     static int[] ekransLocation = {10,10};
     private static final int[] ekransCorrection = {0, 0};
-    public int ekranaPlatums = 1000 + ekransCorrection[0], ekranaAugstums = 700 + ekransCorrection[1];
+    public int ekranaPlatums = 1340 + ekransCorrection[0], ekranaAugstums = 710 + ekransCorrection[1];
 
     public boolean drawLayoutGrid = false;
     public Color layoutGridColor = Color.red;
 
     public ColorPalette colorPalette;
 
-    public boolean drawHeader = true,
-            drawFooter = true,
-            drawPanel1 = true,
-            drawCalculationTime = true,
-            drawInputDiagnosticsPanel = true,
-            drawPanel2 = true,
-            drawKomanduInfo=true,
-            drawPanel3 = true,
+    public boolean drawCalculationTime = true,
+            drawInputDiagnosticsPanel = false,
             drawSampleImages = false;
 
     public HashMap<String, Image> images = new HashMap<>();
