@@ -37,7 +37,8 @@ public class GrafikasDati {
 
         String[][] imageNames = new String[][]{
                 {"Zvaigzne.png", "zvaigzne"},
-                {"Banans.png", "banana"}
+                {"Banans.png", "banana"},
+                {"panelBackground.png", "panelBackground"}
         };
         FileHandler.loadSprites(images, imageNames, imageLocation);
     }

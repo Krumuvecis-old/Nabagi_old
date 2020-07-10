@@ -22,12 +22,11 @@ public class SetupPanelL extends PanelL {
     public void draw(Graphics g, ClientThread thread, SampleLayout layout) {
         super.draw(g, thread, layout);
 
-        drawContentPlaceHolder(g, thread.dati.grafikasDati.colorPalette.pair2[1]);
+        drawBackgroundImage(g, thread.dati);
+
+        //te var izsaukt savas  metodes
     }
 
-    private void drawContentPlaceHolder(Graphics g, Color textColor){
-        g.setColor(textColor);
-        int[] textLocation = {XY[0] + size[0] / 2 - 60, XY[1] + size[1] / 2};
-        g.drawString("Contents placeholder", textLocation[0], textLocation[1]);
-    }
+    //te var pievienot savas metodes
+
 }

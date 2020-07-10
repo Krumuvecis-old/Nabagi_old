@@ -10,7 +10,7 @@ public class OverPanel {
 
     public void draw(Graphics g, ClientThread thread, SampleLayout layout){
 
-        //varbût uz ðeieni jâpârnes drawLayoutGrid
+        //varbût uz ðeieni jâpârnes drawLayoutGrid no drawManager
 
         if(thread.dati.grafikasDati.drawSampleImages)
             drawSampleImages(g, thread.dati.grafikasDati.images);

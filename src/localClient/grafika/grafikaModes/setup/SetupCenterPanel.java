@@ -26,13 +26,22 @@ public class SetupCenterPanel extends CenterPanel {
     public void draw(Graphics g, Dati dati, SampleLayout layout) {
         super.draw(g, dati, layout);
 
-        drawContentPlaceHolder(g, dati.grafikasDati.colorPalette.pair3[1]);
+        buttonRepositioner(layout);
+
+        drawWelcomeSign(g, dati.grafikasDati.colorPalette.pair3[1]);
     }
 
-    private void drawContentPlaceHolder(Graphics g, Color textColor){
+    private void buttonRepositioner(SampleLayout layout){
+        buttonList.get(0).x = size[0] / 2 - buttonList.get(0).wx /2;
+        buttonList.get(0).y = size[1] / 2 - 50;
+        buttonList.get(1).x = buttonList.get(0).x;
+        buttonList.get(1).y = buttonList.get(0).y + buttonList.get(0).wy + 5;
+    }
+
+    private void drawWelcomeSign(Graphics g, Color textColor){
         g.setColor(textColor);
-        int[] textLocation = {XY[0] + size[0] / 2 - 60, XY[1] + size[1] / 2};
-        g.drawString("Contents placeholder", textLocation[0], textLocation[1]);
+        int[] textLocation = {XY[0] + size[0] / 2 - 55, XY[1] + size[1] / 2 - 55};
+        g.drawString("Welcome to Nabagi!", textLocation[0], textLocation[1]);
     }
 
 }

@@ -1,5 +1,6 @@
 package localClient.grafika.grafikaParts;
 
+import localClient.Dati;
 import localClient.grafika.Button;
 
 import java.awt.*;
@@ -39,6 +40,10 @@ public abstract class SamplePanel {
         g.fillRect(XY[0], XY[1], size[0], size[1]);
         g.setColor(Color.black); //kontūra
         g.drawRect(XY[0], XY[1], size[0], size[1]);
+    }
+
+    public void drawBackgroundImage(Graphics g, Dati dati){
+        g.drawImage(dati.grafikasDati.images.get("panelBackground"), XY[0], XY[1], size[0], size[1], null);
     }
 
 }
