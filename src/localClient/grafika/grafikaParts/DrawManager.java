@@ -37,7 +37,7 @@ public abstract class DrawManager {
 
         if(drawCenterPanel) centerPanel.draw(g, thread.dati, layout, true);
 
-        if(drawPanelL) panelL.draw(g, thread.dati, layout, thread.dati.grafikasDati.colorPalette, true, thread);
+        if(drawPanelL) panelL.draw(g, thread, layout, true);
         if(drawPanelR) panelR.draw(g, thread.dati, layout);
 
         if(drawHeader) header.draw(g, thread.dati, layout);
@@ -64,7 +64,7 @@ public abstract class DrawManager {
 
         g.drawRect(header.XY[0], header.XY[1], header.size[0], header.size[1]); //header box
         textXY = new int[]{header.XY[0] + textOffset[0], header.XY[1] + textOffset[1]};
-        g.drawString("Header", textXY[0], textXY[1]);
+        g.drawString("LobbyHeader", textXY[0], textXY[1]);
 
         g.drawRect(panelL.XY[0], panelL.XY[1], panelL.size[0], panelL.size[1]); //panelL box
         textXY = new int[]{panelL.XY[0] + textOffset[0], panelL.XY[1] + textOffset[1]};
@@ -82,7 +82,7 @@ public abstract class DrawManager {
 
         g.drawRect(footer.XY[0], footer.XY[1], footer.size[0], footer.size[1]); //footer box
         textXY = new int[]{footer.XY[0] + textOffset[0], footer.XY[1] + textOffset[1]};
-        g.drawString("Footer", textXY[0], textXY[1]);
+        g.drawString("PlayerViewFooter", textXY[0], textXY[1]);
 
     }
 

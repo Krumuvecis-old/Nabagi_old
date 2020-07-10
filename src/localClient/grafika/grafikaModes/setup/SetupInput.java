@@ -1,21 +1,29 @@
 package localClient.grafika.grafikaModes.setup;
 
 import localClient.ClientThread;
+import localClient.Dati;
 import localClient.grafika.grafikaParts.InputActions;
 
 public class SetupInput extends InputActions {
 
-    //te var overraidot InputActions metodes
+    @Override
+    public void headerButtonActions(int reference, ClientThread thread){
+        switch (reference) {
+            case 1 -> thread.dati.modeCurrent = Dati.ModeOption.settings;
+            case 2 -> thread.dati.modeCurrent = Dati.ModeOption.develop;
 
-//    @Override
-//    public void rightButtonActions(int reference, ClientThread thread) {
-//        switch (reference) {
-//            case 1 -> System.out.println("nospiesta labâ paneïa pirmâ poga");
-//            case 2 -> System.out.println("nospiesta labâ paneïa otrâ poga");
-//            case 3 -> System.out.println("nospiesta labâ paneïa treðâ poga");
-//            case 4 -> System.out.println("nospiesta labâ paneïa ceturtâ poga ayeyeye!");
-//
-//            default -> System.out.println("ServerUIThread PanelRight reìistrçts nedefinçtas pogas notikums!");
-//        }
-//    }
+            default -> System.out.println("ServerUIThread SetupHeader reìistrçts nedefinçtas pogas notikums!");
+        }
+    }
+
+    @Override
+    public void centerButtonActions(int reference, ClientThread thread){
+        switch (reference) {
+            case 1 -> thread.dati.modeCurrent = Dati.ModeOption.lobby;
+            case 2 -> thread.dati.modeCurrent = Dati.ModeOption.spectate;
+
+            default -> System.out.println("ServerUIThread SetupCenterPanel reìistrçts nedefinçtas pogas notikums!");
+        }
+    }
+
 }

@@ -1,11 +1,9 @@
 package localClient.grafika;
 
 import localClient.ClientThread;
-import localClient.Dati;
 import localClient.grafika.grafikaParts.InputActions;
 import localClient.grafika.grafikaParts.SamplePanel;
 
-;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -177,7 +175,4 @@ public class Button {
 		pressed = active && thread.input.peleClick; //ja noklikðíina virs aktîvas pogas, tâ tiek nospiesta
 	}
 
-
-
-	
 }

@@ -1,28 +1,21 @@
 package localClient.grafika.grafikaModes.playerView;
 
-import localClient.ClientThread;
 import localClient.ColorPalette;
 import localClient.grafika.grafikaParts.DrawManager;
-
-import java.awt.*;
 
 public class PlayerViewDrawManager extends DrawManager{
 
     public PlayerViewDrawManager(int ekranaPlatums, int ekranaAugstums, ColorPalette colorPalette) {
         super(ekranaPlatums, ekranaAugstums, colorPalette);
 
+        inputActions = new PlayerViewInput();
         //te var piedefinçt atðíirîgu layout un fona krâsu
 
+        header = new PlayerViewHeader(layout, colorPalette.pair1);
+        footer = new PlayerViewFooter(layout, colorPalette.pair1);
+        panelL = new PlayerViewPanelL(layout, colorPalette.pair2);
+        panelR = new PlayerViewPanelR(layout, colorPalette.pair2);
+        centerPanel = new PlayerViewCenterPanel(layout, colorPalette.pair3);
         //te var piedefinçt atðíirîgus paneïus
     }
-
-    @Override
-    public void main(Graphics g, ClientThread thread) {
-        super.main(g, thread);
-
-        //te var izsaukt savas zîmçðanas metodes
-
-    }
-
-    //te var definçt savas zîmçðanas metodes
 }

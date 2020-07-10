@@ -46,20 +46,19 @@ public class CenterPanel extends SamplePanel {
     }
 
 
-    void draw(Graphics g, Dati dati, SampleLayout layout, boolean sampleImages){
+    public void draw(Graphics g, Dati dati, SampleLayout layout, boolean sampleImages){
         super.draw(g,
                 calculateLocation(layout),
                 calculateSize(layout),
                 dati.grafikasDati.colorPalette.pair3);
 
         if(sampleImages) drawSampleImages(g, dati.grafikasDati.images);
-        //te var likt papildus funkcijas
+        //te var likt papildus default funkcijas
 
         Button.drawButtons(g, this);
     }
 
-    //te var likt papildus funkcijas (jāizsauc no draw() metodes)
-
+    //te var likt papildus default funkcijas (jāizsauc no draw() metodes)
 
 
     private void drawSampleImages(Graphics g, HashMap<String, Image> images){

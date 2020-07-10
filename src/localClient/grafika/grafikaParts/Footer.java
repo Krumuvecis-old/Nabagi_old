@@ -13,16 +13,10 @@ public class Footer extends SamplePanel {
      *
      */
 
-    Footer(SampleLayout layout, Color[] colorPair){
+    public Footer(SampleLayout layout, Color[] colorPair){
         super(calculateLocation(layout), calculateSize(layout), colorPair);
 
-        buttonDetails.add(new Button.ButtonDetails(1, "Layout grid", 0));
-        buttonDetails.add(new Button.ButtonDetails(2, "Diagnostics", 0));
-        buttonDetails.add(new Button.ButtonDetails(3, "Palette1", 0));
-        buttonDetails.add(new Button.ButtonDetails(4, "Palette2", 0));
-        buttonDetails.add(new Button.ButtonDetails(5, "Palette3", 0));
-        buttonDetails.add(new Button.ButtonDetails(6, "Load Settings", 0));
-        buttonDetails.add(new Button.ButtonDetails(7, "Save Settings", 0));
+        //te var pievienot default pogas
 
         generateButtons(layout);
     }
@@ -37,7 +31,7 @@ public class Footer extends SamplePanel {
                 Math.min(layout.footerAugstums, Math.max(0, layout.ekranaAugstums - layout.panelY - layout.footerOffset))};
     }
 
-    private void generateButtons(SampleLayout layout){
+    public void generateButtons(SampleLayout layout){
         buttonList = new ArrayList<>();
 
         int buttonSpacing=5;
@@ -56,12 +50,22 @@ public class Footer extends SamplePanel {
                 calculateSize(layout),
                 dati.grafikasDati.colorPalette.pair1);
 
-        //te var likt papildus funkcijas
+        //te var likt papildus default funkcijas
 
         Button.drawButtons(g, this);
+        drawVersionInfo(g, dati.grafikasDati.windowTitle, dati.grafikasDati.colorPalette.pair1[1], String.valueOf(dati.modeCurrent));
     }
 
-    //te var likt papildus funkcijas (jāizsauc no draw() metodes)
+    private void drawVersionInfo(Graphics g, String windowTitle, Color textColor, String currentMode){
+        String text = windowTitle + " - mode: " + currentMode;
+        int[] textOffset = {5,15};
+
+        int[] textXY = {XY[0] + textOffset[0], XY[1] + textOffset[1]};
+        g.setColor(textColor);
+        g.drawString(text, textXY[0], textXY[1]);
+    }
+
+    //te var likt papildus default funkcijas (jāizsauc no draw() metodes)
 
 
 }

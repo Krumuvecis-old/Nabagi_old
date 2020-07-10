@@ -1,29 +1,19 @@
-package localClient.grafika.grafikaModes.settings;
+package localClient.grafika.grafikaModes.playerView;
 
 import localClient.Dati;
-import localClient.grafika.Button;
 import localClient.grafika.grafikaParts.CenterPanel;
 import localClient.grafika.grafikaParts.SampleLayout;
-import localClient.grafika.grafikaParts.SamplePanel;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
 
-public class SettingsCenterPanel extends CenterPanel {
+public class PlayerViewCenterPanel extends CenterPanel {
 
-    SettingsCenterPanel(SampleLayout layout, Color[] colorPair){
+    PlayerViewCenterPanel(SampleLayout layout, Color[] colorPair){
         super(layout, colorPair);
 
         clearButtons();
 
-        buttonDetails.add(new Button.ButtonDetails(1, "Palette1", 0));
-        buttonDetails.add(new Button.ButtonDetails(2, "Palette2", 0));
-        buttonDetails.add(new Button.ButtonDetails(3, "Palette3", 0));
-        buttonDetails.add(new Button.ButtonDetails(4, "Load settings", 0));
-        buttonDetails.add(new Button.ButtonDetails(4, "Save settings", 0));
-
-        //te var pievienot ppogas
+        //te var pievienot pogas
 
         generateButtons(layout);
     }
@@ -40,5 +30,4 @@ public class SettingsCenterPanel extends CenterPanel {
         int[] textLocation = {XY[0] + size[0] / 2, XY[1] + size[1] / 2};
         g.drawString("Contents placeholder", textLocation[0], textLocation[1]);
     }
-
 }

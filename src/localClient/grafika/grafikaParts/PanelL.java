@@ -16,7 +16,7 @@ public class PanelL extends SamplePanel {
      *
      */
 
-    PanelL(SampleLayout layout, Color[] colorPair){
+    public PanelL(SampleLayout layout, Color[] colorPair){
         super(calculateLocation(layout), calculateSize(layout), colorPair);
 
         buttonDetails.add(new Button.ButtonDetails(1, "New client", 0));
@@ -34,7 +34,7 @@ public class PanelL extends SamplePanel {
                 Math.max(0, layout.panelAugstums)};
     }
 
-    private void generateButtons(SampleLayout layout){
+    public void generateButtons(SampleLayout layout){
         buttonList = new ArrayList<>();
 
         int buttonSpacing=5;
@@ -47,16 +47,16 @@ public class PanelL extends SamplePanel {
                 buttonDetails);
     }
 
-    public void draw(Graphics g, Dati dati, SampleLayout layout, ColorPalette colorPalette, boolean diagnosticsInfo, ClientThread thread){
+    public void draw(Graphics g, ClientThread thread, SampleLayout layout, boolean diagnosticsInfo){
         super.draw(g,
                 calculateLocation(layout),
                 calculateSize(layout),
-                dati.grafikasDati.colorPalette.pair2);
+                thread.dati.grafikasDati.colorPalette.pair2);
 
-        //te var likt papildus funkcijas
+        //te var likt papildus default funkcijas
 
         Button.drawButtons(g, this);
-        if (diagnosticsInfo) drawInputDiagnosticsInfo(g, thread, colorPalette.pair2[1]);
+        if (diagnosticsInfo) drawInputDiagnosticsInfo(g, thread, thread.dati.grafikasDati.colorPalette.pair2[1]);
 
     }
 
@@ -94,7 +94,7 @@ public class PanelL extends SamplePanel {
 
     }
 
-    //te var likt papildus funkcijas (jāizsauc no draw() metodes)
+    //te var likt papildus default funkcijas (jāizsauc no draw() metodes)
 
 
 }

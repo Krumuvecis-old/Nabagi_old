@@ -13,15 +13,10 @@ public class PanelR extends SamplePanel{
      *
      */
 
-    PanelR(SampleLayout layout, Color[] colorPair){
+    public PanelR(SampleLayout layout, Color[] colorPair){
         super(calculateLocation(layout),
                 calculateSize(layout),
                 colorPair);
-
-        buttonDetails.add(new Button.ButtonDetails(1, "Setup mode", 0));
-        buttonDetails.add(new Button.ButtonDetails(2, "Settings mode", 0));
-        buttonDetails.add(new Button.ButtonDetails(3, "Right3", 0));
-        buttonDetails.add(new Button.ButtonDetails(4, "Poga4 yeyeye", 0));
 
         generateButtons(layout);
     }
@@ -36,7 +31,7 @@ public class PanelR extends SamplePanel{
                 Math.max(0, layout.panelAugstums)};
     }
 
-    private void generateButtons(SampleLayout layout){
+    public void generateButtons(SampleLayout layout){
         buttonList = new ArrayList<>();
 
         int buttonSpacing=5;
@@ -55,12 +50,12 @@ public class PanelR extends SamplePanel{
                 calculateSize(layout),
                 dati.grafikasDati.colorPalette.pair2);
 
-        //te var likt papildus funkcijas
+        //te var likt papildus default funkcijas
 
         Button.drawButtons(g, this);
 
     }
 
-    //te var likt papildus funkcijas (jāizsauc no draw() metodes)
+    //te var likt papildus default funkcijas (jāizsauc no draw() metodes)
 
 }

@@ -23,19 +23,11 @@ public class InputActions {
         }
     }
 
-    //idejas ko  regulçt ar pogâm:
-    //calculations pauze
-    //start playerview (lobby)
-    //tablodraw, colorPanel (develop)
-    //mapZoom (spectate, playerView?)
-    //genRate +/- (develop)
-
-
     public void headerButtonActions(int reference, ClientThread thread){
         switch (reference) {
-            case 1 -> thread.running = false;
-            case 2 -> thread.grafika.ekrans.setExtendedState(JFrame.MAXIMIZED_BOTH);
-            case 3 -> thread.grafika.ekrans.setState(Frame.ICONIFIED);
+            case 1 -> System.out.println("nospiesta header pirmâ poga");
+            case 2 -> System.out.println("nospiesta header otrâ poga");
+            case 3 -> System.out.println("nospiesta header treðâ poga");
             case 4 -> System.out.println("nospiesta header ceturtâ poga");
             case 5 -> System.out.println("nospiesta header piektâ poga");
             case 6 -> System.out.println("nospiesta header sestâ poga");
@@ -43,7 +35,7 @@ public class InputActions {
             case 8 -> System.out.println("nospiesta header astotâ poga");
             case 9 -> System.out.println("nospiesta header devîtâ poga");
 
-            default -> System.out.println("ServerUIThread Header reìistrçts nedefinçtas pogas notikums!");
+            default -> System.out.println("ServerUIThread LobbyHeader reìistrçts nedefinçtas pogas notikums!");
         }
     }
 
@@ -58,7 +50,7 @@ public class InputActions {
             case 8 -> System.out.println("nospiesta footer astotâ poga");
             case 9 -> System.out.println("nospiesta footer devîtâ poga");
 
-            default -> System.out.println("ServerUIThread Footer reìistrçts nedefinçtas pogas notikums!");
+            default -> System.out.println("ServerUIThread PlayerViewFooter reìistrçts nedefinçtas pogas notikums!");
         }
     }
 
@@ -109,7 +101,7 @@ public class InputActions {
             case 8 -> System.out.println("nospiesta centrâlâ paneïa astotâ poga");
             case 9 -> System.out.println("nospiesta centrâlâ paneïa devîtâ poga");
 
-            default -> System.out.println("ServerUIThread SettingsCenterPanel reìistrçts nedefinçtas pogas notikums!");
+            default -> System.out.println("ServerUIThread LobbyCenterPanel reìistrçts nedefinçtas pogas notikums!");
         }
     }
 
