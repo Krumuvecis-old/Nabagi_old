@@ -2,8 +2,10 @@ package localClient.grafika.grafikaParts;
 
 import localClient.CalculationTimeCalculator;
 import localClient.ClientThread;
+import localClient.grafika.GrafikasDati;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 public class OverPanel {
@@ -56,7 +58,47 @@ public class OverPanel {
 
     private void drawCalculationTimes(Graphics g){
         //Calculation times display not implemented yed
+
+        //zemâk kopçts no vecâ
+//      g.setColor(thread.dati.tablo1krasa);
+//
+//		int nobideX=thread.dati.tablo1x0, nobideY=thread.dati.tablo1y0;
+//		int tekstaPlatums=thread.dati.tablo1tekstaPlatums;
+//
+//		int w=0; //uzrakstîto rindu skaits
+//
+//		CalculationTimeCalculator calculationTimeCalculatorTemp=server.calculations.CalculationsThread.calculationTimeCalculator; //informâcija par galvenâ thread statusu
+//		if (thread.dati.drawCalculationTime) {
+//			g.drawString("Par aprçíinu Thread:", nobideX,w*tekstaPlatums+nobideY); w++;
+//			g.drawString("CalcTimeMax("+calculationTimeCalculatorTemp.timeCalculationFrequency+"): "+
+//					calculationTimeCalculatorTemp.calculationTimeMax, nobideX,w*tekstaPlatums+nobideY); w++;
+//			g.drawString("TotalFrameTime("+calculationTimeCalculatorTemp.timeCalculationFrequency+"): "+
+//					calculationTimeCalculatorTemp.totalFrameTimeMax, nobideX,w*tekstaPlatums+nobideY); w++;
+//		}
+//		g.drawString("Pauze: "+server.calculations.CalculationsThread.pauze,nobideX,w*tekstaPlatums+nobideY);w++;
+//		g.drawString("---------------",nobideX,w*tekstaPlatums+nobideY);w++;
+
     }
+
+//    private void drawColorPanel(Graphics g) {
+//
+//		int radiuss=thread.dati.colorPanelRadiuss,
+//				centrsX=thread.dati.colorPanelX0+radiuss,
+//				centrsY=thread.dati.colorPanelY0+radiuss;
+//
+//		g.setColor(thread.dati.colorPanelColor);
+//		g.drawOval(centrsX-radiuss, centrsY-radiuss, 2*radiuss, 2*radiuss); //pelçks krâsu aplis
+//
+//		double[] colorList=KomanduApskats.komandasTakenColors();
+//
+//		for(int i=0; i<colorList.length;i++) {
+//			g.setColor(new Color(Color.HSBtoRGB((float)colorList[i], 1, 1)));
+//			g.drawLine(centrsX, centrsY,
+//					(int)(centrsX+radiuss*Math.sin(2*Math.PI*colorList[i])),
+//					(int)(centrsY-radiuss*Math.cos(2*Math.PI*colorList[i])));
+//		}
+//
+//	}
 
     private void drawSampleImages(Graphics g, HashMap<String, Image> images){
 
@@ -77,6 +119,11 @@ public class OverPanel {
         imageXY = new int[]{imageXYrelative[0] - imageSize[0]/2,
                 imageXYrelative[1] - imageSize[1]/2};
         g.drawImage(images.get("banana"), imageXY[0], imageXY[1], imageSize[0], imageSize[1],null);
-    }
 
+        imageXYrelative = new int[]{300, 400};
+        imageSize = new int[]{100, 100};
+        imageXY = new int[]{imageXYrelative[0] - imageSize[0]/2,
+                imageXYrelative[1] - imageSize[1]/2};
+        g.drawImage(GrafikasDati.rotateImage(images.get("banana"), 90), imageXY[0], imageXY[1], imageSize[0], imageSize[1],null);
+    }
 }

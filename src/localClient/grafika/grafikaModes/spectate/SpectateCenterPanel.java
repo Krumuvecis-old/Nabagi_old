@@ -27,6 +27,11 @@ public class SpectateCenterPanel extends CenterPanel {
         super.draw(g, dati, layout);
 
         drawContentPlaceHolder(g, dati.grafikasDati.colorPalette.pair3[1]);
+
+
+        //zemâk kopçts no vecâ
+        //if (thread.dati.miniMapDraw) Map.main(g, thread, this); //karte
+
     }
 
     private void drawContentPlaceHolder(Graphics g, Color textColor){
