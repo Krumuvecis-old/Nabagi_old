@@ -8,7 +8,7 @@ public class CalculationsThread implements Runnable {
 	private static final String threadName = "CalculationsThread",
 			consoleOut = threadName + ": ";
 
-	public static boolean running = false, pauze = false;//, patsStarts=true;
+	public static boolean running = false, pauze = true;//, patsStarts=true;
 	public static CalculationTimeCalculator calculationTimeCalculator = new CalculationTimeCalculator();
 
 	public CalculationsThread(){
@@ -26,7 +26,7 @@ public class CalculationsThread implements Runnable {
 
 			calculationTimeCalculator.time(false);
 			try{
-				Thread.sleep(50 + calculationTimeCalculator.sleepT());
+				Thread.sleep(calculationTimeCalculator.sleepT());
 			}catch (Exception e){
 				e.printStackTrace();
 			}

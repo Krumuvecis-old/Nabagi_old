@@ -4,11 +4,8 @@ import localClient.Dati;
 import localClient.grafika.Button;
 import localClient.grafika.grafikaParts.CenterPanel;
 import localClient.grafika.grafikaParts.SampleLayout;
-import localClient.grafika.grafikaParts.SamplePanel;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class SettingsCenterPanel extends CenterPanel {
 
@@ -35,8 +32,8 @@ public class SettingsCenterPanel extends CenterPanel {
 
         clearButtons();
 
-        buttonDetails.add(new Button.ButtonDetails(1, "Brown/green", 3));
-        buttonDetails.add(new Button.ButtonDetails(2, "Blue", 0));
+        buttonDetails.add(new Button.ButtonDetails(1, "Brown", 2));
+        buttonDetails.add(new Button.ButtonDetails(2, "Blue", 2));
         buttonDetails.add(new Button.ButtonDetails(3, "Red", -2));
         buttonDetails.add(new Button.ButtonDetails(4, "Load settings", 10));
         buttonDetails.add(new Button.ButtonDetails(5, "Save settings", 8));
