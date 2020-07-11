@@ -32,7 +32,7 @@ public class GrafikasDati {
             drawColorWheel = false;
 
     public HashMap<String, Image> images = new HashMap<>();
-    static final String imageLocation = "src/localClient/samplePictures/";
+    static final String imageLocation = "media/";
 
     public GrafikasDati(){
         ColorPalette.generatePresetPalettes();
@@ -43,8 +43,8 @@ public class GrafikasDati {
                 {"nabagiLogo.png", "nabagiLogo"},
                 {"welcomeSign.png", "welcomeSign"},
                 {"panelBackground.png", "panelBackground"},
-                {"Banans.png", "banana"},
-                {"Zvaigzne.png", "zvaigzne"}
+                {"sprites/Banans.png", "banana"},
+                {"sprites/Zvaigzne.png", "zvaigzne"}
         };
         FileHandler.loadSprites(images, imageNames, imageLocation);
     }
