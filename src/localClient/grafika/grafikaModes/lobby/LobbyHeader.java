@@ -13,7 +13,7 @@ public class LobbyHeader extends Header {
 
         clearButtons();
         buttonDetails.add(new Button.ButtonDetails(1, "Main", 0));
-        buttonDetails.add(new Button.ButtonDetails(1, "Spectate", 0));
+        buttonDetails.add(new Button.ButtonDetails(2, "Spectate", 0));
 
         //te var pievienot pogas
 

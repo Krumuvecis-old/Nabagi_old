@@ -1,13 +1,13 @@
-package localClient.grafika.grafikaModes.develop;
+package localClient.grafika.grafikaModes.playerView;
 
 import localClient.grafika.grafikaParts.SampleLayout;
 
-public class DevelopLayout extends SampleLayout {
+public class PlayerViewLayout extends SampleLayout {
 
-    public DevelopLayout(int _ekranaPlatums, int _ekranaAugstums){
+    public PlayerViewLayout(int _ekranaPlatums, int _ekranaAugstums){
         super(_ekranaPlatums, _ekranaAugstums);
 
-        panelLPlatums = 200;
+        panelLPlatums = 300;
         panelRPlatums = 500;
 
         updateCalculatedValues(_ekranaPlatums, _ekranaAugstums);

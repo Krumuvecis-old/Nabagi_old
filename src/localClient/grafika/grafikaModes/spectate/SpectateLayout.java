@@ -1,10 +1,10 @@
-package localClient.grafika.grafikaModes.develop;
+package localClient.grafika.grafikaModes.spectate;
 
 import localClient.grafika.grafikaParts.SampleLayout;
 
-public class DevelopLayout extends SampleLayout {
+public class SpectateLayout extends SampleLayout {
 
-    public DevelopLayout(int _ekranaPlatums, int _ekranaAugstums){
+    public SpectateLayout(int _ekranaPlatums, int _ekranaAugstums){
         super(_ekranaPlatums, _ekranaAugstums);
 
         panelLPlatums = 200;

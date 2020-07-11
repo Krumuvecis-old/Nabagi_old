@@ -10,9 +10,9 @@ public class SampleLayout {
             panelAugstums, //calculated height for panels (in pixels)
 
             panelLX = 0, //panel1 x starting point (in pixels from left, acts as offset)
-            panelLPlatums = 200, //panel1 x width (in pixels)
+            panelLPlatums = 300, //panel1 x width (in pixels)
             panelRX, panelROffset = 0, //calculated panel2 x starting point (in pixels from left)
-            panelRPlatums = 300, //panel2 x width (in pixels)
+            panelRPlatums = panelLPlatums, //panel2 x width (in pixels)
             centerPanelX, //calculated panel3 x starting point (in pixels from left)
             centerPanelPlatums, //calculated panel3 x width (in pixels)
             centerPanelBorder = 20, //centerPanel border width (in pixels)

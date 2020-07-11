@@ -38,7 +38,17 @@ public abstract class DrawManager {
 
     public void main(Graphics g, ClientThread thread){
         drawFons(g, thread);
+        panelDrawingOrder(g, thread);
+        if(thread.dati.grafikasDati.drawLayoutGrid) drawLayoutGrid(g, thread.dati.grafikasDati.layoutGridColor);
+        if(drawOverPanel) overPanel.draw(g, thread, layout);
+    }
 
+    private void drawFons(Graphics g, ClientThread thread) {
+        g.setColor(thread.dati.grafikasDati.backgroundColor);
+        g.fillRect(0, 0, thread.grafika.grafika.getWidth(), thread.grafika.grafika.getHeight());
+    }
+
+    private void panelDrawingOrder(Graphics g, ClientThread thread){
         if(drawCenterPanel) centerPanel.draw(g, thread.dati, layout);
 
         if(drawPanelL) panelL.draw(g, thread, layout);
@@ -47,14 +57,7 @@ public abstract class DrawManager {
         if(drawHeader) header.draw(g, thread.dati, layout);
         if(drawFooter) footer.draw(g, thread.dati, layout);
 
-        if(thread.dati.grafikasDati.drawLayoutGrid) drawLayoutGrid(g, thread.dati.grafikasDati.layoutGridColor);
 
-        if(drawOverPanel) overPanel.draw(g, thread, layout);
-    }
-
-    private void drawFons(Graphics g, ClientThread thread) {
-        g.setColor(thread.dati.grafikasDati.backgroundColor);
-        g.fillRect(0, 0, thread.grafika.grafika.getWidth(), thread.grafika.grafika.getHeight());
     }
 
     private void drawLayoutGrid(Graphics g, Color gridColor){

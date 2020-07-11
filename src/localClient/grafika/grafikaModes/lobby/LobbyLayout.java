@@ -1,10 +1,10 @@
-package localClient.grafika.grafikaModes.develop;
+package localClient.grafika.grafikaModes.lobby;
 
 import localClient.grafika.grafikaParts.SampleLayout;
 
-public class DevelopLayout extends SampleLayout {
+public class LobbyLayout extends SampleLayout {
 
-    public DevelopLayout(int _ekranaPlatums, int _ekranaAugstums){
+    public LobbyLayout(int _ekranaPlatums, int _ekranaAugstums){
         super(_ekranaPlatums, _ekranaAugstums);
 
         panelLPlatums = 200;

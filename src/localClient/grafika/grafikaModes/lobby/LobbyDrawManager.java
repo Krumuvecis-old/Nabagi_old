@@ -9,7 +9,8 @@ public class LobbyDrawManager extends DrawManager{
         super(ekranaPlatums, ekranaAugstums, colorPalette);
 
         inputActions = new LobbyInput();
-        //te var piedefinçt atðíirîgu layout un fona krâsu
+        layout = new LobbyLayout(ekranaPlatums, ekranaAugstums);
+        //te var piedefinçt arî atðíirîgu fona krâsu
 
         header = new LobbyHeader(layout, colorPalette.pair1);
         panelL = new LobbyPanelL(layout, colorPalette.pair2);

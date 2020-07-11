@@ -1,11 +1,7 @@
 package localClient.grafika.grafikaModes.spectate;
 
-import localClient.ClientThread;
 import localClient.ColorPalette;
-import localClient.grafika.grafikaModes.develop.*;
 import localClient.grafika.grafikaParts.DrawManager;
-
-import java.awt.*;
 
 public class SpectateDrawManager extends DrawManager{
 
@@ -13,7 +9,8 @@ public class SpectateDrawManager extends DrawManager{
         super(ekranaPlatums, ekranaAugstums, colorPalette);
 
         inputActions = new SpectateInput();
-        //te var piedefinçt atðíirîgu layout un fona krâsu
+        layout = new SpectateLayout(ekranaPlatums, ekranaAugstums);
+        //te var piedefinçt arî atðíirîgu fona krâsu
 
         header = new SpectateHeader(layout, colorPalette.pair1);
         footer = new SpectateFooter(layout, colorPalette.pair1);

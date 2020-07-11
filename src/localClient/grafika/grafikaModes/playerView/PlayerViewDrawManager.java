@@ -9,7 +9,8 @@ public class PlayerViewDrawManager extends DrawManager{
         super(ekranaPlatums, ekranaAugstums, colorPalette);
 
         inputActions = new PlayerViewInput();
-        //te var piedefinçt atðíirîgu layout un fona krâsu
+        layout = new PlayerViewLayout(ekranaPlatums, ekranaAugstums);
+        //te var piedefinçt arî atðíirîgu fona krâsu
 
         header = new PlayerViewHeader(layout, colorPalette.pair1);
         footer = new PlayerViewFooter(layout, colorPalette.pair1);
