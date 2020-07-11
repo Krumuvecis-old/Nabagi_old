@@ -17,6 +17,8 @@ public class LobbyPanelR extends PanelR {
         //te var pievienot pogas
 
         generateButtons(layout);
+
+        drawKomanduInfo = true;
     }
 
 }

@@ -16,6 +16,8 @@ public class SpectatePanelR extends PanelR {
         //te var pievienot pogas
 
         generateButtons(layout);
+
+        drawKomanduInfo = true;
     }
 
     @Override

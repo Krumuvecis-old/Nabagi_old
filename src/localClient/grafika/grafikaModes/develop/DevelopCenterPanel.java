@@ -31,10 +31,8 @@ public class DevelopCenterPanel extends CenterPanel {
 
         contentsMethods.drawContentPlaceHolder(g, dati.grafikasDati.colorPalette.pair3[1], XY, size);
 
-        //zemâk kopçts no vecâ (arî zemâk 3 metodes definçtas no vecâ)
-// 		if (thread.dati.tablo1Draw) ContentsMethods.drawTablo1(g); //galvenais komandu panelis sânâ
 //		if (thread.dati.tablo2Draw) ContentsMethods.drawTablo2(g); //centrâlais panelis cilvçku diagnostikai
-//		if (thread.dati.tablo3Draw) drawTablo3(g); //centrâlais panelis kartes diagnostikai
+//		if (thread.dati.tablo3Draw) ContentsMethods.drawTablo3(g); //centrâlais panelis kartes diagnostikai
 
     }
 
