@@ -75,15 +75,5 @@ public class Dati {
 				grafikasDati.ekranaAugstums); //lai ekrânam varçtu notikt resize
 	}
 
-
-//	//zemâk vecâ info par cilvçku tablo (tablo2) zîmçðanas krâsâm
-//
-//		boolean tablo2Transparent=false; //caurspîdîgs teksts
-//		int tablo2alfa=255;
-//		if(tablo2Transparent) tablo2alfa=100; //max caurspîdîgums
-//
-//		tablo2krasaDefault=new Color(255,255,0,tablo2alfa); //dzeltens
-//		tablo2krasaCritical=new Color(255,0,0,tablo2alfa); //sarkans
-//
 	
 }

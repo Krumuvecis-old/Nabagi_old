@@ -12,7 +12,7 @@ public class OverPanel {
 
     public void draw(Graphics g, ClientThread thread, SampleLayout layout){
 
-        //varbût uz ðeieni jâpârnes drawLayoutGrid no drawManager
+        //varbût uz ðeieni jâpârnes drawLayoutGrid no drawManager ?
 
         if(thread.dati.grafikasDati.drawSampleImages)
             drawSampleImages(g, thread.dati.grafikasDati.images);
@@ -21,10 +21,12 @@ public class OverPanel {
         if(thread.dati.grafikasDati.drawClientDiagnosticsInfo)
             drawClientDiagnosticsInfo(g, thread, thread.dati.grafikasDati.colorPalette.pair2[1], layout);
         if(thread.dati.grafikasDati.drawCalculationTime)
-            drawCalculationTimes(g);
+            drawCalculationTimes(g, thread.dati.grafikasDati.colorPalette.pair2[1], layout);
     }
 
-    private void drawClientDiagnosticsInfo(Graphics g, ClientThread thread, Color textColor, SampleLayout layout) { //ieavades pârbaude un grafiskâ informâcija
+    private void drawClientDiagnosticsInfo(Graphics g, ClientThread thread, Color textColor, SampleLayout layout) {
+
+        //ieavades pârbaude un grafiskâ informâcija
 
         int[] textOffset = {5, 200};
 
@@ -58,27 +60,25 @@ public class OverPanel {
 
     }
 
-    private void drawCalculationTimes(Graphics g){
-        //Calculation times display not implemented yed
+    private void drawCalculationTimes(Graphics g, Color textColor, SampleLayout layout){
+        //informâcija par galvenâ thread statusu
 
-        //zemâk kopçts no vecâ
-//      g.setColor(thread.dati.tablo1krasa);
-//
-//		int nobideX=thread.dati.tablo1x0, nobideY=thread.dati.tablo1y0;
-//		int tekstaPlatums=thread.dati.tablo1tekstaPlatums;
-//
-//		int w=0; //uzrakstîto rindu skaits
-//
-//		CalculationTimeCalculator calculationTimeCalculatorTemp=server.calculations.CalculationsThread.calculationTimeCalculator; //informâcija par galvenâ thread statusu
-//		if (thread.dati.drawCalculationTime) {
-//			g.drawString("Par aprçíinu Thread:", nobideX,w*tekstaPlatums+nobideY); w++;
-//			g.drawString("CalcTimeMax("+calculationTimeCalculatorTemp.timeCalculationFrequency+"): "+
-//					calculationTimeCalculatorTemp.calculationTimeMax, nobideX,w*tekstaPlatums+nobideY); w++;
-//			g.drawString("TotalFrameTime("+calculationTimeCalculatorTemp.timeCalculationFrequency+"): "+
-//					calculationTimeCalculatorTemp.totalFrameTimeMax, nobideX,w*tekstaPlatums+nobideY); w++;
-//		}
-//		g.drawString("Pauze: "+server.calculations.CalculationsThread.pauze,nobideX,w*tekstaPlatums+nobideY);w++;
-//		g.drawString("---------------",nobideX,w*tekstaPlatums+nobideY);w++;
+        server.calculations.CalculationTimeCalculator calculationTimeCalculatorTemp =
+                server.calculations.CalculationsThread.calculationTimeCalculator;
+
+        int[] location = new int[]{10, 10 + 45}; // xy from bottom-left
+
+        int yw = 15, w = 1,
+                x0 = layout.centerPanelContentsX + location[0],
+                y0 = layout.centerPanelContentsY + layout.centerPanelContentsWY - location[1];
+
+        g.setColor(textColor);
+
+        g.drawString("Par aprçíinu Thread:", x0, y0 + yw * w); w++;
+        g.drawString("CalcTimeMax(" + calculationTimeCalculatorTemp.timeCalculationFrequency + "): " +
+                calculationTimeCalculatorTemp.calculationTimeMax, x0, y0 + yw * w); w++;
+        g.drawString("TotalFrameTime(" + calculationTimeCalculatorTemp.timeCalculationFrequency + "): " +
+                calculationTimeCalculatorTemp.totalFrameTimeMax, x0, y0 + yw * w);
 
     }
 

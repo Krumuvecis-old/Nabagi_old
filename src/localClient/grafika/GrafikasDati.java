@@ -48,50 +48,6 @@ public class GrafikasDati {
         FileHandler.loadSprites(images, imageNames, imageLocation);
     }
 
-//	//zemâk vecie parametri
-//	// --------------------
-//	//zemâk par centrâlâ cilvçku tablo Parametriem (no vecâ varianta)
-//
-//	protected boolean tablo2Draw=false;
-//
-//	protected int tablo2x0=280, tablo2y0=tablo1y0, tablo2rindasPlatums=14;
-//
-//	protected int tablo2platums1=200; //platums1
-//	protected int tablo2platums2=130; //platums2
-//	protected int tablo2platumsN=80; //platumsN
-//
-//	protected Color tablo2krasaDefault, tablo2krasaCritical; //paðas krâsas nosaka initialize() ciklâ
-//
-//
-//	// --------------------
-//	//zemâk par kartes zîmçðanu
-//
-//	public boolean miniMapDraw=true, miniMapDrawInfo=true; //kartes zîmçðana vispâr un informâcija tai apakðâ
-//	public int miniMapX=tablo2x0, miniMapY=tablo2y0-15,
-//			miniMapPlatums=ekranaPlatums-miniMapX-50,
-//			miniMapAugstums=ekranaAugstums-miniMapY-50;
-//
-//
-//	// --------------------
-//	//zemâk par centrâlâ (kartes diagnostikas) tablo Parametriem
-//
-//	protected boolean tablo3Draw=false;
-//	protected Color tablo3krasa=Color.white;
-//
-//	//augstâk vecie parametri
-
-    // --------------------
-    //zemâk jaunâs funkcijas paòemtas no TimeScheduler
-
-
-    public static double cilvekiKrasaSaturation=1;
-    public static double cilvekiKrasaBrightnessMin=0.4; //pie hpRatio=0
-    public static double cilvekiKrasaBrightnessMax=1; //pie hpRatio=1
-
-    public static Color kronaKrasa = new Color(0,0,0); //kroòa krâsa - melns  punkts
-    public static double kronaKoeficients=0.5; //kroòa resnums pret kopçjo resnumu
-
-
     public static Image rotateImage(Image _image, double fi){
 
         /*
