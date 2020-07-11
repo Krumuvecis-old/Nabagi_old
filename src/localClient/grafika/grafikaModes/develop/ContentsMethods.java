@@ -74,34 +74,7 @@ public class ContentsMethods {
 //    public static double kronaKoeficients=0.5; //kroòa resnums pret kopçjo resnumu
 
     //zemâk kopçts no vecâ
-    //	private void drawTablo1(Graphics g) { //galvenais tablo pa labi no pogâm
-//
-//		g.setColor(thread.dati.tablo1krasa);
-//
-//		int nobideX=thread.dati.tablo1x0, nobideY=thread.dati.tablo1y0;
-//		int tekstaPlatums=thread.dati.tablo1tekstaPlatums;
-//
-//		int w=0; //uzrakstîto rindu skaits
-//
-//		//tekoðâ informâcija par komandâm
-//		g.drawString("vislielâkâ komanda: "+KomanduApskats.komanduVestureLielakaKomanda+" ("+KomanduApskats.komanduVestureMaksimums+")",nobideX,w*tekstaPlatums+nobideY);w++;
-//		g.drawString("tagad kopâ spçlçtâji: "+Cilveks.cilvekuListPilnais.size(),nobideX,w*tekstaPlatums+nobideY);w++;
-//		g.drawString("---------------",nobideX,w*tekstaPlatums+nobideY);w++;
-//
-//		for (int i=0;i<komandasList.size();i++) {
-//			g.setColor(komandasList.get(i).krasa);
-//			g.drawString(komandasList.get(i).nosaukums+" - "+komandasList.get(i).biedruList.size()+" speletaji",nobideX,w*tekstaPlatums+nobideY);w++;
-//			g.drawString("karalis: "+komandasList.get(i).galvenais,nobideX,w*tekstaPlatums+nobideY);w++;
-//		}
-//
-//		//vispârçja spçlçtâju statistika drusku zemâk
-//		g.setColor(thread.dati.tablo1krasa);
-//		g.drawString("---------------",nobideX,w*tekstaPlatums+nobideY);w++;
-//		//g.drawString("vecâkais: "+cilvekiList.get(0).vards,nobideX,w*tekstaPlatums+nobideY);w++;
-//		//g.drawString("jaunâkais: "+cilvekiList.get(cilvekiList.size()-1).vards,nobideX,w*tekstaPlatums+nobideY);w++;
-//		g.drawString("kopâ bijuði spçlçtâji: "+Cilveks.maxCilveks,nobideX,w*tekstaPlatums+nobideY);w++;
-//
-//	}
+
 //
 //	private void drawTablo2(Graphics g) { //lielais cilvçku diagnostikas logs
 //		//ðis logs pagaidâm nedarbojas
