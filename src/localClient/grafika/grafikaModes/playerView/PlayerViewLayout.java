@@ -8,7 +8,7 @@ public class PlayerViewLayout extends SampleLayout {
         super(_ekranaPlatums, _ekranaAugstums);
 
         panelLPlatums = 300;
-        panelRPlatums = 500;
+        panelRPlatums = 400;
 
         updateCalculatedValues(_ekranaPlatums, _ekranaAugstums);
     }

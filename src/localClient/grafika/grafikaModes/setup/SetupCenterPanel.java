@@ -10,9 +10,8 @@ import java.awt.*;
 public class SetupCenterPanel extends CenterPanel {
 
 
-    private static final double[] groupSizeProportion = new double[]{0.5, 0.5},
+    private static final double[] groupSizeProportion = new double[]{0.5, 0.6},
             groupOffset = new double[]{0, 0};
-
 
     private StartingBox startingBox;
 
@@ -47,7 +46,7 @@ public class SetupCenterPanel extends CenterPanel {
 
         private int[] buttonBoxLoc, buttonBoxSize;
         private int buttonCount;
-        private final int[] buttonSizeMin = new int[]{50, 30};
+        private final int[] buttonSizeMin = new int[]{60, 30};
         private static final double buttonBoxYProportion = 0.3;
         private static final int buttonSeparation = 5;
 

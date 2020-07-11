@@ -7,8 +7,8 @@ public class LobbyLayout extends SampleLayout {
     public LobbyLayout(int _ekranaPlatums, int _ekranaAugstums){
         super(_ekranaPlatums, _ekranaAugstums);
 
-        panelLPlatums = 200;
-        panelRPlatums = 500;
+        panelLPlatums = 150;
+        panelRPlatums = 300;
 
         updateCalculatedValues(_ekranaPlatums, _ekranaAugstums);
     }

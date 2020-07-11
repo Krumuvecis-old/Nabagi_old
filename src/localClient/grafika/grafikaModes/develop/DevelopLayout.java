@@ -7,8 +7,8 @@ public class DevelopLayout extends SampleLayout {
     public DevelopLayout(int _ekranaPlatums, int _ekranaAugstums){
         super(_ekranaPlatums, _ekranaAugstums);
 
-        panelLPlatums = 200;
-        panelRPlatums = 500;
+        panelLPlatums = 150;
+        panelRPlatums = 400;
 
         updateCalculatedValues(_ekranaPlatums, _ekranaAugstums);
     }
