@@ -8,7 +8,7 @@ public class SpectateLayout extends SampleLayout {
         super(_ekranaPlatums, _ekranaAugstums);
 
         panelLPlatums = 150;
-        panelRPlatums = 150;
+        panelRPlatums = 250;
 
         updateCalculatedValues(_ekranaPlatums, _ekranaAugstums);
     }
