@@ -12,12 +12,11 @@ public class DevelopPanelL extends PanelL {
         super(layout, colorPair);
 
         clearButtons();
-        buttonDetails.add(new Button.ButtonDetails(1, "Client diagnostics", 9));
-        buttonDetails.add(new Button.ButtonDetails(2, "Server diagnostics", 9));
-        buttonDetails.add(new Button.ButtonDetails(3, "Sample images", -1));
 
-        //buttonDetails.add(new Button.ButtonDetails(2, "Diagnostics", 0));
-        //tablodraw, colorPanel
+        buttonDetails.add(new Button.ButtonDetails(1, "Tablo1", 0));
+        buttonDetails.add(new Button.ButtonDetails(2, "Tablo2", 0));
+        buttonDetails.add(new Button.ButtonDetails(3, "Tablo3", 0));
+
         //genRate +/-
 
         //te var pievienot pogas

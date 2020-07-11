@@ -30,9 +30,9 @@ public class DevelopInput extends InputActions {
     @Override
     public void leftButtonActions(int reference, ClientThread thread){
         switch (reference) {
-            case 1 -> thread.dati.grafikasDati.drawInputDiagnosticsPanel = !thread.dati.grafikasDati.drawInputDiagnosticsPanel;
-            case 2 -> thread.dati.grafikasDati.drawCalculationTime = !thread.dati.grafikasDati.drawCalculationTime;
-            case 3 -> thread.dati.grafikasDati.drawSampleImages = !thread.dati.grafikasDati.drawSampleImages;
+            case 1 -> System.out.println("tablo1 action placeholder");
+            case 2 -> System.out.println("tablo2 action placeholder");
+            case 3 -> System.out.println("tablo3 action placeholder");
 
             default -> System.out.println("ServerUIThread DevelopLeftPanel reìistrçts nedefinçtas pogas notikums!");
         }
@@ -41,9 +41,10 @@ public class DevelopInput extends InputActions {
     @Override
     public void rightButtonActions(int reference, ClientThread thread){
         switch (reference) {
-            case 1 -> System.out.println("develop mode right panel button 1");
-            case 2 -> System.out.println("develop mode right panel button 2");
-            case 3 -> System.out.println("develop mode right panel button 3");
+            case 1 -> thread.dati.grafikasDati.drawClientDiagnosticsInfo = !thread.dati.grafikasDati.drawClientDiagnosticsInfo;
+            case 2 -> thread.dati.grafikasDati.drawCalculationTime = !thread.dati.grafikasDati.drawCalculationTime;
+            case 3 -> thread.dati.grafikasDati.drawSampleImages = !thread.dati.grafikasDati.drawSampleImages;
+            case 4 -> thread.dati.grafikasDati.drawColorWheel = !thread.dati.grafikasDati.drawColorWheel;
 
             default -> System.out.println("ServerUIThread DevelopRightPanel reìistrçts nedefinçtas pogas notikums!");
         }

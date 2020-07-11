@@ -9,7 +9,8 @@ public class DevelopDrawManager extends DrawManager{
         super(ekranaPlatums, ekranaAugstums, colorPalette);
 
         inputActions = new DevelopInput();
-        //te var piedefinçt atðíirîgu layout un fona krâsu
+        layout = new DevelopLayout(ekranaPlatums, ekranaAugstums);
+        //te var piedefinçt arî atðíirîgu fona krâsu
 
         header = new DevelopHeader(layout, colorPalette.pair1);
         footer = new DevelopFooter(layout, colorPalette.pair1);

@@ -3,9 +3,9 @@ package localClient.grafika.grafikaParts;
 import localClient.CalculationTimeCalculator;
 import localClient.ClientThread;
 import localClient.grafika.GrafikasDati;
+import server.calculations.komandas.Komanda;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 public class OverPanel {
@@ -16,13 +16,15 @@ public class OverPanel {
 
         if(thread.dati.grafikasDati.drawSampleImages)
             drawSampleImages(g, thread.dati.grafikasDati.images);
-        if(thread.dati.grafikasDati.drawInputDiagnosticsPanel)
-            drawInputDiagnosticsInfo(g, thread, thread.dati.grafikasDati.colorPalette.pair2[1], layout);
-        if(thread.dati.grafikasDati.drawInputDiagnosticsPanel)
+        if(thread.dati.grafikasDati.drawColorWheel)
+            drawColorWheel(g, layout);
+        if(thread.dati.grafikasDati.drawClientDiagnosticsInfo)
+            drawClientDiagnosticsInfo(g, thread, thread.dati.grafikasDati.colorPalette.pair2[1], layout);
+        if(thread.dati.grafikasDati.drawCalculationTime)
             drawCalculationTimes(g);
     }
 
-    private void drawInputDiagnosticsInfo(Graphics g, ClientThread thread, Color textColor, SampleLayout layout) { //ieavades pârbaude un grafiskâ informâcija
+    private void drawClientDiagnosticsInfo(Graphics g, ClientThread thread, Color textColor, SampleLayout layout) { //ieavades pârbaude un grafiskâ informâcija
 
         int[] textOffset = {5, 200};
 
@@ -80,25 +82,31 @@ public class OverPanel {
 
     }
 
-//    private void drawColorPanel(Graphics g) {
-//
-//		int radiuss=thread.dati.colorPanelRadiuss,
-//				centrsX=thread.dati.colorPanelX0+radiuss,
-//				centrsY=thread.dati.colorPanelY0+radiuss;
-//
-//		g.setColor(thread.dati.colorPanelColor);
-//		g.drawOval(centrsX-radiuss, centrsY-radiuss, 2*radiuss, 2*radiuss); //pelçks krâsu aplis
-//
-//		double[] colorList=KomanduApskats.komandasTakenColors();
-//
-//		for(int i=0; i<colorList.length;i++) {
-//			g.setColor(new Color(Color.HSBtoRGB((float)colorList[i], 1, 1)));
-//			g.drawLine(centrsX, centrsY,
-//					(int)(centrsX+radiuss*Math.sin(2*Math.PI*colorList[i])),
-//					(int)(centrsY-radiuss*Math.cos(2*Math.PI*colorList[i])));
-//		}
-//
-//	}
+    private void drawColorWheel(Graphics g, SampleLayout layout) {
+
+        int[] location = new int[]{10, 10}; // xy from bottom-right
+		int radiuss = 50,
+				centrsX = layout.centerPanelContentsX + layout.centerPanelContentsWX - radiuss - location[0] ,
+				centrsY = layout.centerPanelContentsY + layout.centerPanelContentsWY - radiuss - location[1];
+
+		g.setColor(Color.lightGray); // apïa kontûra
+
+		g.drawOval(
+		        centrsX - radiuss,
+                centrsY - radiuss,
+                2 * radiuss,
+                2 * radiuss);
+
+		double[] colorList = Komanda.komandasTakenColors();
+
+		for(int i=0; i<colorList.length;i++) {
+			g.setColor(new Color(Color.HSBtoRGB((float)colorList[i], 1, 1)));
+			g.drawLine(centrsX, centrsY,
+					(int)(centrsX+radiuss*Math.sin(2*Math.PI*colorList[i])),
+					(int)(centrsY-radiuss*Math.cos(2*Math.PI*colorList[i])));
+		}
+
+	}
 
     private void drawSampleImages(Graphics g, HashMap<String, Image> images){
 

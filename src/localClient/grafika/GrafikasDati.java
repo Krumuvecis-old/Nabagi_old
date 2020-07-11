@@ -27,8 +27,9 @@ public class GrafikasDati {
     public ColorPalette colorPalette;
 
     public boolean drawCalculationTime = true,
-            drawInputDiagnosticsPanel = false,
-            drawSampleImages = false;
+            drawClientDiagnosticsInfo = true,
+            drawSampleImages = true,
+            drawColorWheel = true;
 
     public HashMap<String, Image> images = new HashMap<>();
     static final String imageLocation = "src/localClient/samplePictures/";
@@ -60,14 +61,6 @@ public class GrafikasDati {
 //	protected int tablo2platumsN=80; //platumsN
 //
 //	protected Color tablo2krasaDefault, tablo2krasaCritical; //paðas krâsas nosaka initialize() ciklâ
-//
-//
-//	// --------------------
-//	//zemâk par atïauto krâsu paneli
-//
-//	protected boolean colorPanelDraw=false;
-//	protected Color colorPanelColor=Color.lightGray; //krâsu apïa kontûras krâsa
-//	protected int colorPanelX0=10, colorPanelY0=380, colorPanelRadiuss=50;
 //
 //
 //	// --------------------

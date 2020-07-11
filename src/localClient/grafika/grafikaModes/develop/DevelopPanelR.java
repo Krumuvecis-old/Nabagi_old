@@ -13,9 +13,11 @@ public class DevelopPanelR extends PanelR {
         super(layout, colorPair);
         clearButtons();
 
-        buttonDetails.add(new Button.ButtonDetails(1, "Button1", 0));
-        buttonDetails.add(new Button.ButtonDetails(2, "Button2", 0));
-        buttonDetails.add(new Button.ButtonDetails(3, "Button3", 0));
+        //overPanel toggles
+        buttonDetails.add(new Button.ButtonDetails(1, "Client diagnostics toggle", 18));
+        buttonDetails.add(new Button.ButtonDetails(2, "Server diagnostics toggle", 16));
+        buttonDetails.add(new Button.ButtonDetails(3, "Sample images toggle", 4));
+        buttonDetails.add(new Button.ButtonDetails(4, "Color wheel toggle", 0));
 
         //te var pievienot pogas
 

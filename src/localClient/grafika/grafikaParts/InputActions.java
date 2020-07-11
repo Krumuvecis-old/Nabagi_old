@@ -36,13 +36,14 @@ public class InputActions {
     }
 
     public void footerButtonActions(int reference, ClientThread thread){
-        switch (reference) {case 1 -> thread.dati.grafikasDati.drawLayoutGrid = !thread.dati.grafikasDati.drawLayoutGrid;
-            case 2 -> thread.dati.grafikasDati.drawInputDiagnosticsPanel = !thread.dati.grafikasDati.drawInputDiagnosticsPanel;
-            case 3 -> thread.dati.grafikasDati.colorPalette.pickPreset(0);
-            case 4 -> thread.dati.grafikasDati.colorPalette.pickPreset(1);
-            case 5 -> thread.dati.grafikasDati.colorPalette.pickPreset(2);
-            case 6 -> FileHandler.loadSettings(thread.dati, thread.grafika.ekrans);
-            case 7 -> FileHandler.saveSettings(thread.dati);
+        switch (reference) {
+            case 1 -> System.out.println("nospiesta footer pirmâ poga");
+            case 2 -> System.out.println("nospiesta footer otrâ poga");
+            case 3 -> System.out.println("nospiesta footer treðâ poga");
+            case 4 -> System.out.println("nospiesta footer ceturtâ poga");
+            case 5 -> System.out.println("nospiesta footer piektâ poga");
+            case 6 -> System.out.println("nospiesta footer sestâ poga");
+            case 7 -> System.out.println("nospiesta footer septîtâ poga");
             case 8 -> System.out.println("nospiesta footer astotâ poga");
             case 9 -> System.out.println("nospiesta footer devîtâ poga");
 
@@ -52,10 +53,7 @@ public class InputActions {
 
     public void leftButtonActions(int reference, ClientThread thread){
         switch (reference) {
-            case 1 -> {
-                //newClient(); //jauns klients
-                System.out.println("neweClient placeholder");
-            }
+            case 1 -> System.out.println("nospiesta kreisâ paneïa pirmâ poga");
             case 2 -> System.out.println("nospiesta kreisâ paneïa otrâ poga");
             case 3 -> System.out.println("nospiesta kreisâ paneïa treðâ poga");
             case 4 -> System.out.println("nospiesta kreisâ paneïa ceturtâ poga");
@@ -87,9 +85,9 @@ public class InputActions {
 
     public void centerButtonActions(int reference, ClientThread thread){
         switch (reference) {
-            case 1 -> System.out.println("zoom++ placeholder");
-            case 2 -> System.out.println("zoom-- placeholder");
-            case 3 -> thread.dati.grafikasDati.drawSampleImages = !thread.dati.grafikasDati.drawSampleImages;
+            case 1 -> System.out.println("nospiesta centrâlâ paneïa pirmâ poga");
+            case 2 -> System.out.println("nospiesta centrâlâ paneïa otrâ poga");
+            case 3 -> System.out.println("nospiesta centrâlâ paneïa trçðâ poga");
             case 4 -> System.out.println("nospiesta centrâlâ paneïa ceturtâ poga");
             case 5 -> System.out.println("nospiesta centrâlâ paneïa piektâ poga");
             case 6 -> System.out.println("nospiesta centrâlâ paneïa sestâ poga");

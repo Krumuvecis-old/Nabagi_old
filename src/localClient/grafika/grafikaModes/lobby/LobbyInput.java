@@ -32,6 +32,9 @@ public class LobbyInput extends InputActions {
             case 1 -> thread.dati.modeCurrent = Dati.ModeOption.playerView;
             case 2 -> thread.dati.modeCurrent = Dati.ModeOption.spectate;
 
+            //newClient(); //jauns klients
+            //System.out.println("neweClient placeholder");
+
             default -> System.out.println("ServerUIThread LobbyRightPanel reìistrçts nedefinçtas pogas notikums!");
         }
     }
