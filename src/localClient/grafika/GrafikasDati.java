@@ -28,8 +28,8 @@ public class GrafikasDati {
 
     public boolean drawCalculationTime = true,
             drawClientDiagnosticsInfo = true,
-            drawSampleImages = true,
-            drawColorWheel = true;
+            drawSampleImages = false,
+            drawColorWheel = false;
 
     public HashMap<String, Image> images = new HashMap<>();
     static final String imageLocation = "src/localClient/samplePictures/";

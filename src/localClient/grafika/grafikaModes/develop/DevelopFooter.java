@@ -14,7 +14,6 @@ public class DevelopFooter extends Footer {
         clearButtons();
         buttonDetails.add(new Button.ButtonDetails(1, "Layout grid", 0));
         buttonDetails.add(new Button.ButtonDetails(2, "Pauze", 0));
-        buttonDetails.add(new Button.ButtonDetails(3, "Diagnostics panel", 0));
 
         //te var pievienot pogas
 

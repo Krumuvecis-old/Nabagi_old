@@ -10,8 +10,8 @@ public class DevelopInput extends InputActions {
     @Override
     public void headerButtonActions(int reference, ClientThread thread){
         switch (reference) {
-            case 1 -> thread.dati.modeCurrent = Dati.ModeOption.settings;
-            case 2 -> thread.dati.modeCurrent = Dati.ModeOption.setup;
+            case 1 -> thread.dati.modeCurrent = Dati.ModeOption.setup;
+            case 2 -> thread.dati.modeCurrent = Dati.ModeOption.spectate;
 
             default -> System.out.println("ServerUIThread DevelopHeader reìistrçts nedefinçtas pogas notikums!");
         }

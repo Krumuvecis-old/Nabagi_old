@@ -4,6 +4,8 @@ import java.awt.*;
 
 public class ContentsMethods {
 
+    //ðî klase vajadzîga lai katram tablo varçtu bût savas kontekstam atbilstoðas pogas
+
     ContentsMethods(){
 
     }

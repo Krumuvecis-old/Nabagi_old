@@ -13,7 +13,6 @@ public class LobbyPanelR extends PanelR {
         clearButtons();
 
         buttonDetails.add(new Button.ButtonDetails(1, "Start", 0));
-        buttonDetails.add(new Button.ButtonDetails(2, "Spectate", 0));
 
         //te var pievienot pogas
 

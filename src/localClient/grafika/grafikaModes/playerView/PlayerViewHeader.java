@@ -12,8 +12,8 @@ public class PlayerViewHeader extends Header {
         super(layout, colorPair);
 
         clearButtons();
-        buttonDetails.add(new Button.ButtonDetails(1, "Spectate", 0));
-        buttonDetails.add(new Button.ButtonDetails(2, "Lobby", 0));
+        buttonDetails.add(new Button.ButtonDetails(1, "Lobby", 0));
+        buttonDetails.add(new Button.ButtonDetails(2, "Spectate", 0));
 
         //te var pievienot pogas
 

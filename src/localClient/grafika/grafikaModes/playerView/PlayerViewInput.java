@@ -10,8 +10,8 @@ public class PlayerViewInput extends InputActions {
     @Override
     public void headerButtonActions(int reference, ClientThread thread){
         switch (reference) {
-            case 1 -> thread.dati.modeCurrent = Dati.ModeOption.spectate;
-            case 2 -> thread.dati.modeCurrent = Dati.ModeOption.lobby;
+            case 1 -> thread.dati.modeCurrent = Dati.ModeOption.lobby;
+            case 2 -> thread.dati.modeCurrent = Dati.ModeOption.spectate;
 
             default -> System.out.println("ServerUIThread PlayerViewHeader reìistrçts nedefinçtas pogas notikums!");
         }

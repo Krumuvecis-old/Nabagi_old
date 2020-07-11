@@ -61,7 +61,7 @@ public class OverPanel {
     }
 
     private void drawCalculationTimes(Graphics g, Color textColor, SampleLayout layout){
-        //informâcija par galvenâ thread statusu
+        //informâcija par serverThread statusu
 
         server.calculations.CalculationTimeCalculator calculationTimeCalculatorTemp =
                 server.calculations.CalculationsThread.calculationTimeCalculator;

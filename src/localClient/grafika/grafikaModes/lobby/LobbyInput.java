@@ -10,6 +10,7 @@ public class LobbyInput extends InputActions {
     public void headerButtonActions(int reference, ClientThread thread){
         switch (reference) {
             case 1 -> thread.dati.modeCurrent = Dati.ModeOption.setup;
+            case 2 -> thread.dati.modeCurrent = Dati.ModeOption.spectate;
 
             default -> System.out.println("ServerUIThread LobbyHeader reìistrçts nedefinçtas pogas notikums!");
         }
@@ -30,7 +31,6 @@ public class LobbyInput extends InputActions {
     public void rightButtonActions(int reference, ClientThread thread){
         switch (reference) {
             case 1 -> thread.dati.modeCurrent = Dati.ModeOption.playerView;
-            case 2 -> thread.dati.modeCurrent = Dati.ModeOption.spectate;
 
             //newClient(); //jauns klients
             //System.out.println("neweClient placeholder");
