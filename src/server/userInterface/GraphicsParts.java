@@ -52,9 +52,9 @@ abstract class GraphicsParts {
 
         public void refresh(){
 
-            label1.setText("label1 " + ServerUIThread.skaitlis);
+            label1.setText("label1 " + ServerUIThread.skaitlis1);
 
-            label2.setText("label2 " + (ServerUIThread.skaitlis * 2));
+            label2.setText("label2 " + (ServerUIThread.skaitlis1 * 2));
             label2.setLocation(200,100);
 
             repaint();
@@ -108,10 +108,13 @@ abstract class GraphicsParts {
 
         private void drawDemo(Graphics g){
             g.setColor(Color.pink);
-            g.drawOval(ServerUIThread.skaitlis,50,50,50);
+            g.drawOval((int)(ServerUIThread.skaitlis2/10.0),50,50,50);
 
-            int maksimums = 100;
-            if(ServerUIThread.skaitlis >= maksimums) ServerUIThread.skaitlis -= maksimums;
+            int maksimums1 = 1000;
+            if(ServerUIThread.skaitlis1 >= maksimums1) ServerUIThread.skaitlis1 -= maksimums1;
+            int maksimums2 = 1000;
+            if(ServerUIThread.skaitlis2 >= maksimums2) ServerUIThread.skaitlis2 -= maksimums2;
+            ServerUIThread.skaitlis2 += 7;
         }
     }
 

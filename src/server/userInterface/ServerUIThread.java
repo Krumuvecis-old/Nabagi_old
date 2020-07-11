@@ -9,7 +9,7 @@ public class ServerUIThread implements Runnable {
 
     private static boolean running = false;
 
-    static int skaitlis = 0; //temporary - pârbaudei
+    static int skaitlis1 = 0, skaitlis2 = 0; //temporary - pârbaudei
 
     public ServerUIThread(){
         running = true;
@@ -24,7 +24,7 @@ public class ServerUIThread implements Runnable {
 
             UserInterface.refresh(); //grafikas update
 
-            skaitlis++; //temporary - pârbaudei
+            skaitlis1 += 13; //temporary - pârbaudei
             //System.out.println(consoleOut + "Skaitlis: " + skaitlis);
 
             try{
