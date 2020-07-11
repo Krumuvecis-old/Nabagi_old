@@ -3,6 +3,7 @@ package localClient.grafika.grafikaModes.playerView;
 import localClient.ClientThread;
 import localClient.Dati;
 import localClient.grafika.grafikaParts.InputActions;
+import server.calculations.CalculationsThread;
 
 public class PlayerViewInput extends InputActions {
 
@@ -20,7 +21,7 @@ public class PlayerViewInput extends InputActions {
     public void footerButtonActions(int reference, ClientThread thread){
 
         switch (reference) {
-            case 1 -> System.out.println("pauze setter placeholder");
+            case 1 -> CalculationsThread.pauze = !CalculationsThread.pauze;
 
             default -> System.out.println("ServerUIThread PlayerViewFooter reìistrçts nedefinçtas pogas notikums!");
         }

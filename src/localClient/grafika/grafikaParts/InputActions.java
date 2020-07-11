@@ -3,10 +3,6 @@ package localClient.grafika.grafikaParts;
 import localClient.ClientThread;
 import localClient.Dati;
 import localClient.FileHandler;
-import localClient.grafika.Button;
-
-import javax.swing.*;
-import java.awt.*;
 
 public class InputActions {
 

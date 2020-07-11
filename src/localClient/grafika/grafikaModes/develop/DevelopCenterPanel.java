@@ -14,9 +14,9 @@ public class DevelopCenterPanel extends CenterPanel {
 
         clearButtons();
 
-        buttonDetails.add(new Button.ButtonDetails(1, "Scroll up", 0));
-        buttonDetails.add(new Button.ButtonDetails(2, "Scroll down", 0));
-        buttonDetails.add(new Button.ButtonDetails(3, "Select", 0));
+        buttonDetails.add(new Button.ButtonDetails(1, "Scroll up", 5));
+        buttonDetails.add(new Button.ButtonDetails(2, "Scroll down", 6));
+        buttonDetails.add(new Button.ButtonDetails(3, "Select", 2));
 
         generateButtons(layout);
     }

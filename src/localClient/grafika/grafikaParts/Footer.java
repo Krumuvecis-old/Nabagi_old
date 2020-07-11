@@ -2,6 +2,7 @@ package localClient.grafika.grafikaParts;
 
 import localClient.Dati;
 import localClient.grafika.Button;
+import server.calculations.CalculationsThread;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class Footer extends SamplePanel {
     }
 
     private void drawVersionInfo(Graphics g, String windowTitle, Color textColor, String currentMode){
-        String text = windowTitle + " - mode: " + currentMode;
+        String text = windowTitle + " - server paused: " + CalculationsThread.pauze + " , graphics mode: " + currentMode;
         int[] textOffset = {5,15};
 
         int[] textXY = {XY[0] + textOffset[0], XY[1] + textOffset[1]};

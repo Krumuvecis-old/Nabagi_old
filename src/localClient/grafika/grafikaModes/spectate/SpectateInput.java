@@ -3,6 +3,7 @@ package localClient.grafika.grafikaModes.spectate;
 import localClient.ClientThread;
 import localClient.Dati;
 import localClient.grafika.grafikaParts.InputActions;
+import server.calculations.CalculationsThread;
 
 public class SpectateInput extends InputActions {
 
@@ -20,7 +21,7 @@ public class SpectateInput extends InputActions {
     public void footerButtonActions(int reference, ClientThread thread){
 
         switch (reference) {
-            case 1 -> System.out.println("pauze setter placeholder");
+            case 1 -> CalculationsThread.pauze = !CalculationsThread.pauze;
 
             default -> System.out.println("ServerUIThread SpectateFooter reìistrçts nedefinçtas pogas notikums!");
         }

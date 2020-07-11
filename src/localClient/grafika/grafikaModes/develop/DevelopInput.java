@@ -3,6 +3,7 @@ package localClient.grafika.grafikaModes.develop;
 import localClient.ClientThread;
 import localClient.Dati;
 import localClient.grafika.grafikaParts.InputActions;
+import server.calculations.CalculationsThread;
 
 public class DevelopInput extends InputActions {
 
@@ -20,7 +21,7 @@ public class DevelopInput extends InputActions {
     public void footerButtonActions(int reference, ClientThread thread){
         switch (reference) {
             case 1 -> thread.dati.grafikasDati.drawLayoutGrid = !thread.dati.grafikasDati.drawLayoutGrid;
-            case 2 -> System.out.println("pauze setter placeholder");
+            case 2 -> CalculationsThread.pauze = !CalculationsThread.pauze;
 
             default -> System.out.println("ServerUIThread DevelopFooter reìistrçts nedefinçtas pogas notikums!");
         }
