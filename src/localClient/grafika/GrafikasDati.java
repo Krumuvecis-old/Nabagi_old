@@ -12,9 +12,9 @@ import java.util.HashMap;
 
 public class GrafikasDati {
 
-    public static String ekranaNosaukums = "Nabagi - versija: "+ DataBase.versija;
-
-    public String windowTitle = GrafikasDati.ekranaNosaukums + ", ClientWindow";
+    public static String programTitle = "Nabagi - versija: " + DataBase.versija;
+    public static final String windowName = "ClientWindow";
+    public String windowTitle = programTitle + ", " + windowName;
     public Color backgroundColor = Color.black;
 
     static int[] ekransLocation = {10,10};
@@ -40,10 +40,11 @@ public class GrafikasDati {
         colorPalette = new ColorPalette(defaultPalette.pair1, defaultPalette.pair2, defaultPalette.pair3);
 
         String[][] imageNames = new String[][]{
-                {"Zvaigzne.png", "zvaigzne"},
-                {"Banans.png", "banana"},
+                {"nabagiLogo.png", "nabagiLogo"},
+                {"welcomeSign.png", "welcomeSign"},
                 {"panelBackground.png", "panelBackground"},
-                {"welcomeSign.png", "welcomeSign"}
+                {"Banans.png", "banana"},
+                {"Zvaigzne.png", "zvaigzne"}
         };
         FileHandler.loadSprites(images, imageNames, imageLocation);
     }

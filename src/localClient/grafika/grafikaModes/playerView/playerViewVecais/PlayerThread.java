@@ -24,7 +24,7 @@ public class PlayerThread implements Runnable{
 		int maxFrameRate=50; //kadri sekundç
 		dati.calculationTimeCalculator.delayMin=1000/maxFrameRate; //simulâcijas solis
 		
-		threadName=dati.windowTitle;
+		threadName="";
 		thread = new Thread(this, threadName);
 		running = true;
 		minimized = false;

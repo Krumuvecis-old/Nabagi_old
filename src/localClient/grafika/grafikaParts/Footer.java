@@ -2,6 +2,7 @@ package localClient.grafika.grafikaParts;
 
 import localClient.Dati;
 import localClient.grafika.Button;
+import localClient.grafika.GrafikasDati;
 import server.calculations.CalculationsThread;
 
 import java.awt.*;
@@ -13,6 +14,8 @@ public class Footer extends SamplePanel {
      * šī klase raksturo default footer paneli
      *
      */
+
+    public boolean drawInfoAtTitle = true;
 
     public Footer(SampleLayout layout, Color[] colorPair){
         super(calculateLocation(layout), calculateSize(layout), colorPair);
@@ -54,11 +57,17 @@ public class Footer extends SamplePanel {
         //te var likt papildus default funkcijas
 
         Button.drawButtons(g, this);
-        drawVersionInfo(g, dati.grafikasDati.windowTitle, dati.grafikasDati.colorPalette.pair1[1], String.valueOf(dati.modeCurrent));
+        drawVersionInfo(g, dati);
     }
 
-    private void drawVersionInfo(Graphics g, String windowTitle, Color textColor, String currentMode){
-        String text = windowTitle + " - server paused: " + CalculationsThread.pauze + " , graphics mode: " + currentMode;
+    private void drawVersionInfo(Graphics g, Dati dati){
+        Color textColor = dati.grafikasDati.colorPalette.pair1[1];
+        String currentMode = String.valueOf(dati.modeCurrent);
+
+        String text;
+        if(drawInfoAtTitle) text = dati.grafikasDati.windowTitle + " - server paused: " + CalculationsThread.pauze + " , graphics mode: " + currentMode;
+        else text = GrafikasDati.programTitle;
+
         int[] textOffset = {5,15};
 
         int[] textXY = {XY[0] + textOffset[0], XY[1] + textOffset[1]};

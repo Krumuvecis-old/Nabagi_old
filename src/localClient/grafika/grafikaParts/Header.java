@@ -53,16 +53,16 @@ public class Header extends SamplePanel {
         //te var likt papildus default funkcijas
 
         Button.drawButtons(g, this);
-        drawTitle(g, dati.grafikasDati.windowTitle, dati.grafikasDati.colorPalette.pair1[1]);
+        drawTitleLogo(g, dati);
     }
 
-    private void drawTitle(Graphics g, String windowTitle, Color textColor){
-        String text = windowTitle + " [LOGO PLACEHOLDER]";
-        int[] textOffset = {5,15};
+    private void drawTitleLogo(Graphics g, Dati dati){
+        int[] imageOffset = {0,0};
 
-        int[] textXY = {XY[0] + textOffset[0], XY[1] + textOffset[1]};
-        g.setColor(textColor);
-        g.drawString(text, textXY[0], textXY[1]);
+        double aspectRatio = 8;
+        int[] imageXY = {XY[0] + imageOffset[0], XY[1] + imageOffset[1]},
+        imageSize = {(int)(aspectRatio * size[1]), size[1]};
+        g.drawImage(dati.grafikasDati.images.get("nabagiLogo"), imageXY[0], imageXY[1], imageSize[0], imageSize[1], null);
     }
 
     //te var likt papildus default funkcijas (jāizsauc no draw() metodes)
