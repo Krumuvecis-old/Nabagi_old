@@ -98,8 +98,10 @@ public class DevelopPanelR extends PanelR {
     private void drawDetailedPlayerInfo(Graphics g, Color textColor){
         drawKomanduInfo = false;
         g.setColor(textColor);
-        int[] textLocation = {XY[0] + size[0] / 2 - 60, XY[1] + size[1] / 2};
-        g.drawString("Player list placeholder", textLocation[0], textLocation[1]);
+        int[] textLocation = new int[]{
+                XY[0] + size[0] / 2,
+                XY[1] + (buttonBox.boxSize[1] + size[1]) / 2};
+        g.drawString("Detailed player info placeholder", textLocation[0] - 85, textLocation[1]);
     }
 
     //te var pievienot savas metodes

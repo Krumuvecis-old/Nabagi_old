@@ -7,12 +7,14 @@ import server.calculations.komandas.KomanduApskats;
 import server.dataBase.DataBase;
 
 import java.awt.*;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class PanelR extends SamplePanel{
 
     /*
-     * Å¡Ä« klase raksturo default labo paneli
+     * ğî klase raksturo default labo paneli
      *
      */
 
@@ -68,13 +70,13 @@ public class PanelR extends SamplePanel{
 
         g.setColor(textColorDefault);
 
-        int wy = 15, w=1; //rindas platums un uzrakstÄ«to rindu skaits
+        int wy = 15, w=1; //rindas platums un uzrakstîto rindu skaits
         int x0 = XY[0] + offsetXY[0], y0 = XY[1] + offsetXY[1];
 
-        //tekoÅ¡Ä informÄcija par komandÄm
-        g.drawString("vislielÄkÄ komanda: " + KomanduApskats.komanduVestureLielakaKomanda + " (" + KomanduApskats.komanduVestureMaksimums + ")",
+        //tekoğâ informâcija par komandâm
+        g.drawString("vislielâkâ komanda: " + KomanduApskats.komanduVestureLielakaKomanda + " (" + KomanduApskats.komanduVestureMaksimums + ")",
                 x0, y0 + wy * w); w++;
-        g.drawString("tagad kopÄ spÄ“lÄ“tÄji: " + DataBase.cilvekuList.size(),
+        g.drawString("tagad kopâ spçlçtâji: " + DataBase.cilvekuList.size(),
                 x0, y0 + wy * w); w++;
         g.drawString("---------------",
                 x0, y0 + wy * w); w++;
@@ -88,21 +90,21 @@ public class PanelR extends SamplePanel{
             w++;
         }
 
-        //vispÄrÄ“ja spÄ“lÄ“tÄju statistika drusku zemÄk
+        //vispârçja spçlçtâju statistika drusku zemâk
         g.setColor(textColorDefault);
         g.drawString("---------------",
                 x0, y0 + wy * w); w++;
 
         //List<String> cilvekuVardiTemp = new ArrayList<>(DataBase.cilvekuList.keySet());
-        //g.drawString("Å¡obrÄ«d vecÄkais: " + (cilvekuVardiTemp.sort(null)).get(0)),
+        //g.drawString("ğobrîd vecâkais: " + (cilvekuVardiTemp.sort(null)).get(0)),
         //        x0, y0 + wy * w); w++;
-        //g.drawString("jaunÄkais: "+cilvekiList.get(cilvekiList.size()-1).vards,
+        //g.drawString("jaunâkais: "+cilvekiList.get(cilvekiList.size()-1).vards,
         //        x0, y0 + wy * w); w++;
-        g.drawString("kopÄ bijuÅ¡i spÄ“lÄ“tÄji: " + Cilveks.maxCilveks,
+        g.drawString("kopâ bijuği spçlçtâji: " + Cilveks.maxCilveks,
                 x0, y0 + wy * w); w++;
 
     }
 
-    //te var likt papildus default funkcijas (jÄizsauc no draw() metodes)
+    //te var likt papildus default funkcijas (jâizsauc no draw() metodes)
 
 }
