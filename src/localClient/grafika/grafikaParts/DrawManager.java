@@ -1,11 +1,9 @@
 package localClient.grafika.grafikaParts;
 
-import localClient.CalculationTimeCalculator;
 import localClient.ClientThread;
 import localClient.ColorPalette;
 
 import java.awt.*;
-import java.util.HashMap;
 
 public abstract class DrawManager {
 

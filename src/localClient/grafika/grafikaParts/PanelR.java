@@ -17,6 +17,7 @@ public class PanelR extends SamplePanel{
      */
 
     public boolean drawKomanduInfo = false;
+    public int[] komanduInfoOffsetXY = new int[]{10, 10}; //default offset relative to panel
 
     public PanelR(SampleLayout layout, Color[] colorPair){
         super(calculateLocation(layout),
@@ -55,23 +56,20 @@ public class PanelR extends SamplePanel{
                 calculateSize(layout),
                 dati.grafikasDati.colorPalette.pair2);
 
-
-
         //te var likt papildus default funkcijas
 
         Button.drawButtons(g, this);
 
-        if(drawKomanduInfo) drawKomanduInfo(g, dati.grafikasDati.colorPalette.pair2[1]);
+        if(drawKomanduInfo) drawKomanduInfo(g, komanduInfoOffsetXY, dati.grafikasDati.colorPalette.pair2[1]);
 
     }
 
-    private void drawKomanduInfo(Graphics g, Color textColorDefault) {
+    private void drawKomanduInfo(Graphics g, int[] offsetXY, Color textColorDefault) {
 
         g.setColor(textColorDefault);
 
-        int nobideX = 10, nobideY = 150;
         int wy = 15, w=1; //rindas platums un uzrakstīto rindu skaits
-        int x0 = XY[0] + nobideX, y0 = XY[1] + nobideY;
+        int x0 = XY[0] + offsetXY[0], y0 = XY[1] + offsetXY[1];
 
         //tekošā informācija par komandām
         g.drawString("vislielākā komanda: " + KomanduApskats.komanduVestureLielakaKomanda + " (" + KomanduApskats.komanduVestureMaksimums + ")",

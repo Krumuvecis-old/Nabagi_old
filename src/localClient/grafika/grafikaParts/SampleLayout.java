@@ -22,6 +22,7 @@ public class SampleLayout {
             footerAugstums = 40, //footer height (in pixels)
             footerY, footerOffset = 0; //starting point and offset (in pixels from top)
 
+    public boolean playerSelected = false;
 
     public SampleLayout(int _ekranaPlatums, int _ekranaAugstums){
         updateCalculatedValues(_ekranaPlatums, _ekranaAugstums);

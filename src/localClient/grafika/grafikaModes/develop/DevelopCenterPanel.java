@@ -19,6 +19,7 @@ public class DevelopCenterPanel extends CenterPanel {
         buttonDetails.add(new Button.ButtonDetails(1, "Scroll up", 5));
         buttonDetails.add(new Button.ButtonDetails(2, "Scroll down", 6));
         buttonDetails.add(new Button.ButtonDetails(3, "Select", 2));
+        buttonDetails.add(new Button.ButtonDetails(4, "Deselect", 0));
 
         generateButtons(layout);
 

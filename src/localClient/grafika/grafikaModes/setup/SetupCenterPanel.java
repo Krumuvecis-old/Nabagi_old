@@ -137,11 +137,14 @@ public class SetupCenterPanel extends CenterPanel {
         int[] boxLoc, boxSize;
         int[] boxSizeMin;
 
-        private static final int buttonCount = 2, buttonSeparation = 10;
+        private static final int buttonSeparation = 10;
+        private int buttonCount;
 
         ButtonBox(){
             buttonDetails.add(new Button.ButtonDetails(1, "Lobby", 0));
             buttonDetails.add(new Button.ButtonDetails(2, "Spectate", 5));
+
+            buttonCount = buttonDetails.size();
 
             int[] buttonSizeMin = new int[]{60, 30};
             boxSizeMin = new int[]{

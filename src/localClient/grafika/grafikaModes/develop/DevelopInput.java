@@ -55,7 +55,8 @@ public class DevelopInput extends InputActions {
         switch (reference) {
             case 1 -> System.out.println("develop mode scroll up placeholder");
             case 2 -> System.out.println("develop mode scroll down placeholder");
-            case 3 -> System.out.println("develop mode selector placeholder");
+            case 3 -> thread.dati.drawManagerList.get(Dati.ModeOption.develop).layout.playerSelected = true;
+            case 4 -> thread.dati.drawManagerList.get(Dati.ModeOption.develop).layout.playerSelected = false;
 
             default -> System.out.println("ServerUIThread DevelopCenterPanel reìistrçts nedefinçtas pogas notikums!");
         }
