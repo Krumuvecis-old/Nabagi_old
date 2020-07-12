@@ -1,8 +1,12 @@
 package localClient.grafika.grafikaModes.develop;
 
 import localClient.Dati;
+import server.calculations.cilveki.Cilveks;
+import server.dataBase.DataBase;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Tablo1 extends DevelopCenterPanel.Tablo {
 
@@ -16,7 +20,52 @@ public class Tablo1 extends DevelopCenterPanel.Tablo {
     public void draw(Graphics g, Dati dati, int[] panelXY, int boxY, int boxH){
         super.draw(g, dati, panelXY, boxY, boxH);
 
-        drawTabloName(g, panelXY, dati.grafikasDati.colorPalette.pair3[1]);
+        Color textColor = dati.grafikasDati.colorPalette.pair3[1];
+
+        int w = 0,
+                column1X = 0,
+                column2X = 100,
+                column3X = 200;
+
+
+        printLine(g, new int[]{panelXY[0] + column1X, panelXY[1]}, w,
+                "Vârds, koordinâtas",
+                textColor);
+
+        printLine(g, new int[]{panelXY[0] + column2X, panelXY[1]}, w,
+                "kolonna2",
+                textColor);
+
+        printLine(g, new int[]{panelXY[0] + column3X, panelXY[1]}, w,
+                "kolonna3",
+                textColor);
+
+        ArrayList<String> sortedNames = new ArrayList<>();
+
+        for(String vards : DataBase.cilvekuList.keySet()){
+            sortedNames.add(vards);
+        }
+
+        sortedNames.sort(Comparator.naturalOrder());
+
+        for(String vards : sortedNames){
+            w++;
+            drawBasicInfo(g, new int[]{panelXY[0] + column1X, panelXY[1]}, w,
+                    textColor, vards);
+        }
+    }
+
+    private void drawBasicInfo(Graphics g, int[] XY, int w, Color textColor, String vards){
+
+        Cilveks cilveks = DataBase.cilvekuList.get(vards);
+
+        String text = vards + " , " +
+                "chunk: [ " + cilveks.xyz.chunkXY.get(0) + " / " + cilveks.xyz.chunkXY.get(1) + " ] , " +
+                "xy: [ " + cilveks.xyz.x + " / " + cilveks.xyz.y + " ]";
+
+        printLine(g, XY, w,
+                text,
+                textColor);
     }
 
     //	//zemâk vecie parametri

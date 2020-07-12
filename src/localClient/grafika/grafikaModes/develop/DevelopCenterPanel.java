@@ -125,8 +125,8 @@ public class DevelopCenterPanel extends CenterPanel {
 
         public void drawTabloName(Graphics g, int[] XY, Color textColor){
             printLine(g, XY, 0,
-                    "Contents placeholder, tablo name: " + tabloName
-                    , textColor);
+                    "Contents placeholder, tablo name: " + tabloName,
+                    textColor);
         }
 
         public void printLine(Graphics g, int[] panelXY, int w, String text, Color textColor){
