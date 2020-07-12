@@ -25,46 +25,126 @@ public class Tablo1 extends DevelopCenterPanel.Tablo {
         int w = 0,
                 column1X = 0,
                 column2X = 100,
-                column3X = 200;
+                column3X = 400;
 
-
+        //column names
         printLine(g, new int[]{panelXY[0] + column1X, panelXY[1]}, w,
-                "Vârds, koordinâtas",
+                "Vârds (komanda)",
                 textColor);
 
         printLine(g, new int[]{panelXY[0] + column2X, panelXY[1]}, w,
-                "kolonna2",
+                "Koordinâtu informâcija",
                 textColor);
 
         printLine(g, new int[]{panelXY[0] + column3X, panelXY[1]}, w,
                 "kolonna3",
                 textColor);
 
-        ArrayList<String> sortedNames = new ArrayList<>();
-
-        for(String vards : DataBase.cilvekuList.keySet()){
-            sortedNames.add(vards);
-        }
-
-        sortedNames.sort(Comparator.naturalOrder());
+        //content
+        ArrayList<String> sortedNames = sortPlayerNames();
 
         for(String vards : sortedNames){
             w++;
+
+            //1. kolonna
             drawBasicInfo(g, new int[]{panelXY[0] + column1X, panelXY[1]}, w,
                     textColor, vards);
+
+            //2. kolonna
+            drawLocationInfo(g, new int[]{panelXY[0] + column2X, panelXY[1]}, w,
+                    textColor, vards);
+
+            //3. kolonna
+            //placeholder
+
         }
+    }
+
+    private static ArrayList<String> sortPlayerNames(){
+
+        class SortingInfo {
+            String vards;
+            String parameter; //parameter type declaration
+
+            SortingInfo(String playerName, String sortingParameter){
+                vards = playerName;
+                parameter = sortingParameter;
+            }
+        }
+
+        ArrayList<String> parameterList = new ArrayList<>();
+        ArrayList<SortingInfo> sortingInfo1 = new ArrayList<>(),
+                sortingInfo2 = new ArrayList<>();
+
+        for(String vards : DataBase.cilvekuList.keySet()){
+            String sortingParameter = DataBase.cilvekuList.get(vards).komanda; //sorting paramater value
+
+            sortingInfo1.add(new SortingInfo(vards, sortingParameter)); //unsorted list
+            parameterList.add(sortingParameter);
+        }
+
+        parameterList.sort(Comparator.naturalOrder());
+
+        //move data from one array to another
+        while (parameterList.size() > 0) {
+            for (int i = 0; i<sortingInfo1.size(); i++){
+                if(sortingInfo1.get(i).parameter == parameterList.get(0)) {
+
+                    sortingInfo2.add(new SortingInfo(sortingInfo1.get(i).vards, sortingInfo1.get(i).parameter));
+                    sortingInfo1.remove(i);
+                    parameterList.remove(0);
+
+                    break;
+                }
+            }
+
+        }
+
+        //generate names list
+        ArrayList<String> sortedNamesList = new ArrayList<>();
+        for(int i = 0; i<sortingInfo2.size(); i++)
+            sortedNamesList.add(sortingInfo2.get(i).vards);
+
+        return sortedNamesList;
     }
 
     private void drawBasicInfo(Graphics g, int[] XY, int w, Color textColor, String vards){
 
         Cilveks cilveks = DataBase.cilvekuList.get(vards);
 
-        String text = vards + " , " +
-                "chunk: [ " + cilveks.xyz.chunkXY.get(0) + " / " + cilveks.xyz.chunkXY.get(1) + " ] , " +
-                "xy: [ " + cilveks.xyz.x + " / " + cilveks.xyz.y + " ]";
+        String text = vards + " (" + cilveks.komanda + ")";
 
         printLine(g, XY, w,
                 text,
+                textColor);
+    }
+
+    private void drawLocationInfo(Graphics g, int[] XY, int w, Color textColor, String vards){
+
+        Cilveks cilveks = DataBase.cilvekuList.get(vards);
+
+        int[] chunkXY = new int[]{cilveks.xyz.chunkXY.get(0), cilveks.xyz.chunkXY.get(1)},
+                xy = new int[]{(int)cilveks.xyz.x, (int)cilveks.xyz.y},
+                xySum = new int[]{
+                        (int)(cilveks.xyz.x + cilveks.xyz.chunkXY.get(0) * DataBase.mapChunkW),
+                        (int)(cilveks.xyz.y + cilveks.xyz.chunkXY.get(1) * DataBase.mapChunkW)};
+
+        String text1 = "chunk: [ " + chunkXY[0] + " / " + chunkXY[1] + " ]",
+                text2 = "xy: [ " + xy[0] + " / " + xy[1] + " ]",
+                text3 = "xySum: [ " + xySum[0] + " / " + xySum[1] + " ]";
+
+        int column1w = 80, column2w = 90;
+
+        printLine(g, XY, w,
+                text1,
+                textColor);
+
+        printLine(g, new int[]{XY[0] + column1w, XY[1]}, w,
+                text2,
+                textColor);
+
+        printLine(g, new int[]{XY[0] + column1w + column2w, XY[1]}, w,
+                text3,
                 textColor);
     }
 
@@ -72,25 +152,11 @@ public class Tablo1 extends DevelopCenterPanel.Tablo {
 //	// --------------------
 //	//zemâk par centrâlâ cilvçku tablo Parametriem (no vecâ varianta)
 //
-//	protected boolean tablo2Draw=false;
-//
-//	protected int tablo2x0=280, tablo2y0=tablo1y0, tablo2rindasPlatums=14;
-//
-//	protected int tablo2platums1=200; //platums1
-//	protected int tablo2platums2=130; //platums2
-//	protected int tablo2platumsN=80; //platumsN
 //
 //	protected Color tablo2krasaDefault, tablo2krasaCritical; //paðas krâsas nosaka initialize() ciklâ
 //
-
-    //	//zemâk vecâ info par cilvçku tablo (tablo2) zîmçðanas krâsâm
-//
-//		boolean tablo2Transparent=false; //caurspîdîgs teksts
-//		int tablo2alfa=255;
-//		if(tablo2Transparent) tablo2alfa=100; //max caurspîdîgums
-//
-//		tablo2krasaDefault=new Color(255,255,0,tablo2alfa); //dzeltens
-//		tablo2krasaCritical=new Color(255,0,0,tablo2alfa); //sarkans
+//		tablo2krasaDefault=new Color(255,255,0); //dzeltens
+//		tablo2krasaCritical=new Color(255,0,0); //sarkans
 //
 
     //	private void drawTablo2(Graphics g) { //lielais cilvçku diagnostikas logs
