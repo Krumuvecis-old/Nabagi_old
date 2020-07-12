@@ -52,8 +52,8 @@ public class DevelopPanelR extends PanelR {
         ButtonBox(){
             buttonDetails.add(new Button.ButtonDetails(1, "Client diagnostics toggle", 18));
             buttonDetails.add(new Button.ButtonDetails(2, "Server diagnostics toggle", 16));
-            buttonDetails.add(new Button.ButtonDetails(3, "Sample images toggle", 4));
-            buttonDetails.add(new Button.ButtonDetails(4, "Color wheel toggle", 0));
+            buttonDetails.add(new Button.ButtonDetails(3, "Sample images toggle", 6));
+            buttonDetails.add(new Button.ButtonDetails(4, "Color wheel toggle", 8));
 
             buttonCount = buttonDetails.size();
             buttonRowCount = (int)Math.ceil((1.0 * buttonCount) / buttonRowLenght); //roundup division

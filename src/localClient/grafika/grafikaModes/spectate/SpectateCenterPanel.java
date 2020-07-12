@@ -14,12 +14,29 @@ public class SpectateCenterPanel extends CenterPanel {
 
         clearButtons();
 
-        buttonDetails.add(new Button.ButtonDetails(1, "Zoom in", 0));
-        buttonDetails.add(new Button.ButtonDetails(2, "Zoom out", 0));
+        buttonDetails.add(new Button.ButtonDetails(1, "Zoom in", 1));
+        buttonDetails.add(new Button.ButtonDetails(2, "Zoom out", 2));
 
         //te var pievienot ppogas
 
         generateButtons(layout);
+
+        buttonResizer();
+    }
+
+    private void buttonResizer(){
+        int[] buttonOffset = new int[]{0, 0},
+                buttonSize = new int[]{80, 30};
+        int buttonSeparation = 5;
+        for (int i = 0; i<buttonList.size(); i++){
+            Button button = buttonList.get(i);
+            button.wx = buttonSize[0];
+            button.wy = buttonSize[1];
+
+            button.x = buttonOffset[0] + buttonSeparation;
+            button.y = buttonOffset[1] + buttonSeparation + (buttonSize[1] + buttonSeparation) * i;
+        }
+
     }
 
     @Override
