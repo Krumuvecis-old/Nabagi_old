@@ -22,6 +22,19 @@ public abstract class DrawManager {
             drawCenterPanel = true,
             drawOverPanel = true;
 
+    public static class DevelopTabloInfo {
+        public enum TabloMode {
+            none,
+            tablo1, // kopçjais cilvçku info
+            tablo2, // komandu info
+            tablo3 // nâkotnei un testiem
+        }
+
+        public TabloMode tabloCurrent = TabloMode.none; //default
+    }
+
+    public DevelopTabloInfo developTabloInfo = new DevelopTabloInfo();
+
     public DrawManager(int ekranaPlatums, int ekranaAugstums, ColorPalette colorPalette){
         layout = new SampleLayout(ekranaPlatums, ekranaAugstums);
         inputActions = new InputActions();

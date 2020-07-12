@@ -2,6 +2,7 @@ package localClient.grafika.grafikaModes.develop;
 
 import localClient.ClientThread;
 import localClient.Dati;
+import localClient.grafika.grafikaParts.DrawManager;
 import localClient.grafika.grafikaParts.InputActions;
 import server.calculations.CalculationsThread;
 
@@ -29,10 +30,26 @@ public class DevelopInput extends InputActions {
 
     @Override
     public void leftButtonActions(int reference, ClientThread thread){
+
+        DrawManager.DevelopTabloInfo developTabloInfo =
+                thread.dati.drawManagerList.get(Dati.ModeOption.develop).developTabloInfo;
+
         switch (reference) {
-            case 1 -> System.out.println("tablo1 action placeholder");
-            case 2 -> System.out.println("tablo2 action placeholder");
-            case 3 -> System.out.println("tablo3 action placeholder");
+            case 1 -> {
+                if (developTabloInfo.tabloCurrent == DrawManager.DevelopTabloInfo.TabloMode.tablo1)
+                    developTabloInfo.tabloCurrent = DrawManager.DevelopTabloInfo.TabloMode.none;
+                else developTabloInfo.tabloCurrent = DrawManager.DevelopTabloInfo.TabloMode.tablo1;
+            }
+            case 2 -> {
+                if (developTabloInfo.tabloCurrent == DrawManager.DevelopTabloInfo.TabloMode.tablo2)
+                    developTabloInfo.tabloCurrent = DrawManager.DevelopTabloInfo.TabloMode.none;
+                else developTabloInfo.tabloCurrent = DrawManager.DevelopTabloInfo.TabloMode.tablo2;
+            }
+            case 3 -> {
+                if (developTabloInfo.tabloCurrent == DrawManager.DevelopTabloInfo.TabloMode.tablo3)
+                    developTabloInfo.tabloCurrent = DrawManager.DevelopTabloInfo.TabloMode.none;
+                else developTabloInfo.tabloCurrent = DrawManager.DevelopTabloInfo.TabloMode.tablo3;
+            }
 
             default -> System.out.println("ServerUIThread DevelopLeftPanel reìistrçts nedefinçtas pogas notikums!");
         }

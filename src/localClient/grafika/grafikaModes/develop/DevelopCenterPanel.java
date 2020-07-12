@@ -3,6 +3,7 @@ package localClient.grafika.grafikaModes.develop;
 import localClient.Dati;
 import localClient.grafika.Button;
 import localClient.grafika.grafikaParts.CenterPanel;
+import localClient.grafika.grafikaParts.DrawManager;
 import localClient.grafika.grafikaParts.SampleLayout;
 
 import java.awt.*;
@@ -10,9 +11,8 @@ import java.awt.*;
 public class DevelopCenterPanel extends CenterPanel {
 
     private ButtonBox buttonBox;
-    private int[] tabloLoc;
 
-    private ContentsMethods contentsMethods;
+    private Tablo tablo1, tablo2, tablo3;
 
     DevelopCenterPanel(SampleLayout layout, Color[] colorPair){
         super(layout, colorPair);
@@ -25,7 +25,9 @@ public class DevelopCenterPanel extends CenterPanel {
 
         generateButtons(layout);
 
-        contentsMethods = new ContentsMethods();
+        tablo1 = new Tablo1();
+        tablo2 = new Tablo2();
+        tablo3 = new Tablo3();
     }
 
     @Override
@@ -34,21 +36,18 @@ public class DevelopCenterPanel extends CenterPanel {
 
         buttonBox.update();
 
-        updateTabloInfo();
+        DrawManager.DevelopTabloInfo.TabloMode tabloCurrent =
+                dati.drawManagerList.get(Dati.ModeOption.develop).developTabloInfo.tabloCurrent;
 
-        //drawTablo
+        switch (tabloCurrent){
+            case tablo1 -> tablo1.draw(g, dati, XY, buttonBox.boxLoc[1], buttonBox.boxSize[1]); //cilvçku info
+            case tablo2 -> tablo2.draw(g, dati, XY, buttonBox.boxLoc[1], buttonBox.boxSize[1]); //komandu info
+            case tablo3 -> tablo3.draw(g, dati, XY, buttonBox.boxLoc[1], buttonBox.boxSize[1]); //tablo3
 
-//		if (thread.dati.tablo2Draw) ContentsMethods.drawTablo2(g); //centrâlais panelis cilvçku diagnostikai
-//		if (thread.dati.tablo3Draw) ContentsMethods.drawTablo3(g); //centrâlais panelis kartes diagnostikai
-
-        contentsMethods.drawContentPlaceHolder(g, dati.grafikasDati.colorPalette.pair3[1], XY, size);
+            default -> {}
+        }
 
         //te var izsaukt savas metodes
-    }
-
-    private void updateTabloInfo(){
-        int[] tabloDataOffset = new int[]{10, 10};
-        tabloLoc = new int[]{tabloDataOffset[0], buttonBox.boxLoc[1] + buttonBox.boxSize[1] + tabloDataOffset[1]};
     }
 
     private class ButtonBox {
@@ -97,6 +96,49 @@ public class DevelopCenterPanel extends CenterPanel {
                 button.y = boxLoc[1] + buttonSeparation;
             }
         }
+    }
+
+    public static class Tablo {
+
+        public String tabloName = "default";
+        public int[] tabloLoc, tabloSize;
+
+        private static final int lineHeight = 15;
+        private static final int[] textOffset = new int[]{0, 0};
+
+        public Tablo(){
+
+        }
+
+        public void draw(Graphics g, Dati dati, int[] panelXY, int boxY, int boxH){
+            reposition(boxY, boxH);
+
+            //te var izsaukt default tablo metodes
+
+        }
+
+        private void reposition(int boxY, int boxH){
+            int[] tabloDataOffset = new int[]{10, 10};
+            tabloLoc = new int[]{tabloDataOffset[0],
+                    boxY + boxH + tabloDataOffset[1]};
+        }
+
+        public void drawTabloName(Graphics g, int[] XY, Color textColor){
+            printLine(g, XY, 0,
+                    "Contents placeholder, tablo name: " + tabloName
+                    , textColor);
+        }
+
+        public void printLine(Graphics g, int[] panelXY, int w, String text, Color textColor){
+            g.setColor(textColor);
+            int x = panelXY[0] + tabloLoc[0] + textOffset[0],
+                    y =  tabloLoc[1] + tabloLoc[1] + textOffset[1] + lineHeight * w;
+
+            g.drawString(text, x, y);
+        }
+
+        //te var definçt default tablo metodes
+
     }
 
     //te var pievienot savas metodes
