@@ -2,12 +2,15 @@ package localClient.grafika.grafikaModes.spectate;
 
 import localClient.Dati;
 import localClient.grafika.Button;
+import localClient.grafika.grafikaModes.spectate.spectateMap.SpectateMap;
 import localClient.grafika.grafikaParts.CenterPanel;
 import localClient.grafika.grafikaParts.SampleLayout;
 
 import java.awt.*;
 
 public class SpectateCenterPanel extends CenterPanel {
+
+    SpectateMap spectateMap;
 
     SpectateCenterPanel(SampleLayout layout, Color[] colorPair){
         super(layout, colorPair);
@@ -16,12 +19,15 @@ public class SpectateCenterPanel extends CenterPanel {
 
         buttonDetails.add(new Button.ButtonDetails(1, "Zoom in", 1));
         buttonDetails.add(new Button.ButtonDetails(2, "Zoom out", 2));
+        buttonDetails.add(new Button.ButtonDetails(3, "Reset zoom", 0));
 
         //te var pievienot pogas
 
         generateButtons(layout);
 
         buttonResizer();
+
+        spectateMap = new SpectateMap();
     }
 
     private void buttonResizer(){
@@ -43,21 +49,14 @@ public class SpectateCenterPanel extends CenterPanel {
     public void draw(Graphics g, Dati dati, SampleLayout layout) {
         super.draw(g, dati, layout);
 
+        spectateMap.draw(g, dati,
+                new int[]{layout.centerPanelContentsX, layout.centerPanelContentsY},
+                new int[]{layout.centerPanelContentsWX, layout.centerPanelContentsWY}); //kartes zîmçðana
 
+        Button.drawButtons(g, this); //vçlreiz uzzîmç pogas, lai tieðâm bûtu virs kartes
 
         //te var izsaukt savas metodes
 
-        //no vecâ:
-        //if (thread.dati.miniMapDraw) SpectateMap.main(g, thread, this); //karte
-
-        drawContentPlaceHolder(g, dati.grafikasDati.colorPalette.pair3[1]);
-
-    }
-
-    private void drawContentPlaceHolder(Graphics g, Color textColor){
-        g.setColor(textColor);
-        int[] textLocation = {XY[0] + size[0] / 2 - 60, XY[1] + size[1] / 2};
-        g.drawString("Contents placeholder", textLocation[0], textLocation[1]);
     }
 
     //te var pievienot savas metodes

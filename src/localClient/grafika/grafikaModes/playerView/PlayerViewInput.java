@@ -13,7 +13,7 @@ public class PlayerViewInput extends InputActions {
             case 1 -> thread.dati.modeCurrent = Dati.ModeOption.lobby;
             case 2 -> thread.dati.modeCurrent = Dati.ModeOption.spectate;
 
-            default -> System.out.println("ServerUIThread PlayerViewHeader reìistrçts nedefinçtas pogas notikums!");
+            default -> super.headerButtonActions(reference, thread);
         }
     }
 
@@ -23,7 +23,7 @@ public class PlayerViewInput extends InputActions {
         switch (reference) {
             case 1 -> CalculationsThread.pauze = !CalculationsThread.pauze;
 
-            default -> System.out.println("ServerUIThread PlayerViewFooter reìistrçts nedefinçtas pogas notikums!");
+            default -> super.footerButtonActions(reference, thread);
         }
     }
 
@@ -34,7 +34,7 @@ public class PlayerViewInput extends InputActions {
             case 2 -> System.out.println("PlayerView mode left panel button 2");
             case 3 -> System.out.println("PlayerView mode left panel button 3");
 
-            default -> System.out.println("ServerUIThread PlayerViewLeftPanel reìistrçts nedefinçtas pogas notikums!");
+            default -> super.leftButtonActions(reference, thread);
         }
     }
 
@@ -45,7 +45,7 @@ public class PlayerViewInput extends InputActions {
             case 2 -> System.out.println("PlayerView mode right panel button 2");
             case 3 -> System.out.println("PlayerView mode right panel button 3");
 
-            default -> System.out.println("ServerUIThread PlayerViewRightPanel reìistrçts nedefinçtas pogas notikums!");
+            default -> super.rightButtonActions(reference, thread);
         }
     }
 

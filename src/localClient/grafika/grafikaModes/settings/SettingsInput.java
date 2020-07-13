@@ -12,7 +12,7 @@ public class SettingsInput extends InputActions {
         switch (reference) {
             case 1 -> thread.dati.modeCurrent = Dati.ModeOption.setup;
 
-            default -> System.out.println("ServerUIThread SettingsHeader reìistrçts nedefinçtas pogas notikums!");
+            default -> super.headerButtonActions(reference, thread);
         }
     }
 
@@ -25,7 +25,7 @@ public class SettingsInput extends InputActions {
             case 4 -> FileHandler.loadSettings(thread.dati, thread.grafika.ekrans);
             case 5 -> FileHandler.saveSettings(thread.dati);
 
-            default -> System.out.println("ServerUIThread SettingsCenterPanel reìistrçts nedefinçtas pogas notikums!");
+            default -> super.centerButtonActions(reference, thread);
         }
     }
 

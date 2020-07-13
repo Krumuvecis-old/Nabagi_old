@@ -13,7 +13,7 @@ public class SpectateInput extends InputActions {
             case 1 -> thread.dati.modeCurrent = Dati.ModeOption.setup;
             case 2 -> thread.dati.modeCurrent = Dati.ModeOption.lobby;
 
-            default -> System.out.println("ServerUIThread SpectateHeader reìistrçts nedefinçtas pogas notikums!");
+            default -> super.headerButtonActions(reference, thread);
         }
     }
 
@@ -23,18 +23,19 @@ public class SpectateInput extends InputActions {
         switch (reference) {
             case 1 -> CalculationsThread.pauze = !CalculationsThread.pauze;
 
-            default -> System.out.println("ServerUIThread SpectateFooter reìistrçts nedefinçtas pogas notikums!");
+            default -> super.footerButtonActions(reference, thread);
         }
     }
 
     @Override
     public void leftButtonActions(int reference, ClientThread thread){
         switch (reference) {
-            case 1 -> System.out.println("Spectate mode left panel button 1");
-            case 2 -> System.out.println("Spectate mode left panel button 2");
-            case 3 -> System.out.println("Spectate mode left panel button 3");
+            case 1 -> System.out.println("Spectate mode free view - placeholder");
+            case 2 -> System.out.println("Spectate mode random player selector - placeholder");
+            case 3 -> System.out.println("Spectate mode MapChunk grid toggle - placeholder");
+            case 4 -> System.out.println("Spectate mode MapCell grid toggle - placeholder");
 
-            default -> System.out.println("ServerUIThread SpectateLeftPanel reìistrçts nedefinçtas pogas notikums!");
+            default -> super.leftButtonActions(reference, thread);
         }
     }
 
@@ -45,7 +46,7 @@ public class SpectateInput extends InputActions {
             case 2 -> System.out.println("Spectate mode right panel button 2");
             case 3 -> System.out.println("Spectate mode right panel button 3");
 
-            default -> System.out.println("ServerUIThread SpectateRightPanel reìistrçts nedefinçtas pogas notikums!");
+            default -> super.rightButtonActions(reference, thread);
         }
     }
 
@@ -54,8 +55,9 @@ public class SpectateInput extends InputActions {
         switch (reference) {
             case 1 -> System.out.println("Spectate mode zoom in placeholder");
             case 2 -> System.out.println("Spectate mode zoom out placeholder");
+            case 3 -> System.out.println("Spectate mode zoom reset placeholder");
 
-            default -> System.out.println("ServerUIThread SpectateCenterPanel reìistrçts nedefinçtas pogas notikums!");
+            default -> super.centerButtonActions(reference, thread);
         }
     }
 }

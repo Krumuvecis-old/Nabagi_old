@@ -1,12 +1,21 @@
 package localClient.grafika.grafikaModes.spectate.spectateMap;
 
-import localClient.ClientThread;
+import localClient.Dati;
 
 import java.awt.*;
 
 public class SpectateMap {
 
-    public void draw(Graphics g, ClientThread threadTemp) {
+    public SpectateMap(){
+
+    }
+
+    public void draw(Graphics g, Dati dati, int[] contentsXY, int[] contentsSize) {
+
+        //if (dati.drawManagerList.get(dati.modeCurrent).spectateMapInfo.)
+
+
+        //zemâk no vecâ
 
 //      int x0=threadTemp.dati.miniMapX, y0=threadTemp.dati.miniMapY, //zîmçðanas pamatpunkts
 //				platumsMax=Math.max(0, threadTemp.dati.miniMapPlatums), //zîmçðanas maksimumi
@@ -30,7 +39,17 @@ public class SpectateMap {
 //		if(threadTemp.dati.miniMapDrawInfo) { //informâcija apakðâ par paðu karti
 //			drawInfo(g, x0, y0, merogs, laukumaPlatums, laukumaAugstums);
 //		}
+
+        drawContentPlaceHolder(g, contentsXY, contentsSize, dati.grafikasDati.colorPalette.pair3[1]);
+
     }
+
+    private void drawContentPlaceHolder(Graphics g, int[]XY, int[] size, Color textColor){
+        g.setColor(textColor);
+        int[] textLocation = {XY[0] + size[0] / 2 - 60, XY[1] + size[1] / 2};
+        g.drawString("Contents placeholder", textLocation[0], textLocation[1]);
+    }
+
 
 //		komandasList = CalculationsThread.komandasList;
 //		laukums = CalculationsThread.laukums;
@@ -102,9 +121,8 @@ public class SpectateMap {
 //		}
 //	}
 
-//
-//
-//
+
+//vçrtîga funkcija bet jâpievieno pie centerPanel sample klases
 //
 //	private static void overPanels(Graphics g, int x0, int y0, int kartesPlatums, int kartesAugstums){
 //
@@ -118,65 +136,6 @@ public class SpectateMap {
 //		g.fillRect(x0+kartesPlatums, y0-mala, mala, kartesAugstums+mala*2);//austrumi
 //		g.fillRect(x0-mala, y0+kartesAugstums, kartesPlatums+mala*2, mala);//dienvidi
 //
-//
-//	}
-//
-//	private static void drawInfo(Graphics g, int x0temp, int y0temp, double merogs, int laukumaPlatums, int laukumaAugstums){
-//		Color infoPanelKrasa = Color.white;
-//
-//		int x0 = x0temp + 5, y0 = y0temp + (int)(laukumaAugstums*merogs), w=2, rindasPlatums=15;
-//
-//		g.setColor(infoPanelKrasa);
-//		w = drawInfoKartei(g, x0, y0, w, rindasPlatums, merogs);
-//		g.drawString("--------------------", x0, y0 + w * rindasPlatums); w++;
-//		w = drawInfoGenRates(g, x0, y0, w, rindasPlatums);
-//
-//	}
-//
-//	private static int drawInfoKartei(Graphics g, int x0, int y0, int w, int rindasPlatums, double merogs){
-//		g.drawString("kartes platums: " + (int)(merogs * KonstantesUniversal.laukumaPlatumsSum) +
-//						" kartes augstums: " + (int)(merogs * KonstantesUniversal.laukumaAugstumsSum) +
-//						" merogs: " + (new DecimalFormat("#.##").format(merogs) ),
-//				x0, y0 + w * rindasPlatums); w++;
-//		g.drawString("laukuma kopçjais platums (x): " + KonstantesUniversal.laukumaPlatumsSum +
-//						" laukuma kopçjais augstums (y): " + KonstantesUniversal.laukumaAugstumsSum +
-//						" chunk platums (x  & y): " + KonstantesUniversal.mapChunkW,
-//				x0, y0 + w * rindasPlatums); w++;
-//		g.drawString("chunk skaits x: " + KonstantesUniversal.mapChunkCountX +
-//						" chunk skaits y: " + KonstantesUniversal.mapChunkCountY +
-//						" chunk platums (cells): " + KonstantesUniversal.mapCellCount,
-//				x0, y0 + w * rindasPlatums); w++;
-//		g.drawString("cell skaits x: " + (KonstantesUniversal.mapCellCount * KonstantesUniversal.mapChunkCountX) +
-//						" cell skaits y: " + (KonstantesUniversal.mapCellCount * KonstantesUniversal.mapChunkCountY) +
-//						" cell platums (x & y): " + KonstantesUniversal.mapCellW,
-//				x0, y0 + w * rindasPlatums); w++;
-//
-//		return w;
-//
-//	}
-//
-//	private static int drawInfoGenRates(Graphics g, int x0, int y0, int w, int rindasPlatums){
-//
-//		g.drawString("overallGenRate: "+(new DecimalFormat("#.##").format(KonstantesUniversal.overallGenRate)),
-//				x0, y0 + w * rindasPlatums); w++;
-//
-//		for(int i=1; i<KonstantesUniversal.defaultLietas.size(); i++){
-//			int x = x0, y = y0 + w * rindasPlatums;
-//			drawInfoGenRateOnce(g, x, y, i);
-//			w++;
-//		}
-//
-//		return w;
-//	}
-//
-//	private static void drawInfoGenRateOnce(Graphics g, int x, int y, int tips){
-//		String nosaukums = KonstantesUniversal.defaultLietas.get(tips).nosaukums;
-//		double genRate = KonstantesUniversal.overallGenRate * KonstantesUniversal.defaultLietas.get(tips).genKoef;
-//
-//		g.drawString(nosaukums + " genRate: " + (new DecimalFormat("#.##").format(genRate)) +
-//						" minAmount: " + (new DecimalFormat("#.#").format(KonstantesUniversal.defaultLietas.get(tips).genMin)) +
-//						" maxAmount: " + (new DecimalFormat("#.#").format(KonstantesUniversal.defaultLietas.get(tips).genMax)),
-//				x, y);
 //
 //	}
 

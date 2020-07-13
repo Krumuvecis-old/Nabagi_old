@@ -14,7 +14,7 @@ public class DevelopInput extends InputActions {
             case 1 -> thread.dati.modeCurrent = Dati.ModeOption.setup;
             case 2 -> thread.dati.modeCurrent = Dati.ModeOption.spectate;
 
-            default -> System.out.println("ServerUIThread DevelopHeader reìistrçts nedefinçtas pogas notikums!");
+            default -> super.headerButtonActions(reference, thread);
         }
     }
 
@@ -24,7 +24,7 @@ public class DevelopInput extends InputActions {
             case 1 -> thread.dati.grafikasDati.drawLayoutGrid = !thread.dati.grafikasDati.drawLayoutGrid;
             case 2 -> CalculationsThread.pauze = !CalculationsThread.pauze;
 
-            default -> System.out.println("ServerUIThread DevelopFooter reìistrçts nedefinçtas pogas notikums!");
+            default -> super.footerButtonActions(reference, thread);
         }
     }
 
@@ -51,7 +51,7 @@ public class DevelopInput extends InputActions {
                 else developTabloInfo.tabloCurrent = DrawManager.DevelopTabloInfo.TabloMode.tablo3;
             }
 
-            default -> System.out.println("ServerUIThread DevelopLeftPanel reìistrçts nedefinçtas pogas notikums!");
+            default -> super.leftButtonActions(reference, thread);
         }
     }
 
@@ -63,7 +63,7 @@ public class DevelopInput extends InputActions {
             case 3 -> thread.dati.grafikasDati.drawSampleImages = !thread.dati.grafikasDati.drawSampleImages;
             case 4 -> thread.dati.grafikasDati.drawColorWheel = !thread.dati.grafikasDati.drawColorWheel;
 
-            default -> System.out.println("ServerUIThread DevelopRightPanel reìistrçts nedefinçtas pogas notikums!");
+            default -> super.rightButtonActions(reference, thread);
         }
     }
 
@@ -75,7 +75,7 @@ public class DevelopInput extends InputActions {
             case 3 -> thread.dati.drawManagerList.get(Dati.ModeOption.develop).layout.playerSelected = true;
             case 4 -> thread.dati.drawManagerList.get(Dati.ModeOption.develop).layout.playerSelected = false;
 
-            default -> System.out.println("ServerUIThread DevelopCenterPanel reìistrçts nedefinçtas pogas notikums!");
+            default -> super.centerButtonActions(reference, thread);
         }
     }
 

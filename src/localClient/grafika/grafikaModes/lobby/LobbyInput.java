@@ -12,7 +12,7 @@ public class LobbyInput extends InputActions {
             case 1 -> thread.dati.modeCurrent = Dati.ModeOption.setup;
             case 2 -> thread.dati.modeCurrent = Dati.ModeOption.spectate;
 
-            default -> System.out.println("ServerUIThread LobbyHeader reìistrçts nedefinçtas pogas notikums!");
+            default -> super.headerButtonActions(reference, thread);
         }
     }
 
@@ -23,7 +23,7 @@ public class LobbyInput extends InputActions {
             case 2 -> System.out.println("Lobby mode left panel button 2");
             case 3 -> System.out.println("Lobby mode left panel button 3");
 
-            default -> System.out.println("ServerUIThread LobbyLeftPanel reìistrçts nedefinçtas pogas notikums!");
+            default -> super.leftButtonActions(reference, thread);
         }
     }
 
@@ -35,7 +35,7 @@ public class LobbyInput extends InputActions {
             //newClient(); //jauns klients
             //System.out.println("neweClient placeholder");
 
-            default -> System.out.println("ServerUIThread LobbyRightPanel reìistrçts nedefinçtas pogas notikums!");
+            default -> super.rightButtonActions(reference, thread);
         }
     }
 

@@ -12,7 +12,7 @@ public class SetupInput extends InputActions {
             case 1 -> thread.dati.modeCurrent = Dati.ModeOption.settings;
             case 2 -> thread.dati.modeCurrent = Dati.ModeOption.develop;
 
-            default -> System.out.println("ServerUIThread SetupHeader reìistrçts nedefinçtas pogas notikums!");
+            default -> super.headerButtonActions(reference, thread);
         }
     }
 
@@ -22,7 +22,7 @@ public class SetupInput extends InputActions {
             case 1 -> thread.dati.modeCurrent = Dati.ModeOption.lobby;
             case 2 -> thread.dati.modeCurrent = Dati.ModeOption.spectate;
 
-            default -> System.out.println("ServerUIThread SetupCenterPanel reìistrçts nedefinçtas pogas notikums!");
+            default -> super.centerButtonActions(reference, thread);
         }
     }
 
