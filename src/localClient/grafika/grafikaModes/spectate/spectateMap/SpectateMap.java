@@ -47,7 +47,7 @@ public class SpectateMap {
     private void drawContentPlaceHolder(Graphics g, int[]XY, int[] size, Color textColor){
         g.setColor(textColor);
         int[] textLocation = {XY[0] + size[0] / 2 - 60, XY[1] + size[1] / 2};
-        g.drawString("Contents placeholder", textLocation[0], textLocation[1]);
+        g.drawString("Spectator map placeholder", textLocation[0], textLocation[1]);
     }
 
 
