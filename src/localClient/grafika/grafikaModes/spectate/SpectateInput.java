@@ -50,14 +50,35 @@ public class SpectateInput extends InputActions {
         }
     }
 
+    private static final double zoomChangeRate = 0.1, minZoom = 1;
+
     @Override
     public void centerButtonActions(int reference, ClientThread thread){
+
         switch (reference) {
-            case 1 -> System.out.println("Spectate mode zoom in placeholder");
-            case 2 -> System.out.println("Spectate mode zoom out placeholder");
-            case 3 -> System.out.println("Spectate mode zoom reset placeholder");
+            case 1 -> zoomIn(thread);
+            case 2 -> zoomOut(thread);
+            case 3 -> resetZoom(thread);
 
             default -> super.centerButtonActions(reference, thread);
         }
+    }
+
+    private void zoomIn(ClientThread thread){
+        thread.dati.drawManagerList.get(Dati.ModeOption.spectate).spectateMapInfo.zoomFactor +=
+                zoomChangeRate * thread.dati.drawManagerList.get(Dati.ModeOption.spectate).spectateMapInfo.zoomFactor;
+    }
+
+    private void zoomOut(ClientThread thread){
+        thread.dati.drawManagerList.get(Dati.ModeOption.spectate).spectateMapInfo.zoomFactor -=
+                zoomChangeRate * thread.dati.drawManagerList.get(Dati.ModeOption.spectate).spectateMapInfo.zoomFactor;
+
+        if (thread.dati.drawManagerList.get(Dati.ModeOption.spectate).spectateMapInfo.zoomFactor < minZoom)
+            resetZoom(thread);
+    }
+
+    private void resetZoom(ClientThread thread){
+        thread.dati.drawManagerList.get(Dati.ModeOption.spectate).spectateMapInfo.zoomFactor =
+                minZoom; 
     }
 }

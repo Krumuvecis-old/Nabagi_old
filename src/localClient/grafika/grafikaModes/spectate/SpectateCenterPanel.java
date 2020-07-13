@@ -18,8 +18,8 @@ public class SpectateCenterPanel extends CenterPanel {
         clearButtons();
 
         buttonDetails.add(new Button.ButtonDetails(1, "Zoom in", 1));
-        buttonDetails.add(new Button.ButtonDetails(2, "Zoom out", 2));
-        buttonDetails.add(new Button.ButtonDetails(3, "Reset zoom", 0));
+        buttonDetails.add(new Button.ButtonDetails(2, "Zoom out", 1));
+        buttonDetails.add(new Button.ButtonDetails(3, "Reset zoom", 2));
 
         //te var pievienot pogas
 
