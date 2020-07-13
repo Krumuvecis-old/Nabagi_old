@@ -32,29 +32,29 @@ public class ColorPalette {
                         new Color(20,0,0)},
                 new Color[]{
                         new Color(50,100,5),
-                        new Color(0,0,0)}));
+                        new Color(30,10,0)}));
 
         presetPalettes.add(new ColorPalette(
                 new Color[]{
                         new Color(30,35,65),
                         new Color(50, 120, 160)},
                 new Color[]{
-                        new Color(100,100,110),
+                        new Color(120,120,160),
                         new Color(0,0,20)},
                 new Color[]{
-                        new Color(50,100,5),
-                        new Color(0,0,0)}));
+                        new Color(80,80,100),
+                        new Color(5,5,30)}));
 
         presetPalettes.add(new ColorPalette(
                 new Color[]{
-                        new Color(120,25,20),
-                        new Color(190, 80, 80)},
+                        new Color(150,25,20),
+                        new Color(200, 80, 80)},
                 new Color[]{
-                        new Color(140,120,120),
+                        new Color(160,120,120),
                         new Color(60,0,0)},
                 new Color[]{
-                        new Color(50,100,5),
-                        new Color(3,0,0)}));
+                        new Color(170,50,40),
+                        new Color(40,0,0)}));
     }
 
     public void pickPreset(int number){
