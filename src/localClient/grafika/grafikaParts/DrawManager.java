@@ -37,11 +37,11 @@ public abstract class DrawManager {
     public DevelopTabloInfo developTabloInfo = new DevelopTabloInfo();
 
     public static class SpectateMapInfo {
-        double zoomFactor; //1 - râda 100%, 2 - râda 50%, utt
-        int[] centerXY; //skata fokuss
+        public double zoomFactor; //1 - râda 100%, 2 - râda 50%, utt
+        public int[] centerXY; //skata fokuss
 
-        boolean playerSelected, playerDead;
-        String selectedPlayerName;
+        public boolean playerSelected, playerDead;
+        public String selectedPlayerName;
 
         public SpectateMapInfo(){
             zoomFactor = 1;

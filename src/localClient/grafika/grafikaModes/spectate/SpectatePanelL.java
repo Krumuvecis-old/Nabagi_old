@@ -1,11 +1,15 @@
 package localClient.grafika.grafikaModes.spectate;
 
 import localClient.ClientThread;
+import localClient.Dati;
 import localClient.grafika.Button;
+import localClient.grafika.GrafikasDati;
 import localClient.grafika.grafikaParts.PanelL;
 import localClient.grafika.grafikaParts.SampleLayout;
+import server.dataBase.DataBase;
 
 import java.awt.*;
+import java.text.DecimalFormat;
 
 public class SpectatePanelL extends PanelL {
 
@@ -30,12 +34,14 @@ public class SpectatePanelL extends PanelL {
         Button lastButton = buttonList.get(buttonList.size() - 1);
         int lastButtonEndPoint = lastButton.y + lastButton.wy;
 
-        drawInformation(g, lastButtonEndPoint, thread.dati.grafikasDati.colorPalette.pair2[1]);
+        drawInformation(g, lastButtonEndPoint, thread.dati);
 
         //te var izsaukt savas metodes
     }
 
-    private void drawInformation(Graphics g, int y0, Color textColor){
+    private void drawInformation(Graphics g, int y0, Dati dati){
+        Color textColor = dati.grafikasDati.colorPalette.pair2[1];
+
         int[] textOffset = new int[]{10, 10},
                 xy = new int[]{
                         XY[0] + textOffset[0],
@@ -47,24 +53,47 @@ public class SpectatePanelL extends PanelL {
 
         g.drawString("Informâcija", xy[0], xy[1] + w * textHeight); w++;
         g.drawString("--------------------", xy[0], xy[1] + w * textHeight); w++;
-		w = drawMapInfo(g, xy, w, textHeight);
+		w = drawMapInfo(g, xy, w, textHeight, dati, dati.drawManagerList.get(Dati.ModeOption.spectate).layout);
 		g.drawString("--------------------", xy[0], xy[1] + w * textHeight); w++;
 		w = drawGenRateInfo(g, xy, w, textHeight);
 
     }
 
-    private int drawMapInfo(Graphics g, int[] xy, int w, int textHeight){
+    private int drawMapInfo(Graphics g, int[] xy, int w, int textHeight, Dati dati, SampleLayout layout){
         g.drawString("kartesInfo1", xy[0], xy[1] + w * textHeight);
         w++;
 
+        g.drawString("Laukuma kopçjais izmçrs (x & y): " +
+                        "[ " + DataBase.laukumaPlatumsSum + " - " + DataBase.laukumaAugstumsSum + " ]",
+				xy[0], xy[1] + w * textHeight); w++;
+
+		double zoomFactor = dati.drawManagerList.get(Dati.ModeOption.spectate).spectateMapInfo.zoomFactor;
+        g.drawString("Zoom factor: " + (new DecimalFormat("#.##").format(zoomFactor)),
+                xy[0], xy[1] + w * textHeight); w++;
+
+        double[] redzamaisSize = new double[]{
+                DataBase.laukumaPlatumsSum / zoomFactor,
+                DataBase.laukumaAugstumsSum / zoomFactor};
+
+        g.drawString("Redzamâ laukuma izmçrs (x & y): " +
+                        "[ " + redzamaisSize[0] + " - " + redzamaisSize[1] + " ]",
+                xy[0], xy[1] + w * textHeight); w++;
+
+        int[] contentsSize = new int[]{layout.centerPanelContentsWX, layout.centerPanelContentsWY};
+
+        //grafiskie izmçri
 //		g.drawString("kartes platums: " + (int)(merogs * KonstantesUniversal.laukumaPlatumsSum) +
 //						" kartes augstums: " + (int)(merogs * KonstantesUniversal.laukumaAugstumsSum) +
 //						" merogs: " + (new DecimalFormat("#.##").format(merogs) ),
 //				xy[0], xy[1] + w * textHeight); w++;
-//		g.drawString("laukuma kopçjais platums (x): " + KonstantesUniversal.laukumaPlatumsSum +
-//						" laukuma kopçjais augstums (y): " + KonstantesUniversal.laukumaAugstumsSum +
-//						" chunk platums (x  & y): " + KonstantesUniversal.mapChunkW,
-//				xy[0], xy[1] + w * textHeight); w++;
+
+        //mçrogs
+        //chunkCount x & y
+        //chunkSize
+        //cellSize
+        //cellCount in chunk
+        //cellCount overall
+
 //		g.drawString("chunk skaits x: " + KonstantesUniversal.mapChunkCountX +
 //						" chunk skaits y: " + KonstantesUniversal.mapChunkCountY +
 //						" chunk platums (cells): " + KonstantesUniversal.mapCellCount,
@@ -81,6 +110,8 @@ public class SpectatePanelL extends PanelL {
 	private int drawGenRateInfo(Graphics g, int[] xy, int w, int textHeight){
         g.drawString("genRateInfo1", xy[0], xy[1] + w * textHeight);
         w++;
+
+        //kopçts no vecâ
 
 //		g.drawString("overallGenRate: "+(new DecimalFormat("#.##").format(KonstantesUniversal.overallGenRate)),
 //				x0, y0 + w * rindasPlatums); w++;
