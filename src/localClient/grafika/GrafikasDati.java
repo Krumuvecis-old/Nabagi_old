@@ -43,6 +43,9 @@ public class GrafikasDati {
                 {"nabagiLogo.png", "nabagiLogo"},
                 {"welcomeSign.png", "welcomeSign"},
                 {"panelBackground.png", "panelBackground"},
+
+                {"sprites/cilveks.png", "cilveks"},
+                {"sprites/zelts.png", "zelts"},
                 {"sprites/Banans.png", "banana"},
                 {"sprites/Zvaigzne.png", "zvaigzne"}
         };
