@@ -1,4 +1,4 @@
-package localClient.grafika.grafikaModes.spectate.map;
+package localClient.grafika.grafikaModes.spectate.spectateMap;
 
 import server.dataBase.DataBase;
 

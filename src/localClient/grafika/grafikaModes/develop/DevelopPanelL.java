@@ -13,9 +13,9 @@ public class DevelopPanelL extends PanelL {
 
         clearButtons();
 
-        buttonDetails.add(new Button.ButtonDetails(1, "Tablo1", 0));
-        buttonDetails.add(new Button.ButtonDetails(2, "Tablo2", 0));
-        buttonDetails.add(new Button.ButtonDetails(3, "Tablo3", 0));
+        buttonDetails.add(new Button.ButtonDetails(1, "Tablo1 - par cilvçkiem", 17));
+        buttonDetails.add(new Button.ButtonDetails(2, "Tablo2 - par komandâm", 8));
+        buttonDetails.add(new Button.ButtonDetails(3, "Tablo3 - testiem", 9));
 
         //genRate +/-
 

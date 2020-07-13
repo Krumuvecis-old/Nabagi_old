@@ -32,8 +32,8 @@ public class SettingsCenterPanel extends CenterPanel {
 
         clearButtons();
 
-        buttonDetails.add(new Button.ButtonDetails(1, "Brown", 2));
-        buttonDetails.add(new Button.ButtonDetails(2, "Blue", 2));
+        buttonDetails.add(new Button.ButtonDetails(1, "Brown/green", 4));
+        buttonDetails.add(new Button.ButtonDetails(2, "Blue", 1));
         buttonDetails.add(new Button.ButtonDetails(3, "Red", -2));
         buttonDetails.add(new Button.ButtonDetails(4, "Load settings", 10));
         buttonDetails.add(new Button.ButtonDetails(5, "Save settings", 8));

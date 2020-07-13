@@ -2,6 +2,7 @@ package localClient.grafika.grafikaParts;
 
 import localClient.ClientThread;
 import localClient.ColorPalette;
+import server.dataBase.DataBase;
 
 import java.awt.*;
 
@@ -34,6 +35,52 @@ public abstract class DrawManager {
     }
 
     public DevelopTabloInfo developTabloInfo = new DevelopTabloInfo();
+
+    public static class SpectateMapInfo {
+        double zoomFactor; //1 - râda 100%, 2 - râda 50%, utt
+        int[] centerXY; //skata fokuss
+
+        boolean playerSelected, playerDead;
+        String selectedPlayerName;
+
+        public SpectateMapInfo(){
+            zoomFactor = 1;
+            centerXY = new int[]{
+                    DataBase.laukumaPlatumsSum / 2,
+                    DataBase.laukumaAugstumsSum / 2};
+            playerSelected = false;
+            playerDead = false;
+        }
+
+        public void update(){
+            if(playerSelected){
+                if(DataBase.cilvekuList.containsKey(selectedPlayerName)){
+                    centerXY = new int[]{
+                            (int)(DataBase.cilvekuList.get(selectedPlayerName).xyz.x +
+                                    DataBase.cilvekuList.get(selectedPlayerName).xyz.chunkXY.get(0) * DataBase.mapChunkW),
+                            (int)(DataBase.cilvekuList.get(selectedPlayerName).xyz.y +
+                                    DataBase.cilvekuList.get(selectedPlayerName).xyz.chunkXY.get(1) * DataBase.mapChunkW)};
+                } else {
+                    playerDead = true;
+                }
+            }
+        }
+
+        public void selectPlayer(boolean select, String name){
+            if(select){
+                if(DataBase.cilvekuList.containsKey(name)){
+                    playerSelected = true;
+                    selectedPlayerName = name;
+                    playerDead = false;
+                }
+            } else { //deselect
+                playerSelected = false;
+            }
+        }
+
+    }
+
+    public SpectateMapInfo spectateMapInfo = new SpectateMapInfo();
 
     public DrawManager(int ekranaPlatums, int ekranaAugstums, ColorPalette colorPalette){
         layout = new SampleLayout(ekranaPlatums, ekranaAugstums);

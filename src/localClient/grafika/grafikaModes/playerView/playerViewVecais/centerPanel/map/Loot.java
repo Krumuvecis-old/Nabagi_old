@@ -26,7 +26,7 @@ class Loot {
 //                    if (Math.hypot(dx, dy) > R1) continue; //lai atmet tos kas par tâlu
 //
 //                    double[] koord;
-//                    koord = Map.getAbsoluteCoordinates(false, dx, dy);
+//                    koord = SpectateMap.getAbsoluteCoordinates(false, dx, dy);
 //                    double resnums = KonstantesUniversal.defaultLietas.get(0).izmers * merogs;
 //                    Color krasa1 = KonstantesUniversal.defaultLietas.get(0).krasa, krasa2=Color.black; //iekða un kontûra
 //
