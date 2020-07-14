@@ -15,7 +15,7 @@ public class SampleLayout {
             panelRPlatums = panelLPlatums, //panel2 x width (in pixels)
             centerPanelX, //calculated panel3 x starting point (in pixels from left)
             centerPanelPlatums, //calculated panel3 x width (in pixels)
-            centerPanelBorder = 20, //centerPanel border width (in pixels)
+            centerPanelBorder = 0, //centerPanel border width (in pixels)
             centerPanelContentsX, centerPanelContentsY, //starting point for centerPanel contents (in pixels)
             centerPanelContentsWX, centerPanelContentsWY, //width&height for centerPanel contents (in pixels)
 

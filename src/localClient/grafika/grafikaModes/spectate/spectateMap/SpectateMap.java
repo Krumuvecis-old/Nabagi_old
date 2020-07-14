@@ -108,24 +108,7 @@ public class SpectateMap {
 //	}
 
 
-//vçrtîga funkcija bet jâpievieno pie centerPanel sample klases
 
-    //overPanels(g, x0, y0, kartesPlatums, kartesAugstums); //maliòas apkârt laukumam - jâpârliek uz sample centrePanel
-//
-//	private static void overPanels(Graphics g, int x0, int y0, int kartesPlatums, int kartesAugstums){
-//
-//
-//		int mala=15;//KonstantesUniversal.mala;
-//		g.setColor(Grafiskie.malasKrasa); //apkârt kartei uzzîmç maliòu
-//		g.setColor(Color.darkGray);
-//
-//		g.fillRect(x0-mala, y0-mala, mala, kartesAugstums+mala*2);//rietumi
-//		g.fillRect(x0-mala, y0-mala, kartesPlatums+mala*2, mala);//ziemeïi
-//		g.fillRect(x0+kartesPlatums, y0-mala, mala, kartesAugstums+mala*2);//austrumi
-//		g.fillRect(x0-mala, y0+kartesAugstums, kartesPlatums+mala*2, mala);//dienvidi
-//
-//
-//	}
 
 
 }

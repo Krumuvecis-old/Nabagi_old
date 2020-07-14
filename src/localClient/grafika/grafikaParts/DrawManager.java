@@ -145,7 +145,10 @@ public abstract class DrawManager {
     }
 
     private void panelDrawingOrder(Graphics g, ClientThread thread){
-        if(drawCenterPanel) centerPanel.draw(g, thread.dati, layout);
+        if(drawCenterPanel) {
+            centerPanel.draw(g, thread.dati, layout);
+            centerPanel.drawContentsBorder(g, layout, thread.dati.grafikasDati.colorPalette);
+        }
 
         if(drawPanelL) panelL.draw(g, thread, layout);
         if(drawPanelR) panelR.draw(g, thread.dati, layout);

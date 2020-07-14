@@ -56,7 +56,6 @@ public class SpectateCenterPanel extends CenterPanel {
         Button.drawButtons(g, this); //vçlreiz uzzîmç pogas, lai tieðâm bûtu virs kartes
 
         //te var izsaukt savas metodes
-
     }
 
     //te var pievienot savas metodes

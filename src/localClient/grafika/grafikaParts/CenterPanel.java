@@ -1,5 +1,6 @@
 package localClient.grafika.grafikaParts;
 
+import localClient.ColorPalette;
 import localClient.grafika.Button;
 import localClient.Dati;
 
@@ -57,7 +58,38 @@ public class CenterPanel extends SamplePanel {
         Button.drawButtons(g, this);
     }
 
+    public void drawContentsBorder(Graphics g, SampleLayout layout, ColorPalette colorPalette){
+        g.setColor(colorPalette.pair2[0]);
+		g.fillRect(layout.centerPanelX, layout.panelY,
+                layout.centerPanelBorder, layout.panelAugstums);//rietumi
+		g.fillRect(layout.centerPanelX, layout.panelY,
+                layout.centerPanelPlatums, layout.centerPanelBorder);//ziemeļi
+		g.fillRect(layout.panelRX - layout.centerPanelBorder,
+                layout.panelY, layout.centerPanelBorder, layout.panelAugstums);//austrumi
+		g.fillRect(layout.centerPanelX, layout.footerY - layout.centerPanelBorder,
+                layout.centerPanelPlatums, layout.centerPanelBorder);//dienvidi
+
+        g.setColor(Color.black);
+        g.drawRect(layout.centerPanelContentsX, layout.centerPanelContentsY,
+                layout.centerPanelContentsWX, layout.centerPanelContentsWY); //iekšējā kontūra
+        g.drawRect(layout.centerPanelX, layout.panelY,
+                layout.centerPanelPlatums, layout.panelAugstums); //ārējā kontūra
+    }
+
+    //overPanels(g, x0, y0, kartesPlatums, kartesAugstums); //maliņas apkārt laukumam - jāpārliek uz sample centrePanel
+//
+//	private static void overPanels(Graphics g, int x0, int y0, int kartesPlatums, int kartesAugstums){
+//
+//
+//		int mala=15;//KonstantesUniversal.mala;
+//		g.setColor(Grafiskie.malasKrasa); //apkārt kartei uzzīmē maliņu
+//
+//
+//
+//	}
+
     //te var likt papildus default funkcijas (jāizsauc no draw() metodes)
+
 
 
 

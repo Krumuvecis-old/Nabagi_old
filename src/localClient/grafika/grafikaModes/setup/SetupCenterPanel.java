@@ -31,11 +31,14 @@ public class SetupCenterPanel extends CenterPanel {
     public void draw(Graphics g, Dati dati, SampleLayout layout) {
         super.draw(g, dati, layout);
 
-        //te var  izsaukt savu satura boxu  metodes
+        //te var izsaukt savu satura boxu metodes
 
-        startingBox.draw(g, dati);
+        startingBox.draw(g, dati,
+                new int[]{layout.centerPanelContentsX, layout.centerPanelContentsY},
+                new int[]{layout.centerPanelContentsWX, layout.centerPanelContentsWY});
 
         //te var izsaukt savas metodes
+
     }
 
     private class StartingBox {
@@ -51,17 +54,17 @@ public class SetupCenterPanel extends CenterPanel {
             buttonBox = new ButtonBox();
         }
 
-        void draw(Graphics g, Dati dati){
-            boxResizer();
+        void draw(Graphics g, Dati dati, int[] contentsXY, int[] contentsSize){
+            boxResizer(contentsSize);
 
             buttonBox.update();
-            greetingBox.draw(g, dati);
+            greetingBox.draw(g, dati, contentsXY);
         }
 
-        private void boxResizer(){
+        private void boxResizer(int[] contentsSize){
             int[] boxSize = new int[]{ //calculate minimum boxSize
-                    (int)(size[0] * startingBoxSizeProportion[0]),
-                    (int)(size[1] * startingBoxSizeProportion[1])};
+                    (int)(contentsSize[0] * startingBoxSizeProportion[0]),
+                    (int)(contentsSize[1] * startingBoxSizeProportion[1])};
 
             buttonBox.boxSize = new int[]{
                     Math.max(buttonBox.boxSizeMin[0], boxSize[0]),
@@ -76,8 +79,8 @@ public class SetupCenterPanel extends CenterPanel {
                     greetingBox.boxSize[1] + boxSeparation + buttonBox.boxSize[1]};
 
             int[] boxLoc = new int[]{
-                    (int)(size[0] / 2 - boxSize[0] / 2 + size[0] * startingBoxOffset[0]),
-                    (int)(size[1] / 2 - boxSize[1] / 2 + size[1] * startingBoxOffset[1])};
+                    (int)(contentsSize[0] / 2 - boxSize[0] / 2 + contentsSize[0] * startingBoxOffset[0]),
+                    (int)(contentsSize[1] / 2 - boxSize[1] / 2 + contentsSize[1] * startingBoxOffset[1])};
 
             greetingBox.boxLoc = new int[]{boxLoc[0], boxLoc[1]};
             buttonBox.boxLoc = new int[]{
@@ -99,11 +102,11 @@ public class SetupCenterPanel extends CenterPanel {
         int[] boxLoc, boxSize;
         private int[] greetingLoc, greetingSize;
 
-        GreetingBox(){};
+        GreetingBox(){}
 
-        void draw(Graphics g, Dati dati){
+        void draw(Graphics g, Dati dati, int[] contentsXY){
             resizeGreeting();
-            drawWelcomeSign(g, dati);
+            drawWelcomeSign(g, dati, contentsXY);
         }
 
         private void resizeGreeting(){
@@ -121,10 +124,10 @@ public class SetupCenterPanel extends CenterPanel {
                     boxSize[1] / 2 - greetingSize[1] / 2};
         }
 
-        private void drawWelcomeSign(Graphics g, Dati dati){
+        private void drawWelcomeSign(Graphics g, Dati dati, int[] contentsXY){
             int[] imageLocation = new int[]{
-                    XY[0] + boxLoc[0] + greetingLoc[0],
-                    XY[1] + boxLoc[1] + greetingLoc[1]};
+                    contentsXY[0] + boxLoc[0] + greetingLoc[0],
+                    contentsXY[1] + boxLoc[1] + greetingLoc[1]};
 
             g.drawImage(dati.grafikasDati.images.get("welcomeSign"),
                     imageLocation[0], imageLocation[1], greetingSize[0], greetingSize[1],
