@@ -49,10 +49,10 @@ public class SpectateInput extends InputActions {
     @Override
     public void footerButtonActions(int reference, ClientThread thread){
 
-        switch (reference) {
-            case 1 -> CalculationsThread.pauze = !CalculationsThread.pauze;
-
-            default -> super.footerButtonActions(reference, thread);
+        if (reference == 1) { //ja vairâk pogas, var likt switch -> case
+            CalculationsThread.pauze = !CalculationsThread.pauze;
+        } else {
+            super.footerButtonActions(reference, thread);
         }
     }
 
@@ -60,8 +60,6 @@ public class SpectateInput extends InputActions {
     public void leftButtonActions(int reference, ClientThread thread){
         DrawManager.SpectateMapInfo spectateMapInfo =
                 thread.dati.drawManagerList.get(thread.dati.modeCurrent).spectateMapInfo;
-
-
 
         switch (reference) {
             case 1 -> spectateMapInfo.selectPlayer(false, ""); //deselect player
@@ -84,35 +82,35 @@ public class SpectateInput extends InputActions {
         }
     }
 
-    private static final double zoomChangeRate = 0.1, minZoom = 1;
+    private static final double zoomChangeRate = 0.1;
 
     @Override
     public void centerButtonActions(int reference, ClientThread thread){
 
+        DrawManager.SpectateMapInfo spectateMapInfo =
+                thread.dati.drawManagerList.get(Dati.ModeOption.spectate).spectateMapInfo;
+
         switch (reference) {
-            case 1 -> zoomIn(thread);
-            case 2 -> zoomOut(thread);
-            case 3 -> resetZoom(thread);
+            case 1 -> zoomIn(spectateMapInfo);
+            case 2 -> zoomOut(spectateMapInfo);
+            case 3 -> resetZoom(spectateMapInfo);
 
             default -> super.centerButtonActions(reference, thread);
         }
     }
 
-    private void zoomIn(ClientThread thread){
-        thread.dati.drawManagerList.get(Dati.ModeOption.spectate).spectateMapInfo.zoomFactor +=
-                zoomChangeRate * thread.dati.drawManagerList.get(Dati.ModeOption.spectate).spectateMapInfo.zoomFactor;
+    private void zoomIn(DrawManager.SpectateMapInfo spectateMapInfo){
+        spectateMapInfo.zoomFactor += zoomChangeRate * spectateMapInfo.zoomFactor;
     }
 
-    private void zoomOut(ClientThread thread){
-        thread.dati.drawManagerList.get(Dati.ModeOption.spectate).spectateMapInfo.zoomFactor -=
-                zoomChangeRate * thread.dati.drawManagerList.get(Dati.ModeOption.spectate).spectateMapInfo.zoomFactor;
+    private void zoomOut(DrawManager.SpectateMapInfo spectateMapInfo){
+        spectateMapInfo.zoomFactor -= zoomChangeRate * spectateMapInfo.zoomFactor;
 
-        if (thread.dati.drawManagerList.get(Dati.ModeOption.spectate).spectateMapInfo.zoomFactor < minZoom)
-            resetZoom(thread);
+        if (spectateMapInfo.zoomFactor < DrawManager.SpectateMapInfo.minZoom)
+            resetZoom(spectateMapInfo);
     }
 
-    private void resetZoom(ClientThread thread){
-        thread.dati.drawManagerList.get(Dati.ModeOption.spectate).spectateMapInfo.zoomFactor =
-                minZoom; 
+    private void resetZoom(DrawManager.SpectateMapInfo spectateMapInfo){
+        spectateMapInfo.zoomFactor = DrawManager.SpectateMapInfo.minZoom;
     }
 }

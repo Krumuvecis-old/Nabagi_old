@@ -4,6 +4,7 @@ import localClient.ClientThread;
 import localClient.Dati;
 import localClient.grafika.Button;
 import localClient.grafika.GrafikasDati;
+import localClient.grafika.grafikaParts.DrawManager;
 import localClient.grafika.grafikaParts.PanelL;
 import localClient.grafika.grafikaParts.SampleLayout;
 import server.dataBase.DataBase;
@@ -60,26 +61,37 @@ public class SpectatePanelL extends PanelL {
     }
 
     private int drawMapInfo(Graphics g, int[] xy, int w, int textHeight, Dati dati, SampleLayout layout){
-        g.drawString("kartesInfo1", xy[0], xy[1] + w * textHeight);
+        g.drawString("Par karti", xy[0], xy[1] + w * textHeight);
         w++;
 
-        g.drawString("Laukuma kopçjais izmçrs (x & y): " +
-                        "[ " + DataBase.laukumaPlatumsSum + " - " + DataBase.laukumaAugstumsSum + " ]",
-				xy[0], xy[1] + w * textHeight); w++;
-
-		double zoomFactor = dati.drawManagerList.get(Dati.ModeOption.spectate).spectateMapInfo.zoomFactor;
-        g.drawString("Zoom factor: " + (new DecimalFormat("#.##").format(zoomFactor)),
+        g.drawString("Grafikas paneïa izmçrs (px)",
                 xy[0], xy[1] + w * textHeight); w++;
-
-        double[] redzamaisSize = new double[]{
-                DataBase.laukumaPlatumsSum / zoomFactor,
-                DataBase.laukumaAugstumsSum / zoomFactor};
-
-        g.drawString("Redzamâ laukuma izmçrs (x & y): " +
-                        "[ " + redzamaisSize[0] + " - " + redzamaisSize[1] + " ]",
-                xy[0], xy[1] + w * textHeight); w++;
-
         int[] contentsSize = new int[]{layout.centerPanelContentsWX, layout.centerPanelContentsWY};
+        g.drawString("[ " + contentsSize[0] + " - " + contentsSize[1] + " ]",
+                xy[0], xy[1] + w * textHeight); w++;
+
+        g.drawString("Laukuma kopçjais izmçrs (x & y): ",
+				xy[0], xy[1] + w * textHeight); w++;
+        g.drawString("[ " + DataBase.laukumaPlatumsSum + " - " + DataBase.laukumaAugstumsSum + " ]",
+                xy[0], xy[1] + w * textHeight); w++;
+
+        DrawManager.SpectateMapInfo spectateMapInfo =
+                dati.drawManagerList.get(dati.modeCurrent).spectateMapInfo;
+
+        g.drawString("Laukuma grafiskais izmçrs (x & y): ",
+                xy[0], xy[1] + w * textHeight); w++;
+        g.drawString("[ " + (int)(DataBase.laukumaPlatumsSum * spectateMapInfo.merogs) + " - " + (int)(DataBase.laukumaAugstumsSum * spectateMapInfo.merogs) + " ]",
+                xy[0], xy[1] + w * textHeight); w++;
+
+        g.drawString("Zoom factor: " + (new DecimalFormat("#.##").format(spectateMapInfo.zoomFactor)) + ", " +
+                        "merogs: " + (new DecimalFormat("#.##").format(spectateMapInfo.merogs)),
+                xy[0], xy[1] + w * textHeight); w++;
+
+        g.drawString("Center XY: " + spectateMapInfo.centerXY[0] + " , " +spectateMapInfo.centerXY[1],
+                xy[0], xy[1] + w * textHeight); w++;
+
+
+
 
         //grafiskie izmçri
 //		g.drawString("kartes platums: " + (int)(merogs * KonstantesUniversal.laukumaPlatumsSum) +

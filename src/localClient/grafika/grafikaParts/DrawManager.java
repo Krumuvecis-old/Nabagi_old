@@ -39,6 +39,7 @@ public abstract class DrawManager {
     public DevelopTabloInfo developTabloInfo = new DevelopTabloInfo();
 
     public static class SpectateMapInfo {
+        public static final double minZoom = 0.9;
         public double zoomFactor; //1 - râda 100%, 2 - râda 50%, utt
         public int[] centerXY; //skata fokuss
         public double merogsMin, merogs;
@@ -49,7 +50,7 @@ public abstract class DrawManager {
         public boolean chunkGrid = true, cellGrid = true;
 
         public SpectateMapInfo(){
-            zoomFactor = 1;
+            zoomFactor = minZoom;
             centerXY = new int[]{
                     DataBase.laukumaPlatumsSum / 2,
                     DataBase.laukumaAugstumsSum / 2};
