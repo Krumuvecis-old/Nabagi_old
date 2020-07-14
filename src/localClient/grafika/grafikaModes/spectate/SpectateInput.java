@@ -2,10 +2,39 @@ package localClient.grafika.grafikaModes.spectate;
 
 import localClient.ClientThread;
 import localClient.Dati;
+import localClient.grafika.grafikaParts.DrawManager;
 import localClient.grafika.grafikaParts.InputActions;
 import server.calculations.CalculationsThread;
+import server.dataBase.DataBase;
+
+import java.util.Random;
 
 public class SpectateInput extends InputActions {
+
+    @Override
+    public void keyboardActions(int numurs, ClientThread thread){
+        DrawManager.SpectateMapInfo spectateMapInfo =
+                thread.dati.drawManagerList.get(thread.dati.modeCurrent).spectateMapInfo;
+
+        double viewChangeFactor = 0.02;
+        int viewChangeRate = (int)Math.max(
+                1,
+                Math.min(DataBase.laukumaPlatumsSum, DataBase.laukumaAugstumsSum) / spectateMapInfo.zoomFactor * viewChangeFactor);
+
+        if (!spectateMapInfo.playerSelected) {
+            switch (numurs) { //numurs - klaviatûrâ nospiestâs pogas numurs
+                case 87, 38 -> spectateMapInfo.centerXY[1] -= viewChangeRate; //W, up
+                case 65, 37 -> spectateMapInfo.centerXY[0] -= viewChangeRate; //A, left
+                case 83, 40 -> spectateMapInfo.centerXY[1] += viewChangeRate; //S, down
+                case 68, 39 -> spectateMapInfo.centerXY[0] += viewChangeRate; //D, right
+
+                default -> super.keyboardActions(numurs, thread);
+            }
+        } else {
+            super.keyboardActions(numurs, thread);
+        }
+
+    }
 
     @Override
     public void headerButtonActions(int reference, ClientThread thread){
@@ -29,11 +58,16 @@ public class SpectateInput extends InputActions {
 
     @Override
     public void leftButtonActions(int reference, ClientThread thread){
+        DrawManager.SpectateMapInfo spectateMapInfo =
+                thread.dati.drawManagerList.get(thread.dati.modeCurrent).spectateMapInfo;
+
+
+
         switch (reference) {
-            case 1 -> System.out.println("Spectate mode free view - placeholder");
-            case 2 -> System.out.println("Spectate mode random player selector - placeholder");
-            case 3 -> System.out.println("Spectate mode MapChunk grid toggle - placeholder");
-            case 4 -> System.out.println("Spectate mode MapCell grid toggle - placeholder");
+            case 1 -> spectateMapInfo.selectPlayer(false, ""); //deselect player
+            case 2 -> spectateMapInfo.selectPlayer(true, spectateMapInfo.pickRandomPlayer()); //select random player
+            case 3 -> spectateMapInfo.chunkGrid = !spectateMapInfo.chunkGrid;
+            case 4 -> spectateMapInfo.cellGrid = !spectateMapInfo.cellGrid;
 
             default -> super.leftButtonActions(reference, thread);
         }

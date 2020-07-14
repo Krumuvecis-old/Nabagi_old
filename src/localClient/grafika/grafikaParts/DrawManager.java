@@ -5,6 +5,8 @@ import localClient.ColorPalette;
 import server.dataBase.DataBase;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Random;
 
 public abstract class DrawManager {
 
@@ -39,9 +41,12 @@ public abstract class DrawManager {
     public static class SpectateMapInfo {
         public double zoomFactor; //1 - râda 100%, 2 - râda 50%, utt
         public int[] centerXY; //skata fokuss
+        public double merogsMin, merogs;
 
         public boolean playerSelected, playerDead;
         public String selectedPlayerName;
+
+        public boolean chunkGrid = true, cellGrid = true;
 
         public SpectateMapInfo(){
             zoomFactor = 1;
@@ -52,7 +57,34 @@ public abstract class DrawManager {
             playerDead = false;
         }
 
-        public void update(){
+        public void update(int[] contentsSize){
+            updateMerogs(contentsSize);
+            updatePlayerXY();
+        }
+
+        private void updateMerogs(int[] contentsSize){
+            merogsMin = Math.min(
+                    1.0 * contentsSize[0] / DataBase.laukumaPlatumsSum,
+                    1.0 * contentsSize[1] / DataBase.laukumaAugstumsSum);
+
+            merogs = merogsMin * zoomFactor;
+
+
+            //zemâk no vecâ
+//      int x0=threadTemp.dati.miniMapX, y0=threadTemp.dati.miniMapY, //zîmçðanas pamatpunkts
+//				platumsMax=Math.max(0, threadTemp.dati.miniMapPlatums), //zîmçðanas maksimumi
+//				augstumsMax=Math.max(0, threadTemp.dati.miniMapAugstums);
+//
+//      int laukumaPlatums = KonstantesUniversal.laukumaPlatumsSum, //reâlie laukuma izmçri
+//				laukumaAugstums = KonstantesUniversal.laukumaAugstumsSum;
+//
+//		double merogs=Math.min((double)platumsMax/laukumaPlatums, (double)augstumsMax/laukumaAugstums);
+//
+//		int kartesPlatums = (int)(laukumaPlatums*merogs),
+//				kartesAugstums = (int)(laukumaAugstums*merogs); //zîmçðanas izmçri
+        }
+
+        private void updatePlayerXY(){
             if(playerSelected){
                 if(DataBase.cilvekuList.containsKey(selectedPlayerName)){
                     centerXY = new int[]{
@@ -76,6 +108,11 @@ public abstract class DrawManager {
             } else { //deselect
                 playerSelected = false;
             }
+        }
+
+        public String pickRandomPlayer(){
+            ArrayList<String> playerNames = new ArrayList<>(DataBase.cilvekuList.keySet());
+            return playerNames.get((new Random()).nextInt(playerNames.size()));
         }
 
     }

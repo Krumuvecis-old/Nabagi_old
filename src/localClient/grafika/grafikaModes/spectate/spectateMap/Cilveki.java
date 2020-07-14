@@ -1,6 +1,16 @@
 package localClient.grafika.grafikaModes.spectate.spectateMap;
 
+import java.awt.*;
+
 class Cilveki {
+
+    Cilveki(){
+
+    }
+
+    void draw(Graphics g){
+
+    }
 
 //    protected static void main(Graphics g, ClientThread thread, int x0, int y0, double merogs, ArrayList<ArrayList<MapChunk>> laukums, ArrayList<Komanda> komandasList) { //papildinâjums kartei
 //

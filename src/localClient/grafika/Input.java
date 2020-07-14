@@ -165,9 +165,9 @@ public class Input {
 	//private static int[][] debounceList = new int[][]{};
 	//private static int debounceTimer=5;
 
-	public static void keyboardActionCheck(int[] pogas, Dati dati){
+	public static void keyboardActionCheck(int[] pogas, ClientThread thread){
 		for (int i=0; i<pogas.length; i++) { //iziet cauri visâm nospiestajâm keyboard pogâm
-			dati.drawManagerList.get(dati.modeCurrent).inputActions.keyboardActions(pogas[i]);
+			thread.dati.drawManagerList.get(thread.dati.modeCurrent).inputActions.keyboardActions(pogas[i], thread);
 		}
 	}
 

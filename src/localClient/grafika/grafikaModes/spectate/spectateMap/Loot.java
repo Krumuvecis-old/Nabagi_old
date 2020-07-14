@@ -1,6 +1,17 @@
 package localClient.grafika.grafikaModes.spectate.spectateMap;
 
+import java.awt.*;
+
 public class Loot {
+
+    Loot(){
+
+    }
+
+    void draw(Graphics g){
+
+    }
+
 
 //    protected static void main(Graphics g, int x0, int y0, double merogs, ArrayList<ArrayList<MapChunk>> laukums) {
 //

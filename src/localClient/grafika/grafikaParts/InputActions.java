@@ -8,7 +8,7 @@ public class InputActions {
 
     //tikai pağas darbîbas
 
-    public void keyboardActions(int numurs){
+    public void keyboardActions(int numurs, ClientThread thread){
         switch (numurs) { //numurs - klaviatûrâ nospiestâs pogas numurs
             case 32 -> System.out.println("piespiests Space");
             case 87 -> System.out.println("piespiests W");

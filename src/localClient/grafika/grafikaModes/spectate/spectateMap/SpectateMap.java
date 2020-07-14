@@ -6,41 +6,38 @@ import java.awt.*;
 
 public class SpectateMap {
 
+    Terrain terrain;
+    Loot loot;
+    Cilveki cilveki;
+
     public SpectateMap(){
+        terrain = new Terrain();
+        loot = new Loot();
+        cilveki = new Cilveki();
+
 
     }
 
     public void draw(Graphics g, Dati dati, int[] contentsXY, int[] contentsSize) {
+        update(dati, contentsSize);
 
-        //if (dati.drawManagerList.get(dati.modeCurrent).spectateMapInfo.)
+        int[] drawCenterXY = new int[]{
+                contentsXY[0] + contentsSize[0] / 2,
+                contentsXY[1] + contentsSize[1] / 2};
 
-
-        //zemâk no vecâ
-
-//      int x0=threadTemp.dati.miniMapX, y0=threadTemp.dati.miniMapY, //zîmçðanas pamatpunkts
-//				platumsMax=Math.max(0, threadTemp.dati.miniMapPlatums), //zîmçðanas maksimumi
-//				augstumsMax=Math.max(0, threadTemp.dati.miniMapAugstums);
-
-
-//      int laukumaPlatums = KonstantesUniversal.laukumaPlatumsSum, //reâlie laukuma izmçri
-//				laukumaAugstums = KonstantesUniversal.laukumaAugstumsSum;
-//
-//		double merogs=Math.min((double)platumsMax/laukumaPlatums, (double)augstumsMax/laukumaAugstums);
-//
-//		int kartesPlatums = (int)(laukumaPlatums*merogs),
-//				kartesAugstums = (int)(laukumaAugstums*merogs); //zîmçðanas izmçri
-//
-//		Terrain.main(g, x0, y0, kartesPlatums, kartesAugstums, merogs);
-//		Cilveki.main(g, thread, x0, y0, merogs, laukums, komandasList);
-//		Loot.main(g, x0, y0, merogs, laukums);
-//
-//		overPanels(g, x0, y0, kartesPlatums, kartesAugstums); //maliòas apkârt laukumam
-//
-//		if(threadTemp.dati.miniMapDrawInfo) { //informâcija apakðâ par paðu karti
-//			drawInfo(g, x0, y0, merogs, laukumaPlatums, laukumaAugstums);
-//		}
+        //te varçtu izdalît grid un fona zîmçðanu
+        terrain.draw(g, dati, contentsXY , contentsSize, drawCenterXY); //uzzîmç grid & terrain
+        //te varçtu zîmçt komandas un teritorijas
+        //te varçtu zîmçt çkas
+        loot.draw(g); //uzzîmç loot
+        cilveki.draw(g); //uzzîmç spçlçtâjus
 
         drawContentPlaceHolder(g, contentsXY, contentsSize, dati.grafikasDati.colorPalette.pair3[1]);
+    }
+
+    private void update(Dati dati, int[] contentsSize){
+        dati.drawManagerList.get(Dati.ModeOption.spectate).spectateMapInfo.update(contentsSize); //pârrçíina mçrogu, zoom utml
+
 
     }
 
@@ -50,19 +47,8 @@ public class SpectateMap {
         g.drawString("Spectator map placeholder", textLocation[0], textLocation[1]);
     }
 
-
-//		komandasList = CalculationsThread.komandasList;
-//		laukums = CalculationsThread.laukums;
-//
-//		thread = threadTemp;
-//
-
     //zemâk kopçts no vecâ
 
-    //	// --------------------
-//	//zemâk par kartes zîmçðanu
-//
-//	public boolean miniMapDraw=true, miniMapDrawInfo=true; //kartes zîmçðana vispâr un informâcija tai apakðâ
 //	public int miniMapX=tablo2x0, miniMapY=tablo2y0-15,
 //			miniMapPlatums=ekranaPlatums-miniMapX-50,
 //			miniMapAugstums=ekranaAugstums-miniMapY-50;
@@ -123,6 +109,8 @@ public class SpectateMap {
 
 
 //vçrtîga funkcija bet jâpievieno pie centerPanel sample klases
+
+    //overPanels(g, x0, y0, kartesPlatums, kartesAugstums); //maliòas apkârt laukumam - jâpârliek uz sample centrePanel
 //
 //	private static void overPanels(Graphics g, int x0, int y0, int kartesPlatums, int kartesAugstums){
 //
