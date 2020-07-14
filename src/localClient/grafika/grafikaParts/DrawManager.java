@@ -47,7 +47,7 @@ public abstract class DrawManager {
         public boolean playerSelected, playerDead;
         public String selectedPlayerName;
 
-        public boolean chunkGrid = true, cellGrid = true;
+        public boolean chunkGrid = true, cellGrid = true, mapWrap = false;
 
         public SpectateMapInfo(){
             zoomFactor = minZoom;

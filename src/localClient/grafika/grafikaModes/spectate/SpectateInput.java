@@ -7,6 +7,7 @@ import localClient.grafika.grafikaParts.InputActions;
 import server.calculations.CalculationsThread;
 import server.dataBase.DataBase;
 
+import java.util.Comparator;
 import java.util.Random;
 
 public class SpectateInput extends InputActions {
@@ -30,10 +31,36 @@ public class SpectateInput extends InputActions {
 
                 default -> super.keyboardActions(numurs, thread);
             }
+            normalizeXY(spectateMapInfo);
+
         } else {
             super.keyboardActions(numurs, thread);
         }
 
+    }
+
+    private void normalizeXY(DrawManager.SpectateMapInfo spectateMapInfo){
+        if(spectateMapInfo.mapWrap){ //wrapping map
+            if(spectateMapInfo.centerXY[0] < 0)
+                spectateMapInfo.centerXY[0] += DataBase.laukumaPlatumsSum; //west
+            else if(spectateMapInfo.centerXY[0] >= DataBase.laukumaPlatumsSum)
+                spectateMapInfo.centerXY[0] -= DataBase.laukumaPlatumsSum; //east
+
+            if(spectateMapInfo.centerXY[1] < 0)
+                spectateMapInfo.centerXY[1] += DataBase.laukumaAugstumsSum; //north
+            else if(spectateMapInfo.centerXY[1] >= DataBase.laukumaAugstumsSum)
+                spectateMapInfo.centerXY[1] -= DataBase.laukumaAugstumsSum; //south
+        } else{ //limited map
+            if(spectateMapInfo.centerXY[0] < 0)
+                spectateMapInfo.centerXY[0] = 0; //west
+            else if(spectateMapInfo.centerXY[0] >= DataBase.laukumaPlatumsSum)
+                spectateMapInfo.centerXY[0] = DataBase.laukumaPlatumsSum - 1; //east
+
+            if(spectateMapInfo.centerXY[1] < 0)
+                spectateMapInfo.centerXY[1] = 0; //north
+            else if(spectateMapInfo.centerXY[1] >= DataBase.laukumaAugstumsSum)
+                spectateMapInfo.centerXY[1] = DataBase.laukumaAugstumsSum - 1; //south
+        }
     }
 
     @Override
@@ -66,6 +93,7 @@ public class SpectateInput extends InputActions {
             case 2 -> spectateMapInfo.selectPlayer(true, spectateMapInfo.pickRandomPlayer()); //select random player
             case 3 -> spectateMapInfo.chunkGrid = !spectateMapInfo.chunkGrid;
             case 4 -> spectateMapInfo.cellGrid = !spectateMapInfo.cellGrid;
+            case 5 -> spectateMapInfo.mapWrap = !spectateMapInfo.mapWrap;
 
             default -> super.leftButtonActions(reference, thread);
         }

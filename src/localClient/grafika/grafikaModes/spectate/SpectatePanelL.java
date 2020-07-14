@@ -22,6 +22,7 @@ public class SpectatePanelL extends PanelL {
         buttonDetails.add(new Button.ButtonDetails(2, "Select random player", 0));
         buttonDetails.add(new Button.ButtonDetails(3, "Map chunk grid", 0));
         buttonDetails.add(new Button.ButtonDetails(4, "Map cell grid", 0));
+        buttonDetails.add(new Button.ButtonDetails(5, "Extend map", 0));
 
         //te var pievienot pogas
 
@@ -90,30 +91,20 @@ public class SpectatePanelL extends PanelL {
         g.drawString("Center XY: " + spectateMapInfo.centerXY[0] + " , " +spectateMapInfo.centerXY[1],
                 xy[0], xy[1] + w * textHeight); w++;
 
-
-
-
-        //grafiskie izmçri
-//		g.drawString("kartes platums: " + (int)(merogs * KonstantesUniversal.laukumaPlatumsSum) +
-//						" kartes augstums: " + (int)(merogs * KonstantesUniversal.laukumaAugstumsSum) +
-//						" merogs: " + (new DecimalFormat("#.##").format(merogs) ),
-//				xy[0], xy[1] + w * textHeight); w++;
-
-        //mçrogs
-        //chunkCount x & y
-        //chunkSize
-        //cellSize
-        //cellCount in chunk
-        //cellCount overall
-
-//		g.drawString("chunk skaits x: " + KonstantesUniversal.mapChunkCountX +
-//						" chunk skaits y: " + KonstantesUniversal.mapChunkCountY +
-//						" chunk platums (cells): " + KonstantesUniversal.mapCellCount,
-//				xy[0], xy[1] + w * textHeight); w++;
-//		g.drawString("cell skaits x: " + (KonstantesUniversal.mapCellCount * KonstantesUniversal.mapChunkCountX) +
-//						" cell skaits y: " + (KonstantesUniversal.mapCellCount * KonstantesUniversal.mapChunkCountY) +
-//						" cell platums (x & y): " + KonstantesUniversal.mapCellW,
-//				xy[0], xy[1] + w * textHeight); w++;
+        g.drawString("Cell size: " + DataBase.mapCellW + " , " +
+                        "graphical:" + (new DecimalFormat("#.##").format(
+                                DataBase.mapCellW * spectateMapInfo.merogs)),
+                xy[0], xy[1] + w * textHeight); w++;
+        g.drawString("Chunk size: " + DataBase.mapChunkW + " , " +
+                        "graphical:" + (new DecimalFormat("#.##").format(
+                                DataBase.mapChunkW * spectateMapInfo.merogs)),
+                xy[0], xy[1] + w * textHeight); w++;
+        g.drawString("Cell count in chunk: " + DataBase.mapCellCount,
+                xy[0], xy[1] + w * textHeight); w++;
+        g.drawString("Overall cell count: " +
+                        "[ " + DataBase.mapCellCount * DataBase.mapChunkCountX + " - " +
+                        DataBase.mapCellCount * DataBase.mapChunkCountY + " ]",
+                xy[0], xy[1] + w * textHeight); w++;
 
 		return w;
 

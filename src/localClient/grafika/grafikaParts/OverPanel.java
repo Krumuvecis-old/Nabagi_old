@@ -28,10 +28,10 @@ public class OverPanel {
 
         //ieavades pârbaude un grafiskâ informâcija
 
-        int[] textOffset = {5, 200};
+        int[] textOffset = {130, 200}; //pret centrePanel bottom-right stûri
 
-        int x0 = layout.panelLX + textOffset[0],
-                y0 = layout.footerY - textOffset[1],
+        int x0 = layout.centerPanelContentsX + layout.centerPanelContentsWX - textOffset[0],
+                y0 = layout.centerPanelContentsY + layout.centerPanelContentsWY - textOffset[1],
                 yw = 15, w = 0;
 
         g.setColor(textColor);
