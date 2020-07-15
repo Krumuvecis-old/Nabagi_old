@@ -23,7 +23,7 @@ public class DevelopCenterPanel extends CenterPanel {
 
         //te var pievienot pogas
 
-        generateButtons(layout);
+        generateButtons();
 
         tablo1 = new Tablo1();
         tablo2 = new Tablo2();

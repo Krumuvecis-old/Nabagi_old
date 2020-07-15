@@ -24,7 +24,7 @@ public class SetupCenterPanel extends CenterPanel {
 
         //te var pievienot vçl pogas
 
-        generateButtons(layout);
+        generateButtons();
     }
 
     @Override

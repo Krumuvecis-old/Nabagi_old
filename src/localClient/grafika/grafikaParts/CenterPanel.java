@@ -6,7 +6,6 @@ import localClient.Dati;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class CenterPanel extends SamplePanel {
 
@@ -22,7 +21,7 @@ public class CenterPanel extends SamplePanel {
         buttonDetails.add(new Button.ButtonDetails(2, "Zoom out", 0));
         buttonDetails.add(new Button.ButtonDetails(3, "Demo pictures", 0));
 
-        generateButtons(layout);
+        generateButtons();
     }
 
     private static int[] calculateLocation(SampleLayout layout){
@@ -33,7 +32,7 @@ public class CenterPanel extends SamplePanel {
         return new int[]{layout.centerPanelPlatums, layout.panelAugstums};
     }
 
-    public void generateButtons(SampleLayout layout){
+    public void generateButtons(){
         buttonList = new ArrayList<>();
 
         int buttonSpacing=5;

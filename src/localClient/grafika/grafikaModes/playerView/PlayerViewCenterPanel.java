@@ -15,7 +15,7 @@ public class PlayerViewCenterPanel extends CenterPanel {
 
         //te var pievienot pogas
 
-        generateButtons(layout);
+        generateButtons();
     }
 
     @Override

@@ -23,7 +23,7 @@ public class SpectateCenterPanel extends CenterPanel {
 
         //te var pievienot pogas
 
-        generateButtons(layout);
+        generateButtons();
 
         buttonResizer();
 

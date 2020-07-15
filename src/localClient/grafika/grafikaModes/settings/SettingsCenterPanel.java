@@ -40,7 +40,7 @@ public class SettingsCenterPanel extends CenterPanel {
 
         //te var pievienot pogas
 
-        generateButtons(layout);
+        generateButtons();
     }
 
     @Override

@@ -20,9 +20,8 @@ public class Terrain {
         drawTerrain();
 
         if (spectateMapInfo.chunkGrid || spectateMapInfo.cellGrid) {
-            if (spectateMapInfo.cellGrid) drawCellGrid(g);
-            drawChunkGrid(g);
-            drawLaukumaMala(g, spectateMapInfo, drawCenterXY);
+            drawGrid(g, spectateMapInfo, drawCenterXY, contentsXY, contentsSize);
+            drawLaukumaMala(g, spectateMapInfo, drawCenterXY, contentsXY);
         }
     }
 
@@ -35,31 +34,106 @@ public class Terrain {
                 contentsXY[0], contentsXY[1],
                 contentsSize[0], contentsSize[1]);
         else g.fillRect( //tikai 1 laukums
-                (int)(drawCenterXY[0] - spectateMapInfo.centerXY[0] * spectateMapInfo.merogs),
-                (int)(drawCenterXY[1] - spectateMapInfo.centerXY[1] * spectateMapInfo.merogs),
+                (int)(contentsXY[0] + drawCenterXY[0] - spectateMapInfo.centerXY[0] * spectateMapInfo.merogs),
+                (int)(contentsXY[1] + drawCenterXY[1] - spectateMapInfo.centerXY[1] * spectateMapInfo.merogs),
                 (int)(DataBase.laukumaPlatumsSum * spectateMapInfo.merogs),
                 (int)(DataBase.laukumaAugstumsSum * spectateMapInfo.merogs));
     }
 
-    private void drawLaukumaMala(Graphics g, DrawManager.SpectateMapInfo spectateMapInfo, int[] drawCenterXY){
-        g.setColor(Color.red); //uzzîmç laukumu
-        g.drawRect(
-                (int)(drawCenterXY[0] - spectateMapInfo.centerXY[0] * spectateMapInfo.merogs),
-                (int)(drawCenterXY[1] - spectateMapInfo.centerXY[1] * spectateMapInfo.merogs),
-                (int)(DataBase.laukumaPlatumsSum * spectateMapInfo.merogs),
-                (int)(DataBase.laukumaAugstumsSum * spectateMapInfo.merogs));
-    }
+    private void drawGrid(Graphics g, DrawManager.SpectateMapInfo spectateMapInfo,
+                          int[] drawCenterXY, int[] contentsXY, int[] contentsSize){
 
-    private void drawChunkGrid(Graphics g){
-        //horizontâlâs lînijas
+        //spectateMapInfo.cellGrid
 
-        //vertikâlâs lînijas
+        double chunkSizeGraphical = DataBase.mapChunkW * spectateMapInfo.merogs;
+
+        int[] visibleStartingPoint = new int[]{
+                        (int)Math.max(0, drawCenterXY[0] - spectateMapInfo.centerXY[0] * spectateMapInfo.merogs),
+                        (int)Math.max(0, drawCenterXY[1] - spectateMapInfo.centerXY[1] * spectateMapInfo.merogs)},
+
+                visibleEndPoint = new int[]{
+                        (int)Math.min(
+                                contentsSize[0],
+                                drawCenterXY[0] + (DataBase.laukumaPlatumsSum - spectateMapInfo.centerXY[0]) * spectateMapInfo.merogs),
+                        (int)Math.min(
+                                contentsSize[1],
+                                drawCenterXY[1] + (DataBase.laukumaAugstumsSum - spectateMapInfo.centerXY[1]) * spectateMapInfo.merogs)},
+
+                visibleChunkCount = new int[]{
+                        (int)(Math.ceil((visibleEndPoint[0] - visibleStartingPoint[0]) / chunkSizeGraphical)),
+                        (int)(Math.ceil((visibleEndPoint[1] - visibleStartingPoint[1]) / chunkSizeGraphical))},
+
+                visibleCellCount = new int[]{
+                        (int)(contentsSize[0] / chunkSizeGraphical),
+                        (int)(contentsSize[1] / chunkSizeGraphical)},
+
+                activeChunk = new int[]{
+                        (int)Math.floor(1.0 * spectateMapInfo.centerXY[0] / DataBase.mapChunkW),
+                        (int)Math.floor(1.0 * spectateMapInfo.centerXY[1] / DataBase.mapChunkW)},
+
+                activeCell = new int[]{
+                        (int)Math.floor(1.0 * spectateMapInfo.centerXY[0] / DataBase.mapCellW),
+                        (int)Math.floor(1.0 * spectateMapInfo.centerXY[1] / DataBase.mapCellW)},
+
+                startingChunk = new int[]{
+                        activeChunk[0] - (int)Math.floor((drawCenterXY[0] - visibleStartingPoint[0]) / chunkSizeGraphical),
+                        activeChunk[1] - (int)Math.floor((drawCenterXY[1] - visibleStartingPoint[1]) / chunkSizeGraphical)};
+
+
+
+
+        for(int i = startingChunk[1]; i < visibleChunkCount[1] + startingChunk[1]; i++){
+
+
+
+            //te horizontâlâs lînijas
+        }
+
+        g.setColor(Color.magenta);
+        g.drawRect(contentsXY[0] + visibleStartingPoint[0] +1, contentsXY[1] + visibleStartingPoint[1] +1,
+                visibleEndPoint[0] - visibleStartingPoint[0] -2, visibleEndPoint[1] - visibleStartingPoint[1] -2);
+
+
+
+        for(int[] _chunkXY = new int[]{startingChunk[0], startingChunk[1]}; _chunkXY[0] < visibleChunkCount[0] + startingChunk[0]; _chunkXY[0]++){
+
+            //te vajag vertikâlâs lînijas
+
+            for(_chunkXY[1] = startingChunk[1]; _chunkXY[1] < visibleChunkCount[1] + startingChunk[1]; _chunkXY[1]++){
+
+                int[] chunkXY = new int[]{_chunkXY[0], _chunkXY[1]};
+
+                while (chunkXY[0] < 0) chunkXY[0] += DataBase.mapChunkCountX;
+                while (chunkXY[0] >= DataBase.mapChunkCountX) chunkXY[0] -= DataBase.mapChunkCountX;
+
+                while (chunkXY[1] < 0) chunkXY[1] += DataBase.mapChunkCountY;
+                while (chunkXY[1] >= DataBase.mapChunkCountY) chunkXY[1] -= DataBase.mapChunkCountY;
+
+                if (chunkXY[0] == activeChunk[0] && chunkXY[1] == activeChunk[1])
+                    g.setColor(Color.yellow);
+                else g.setColor(Color.darkGray);
+
+                //ðo taisnstûri nevajag
+                g.drawRect(
+                        (int)(contentsXY[0] + drawCenterXY[0] + _chunkXY[0] * chunkSizeGraphical - spectateMapInfo.centerXY[0] * spectateMapInfo.merogs) - 1,
+                        (int)(contentsXY[1] + drawCenterXY[1] + _chunkXY[1] * chunkSizeGraphical - spectateMapInfo.centerXY[1] * spectateMapInfo.merogs) - 1,
+                        (int)chunkSizeGraphical - 2,
+                        (int)chunkSizeGraphical - 2);
+
+                g.drawString("x: " + _chunkXY[0] + " y: " + _chunkXY[1],
+                        (int)(contentsXY[0] + drawCenterXY[0] + _chunkXY[0] * chunkSizeGraphical - spectateMapInfo.centerXY[0] * spectateMapInfo.merogs),
+                        (int)(contentsXY[1] + drawCenterXY[1] + _chunkXY[1] * chunkSizeGraphical + 15 - spectateMapInfo.centerXY[1] * spectateMapInfo.merogs));
+
+            }
+
+        }
+
+
+
+
 
         //zemâk no vecâ
 //        int x0, y0, kartesPlatums, kartesAugstums;
-//        double merogs;
-//
-//
 //
 //        Color chunkColor=Color.gray, cellColor=Color.darkGray;
 //
@@ -79,12 +153,8 @@ public class Terrain {
 //
 //                    int dyCell=dyChunk + (int)(j * DataBase.mapCellW * merogs);
 //                    g.drawLine(x0, y0+dyCell, x0+kartesPlatums, y0+dyCell);
-//
-//
 //                }
-//
 //            }
-//
 //        }
 //
 //        for(int i=0; i <= chunkCountX; i++){ //vertikâlâs lînijas
@@ -100,12 +170,8 @@ public class Terrain {
 //
 //                    int dxCell=dxChunk + (int)(j * DataBase.mapCellW * merogs);
 //                    g.drawLine(x0 + dxCell, y0, x0 + dxCell, y0 + kartesAugstums);
-//
-//
 //                }
-//
 //            }
-//
 //        }
     }
 
@@ -113,6 +179,15 @@ public class Terrain {
         //horizontâlâs lînijas
 
         //vertikâlâs lînijas
+    }
+
+    private void drawLaukumaMala(Graphics g, DrawManager.SpectateMapInfo spectateMapInfo, int[] drawCenterXY, int[] contentsXY){
+        g.setColor(Color.red); //laukuma malas kontûra
+        g.drawRect(
+                (int)(contentsXY[0] + drawCenterXY[0] - spectateMapInfo.centerXY[0] * spectateMapInfo.merogs),
+                (int)(contentsXY[1] + drawCenterXY[1] - spectateMapInfo.centerXY[1] * spectateMapInfo.merogs),
+                (int)(DataBase.laukumaPlatumsSum * spectateMapInfo.merogs),
+                (int)(DataBase.laukumaAugstumsSum * spectateMapInfo.merogs));
     }
 
     private void drawTerrain(){

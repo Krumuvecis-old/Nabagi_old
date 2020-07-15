@@ -22,8 +22,8 @@ public class SpectateMap {
         update(dati, contentsSize);
 
         int[] drawCenterXY = new int[]{
-                contentsXY[0] + contentsSize[0] / 2,
-                contentsXY[1] + contentsSize[1] / 2};
+                contentsSize[0] / 2,
+                contentsSize[1] / 2};
 
         //te varçtu izdalît grid un fona zîmçðanu
         terrain.draw(g, dati, contentsXY , contentsSize, drawCenterXY); //uzzîmç grid & terrain
@@ -32,7 +32,7 @@ public class SpectateMap {
         loot.draw(g); //uzzîmç loot
         cilveki.draw(g); //uzzîmç spçlçtâjus
 
-        drawContentPlaceHolder(g, contentsXY, contentsSize, dati.grafikasDati.colorPalette.pair3[1]);
+        drawCrosshairs(g, dati.grafikasDati.colorPalette.pair3[1], contentsXY, drawCenterXY);
     }
 
     private void update(Dati dati, int[] contentsSize){
@@ -41,10 +41,13 @@ public class SpectateMap {
 
     }
 
-    private void drawContentPlaceHolder(Graphics g, int[]XY, int[] size, Color textColor){
-        g.setColor(textColor);
-        int[] textLocation = {XY[0] + size[0] / 2 - 60, XY[1] + size[1] / 2};
-        g.drawString("Spectator map placeholder", textLocation[0], textLocation[1]);
+    private void drawCrosshairs(Graphics g, Color krasa, int[] XY, int[] centerXY){
+        int crosshairSize = 20;
+        g.setColor(krasa);
+        g.drawLine(XY[0] + centerXY[0] - crosshairSize / 2, XY[1] + centerXY[1],
+                XY[0] + centerXY[0] + crosshairSize / 2, XY[1] + centerXY[1]); //horizontal
+        g.drawLine(XY[0] + centerXY[0], XY[1] + centerXY[1] - crosshairSize / 2,
+                XY[0] + centerXY[0], XY[1] + centerXY[1] + crosshairSize / 2); //vertical
     }
 
     //zemâk kopçts no vecâ
@@ -52,7 +55,6 @@ public class SpectateMap {
 //	public int miniMapX=tablo2x0, miniMapY=tablo2y0-15,
 //			miniMapPlatums=ekranaPlatums-miniMapX-50,
 //			miniMapAugstums=ekranaAugstums-miniMapY-50;
-//
 //
 //	// --------------------
 //	//zemâk par centrâlâ (kartes diagnostikas) tablo Parametriem
@@ -106,9 +108,6 @@ public class SpectateMap {
 //			}
 //		}
 //	}
-
-
-
 
 
 }
