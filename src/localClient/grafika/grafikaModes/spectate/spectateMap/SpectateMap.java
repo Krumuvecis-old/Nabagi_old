@@ -2,9 +2,12 @@ package localClient.grafika.grafikaModes.spectate.spectateMap;
 
 import localClient.Dati;
 import localClient.grafika.grafikaParts.DrawManager;
+import server.calculations.MapChunk;
 import server.dataBase.DataBase;
 
 import java.awt.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class SpectateMap {
 
@@ -29,7 +32,7 @@ public class SpectateMap {
         DrawManager.SpectateMapInfo spectateMapInfo = dati.drawManagerList.get(dati.modeCurrent).spectateMapInfo;
 
         drawLaukumaFons(g, spectateMapInfo, drawCenterXY, contentsXY, contentsSize);
-        drawChunks(g, spectateMapInfo, contentsXY, contentsSize, drawCenterXY);
+        drawChunks(g, dati, spectateMapInfo, contentsXY, contentsSize, drawCenterXY);
 
         if (spectateMapInfo.chunkGrid || spectateMapInfo.cellGrid)
             drawLaukumaMala(g, spectateMapInfo, drawCenterXY, contentsXY, Color.red); //laukuma malas kontûra
@@ -61,7 +64,7 @@ public class SpectateMap {
 
 
 
-    private void drawChunks(Graphics g, DrawManager.SpectateMapInfo spectateMapInfo,
+    private void drawChunks(Graphics g, Dati dati, DrawManager.SpectateMapInfo spectateMapInfo,
                             int[] contentsXY, int[] contentsSize, int[] drawCenterXY){
 
         double chunkSizeGraphical = DataBase.mapChunkW * spectateMapInfo.merogs;
@@ -140,16 +143,14 @@ public class SpectateMap {
                         (int)(contentsXY[0] + drawCenterXY[0] + (_chunkXY[0] - activeChunk[0]) * chunkSizeGraphical - visibleChunkOffset[0] + 1),
                         (int)(contentsXY[1] + drawCenterXY[1] + (_chunkXY[1] - activeChunk[1]) * chunkSizeGraphical - visibleChunkOffset[1] + 1)};
 
-                System.out.println("Loc " + chunkLoc[0] + " , " + chunkLoc[1]);
-
-                drawChunk(g, spectateMapInfo,
+                drawChunk(g, dati, spectateMapInfo,
                         chunkSizeGraphical, chunkLoc,
                         chunkXY, activeChunk);
             }
         }
     }
 
-    private void drawChunk(Graphics g, DrawManager.SpectateMapInfo spectateMapInfo,
+    private void drawChunk(Graphics g, Dati dati, DrawManager.SpectateMapInfo spectateMapInfo,
                            double chunkSizeGraphical, int[] chunkLoc,
                            int[] chunkXY, int[] activeChunk){
         //ðeit zîmç attiecîgo chunk
@@ -158,7 +159,7 @@ public class SpectateMap {
         //te varçtu zîmçt komandas un teritorijas
         //te varçtu zîmçt çkas
         loot.draw(g); //uzzîmç loot
-        cilveki.draw(g, spectateMapInfo, chunkSizeGraphical, chunkLoc, chunkXY); //uzzîmç spçlçtâjus
+        cilveki.draw(g, dati, spectateMapInfo, chunkSizeGraphical, chunkLoc, chunkXY); //uzzîmç spçlçtâjus
 
         if (spectateMapInfo.chunkGrid) drawChunkInfo(g, spectateMapInfo, chunkSizeGraphical, chunkLoc, chunkXY, activeChunk);
     }
@@ -173,8 +174,21 @@ public class SpectateMap {
         g.drawRect(chunkLoc[0] - 1, chunkLoc[1] - 1,
                 (int)chunkSizeGraphical - 2, (int)chunkSizeGraphical - 2);
 
+        int[] textOffset = new int[]{3, 0};
+        int textHeight = 15, w = 1;
+
         g.drawString(chunkXY[0] + ", " + chunkXY[1],
-                chunkLoc[0] + 3, chunkLoc[1] + 15);
+                chunkLoc[0] + textOffset[0],
+                chunkLoc[1] + textOffset[1] + textHeight * w);
+        w++;
+
+        List<Integer> chunkXYlist = new ArrayList<>();
+        chunkXYlist.add(chunkXY[0]);
+        chunkXYlist.add(chunkXY[1]);
+        MapChunk chunk = DataBase.laukums.get(chunkXYlist);
+        g.drawString("players: " + chunk.cilvekiList.size(),
+                chunkLoc[0] + textOffset[0],
+                chunkLoc[1] + textOffset[1] + textHeight * w);
     }
 
     private void drawLaukumaMala(Graphics g, DrawManager.SpectateMapInfo spectateMapInfo,

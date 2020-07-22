@@ -52,6 +52,25 @@ public class GrafikasDati {
         FileHandler.loadSprites(images, imageNames, imageLocation);
     }
 
+    public static void drawRotatedImage(Graphics g, GrafikasDati grafikasDati, String imageName, int[] centerLoc, int[] size, double fi){
+
+        double cosComponent = Math.abs(Math.cos(Math.toRadians(fi))),
+                sinComponent = Math.abs(Math.sin(Math.toRadians(fi)));
+
+        int[] rotatedSize = new int[]{
+                (int)(size[0] * cosComponent + size[1] * sinComponent),
+                (int)(size[0] * sinComponent + size[1] * cosComponent)};
+
+        int[] rotatedXY = new int[]{
+                centerLoc[0] - rotatedSize[0] / 2,
+                centerLoc[1] - rotatedSize[1] / 2};
+
+        g.drawImage(rotateImage(grafikasDati.images.get(imageName), fi),
+                rotatedXY[0], rotatedXY[1],
+                rotatedSize[0], rotatedSize[1],null);
+
+    }
+
     public static Image rotateImage(Image _image, double fi){
 
         /*

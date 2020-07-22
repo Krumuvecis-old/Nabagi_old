@@ -1,6 +1,9 @@
 package localClient.grafika.grafikaModes.spectate.spectateMap;
 
+import localClient.Dati;
+import localClient.grafika.GrafikasDati;
 import localClient.grafika.grafikaParts.DrawManager;
+import server.calculations.Formulas;
 import server.calculations.cilveki.Cilveks;
 import server.dataBase.DataBase;
 
@@ -10,103 +13,69 @@ import java.util.ArrayList;
 
 class Cilveki {
 
-    Cilveki(){
+    Cilveki(){}
 
-    }
-
-    void draw(Graphics g, DrawManager.SpectateMapInfo spectateMapInfo,
+    void draw(Graphics g, Dati dati, DrawManager.SpectateMapInfo spectateMapInfo,
               double chunkSizeGraphical, int[] chunkLoc, int[] chunkXY){
-
         List<Integer> _chunkXY = new ArrayList<>();
         _chunkXY.add(chunkXY[0]);
         _chunkXY.add(chunkXY[1]);
-        for(String vards : DataBase.laukums.get(_chunkXY).cilvekiList){
-            drawCilveks(g, vards);
-        }
-
+        for(String vards : DataBase.laukums.get(_chunkXY).cilvekiList)
+            drawCilveks(g, dati, spectateMapInfo, vards, chunkLoc);
     }
 
-    private void drawCilveks(Graphics g, String vards){
-        Cilveks cilveks = DataBase.cilvekuList.get(vards);
+    private void drawCilveks(Graphics g, Dati dati, DrawManager.SpectateMapInfo spectateMapInfo,
+                             String vards, int[] chunkLoc){
 
-        drawMainSprite();
+        Cilveks cilveks = DataBase.cilvekuList.get(vards);
+        double[] cilveksLoc = new double[]{
+                chunkLoc[0] + cilveks.xyz.x * spectateMapInfo.merogs,
+                chunkLoc[1] + cilveks.xyz.y * spectateMapInfo.merogs};
+        Color playerColor = noteiktKrasuCilvekam(cilveks);
+
+        drawMainSprite(g, dati, cilveks,playerColor, cilveksLoc, spectateMapInfo.merogs);
         drawExtras();
         drawInfo();
 
-
-        //zemâk no vecâ
-
-//        double resnums=resnumaKoefic*cilveks.hpmax*merogs;
-//
-//        int komanda=noteiktKomandasNumuru(cilveks); //krâsas noteikðanai
-//        Color krasa = noteiktKrasuCilvekam(cilveks, komanda);
-//
-//        //rumpis
-//
-//        double x = x0 + merogs * (cilveks.xyz.x + chunkXY[0] * KonstantesUniversal.mapChunkW),
-//                y = y0 + merogs * (cilveks.xyz.y + chunkXY[1] * KonstantesUniversal.mapChunkW);
-//
-//        g.setColor(krasa); //iekða
-//        g.fillOval((int)(x-resnums/2),
-//                (int)(y-resnums/2),
-//                (int)resnums, (int)resnums);
-//        g.setColor(Color.black);//kontûra
-//        g.drawOval((int)(x-resnums/2),
-//                (int)(y-resnums/2),
-//                (int)resnums, (int)resnums);
-//
-//        if(cilveks.vards.equals(komandasList.get(komanda).galvenais)) { //karalis
-//            drawKronis(g, x, y, resnums);
-//        }
-//
-//        if(cilveks.vards.equals(thread.dati.playerFocusName)) { //fokusçtâ spçlçtâja redzesloks
-//            drawRedzesloks(g, x, y, merogs, cilveks, krasa);
-//
-//        }
-
     }
 
-    private void drawMainSprite(){
+    private Color noteiktKrasuCilvekam(Cilveks cilveks){
+        double hpRatio = cilveks.hp / cilveks.hpmax;
+
+        double cilvekiKrasaSaturation = 1;
+        double cilvekiKrasaBrightnessMin = 0.4; //pie hpRatio=0
+        double cilvekiKrasaBrightnessMax = 1; //pie hpRatio=1
+
+        return new Color(Color.HSBtoRGB(
+                (float)Formulas.getHue(DataBase.komandasList.get(cilveks.komanda).krasa),
+                (float)cilvekiKrasaSaturation,
+                (float)(cilvekiKrasaBrightnessMin + hpRatio * (cilvekiKrasaBrightnessMax - cilvekiKrasaBrightnessMin))));
+    }
+
+    private void drawMainSprite(Graphics g, Dati dati, Cilveks cilveks,
+                                Color playerColor, double[] cilveksLoc, double merogs){
         //galvenâs bildîtes zîmçðana, kas pagriezta leòíî fi
 
+        double resnums = cilveks.resnums * merogs;
 
-        //zemâk no vecâ
+        int x = (int)(cilveksLoc[0] - resnums / 2),
+                y = (int)(cilveksLoc[1] - resnums / 2);
 
-        //double cilvekiKrasaSaturation=1;
-        //double cilvekiKrasaBrightnessMin=0.4; //pie hpRatio=0
-        //double cilvekiKrasaBrightnessMax=1; //pie hpRatio=1
+        g.setColor(playerColor); //iekrâso rumpi cilvçka krâsâ
+        g.fillOval(x, y, (int)resnums, (int)resnums);
 
-        //private static int noteiktKomandasNumuru(Cilveks cilveks){
-//        int komanda=0;
-//
-//        for (int i = 0; i< CalculationsThread.komandasList.size(); i++) {
-//            if(cilveks.komanda.equals(CalculationsThread.komandasList.get(i).nosaukums)) {
-//                komanda=i;
-//                break;
-//            }
-//        }
-//
-//        return komanda;
-//    }
-
-
-        //    private static Color noteiktKrasuCilvekam(Cilveks cilveks, int komanda){
-//        double hpRatio=cilveks.hp/cilveks.hpmax;
-//
-//        return new Color(Color.HSBtoRGB( (float)Formulas.getHue(CalculationsThread.komandasList.get(komanda).krasa),
-//                (float)GrafikasDati.cilvekiKrasaSaturation,
-//                (float)(GrafikasDati.cilvekiKrasaBrightnessMin + hpRatio *
-//                        (GrafikasDati.cilvekiKrasaBrightnessMax - GrafikasDati.cilvekiKrasaBrightnessMin)) ));
-//
-//    }
-
+        GrafikasDati.drawRotatedImage(g, dati.grafikasDati, "cilveks",
+                new int[]{(int)cilveksLoc[0], (int)cilveksLoc[1]},
+                new int[]{(int)resnums, (int)resnums},
+                cilveks.xyz.fi - 90);
     }
 
     private void drawExtras(){
-        //te var ielikt kroni karalim un lietas rokâs
+        //no vecâ par kroòa zîmçðanu karalim
 
-
-        //zemâk no vecâ
+        //if(cilveks.vards.equals(komandasList.get(komanda).galvenais)) { //karalis
+//            drawKronis(g, x, y, resnums);
+//        }
 
         //Color kronaKrasa = new Color(0,0,0); //kroòa krâsa - melns  punkts
         //double kronaKoeficients=0.5; //kroòa resnums pret kopçjo resnumu
@@ -119,13 +88,20 @@ class Cilveki {
 //                (int)kronaResnums, (int)kronaResnums); //kronis
 //    }
 
+
+        //te var ielikt, ka zîmç lietas, kas rokâs
     }
 
     private void drawInfo(){
         //te var izvadît informâciju un parametrus
 
 
-        //zemâk no vecâ
+        //no vecâ par redzesloka zîmçðanu
+
+        //if(cilveks.vards.equals(thread.dati.playerFocusName)) { //fokusçtâ spçlçtâja redzesloks
+//            drawRedzesloks(g, x, y, merogs, cilveks, krasa);
+//
+//        }
 
 //    private static void drawRedzesloks(Graphics g, double x, double y, double merogs, Cilveks cilveks, Color krasa){
 //        g.setColor(krasa);
@@ -137,7 +113,5 @@ class Cilveki {
 //    }
 
     }
-
-
 
 }

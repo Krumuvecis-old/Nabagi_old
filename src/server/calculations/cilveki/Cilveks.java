@@ -19,6 +19,7 @@ public class Cilveks extends CilvekaParametri {
 
 		hp = _hp;
 		hpmax = _hpmax;
+		resnums = CilvekuKonstantes.resnumsDefault;
 		paika = _paika;
 		R1 = _R1;
 		R2 = _R2;

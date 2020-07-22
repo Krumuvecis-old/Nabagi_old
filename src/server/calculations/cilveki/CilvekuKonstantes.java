@@ -8,6 +8,8 @@ public class CilvekuKonstantes {
     public static double vmax = 3, ommax = 30,
             omChangeRate = 0.1; //grieðanâs atpûðoties
 
+    public static double resnumsDefault = 15;
+
     public static double RMax = 200; //maksimâlais redzesloks (jaunus ìenerçjot)
     public static double R2koefic = 0.3; //minimâlâ redzesloka daïas koefic
 
@@ -29,10 +31,10 @@ public class CilvekuKonstantes {
 
     //vairoðanâs parametri
 
-    public static int sakumaCilveki=20; //sâkuma spçlçtâju skaits
-    public static boolean randomKomandas=false; //vai spçles sâkumâ cilvçki bûs pa komandâm (false -> visi anarhijâ)
+    public static int sakumaCilveki = 5; //sâkuma spçlçtâju skaits
+    public static boolean randomKomandas = false; //vai spçles sâkumâ cilvçki bûs pa komandâm (false -> visi anarhijâ)
 
-    public static double dzimstotDefectionChance=0.02;
+    public static double dzimstotDefectionChance = 0.02;
 
     public static double brunasMax=5, brunasMin=brunasMax*0.7, stiprumsMax=20, stiprumsMin=stiprumsMax*0.7,
             dBrunasDzimstot=0.1,

@@ -15,7 +15,7 @@ public class OverPanel {
         //varbût uz ðeieni jâpârnes drawLayoutGrid no drawManager ?
 
         if(thread.dati.grafikasDati.drawSampleImages)
-            drawSampleImages(g, thread.dati.grafikasDati.images);
+            drawSampleImages(g, thread.dati.grafikasDati);
         if(thread.dati.grafikasDati.drawColorWheel)
             drawColorWheel(g, layout);
         if(thread.dati.grafikasDati.drawClientDiagnosticsInfo)
@@ -108,30 +108,36 @@ public class OverPanel {
 
 	}
 
-    private void drawSampleImages(Graphics g, HashMap<String, Image> images){
+	double fi = 0, deltaFi = 0.5;
+
+    private void drawSampleImages(Graphics g, GrafikasDati grafikasDati){
 
         int[] imageXYrelative = {300, 200},
                 imageSize = {150, 150},
                 imageXY = new int[]{imageXYrelative[0] - imageSize[0]/2,
                         imageXYrelative[1] - imageSize[1]/2};
-        g.drawImage(images.get("zvaigzne"), imageXY[0], imageXY[1], imageSize[0], imageSize[1],null);
+        g.drawImage(grafikasDati.images.get("zvaigzne"), imageXY[0], imageXY[1], imageSize[0], imageSize[1],null);
 
         imageXYrelative = new int[]{500, 300};
         imageSize = new int[]{200, 200};
         imageXY = new int[]{imageXYrelative[0] - imageSize[0]/2,
                 imageXYrelative[1] - imageSize[1]/2};
-        g.drawImage(images.get("banana"), imageXY[0], imageXY[1], imageSize[0], imageSize[1],null);
+        g.drawImage(grafikasDati.images.get("banana"), imageXY[0], imageXY[1], imageSize[0], imageSize[1],null);
 
         imageXYrelative = new int[]{150, 300};
         imageSize = new int[]{30, 30};
         imageXY = new int[]{imageXYrelative[0] - imageSize[0]/2,
                 imageXYrelative[1] - imageSize[1]/2};
-        g.drawImage(images.get("banana"), imageXY[0], imageXY[1], imageSize[0], imageSize[1],null);
+        g.drawImage(grafikasDati.images.get("banana"), imageXY[0], imageXY[1], imageSize[0], imageSize[1],null);
 
         imageXYrelative = new int[]{300, 400};
         imageSize = new int[]{100, 100};
-        imageXY = new int[]{imageXYrelative[0] - imageSize[0]/2,
-                imageXYrelative[1] - imageSize[1]/2};
-        g.drawImage(GrafikasDati.rotateImage(images.get("banana"), 90), imageXY[0], imageXY[1], imageSize[0], imageSize[1],null);
+        GrafikasDati.drawRotatedImage(g, grafikasDati, "banana", imageXYrelative, imageSize, 90);
+
+        imageXYrelative = new int[]{700, 200};
+        imageSize = new int[]{200, 200};
+        GrafikasDati.drawRotatedImage(g, grafikasDati, "cilveks", imageXYrelative, imageSize, fi - 90);
+        fi += deltaFi;
+
     }
 }

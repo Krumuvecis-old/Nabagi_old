@@ -10,6 +10,7 @@ public abstract class CilvekaParametri {
 
     //primârie parametri
     public double vmax, omega;
+    public double resnums;
     public double hp, hpmax;
 
     public double paika, paikaMax, paikaMin;
