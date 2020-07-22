@@ -158,7 +158,7 @@ public class SpectateMap {
         //te varçtu zîmçt komandas un teritorijas
         //te varçtu zîmçt çkas
         loot.draw(g); //uzzîmç loot
-        cilveki.draw(g); //uzzîmç spçlçtâjus
+        cilveki.draw(g, spectateMapInfo, chunkSizeGraphical, chunkLoc, chunkXY); //uzzîmç spçlçtâjus
 
         if (spectateMapInfo.chunkGrid) drawChunkInfo(g, spectateMapInfo, chunkSizeGraphical, chunkLoc, chunkXY, activeChunk);
     }
