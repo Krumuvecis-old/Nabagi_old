@@ -4,6 +4,7 @@ import localClient.ClientThread;
 import localClient.Dati;
 import localClient.grafika.grafikaParts.DrawManager;
 import localClient.grafika.grafikaParts.InputActions;
+import localClient.grafika.grafikaParts.SampleLayout;
 import server.calculations.CalculationsThread;
 import server.dataBase.DataBase;
 
@@ -90,7 +91,10 @@ public class SpectateInput extends InputActions {
 
         switch (reference) {
             case 1 -> spectateMapInfo.selectPlayer(false, ""); //deselect player
-            case 2 -> spectateMapInfo.selectPlayer(true, spectateMapInfo.pickRandomPlayer()); //select random player
+            case 2 -> { //select random player
+                spectateMapInfo.selectPlayer(true, spectateMapInfo.pickRandomPlayer());
+                resetZoom(thread, spectateMapInfo);
+            }
             case 3 -> spectateMapInfo.chunkGrid = !spectateMapInfo.chunkGrid;
             case 4 -> spectateMapInfo.cellGrid = !spectateMapInfo.cellGrid;
             case 5 -> spectateMapInfo.mapWrap = !spectateMapInfo.mapWrap;
@@ -123,7 +127,7 @@ public class SpectateInput extends InputActions {
         switch (reference) {
             case 1 -> zoomIn(spectateMapInfo);
             case 2 -> zoomOut(spectateMapInfo);
-            case 3 -> resetZoom(spectateMapInfo);
+            case 3 -> resetZoom(thread, spectateMapInfo);
 
             default -> super.centerButtonActions(reference, thread);
         }
@@ -137,10 +141,21 @@ public class SpectateInput extends InputActions {
         spectateMapInfo.zoomFactor -= zoomChangeRate * spectateMapInfo.zoomFactor;
 
         if (spectateMapInfo.zoomFactor < DrawManager.SpectateMapInfo.minZoom)
-            resetZoom(spectateMapInfo);
+            resetZoomToMax(spectateMapInfo);
     }
 
-    private void resetZoom(DrawManager.SpectateMapInfo spectateMapInfo){
+    private void resetZoom(ClientThread thread, DrawManager.SpectateMapInfo spectateMapInfo){
+        if(spectateMapInfo.playerSelected){
+            SampleLayout layout = thread.dati.drawManagerList.get(Dati.ModeOption.spectate).layout;
+            double R1 = DataBase.cilvekuList.get(spectateMapInfo.selectedPlayerName).R1;
+            spectateMapInfo.zoomFactor =
+                    Math.min(layout.centerPanelContentsWX, layout.centerPanelContentsWY)
+                            / (R1 * 2 * spectateMapInfo.merogsMin);
+
+        } else resetZoomToMax(spectateMapInfo);
+    }
+
+    private void resetZoomToMax(DrawManager.SpectateMapInfo spectateMapInfo){
         spectateMapInfo.zoomFactor = DrawManager.SpectateMapInfo.minZoom;
     }
 }

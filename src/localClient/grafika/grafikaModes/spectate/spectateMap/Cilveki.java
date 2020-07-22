@@ -49,12 +49,12 @@ class Cilveki {
         }
 
         if(spectateMapInfo.drawRedzesloki){
-
+            drawRedzesloks(g, cilveks, cilveksLoc, spectateMapInfo.merogs, playerColor);
         }
 
         //vârds un informâcija
         drawInfo(g, cilveks, vards, cilveksLoc, resnums,
-                dati.grafikasDati.colorPalette.pair3[1], spectateMapInfo.drawPlayerInfo);
+                dati.grafikasDati.colorPalette.pair3[1], spectateMapInfo.merogs, spectateMapInfo.drawPlayerInfo);
     }
 
     private Color noteiktKrasuCilvekam(Cilveks cilveks){
@@ -115,15 +115,17 @@ class Cilveki {
         //te var ielikt, ka zîmç lietas, kas rokâs
     }
 
-    private void drawInfo(Graphics g, Cilveks cilveks, String vards, double[] cilveksLoc, double resnums, Color textColor, boolean drawPlayerInfo){
+    private void drawInfo(Graphics g, Cilveks cilveks, String vards, double[] cilveksLoc, double resnums, Color textColor, double merogs, boolean drawPlayerInfo){
         g.setColor(textColor);
 
-        int[] nameOffset = new int[]{-30, (int)(-5 - resnums/2)}; //vârds un pamatinformâcija
-        g.drawString(vards + " - " + cilveks.komanda,
-                (int)(cilveksLoc[0] + nameOffset[0]),
-                (int)(cilveksLoc[1] + nameOffset[1]));
+        if(merogs >= 0.3){ //vârds un pamatinformâcija
+            int[] nameOffset = new int[]{-30, (int)(-5 - resnums/2)};
+            g.drawString(vards + " - " + cilveks.komanda,
+                    (int)(cilveksLoc[0] + nameOffset[0]),
+                    (int)(cilveksLoc[1] + nameOffset[1]));
+        }
 
-        if(drawPlayerInfo){ //detalizçta informâcija
+        if(merogs >= 0.8 && drawPlayerInfo){ //detalizçta informâcija
             int[] textOffset = new int[]{-30, (int)(5 + resnums/2)};
             int textHeight = 15, w = 1;
 
@@ -150,22 +152,19 @@ class Cilveki {
         }
     }
 
-    private void drawRedzesloks(){
-        //no vecâ par redzesloka zîmçðanu
+    private void drawRedzesloks(Graphics g, Cilveks cilveks, double[] cilveksLoc, double merogs, Color krasa){
+        g.setColor(krasa);
+        int drawingSizeLimit = 10;
 
-        //if(cilveks.vards.equals(thread.dati.playerFocusName)) { //fokusçtâ spçlçtâja redzesloks
-//            drawRedzesloks(g, x, y, merogs, cilveks, krasa);
-//
-//        }
+        double R1 = cilveks.R1 * merogs; //R1 - tâlais
+        if(R1 >= drawingSizeLimit) g.drawOval(
+                (int)(cilveksLoc[0] - R1), (int)(cilveksLoc[1] - R1),
+                (int)(R1 * 2), (int)(R1 * 2));
 
-//    private static void drawRedzesloks(Graphics g, double x, double y, double merogs, Cilveks cilveks, Color krasa){
-//        g.setColor(krasa);
-//        double R2temp=cilveks.R2*merogs;
-//        g.drawOval((int)(x-R2temp), (int)(y-R2temp), (int)(R2temp*2),(int)(R2temp*2)); //R2 - tuvais
-//
-//        double R1temp=cilveks.R1*merogs;
-//        g.drawOval((int)(x-R1temp), (int)(y-R1temp), (int)(R1temp*2),(int)(R1temp*2)); //R1 - tâlais
-//    }
+        double R2 = cilveks.R2 * merogs; //R2 - tuvais
+        if(R2 >= drawingSizeLimit) g.drawOval(
+                (int)(cilveksLoc[0] - R2), (int)(cilveksLoc[1] - R2),
+                (int)(R2 * 2), (int)(R2 * 2));
     }
 
 }
