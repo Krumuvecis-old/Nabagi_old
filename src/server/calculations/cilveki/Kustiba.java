@@ -64,6 +64,8 @@ class Kustiba {
 		}
 
 		if(chunkX != chunk0.get(0) || chunkY != chunk0.get(1)){
+			cilveks.xyz.chunkXY.set(0, chunkX);
+			cilveks.xyz.chunkXY.set(1, chunkY);
 
 			DataBase.laukums.get(chunk0).cilvekiList.remove(vards); //jâizòem no vienas tabulas
 
