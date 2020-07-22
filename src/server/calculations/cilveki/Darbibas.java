@@ -41,17 +41,19 @@ public class Darbibas {
 
         Koord xyz = new Koord(
                 cilveks.xyz.x, cilveks.xyz.y,
-                0, 360*r.nextDouble(),
+                0, 360 * r.nextDouble(),
                 cilveks.xyz.chunkXY);
 
-        double vmax=Formulas.novirzeRandom(cilveks.vmax, CilvekuKonstantes.dvMaxDzimstot),
-                omega=Formulas.novirzeRandom(cilveks.omega, CilvekuKonstantes.dommaxDzimstot);
+        double vmax = Formulas.novirzeRandom(cilveks.vmax, CilvekuKonstantes.dvMaxDzimstot),
+                omega = Formulas.novirzeRandom(cilveks.omega, CilvekuKonstantes.dommaxDzimstot);
 
-        double hpmax= CilvekuKonstantes.hpmax, hp=hpmax,
-                paika= CilvekuKonstantes.paikaMax;
+        double resnums = CilvekuKonstantes.resnumsDefault,
+                R1 = Formulas.novirzeRandom(cilveks.R1, CilvekuKonstantes.dRDzimstot),
+                R2 = Formulas.novirzeRandom(cilveks.R2, CilvekuKonstantes.dRDzimstot);
 
-        double R2=Formulas.novirzeRandom(cilveks.R2, CilvekuKonstantes.dRDzimstot),
-                R1=Formulas.novirzeRandom(cilveks.R1, CilvekuKonstantes.dRDzimstot);
+        double hpmax = CilvekuKonstantes.hpmax,
+                paikaMax = CilvekuKonstantes.paikaMax,
+                paikaMin = CilvekuKonstantes.paikaMin;
 
         double brunas = Formulas.novirzeRandom(cilveks.brunas, CilvekuKonstantes.dBrunasDzimstot),
                 stiprums = Formulas.novirzeRandom(cilveks.stiprums, CilvekuKonstantes.dStiprumsDzimstot),
@@ -85,8 +87,8 @@ public class Darbibas {
         DataBase.cilvekuList.put(vards,
                 new Cilveks(vards,
                         xyz, vmax, omega,
-                        hp, hpmax, paika,
-                        R1, R2,
+                        resnums, R1, R2,
+                        hpmax, paikaMax, paikaMin,
                         brunas, stiprums, gataviba, drosme,
                         komanda));
 

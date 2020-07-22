@@ -94,6 +94,8 @@ public class SpectateInput extends InputActions {
             case 3 -> spectateMapInfo.chunkGrid = !spectateMapInfo.chunkGrid;
             case 4 -> spectateMapInfo.cellGrid = !spectateMapInfo.cellGrid;
             case 5 -> spectateMapInfo.mapWrap = !spectateMapInfo.mapWrap;
+            case 6 -> spectateMapInfo.drawPlayerInfo = !spectateMapInfo.drawPlayerInfo;
+            case 7 -> spectateMapInfo.drawRedzesloki = !spectateMapInfo.drawRedzesloki;
 
             default -> super.leftButtonActions(reference, thread);
         }

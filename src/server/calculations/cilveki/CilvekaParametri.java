@@ -11,15 +11,15 @@ public abstract class CilvekaParametri {
     //primârie parametri
     public double vmax, omega;
     public double resnums;
-    public double hp, hpmax;
 
+    //sensorie parametri
+    public double R1, R2; //redzesloks (R1-tâlais, R2-tuvais)
+
+    public double hp, hpmax;
     public double paika, paikaMax, paikaMin;
     public boolean navKoEst;
 
     public Darbibas darbibas = new Darbibas();
-
-    //sensorie parametri
-    public double R1, R2; //redzesloks (R1-tâlais, R2-tuvais)
 
     //inventory un tirdzniecîbas parametri
     public ArrayList<Lieta> inventory = new ArrayList<>();

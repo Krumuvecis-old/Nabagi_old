@@ -23,6 +23,8 @@ public class SpectatePanelL extends PanelL {
         buttonDetails.add(new Button.ButtonDetails(3, "Map chunk grid", 0));
         buttonDetails.add(new Button.ButtonDetails(4, "Map cell grid", 0));
         buttonDetails.add(new Button.ButtonDetails(5, "Extend map", 0));
+        buttonDetails.add(new Button.ButtonDetails(6, "Player info", 0));
+        buttonDetails.add(new Button.ButtonDetails(7, "Redzesloki", 0));
 
         //te var pievienot pogas
 

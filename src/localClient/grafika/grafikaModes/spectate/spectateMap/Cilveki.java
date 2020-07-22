@@ -42,12 +42,19 @@ class Cilveki {
             drawBodyBackground(g, cilveksLoc, resnums, playerColor, false);
             drawMainSprite(g, dati, cilveks, cilveksLoc, resnums);
             drawExtras();
-            drawInfo();
+
         } else {
-            drawBodyBackground(g, cilveksLoc, detailedDrawingLimit, playerColor, true);
+            resnums = detailedDrawingLimit;
+            drawBodyBackground(g, cilveksLoc, resnums, playerColor, true);
         }
 
+        if(spectateMapInfo.drawRedzesloki){
 
+        }
+
+        //vârds un informâcija
+        drawInfo(g, cilveks, vards, cilveksLoc, resnums,
+                dati.grafikasDati.colorPalette.pair3[1], spectateMapInfo.drawPlayerInfo);
     }
 
     private Color noteiktKrasuCilvekam(Cilveks cilveks){
@@ -108,10 +115,42 @@ class Cilveki {
         //te var ielikt, ka zîmç lietas, kas rokâs
     }
 
-    private void drawInfo(){
-        //te var izvadît informâciju un parametrus
+    private void drawInfo(Graphics g, Cilveks cilveks, String vards, double[] cilveksLoc, double resnums, Color textColor, boolean drawPlayerInfo){
+        g.setColor(textColor);
 
+        int[] nameOffset = new int[]{-30, (int)(-5 - resnums/2)}; //vârds un pamatinformâcija
+        g.drawString(vards + " - " + cilveks.komanda,
+                (int)(cilveksLoc[0] + nameOffset[0]),
+                (int)(cilveksLoc[1] + nameOffset[1]));
 
+        if(drawPlayerInfo){ //detalizçta informâcija
+            int[] textOffset = new int[]{-30, (int)(5 + resnums/2)};
+            int textHeight = 15, w = 1;
+
+            g.drawString("xy: " + (int)cilveks.xyz.x + ", " + (int)cilveks.xyz.y,
+                    (int)(cilveksLoc[0] + textOffset[0]),
+                    (int)(cilveksLoc[1] + textOffset[1] + textHeight * w));
+            w++;
+            g.drawString("fi: " + (int)cilveks.xyz.fi,
+                    (int)(cilveksLoc[0] + textOffset[0]),
+                    (int)(cilveksLoc[1] + textOffset[1] + textHeight * w));
+            w++;
+            g.drawString("hp: " + (int)cilveks.hp + "/" + (int)cilveks.hpmax,
+                    (int)(cilveksLoc[0] + textOffset[0]),
+                    (int)(cilveksLoc[1] + textOffset[1] + textHeight * w));
+            w++;
+            g.drawString("paika: " + (int)cilveks.paika + "/" + (int)cilveks.paikaMax + " min: " + (int)cilveks.paikaMin,
+                    (int)(cilveksLoc[0] + textOffset[0]),
+                    (int)(cilveksLoc[1] + textOffset[1] + textHeight * w));
+            w++;
+            g.drawString("R1: " + (int)cilveks.R1 + " R2: " + (int)cilveks.R2,
+                    (int)(cilveksLoc[0] + textOffset[0]),
+                    (int)(cilveksLoc[1] + textOffset[1] + textHeight * w));
+            //w++;
+        }
+    }
+
+    private void drawRedzesloks(){
         //no vecâ par redzesloka zîmçðanu
 
         //if(cilveks.vards.equals(thread.dati.playerFocusName)) { //fokusçtâ spçlçtâja redzesloks
@@ -127,7 +166,6 @@ class Cilveki {
 //        double R1temp=cilveks.R1*merogs;
 //        g.drawOval((int)(x-R1temp), (int)(y-R1temp), (int)(R1temp*2),(int)(R1temp*2)); //R1 - tâlais
 //    }
-
     }
 
 }

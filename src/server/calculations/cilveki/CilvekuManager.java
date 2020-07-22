@@ -96,12 +96,13 @@ public class CilvekuManager {
 			double vmax = CilvekuKonstantes.vmax,
 					omega = CilvekuKonstantes.ommax;
 
-			double hpmax = CilvekuKonstantes.hpmax,
-					hp = hpmax * (0.5 + 0.5 * r.nextDouble()),
-					paika = CilvekuKonstantes.paikaMax;
-
-			double R1 = CilvekuKonstantes.RMax * (0.5 + 0.5 * r.nextDouble()),
+			double resnums = CilvekuKonstantes.resnumsDefault,
+					R1 = CilvekuKonstantes.RMax * (0.5 + 0.5 * r.nextDouble()),
 					R2 = CilvekuKonstantes.RMax * CilvekuKonstantes.R2koefic * (0.5 + 0.5 * r.nextDouble());
+
+			double hpmax = CilvekuKonstantes.hpmax,
+					paikaMax = CilvekuKonstantes.paikaMax,
+					paikaMin = CilvekuKonstantes.paikaMin;
 
 			double brunas = CilvekuKonstantes.brunasMin + (CilvekuKonstantes.brunasMax - CilvekuKonstantes.brunasMin) * r.nextDouble(),
 					stiprums = CilvekuKonstantes.stiprumsMin + (CilvekuKonstantes.stiprumsMax - CilvekuKonstantes.stiprumsMin) * r.nextDouble(),
@@ -129,12 +130,15 @@ public class CilvekuManager {
 			DataBase.cilvekuList.put(vards,
 					new Cilveks(vards,
 							xyz, vmax, omega,
-							hp, hpmax, paika,
-							R1, R2,
+							resnums, R1, R2,
+							hpmax, paikaMax, paikaMin,
 							brunas, stiprums, gataviba, drosme,
 							komanda));
+
+			//sarandomizç izsalkuma lîmeni sâkuma spçlçtâjiem
+			DataBase.cilvekuList.get(vards).paika = paikaMin + (paikaMax - paikaMin) * r.nextDouble();
+
 		}
-		
 	}
 	
 	

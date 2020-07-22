@@ -9,7 +9,8 @@ public class Cilveks extends CilvekaParametri {
 			rekords = 0;
 
 	public Cilveks(String vards, Koord _xyz, double _vmax, double _omega,
-				   double _hp, double _hpmax, double _paika, double _R1, double _R2,
+				   double _resnums, double _R1, double _R2,
+				   double _hpmax, double _paikaMax, double _paikaMin,
 				   double _brunas, double _stiprums, double _gataviba, double _drosme,
 				   String _komanda){
 		xyz = _xyz;
@@ -17,12 +18,16 @@ public class Cilveks extends CilvekaParametri {
 		vmax = _vmax;
 		omega = _omega;
 
-		hp = _hp;
-		hpmax = _hpmax;
-		resnums = CilvekuKonstantes.resnumsDefault;
-		paika = _paika;
+		resnums = _resnums;//CilvekuKonstantes.resnumsDefault;
 		R1 = _R1;
 		R2 = _R2;
+
+
+		hpmax = _hpmax;
+		hp = hpmax;
+		paikaMax = _paikaMax;
+		paikaMin = _paikaMin;
+		paika = paikaMax;
 
 		generateStartingInventory();
 
