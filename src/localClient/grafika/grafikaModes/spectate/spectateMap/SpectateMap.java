@@ -17,7 +17,6 @@ public class SpectateMap {
         loot = new Loot();
         cilveki = new Cilveki();
 
-
     }
 
     public void draw(Graphics g, Dati dati, int[] contentsXY, int[] contentsSize) {
@@ -74,19 +73,26 @@ public class SpectateMap {
 
         double chunkSizeGraphical = DataBase.mapChunkW * spectateMapInfo.merogs;
 
-        int[] visibleStartingPoint = new int[]{ //redzamîbas top-left stûris ekrânâ
-                (int)Math.max(0, drawCenterXY[0] - spectateMapInfo.centerXY[0] * spectateMapInfo.merogs),
-                (int)Math.max(0, drawCenterXY[1] - spectateMapInfo.centerXY[1] * spectateMapInfo.merogs)},
+        int[] visibleStartingPoint, visibleEndPoint;
 
-                visibleEndPoint = new int[]{ //redzamîbas bottom-right stûris ekrânâ
-                        (int)Math.min(
-                                contentsSize[0],
-                                drawCenterXY[0] + (DataBase.laukumaPlatumsSum - spectateMapInfo.centerXY[0]) * spectateMapInfo.merogs),
-                        (int)Math.min(
-                                contentsSize[1],
-                                drawCenterXY[1] + (DataBase.laukumaAugstumsSum - spectateMapInfo.centerXY[1]) * spectateMapInfo.merogs)},
+        if(spectateMapInfo.mapWrap){
+            visibleStartingPoint = new int[]{0, 0};
+            visibleEndPoint = new int[]{contentsSize[0], contentsSize[1]};
+        } else {
+            visibleStartingPoint = new int[]{ //redzamîbas top-left stûris ekrânâ
+                    (int)Math.max(0, drawCenterXY[0] - spectateMapInfo.centerXY[0] * spectateMapInfo.merogs),
+                    (int)Math.max(0, drawCenterXY[1] - spectateMapInfo.centerXY[1] * spectateMapInfo.merogs)};
 
-                activeChunk = new int[]{ //centrâlais aktîvais chunk - numurs
+            visibleEndPoint = new int[]{ //redzamîbas bottom-right stûris ekrânâ
+                    (int)Math.min(
+                            contentsSize[0],
+                            drawCenterXY[0] + (DataBase.laukumaPlatumsSum - spectateMapInfo.centerXY[0]) * spectateMapInfo.merogs),
+                    (int)Math.min(
+                            contentsSize[1],
+                            drawCenterXY[1] + (DataBase.laukumaAugstumsSum - spectateMapInfo.centerXY[1]) * spectateMapInfo.merogs)};
+        }
+
+        int[] activeChunk = new int[]{ //centrâlais aktîvais chunk - numurs
                         (int)Math.floor(1.0 * spectateMapInfo.centerXY[0] / DataBase.mapChunkW),
                         (int)Math.floor(1.0 * spectateMapInfo.centerXY[1] / DataBase.mapChunkW)},
 
@@ -173,7 +179,7 @@ public class SpectateMap {
                 (int)chunkSizeGraphical - 2,
                 (int)chunkSizeGraphical - 2);
 
-        g.drawString("x: " + _chunkXY[0] + " y: " + _chunkXY[1],
+        g.drawString("x: " + chunkXY[0] + " y: " + chunkXY[1],
                 (int)(contentsXY[0] + drawCenterXY[0] + _chunkXY[0] * chunkSizeGraphical - spectateMapInfo.centerXY[0] * spectateMapInfo.merogs),
                 (int)(contentsXY[1] + drawCenterXY[1] + _chunkXY[1] * chunkSizeGraphical + 15 - spectateMapInfo.centerXY[1] * spectateMapInfo.merogs));
 
