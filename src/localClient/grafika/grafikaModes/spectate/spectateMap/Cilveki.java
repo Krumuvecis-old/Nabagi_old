@@ -17,6 +17,8 @@ class Cilveki {
 
     void draw(Graphics g, Dati dati, DrawManager.SpectateMapInfo spectateMapInfo,
               int[] chunkLoc, int[] chunkXY){
+        //iziet cauri visiem cilvçkiem
+
         List<Integer> _chunkXY = new ArrayList<>();
         _chunkXY.add(chunkXY[0]);
         _chunkXY.add(chunkXY[1]);
@@ -26,6 +28,7 @@ class Cilveki {
 
     private void drawCilveks(Graphics g, Dati dati, DrawManager.SpectateMapInfo spectateMapInfo,
                              String vards, int[] chunkLoc){
+        //katra cilvçka individuâla zîmçðana
 
         Cilveks cilveks = DataBase.cilvekuList.get(vards);
         double[] cilveksLoc = new double[]{
@@ -33,9 +36,17 @@ class Cilveki {
                 chunkLoc[1] + cilveks.xyz.y * spectateMapInfo.merogs};
         Color playerColor = noteiktKrasuCilvekam(cilveks);
 
-        drawMainSprite(g, dati, cilveks,playerColor, cilveksLoc, spectateMapInfo.merogs);
-        drawExtras();
-        drawInfo();
+        double resnums = cilveks.resnums * spectateMapInfo.merogs;
+        int detailedDrawingLimit = 8; //pret resnumu
+        if(resnums >= detailedDrawingLimit){
+            drawBodyBackground(g, cilveksLoc, resnums, playerColor, false);
+            drawMainSprite(g, dati, cilveks, cilveksLoc, resnums);
+            drawExtras();
+            drawInfo();
+        } else {
+            drawBodyBackground(g, cilveksLoc, detailedDrawingLimit, playerColor, true);
+        }
+
 
     }
 
@@ -52,17 +63,22 @@ class Cilveki {
                 (float)(cilvekiKrasaBrightnessMin + hpRatio * (cilvekiKrasaBrightnessMax - cilvekiKrasaBrightnessMin))));
     }
 
-    private void drawMainSprite(Graphics g, Dati dati, Cilveks cilveks,
-                                Color playerColor, double[] cilveksLoc, double merogs){
-        //galvenâs bildîtes zîmçðana, kas pagriezta leòíî fi
-
-        double resnums = cilveks.resnums * merogs;
-
+    private void drawBodyBackground(Graphics g, double[] cilveksLoc, double resnums, Color playerColor, boolean contour){
         int x = (int)(cilveksLoc[0] - resnums / 2),
                 y = (int)(cilveksLoc[1] - resnums / 2);
 
         g.setColor(playerColor); //iekrâso rumpi cilvçka krâsâ
         g.fillOval(x, y, (int)resnums, (int)resnums);
+
+        if(contour){
+            g.setColor(Color.black); //kontûra ap rumpi
+            g.drawOval(x, y, (int)resnums, (int)resnums);
+        }
+
+    }
+
+    private void drawMainSprite(Graphics g, Dati dati, Cilveks cilveks, double[] cilveksLoc, double resnums){
+        //galvenâs bildîtes zîmçðana, kas pagriezta leòíî fi
 
         GrafikasDati.drawRotatedImage(g, dati.grafikasDati, "cilveks",
                 new int[]{(int)cilveksLoc[0], (int)cilveksLoc[1]},
