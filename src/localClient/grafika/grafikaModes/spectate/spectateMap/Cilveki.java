@@ -12,6 +12,50 @@ class Cilveki {
 
     }
 
+    //zemâk no vecâ
+
+//    public static double cilvekiKrasaSaturation=1;
+//    public static double cilvekiKrasaBrightnessMin=0.4; //pie hpRatio=0
+//    public static double cilvekiKrasaBrightnessMax=1; //pie hpRatio=1
+//
+//    public static Color kronaKrasa = new Color(0,0,0); //kroòa krâsa - melns  punkts
+//    public static double kronaKoeficients=0.5; //kroòa resnums pret kopçjo resnumu
+
+//
+//	private void drawTablo3(Graphics g){
+//		//laukuma diagnostikas panelis
+//		int x0 = 10 + thread.dati.miniMapX,
+//				y0 = 13 + thread.dati.miniMapY,
+//				platumsMax=Math.max(0, thread.dati.miniMapPlatums),
+//				augstumsMax=Math.max(0, thread.dati.miniMapAugstums);
+//
+//		int laukumaPlatums = KonstantesUniversal.laukumaPlatumsSum,
+//				laukumaAugstums=KonstantesUniversal.laukumaAugstumsSum;
+//		double merogs = Math.min((double)platumsMax/laukumaPlatums,
+//				(double)augstumsMax/laukumaAugstums);
+//
+//		int wx = (int)(KonstantesUniversal.mapChunkW * merogs),
+//				wy = (int)(KonstantesUniversal.mapChunkW * merogs),
+//				tekstaPlatums = 15;
+//		g.setColor(thread.dati.tablo3krasa);
+//		for(int[] chunkXY = {0,0}; chunkXY[0]< CalculationsThread.laukums.size(); chunkXY[0]++){
+//			for(chunkXY[1]=0; chunkXY[1]<CalculationsThread.laukums.get(chunkXY[0]).size(); chunkXY[1]++){
+//				int x = x0 + chunkXY[0] * wx,
+//						y = y0 + chunkXY[1] * wy;
+//				int w=0;
+//				g.drawString("lietas: "+CalculationsThread.laukums.get(chunkXY[0]).get(chunkXY[1]).lietas.size(),
+//						x,y + w * tekstaPlatums); w++;
+//				g.drawString("players: "+CalculationsThread.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(),
+//						x,y + w * tekstaPlatums); w++;
+//				for (int i=0; i<CalculationsThread.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.size(); i++){
+//					g.drawString(CalculationsThread.laukums.get(chunkXY[0]).get(chunkXY[1]).cilvekiList.get(i).vards,
+//							x,y + w * tekstaPlatums); w++;
+//				}
+//			}
+//		}
+//	}
+
+
 //    protected static void main(Graphics g, ClientThread thread, int x0, int y0, double merogs, ArrayList<ArrayList<MapChunk>> laukums, ArrayList<Komanda> komandasList) { //papildinâjums kartei
 //
 //        double resnumaKoefic = FizikasKonstantes.resnumaKoefic;
