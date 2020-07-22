@@ -16,7 +16,7 @@ class Cilveki {
     Cilveki(){}
 
     void draw(Graphics g, Dati dati, DrawManager.SpectateMapInfo spectateMapInfo,
-              double chunkSizeGraphical, int[] chunkLoc, int[] chunkXY){
+              int[] chunkLoc, int[] chunkXY){
         List<Integer> _chunkXY = new ArrayList<>();
         _chunkXY.add(chunkXY[0]);
         _chunkXY.add(chunkXY[1]);

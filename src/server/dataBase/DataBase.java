@@ -17,7 +17,7 @@ public class DataBase {
 
     public static Map<List<Integer>, MapChunk> laukums = new HashMap<>(); //laukums-karte
 
-    public static int mapChunkCountX = 7, mapChunkCountY = 5;
+    public static int mapChunkCountX = 21, mapChunkCountY = 13;
     public static int mapCellCount = 7, mapCellW = 20;
     public static int mapChunkW = mapCellW * mapCellCount,
             laukumaPlatumsSum = mapChunkW * mapChunkCountX,

@@ -42,7 +42,7 @@ public abstract class DrawManager {
         public static final double minZoom = 0.9;
         public double zoomFactor; //1 - râda 100%, 2 - râda 50%, utt
         public int[] centerXY; //skata fokuss
-        public double merogsMin, merogs;
+        public double merogsMin, merogs, chunkSizeGraphical;
 
         public boolean playerSelected, playerDead;
         public String selectedPlayerName;
@@ -70,19 +70,7 @@ public abstract class DrawManager {
 
             merogs = merogsMin * zoomFactor;
 
-
-            //zemâk no vecâ
-//      int x0=threadTemp.dati.miniMapX, y0=threadTemp.dati.miniMapY, //zîmçðanas pamatpunkts
-//				platumsMax=Math.max(0, threadTemp.dati.miniMapPlatums), //zîmçðanas maksimumi
-//				augstumsMax=Math.max(0, threadTemp.dati.miniMapAugstums);
-//
-//      int laukumaPlatums = KonstantesUniversal.laukumaPlatumsSum, //reâlie laukuma izmçri
-//				laukumaAugstums = KonstantesUniversal.laukumaAugstumsSum;
-//
-//		double merogs=Math.min((double)platumsMax/laukumaPlatums, (double)augstumsMax/laukumaAugstums);
-//
-//		int kartesPlatums = (int)(laukumaPlatums*merogs),
-//				kartesAugstums = (int)(laukumaAugstums*merogs); //zîmçðanas izmçri
+            chunkSizeGraphical = DataBase.mapChunkW * merogs;
         }
 
         private void updatePlayerXY(){
