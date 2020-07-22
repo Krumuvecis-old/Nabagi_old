@@ -47,11 +47,11 @@ public class Terrain {
 
         double chunkSizeGraphical = DataBase.mapChunkW * spectateMapInfo.merogs;
 
-        int[] visibleStartingPoint = new int[]{
+        int[] visibleStartingPoint = new int[]{ //redzamîbas top-left stûris ekrânâ
                         (int)Math.max(0, drawCenterXY[0] - spectateMapInfo.centerXY[0] * spectateMapInfo.merogs),
                         (int)Math.max(0, drawCenterXY[1] - spectateMapInfo.centerXY[1] * spectateMapInfo.merogs)},
 
-                visibleEndPoint = new int[]{
+                visibleEndPoint = new int[]{ //redzamîbas bottom-right stûris ekrânâ
                         (int)Math.min(
                                 contentsSize[0],
                                 drawCenterXY[0] + (DataBase.laukumaPlatumsSum - spectateMapInfo.centerXY[0]) * spectateMapInfo.merogs),
@@ -59,37 +59,57 @@ public class Terrain {
                                 contentsSize[1],
                                 drawCenterXY[1] + (DataBase.laukumaAugstumsSum - spectateMapInfo.centerXY[1]) * spectateMapInfo.merogs)},
 
-                visibleChunkCount = new int[]{
-                        (int)(Math.ceil((visibleEndPoint[0] - visibleStartingPoint[0]) / chunkSizeGraphical)),
-                        (int)(Math.ceil((visibleEndPoint[1] - visibleStartingPoint[1]) / chunkSizeGraphical))},
-
-                visibleCellCount = new int[]{
-                        (int)(contentsSize[0] / chunkSizeGraphical),
-                        (int)(contentsSize[1] / chunkSizeGraphical)},
-
-                activeChunk = new int[]{
+                activeChunk = new int[]{ //centrâlais aktîvais chunk - numurs
                         (int)Math.floor(1.0 * spectateMapInfo.centerXY[0] / DataBase.mapChunkW),
                         (int)Math.floor(1.0 * spectateMapInfo.centerXY[1] / DataBase.mapChunkW)},
 
-                activeCell = new int[]{
-                        (int)Math.floor(1.0 * spectateMapInfo.centerXY[0] / DataBase.mapCellW),
-                        (int)Math.floor(1.0 * spectateMapInfo.centerXY[1] / DataBase.mapCellW)},
+//                activeCell = new int[]{ //centrâlâ aktîvâ ðûna - numurs (pagaidâm netiek zîmçta)
+//                        (int)Math.floor(1.0 * spectateMapInfo.centerXY[0] / DataBase.mapCellW),
+//                        (int)Math.floor(1.0 * spectateMapInfo.centerXY[1] / DataBase.mapCellW)},
 
-                startingChunk = new int[]{
-                        activeChunk[0] - (int)Math.floor((drawCenterXY[0] - visibleStartingPoint[0]) / chunkSizeGraphical),
-                        activeChunk[1] - (int)Math.floor((drawCenterXY[1] - visibleStartingPoint[1]) / chunkSizeGraphical)};
+                visibleChunkOffset =  new int[]{ //graphical offset inside chunk
+                        (int)((spectateMapInfo.centerXY[0] - Math.floor(1.0 * spectateMapInfo.centerXY[0] / DataBase.mapChunkW) * DataBase.mapChunkW)
+                                * spectateMapInfo.merogs),
+                        (int)((spectateMapInfo.centerXY[1] - Math.floor(1.0 * spectateMapInfo.centerXY[1] / DataBase.mapChunkW) * DataBase.mapChunkW)
+                                * spectateMapInfo.merogs)},
+
+                visibleChunkCountBefore =  new int[]{
+                        (int)Math.max(0, Math.ceil(
+                                (drawCenterXY[0] - visibleStartingPoint[0] - visibleChunkOffset[0] - 2)
+                                        / chunkSizeGraphical)),
+                        (int)Math.max(0, Math.ceil(
+                                (drawCenterXY[1] - visibleStartingPoint[1] - visibleChunkOffset[1] - 2)
+                                        / chunkSizeGraphical))},
+
+                visibleChunkCountAfter =  new int[]{
+                        (int)Math.max(0, Math.ceil(
+                                (visibleEndPoint[0] - drawCenterXY[0] - (chunkSizeGraphical - visibleChunkOffset[0]))
+                                        / chunkSizeGraphical)),
+                        (int)Math.max(0,Math.ceil(
+                                (visibleEndPoint[1] - drawCenterXY[1] - (chunkSizeGraphical - visibleChunkOffset[1]))
+                                        / chunkSizeGraphical))},
+
+                visibleChunkCount = new int[]{ //kopçjais redzamo chunk skaits
+                        1 + visibleChunkCountBefore[0] + visibleChunkCountAfter[0],
+                        1 + visibleChunkCountBefore[1] + visibleChunkCountAfter[1]},
+
+//                visibleCellCount = new int[]{ //netiek lietots - nepareiza formula
+//                        (int)(contentsSize[0] / chunkSizeGraphical),
+//                        (int)(contentsSize[1] / chunkSizeGraphical)},
+
+                startingChunk = new int[]{ //pirmais ekrânâ zîmçjamais chunk - relatîvs numurs (var bût negatîvs)
+                        activeChunk[0] - visibleChunkCountBefore[0],
+                        activeChunk[1] - visibleChunkCountBefore[1]};
 
 
 
 
-        for(int i = startingChunk[1]; i < visibleChunkCount[1] + startingChunk[1]; i++){
+//        for(int i = startingChunk[1]; i < visibleChunkCount[1] + startingChunk[1]; i++){
+//
+//            //te horizontâlâs lînijas
+//        }
 
-
-
-            //te horizontâlâs lînijas
-        }
-
-        g.setColor(Color.magenta);
+        g.setColor(Color.magenta); //redzamîbas râmis
         g.drawRect(contentsXY[0] + visibleStartingPoint[0] +1, contentsXY[1] + visibleStartingPoint[1] +1,
                 visibleEndPoint[0] - visibleStartingPoint[0] -2, visibleEndPoint[1] - visibleStartingPoint[1] -2);
 

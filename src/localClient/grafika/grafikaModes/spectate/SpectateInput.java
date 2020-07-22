@@ -17,7 +17,7 @@ public class SpectateInput extends InputActions {
         DrawManager.SpectateMapInfo spectateMapInfo =
                 thread.dati.drawManagerList.get(thread.dati.modeCurrent).spectateMapInfo;
 
-        double viewChangeFactor = 0.02;
+        double viewChangeFactor = 0.018; //kustîbas âtrums pa karti ar keyboard pogâm
         int viewChangeRate = (int)Math.max(
                 1,
                 Math.min(DataBase.laukumaPlatumsSum, DataBase.laukumaAugstumsSum) / spectateMapInfo.zoomFactor * viewChangeFactor);
@@ -110,7 +110,7 @@ public class SpectateInput extends InputActions {
         }
     }
 
-    private static final double zoomChangeRate = 0.1;
+    private static final double zoomChangeRate = 0.2;
 
     @Override
     public void centerButtonActions(int reference, ClientThread thread){
