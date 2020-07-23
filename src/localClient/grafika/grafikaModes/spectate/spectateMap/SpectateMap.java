@@ -150,7 +150,7 @@ public class SpectateMap {
                            int[] chunkLoc, int[] chunkXY, int[] activeChunk){
         //ðeit zîmç attiecîgo chunk
 
-        terrain.draw(g); //uzzîmç cell grid & terrain
+        terrain.draw(g, dati, spectateMapInfo, chunkLoc, chunkXY); //uzzîmç cell grid & terrain
         //te varçtu zîmçt komandas un teritorijas
         //te varçtu zîmçt çkas
         loot.draw(g, dati, spectateMapInfo, chunkLoc, chunkXY); //uzzîmç loot
@@ -164,7 +164,7 @@ public class SpectateMap {
 
         if (chunkXY[0] == activeChunk[0] && chunkXY[1] == activeChunk[1])
             g.setColor(Color.yellow);
-        else g.setColor(Color.darkGray);
+        else g.setColor(new Color(40,40,40));
 
         g.drawRect(chunkLoc[0] - 1, chunkLoc[1] - 1,
                 (int)spectateMapInfo.chunkSizeGraphical - 2, (int)spectateMapInfo.chunkSizeGraphical - 2);
