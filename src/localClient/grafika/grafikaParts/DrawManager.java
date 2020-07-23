@@ -48,7 +48,8 @@ public abstract class DrawManager {
         public String selectedPlayerName;
 
         public boolean chunkGrid = true, cellGrid = true, mapWrap = false,
-                drawPlayerInfo = false, drawRedzesloki = false;
+                drawPlayerInfo = false, drawRedzesloki = false,
+                drawLootInfo = false;
 
         public SpectateMapInfo(){
             zoomFactor = minZoom;

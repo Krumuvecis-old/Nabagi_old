@@ -153,7 +153,7 @@ public class SpectateMap {
         terrain.draw(g); //uzzîmç cell grid & terrain
         //te varçtu zîmçt komandas un teritorijas
         //te varçtu zîmçt çkas
-        loot.draw(g); //uzzîmç loot
+        loot.draw(g, dati, spectateMapInfo, chunkLoc, chunkXY); //uzzîmç loot
         cilveki.draw(g, dati, spectateMapInfo, chunkLoc, chunkXY); //uzzîmç spçlçtâjus
 
         if (spectateMapInfo.chunkGrid) drawChunkInfo(g, spectateMapInfo, chunkLoc, chunkXY, activeChunk);

@@ -1,59 +1,59 @@
 package localClient.grafika.grafikaModes.spectate.spectateMap;
 
+import localClient.Dati;
+import localClient.grafika.grafikaParts.DrawManager;
+import server.calculations.lietas.Lieta;
+import server.calculations.lietas.LietuTips;
+import server.dataBase.DataBase;
+
 import java.awt.*;
+import java.text.DecimalFormat;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Loot {
 
     Loot(){}
 
-    void draw(Graphics g){
+    void draw(Graphics g, Dati dati, DrawManager.SpectateMapInfo spectateMapInfo, int[] chunkLoc, int[] chunkXY){
 
-        //iziet cauri visiem redzamajiem chunkiem
+        List<Integer> chunkXYlist = new ArrayList<>();
+        chunkXYlist.add(chunkXY[0]);
+        chunkXYlist.add(chunkXY[1]);
+        for(int i = 0; i < DataBase.laukums.get(chunkXYlist).lietas.size(); i++){
+            Lieta lieta = DataBase.laukums.get(chunkXYlist).lietas.get(i);
 
-        drawItem(g); //zîmç atseviðíu lietu (jâbût ciklâ kur iziet cauri visâm lietâm)
+            double[] xy = new double[]{
+                    chunkLoc[0] + lieta.x * spectateMapInfo.merogs,
+                    chunkLoc[1] + lieta.y * spectateMapInfo.merogs};
+            double resnums = LietuTips.lietuTipi.get(lieta.tips).izmers * spectateMapInfo.merogs;
 
-        //zemâk no vecâ
-//        for(int[] chunkXY={0,0}; chunkXY[0]<laukums.size(); chunkXY[0]++){
-//            for(chunkXY[1]=0; chunkXY[1]<laukums.get(chunkXY[0]).size(); chunkXY[1]++){
-//
-//                ArrayList<Lieta> lietasList = laukums.get(chunkXY[0]).get(chunkXY[1]).lietas;
-//
-//                // apskata katru lietu chunkâ
-//                for(int i=0;i<lietasList.size();i++) { //zîmç lietas, kas izmçtâtas pa karti
-//                    Lieta lieta = lietasList.get(i);
-//                    drawLootOnce(g, x0, y0, merogs, chunkXY, lieta);
-//
-//                }
-//
-//            }
-//        }
+            drawItem(g, dati, lieta, xy, resnums, spectateMapInfo.merogs, spectateMapInfo.drawLootInfo); //zîmç atseviðíu lietu
+        }
     }
 
-    private static void drawItem(Graphics g){
+    private void drawItem(Graphics g, Dati dati, Lieta lieta, double[] xy, double resnums, double merogs, boolean drawLootInfo){
+        resnums = Math.max(resnums, 10);
+        if(merogs >= 0.3) g.drawImage(
+                dati.grafikasDati.images.get(LietuTips.lietuTipi.get(lieta.tips).spriteName),
+                (int)(xy[0] - resnums/2), (int)(xy[1] - resnums/2),
+                (int)resnums, (int)resnums,null);
 
-//        double x = x0 + merogs * (lieta.x + KonstantesUniversal.mapChunkW * chunkXY[0]),
-//                y = y0 + merogs * (lieta.y + KonstantesUniversal.mapChunkW * chunkXY[1]),
-//                resnums = KonstantesUniversal.defaultLietas.get(0).izmers * merogs;
+        if(drawLootInfo && merogs >= 1.5)
+            drawItemInfo(g, lieta, xy, resnums, dati.grafikasDati.colorPalette.pair3[1]);
 
-        //ja pietiekami liels, zîmç sprite
-        //ja mazâks, zîmç pçc krâsas
+    }
 
-//        Color krasa1=KonstantesUniversal.defaultLietas.get(0).krasa, // iekðai (default-default)
-//                krasa2=Color.black; // kontûrai
-//
-//        for(int j=1; j<KonstantesUniversal.defaultLietas.size(); j++){ //pârbauda kuram tipam atbilst
-//            if(KonstantesUniversal.defaultLietas.get(j).nosaukums.equals(lieta.nosaukums)) {
-//                krasa1 = KonstantesUniversal.defaultLietas.get(j).krasa;
-//                resnums = KonstantesUniversal.defaultLietas.get(j).izmers * merogs;
-//                break;
-//            }
-//        }
+    private void drawItemInfo(Graphics g, Lieta lieta, double[] xy, double resnums, Color textColor){
+        g.setColor(textColor);
 
-//        g.setColor(krasa1); //iekða
-//        g.fillOval((int)(x-resnums/2), (int)(y-resnums/2), (int)resnums, (int)resnums);
-//        g.setColor(krasa2); //kontûra
-//        g.drawOval((int)(x-resnums/2), (int)(y-resnums/2), (int)resnums, (int)resnums);
+        int[] textOffset = new int[]{-10, (int)(5 + resnums/2)};
+        int textHeight = 15, w = 1;
 
+        g.drawString("" + (new DecimalFormat("#.##")).format(lieta.daudzums),
+                (int)(xy[0] + textOffset[0]),
+                (int)(xy[1] + textOffset[1] + textHeight * w));
+        //w++;
     }
 
 }

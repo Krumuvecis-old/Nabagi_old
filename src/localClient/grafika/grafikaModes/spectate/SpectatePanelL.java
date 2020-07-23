@@ -25,6 +25,7 @@ public class SpectatePanelL extends PanelL {
         buttonDetails.add(new Button.ButtonDetails(5, "Extend map", 0));
         buttonDetails.add(new Button.ButtonDetails(6, "Player info", 0));
         buttonDetails.add(new Button.ButtonDetails(7, "Redzesloki", 0));
+        buttonDetails.add(new Button.ButtonDetails(8, "Loot info", 0));
 
         //te var pievienot pogas
 
@@ -67,15 +68,15 @@ public class SpectatePanelL extends PanelL {
         g.drawString("Par karti", xy[0], xy[1] + w * textHeight);
         w++;
 
+        g.drawString("Laukuma kopçjais izmçrs (x & y): ",
+                xy[0], xy[1] + w * textHeight); w++;
+        g.drawString("[ " + DataBase.laukumaPlatumsSum + " - " + DataBase.laukumaAugstumsSum + " ]",
+                xy[0], xy[1] + w * textHeight); w++;
+
         g.drawString("Grafikas paneïa izmçrs (px)",
                 xy[0], xy[1] + w * textHeight); w++;
         int[] contentsSize = new int[]{layout.centerPanelContentsWX, layout.centerPanelContentsWY};
         g.drawString("[ " + contentsSize[0] + " - " + contentsSize[1] + " ]",
-                xy[0], xy[1] + w * textHeight); w++;
-
-        g.drawString("Laukuma kopçjais izmçrs (x & y): ",
-				xy[0], xy[1] + w * textHeight); w++;
-        g.drawString("[ " + DataBase.laukumaPlatumsSum + " - " + DataBase.laukumaAugstumsSum + " ]",
                 xy[0], xy[1] + w * textHeight); w++;
 
         DrawManager.SpectateMapInfo spectateMapInfo =

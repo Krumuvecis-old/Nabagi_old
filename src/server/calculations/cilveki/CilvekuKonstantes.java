@@ -5,7 +5,7 @@ public class CilvekuKonstantes {
     public static String vardsDefault = "S";
     public static int maxGataviba = 100;
 
-    public static double vmax = 3, ommax = 30,
+    public static double vmax = 2, ommax = 30,
             omChangeRate = 0.1; //grieðanâs atpûðoties
 
     public static double resnumsDefault = 15;

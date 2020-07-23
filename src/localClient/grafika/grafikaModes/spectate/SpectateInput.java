@@ -100,6 +100,7 @@ public class SpectateInput extends InputActions {
             case 5 -> spectateMapInfo.mapWrap = !spectateMapInfo.mapWrap;
             case 6 -> spectateMapInfo.drawPlayerInfo = !spectateMapInfo.drawPlayerInfo;
             case 7 -> spectateMapInfo.drawRedzesloki = !spectateMapInfo.drawRedzesloki;
+            case 8 -> spectateMapInfo.drawLootInfo = !spectateMapInfo.drawLootInfo;
 
             default -> super.leftButtonActions(reference, thread);
         }
