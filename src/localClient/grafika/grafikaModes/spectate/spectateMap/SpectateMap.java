@@ -120,7 +120,7 @@ public class SpectateMap {
                         activeChunk[0] - visibleChunkCountBefore[0],
                         activeChunk[1] - visibleChunkCountBefore[1]};
 
-
+        //vispirms uzzîmç terrain
         for(int[] _chunkXY = new int[]{startingChunk[0], startingChunk[1]};
             _chunkXY[0] < visibleChunkCount[0] + startingChunk[0];
             _chunkXY[0]++){
@@ -141,18 +141,49 @@ public class SpectateMap {
                         (int)(contentsXY[0] + drawCenterXY[0] + (_chunkXY[0] - activeChunk[0]) * spectateMapInfo.chunkSizeGraphical - visibleChunkOffset[0] + 1),
                         (int)(contentsXY[1] + drawCenterXY[1] + (_chunkXY[1] - activeChunk[1]) * spectateMapInfo.chunkSizeGraphical - visibleChunkOffset[1] + 1)};
 
-                drawChunk(g, dati, spectateMapInfo, chunkLoc, chunkXY, activeChunk);
+                drawChunk1(g, dati, spectateMapInfo, chunkLoc, chunkXY, activeChunk);
+            }
+        }
+
+        //vçlreiz jâiziet cauri visiem chunkiem lai uzzîmçtu pârçjo saturu (nevar abus ciklus apvienot)
+        for(int[] _chunkXY = new int[]{startingChunk[0], startingChunk[1]};
+            _chunkXY[0] < visibleChunkCount[0] + startingChunk[0];
+            _chunkXY[0]++){
+
+            for(_chunkXY[1] = startingChunk[1];
+                _chunkXY[1] < visibleChunkCount[1] + startingChunk[1];
+                _chunkXY[1]++){
+
+                int[] chunkXY = new int[]{_chunkXY[0], _chunkXY[1]};
+
+                while (chunkXY[0] < 0) chunkXY[0] += DataBase.mapChunkCountX;
+                while (chunkXY[0] >= DataBase.mapChunkCountX) chunkXY[0] -= DataBase.mapChunkCountX;
+
+                while (chunkXY[1] < 0) chunkXY[1] += DataBase.mapChunkCountY;
+                while (chunkXY[1] >= DataBase.mapChunkCountY) chunkXY[1] -= DataBase.mapChunkCountY;
+
+                int[] chunkLoc = new int[]{
+                        (int)(contentsXY[0] + drawCenterXY[0] + (_chunkXY[0] - activeChunk[0]) * spectateMapInfo.chunkSizeGraphical - visibleChunkOffset[0] + 1),
+                        (int)(contentsXY[1] + drawCenterXY[1] + (_chunkXY[1] - activeChunk[1]) * spectateMapInfo.chunkSizeGraphical - visibleChunkOffset[1] + 1)};
+
+                drawChunk2(g, dati, spectateMapInfo, chunkLoc, chunkXY, activeChunk);
             }
         }
     }
 
-    private void drawChunk(Graphics g, Dati dati, DrawManager.SpectateMapInfo spectateMapInfo,
+    private void drawChunk1(Graphics g, Dati dati, DrawManager.SpectateMapInfo spectateMapInfo,
                            int[] chunkLoc, int[] chunkXY, int[] activeChunk){
-        //ðeit zîmç attiecîgo chunk
+        //primârâ satura uzzîmçðana (pirmais slânis)
 
         terrain.draw(g, dati, spectateMapInfo, chunkLoc, chunkXY); //uzzîmç cell grid & terrain
         //te varçtu zîmçt komandas un teritorijas
         //te varçtu zîmçt çkas
+    }
+
+    private void drawChunk2(Graphics g, Dati dati, DrawManager.SpectateMapInfo spectateMapInfo,
+                           int[] chunkLoc, int[] chunkXY, int[] activeChunk){
+        //sekundârâ satura uzzîmçðana (otrais slânis)
+
         loot.draw(g, dati, spectateMapInfo, chunkLoc, chunkXY); //uzzîmç loot
         cilveki.draw(g, dati, spectateMapInfo, chunkLoc, chunkXY); //uzzîmç spçlçtâjus
 
