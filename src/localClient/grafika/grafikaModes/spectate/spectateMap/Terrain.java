@@ -25,76 +25,82 @@ public class Terrain {
         cellXY.add(0);
         cellXY.add(0);
 
+        boolean detailedCells = false;
+        int[] colorComponents = new int[]{0,0,0};
+        if(spectateMapInfo.merogs >= 0.3) detailedCells = true;
+
         for(cellXY.set(0, 0); cellXY.get(0)<DataBase.mapCellCount; cellXY.set(0, cellXY.get(0) + 1)){
             for(cellXY.set(1, 0); cellXY.get(1)<DataBase.mapCellCount; cellXY.set(1, cellXY.get(1) + 1)){
 
-                double size = DataBase.mapCellW * spectateMapInfo.merogs;
-                double[] loc = new double[]{
-                        chunkLoc[0] + cellXY.get(0) * size,
-                        chunkLoc[1] + cellXY.get(1) * size};
-
                 MapCell cell = DataBase.laukums.get(_chunkXY).mapCells.get(cellXY);
-                drawTerrain(g);
-                if(spectateMapInfo.cellGrid) drawCellGrid(g, loc, size, new Color(70,80,70), spectateMapInfo.merogs);
+
+                if(detailedCells) {
+                    double size = DataBase.mapCellW * spectateMapInfo.merogs;
+                    double[] loc = new double[]{
+                            chunkLoc[0] + cellXY.get(0) * size,
+                            chunkLoc[1] + cellXY.get(1) * size};
+
+
+                    drawTerrain(g, dati, cell, loc, size, spectateMapInfo.merogs);
+                    if(spectateMapInfo.cellGrid) drawCellInfo(g, cell, loc, size, new Color(70,80,70), spectateMapInfo.merogs);
+                }
+                else {
+                    Color cellColor = MapCell.terrainPresets.get(cell.terrainType).defaultColor;
+                    colorComponents[0] += cellColor.getRed();
+                    colorComponents[1] += cellColor.getGreen();
+                    colorComponents[2] += cellColor.getBlue();
+                }
+
             }
         }
+
+        if(!detailedCells) drawCombinedTerrain(g, chunkLoc, (int)Math.ceil(spectateMapInfo.chunkSizeGraphical), colorComponents);
     }
 
-    private void drawTerrain(Graphics g){
-        //te jâzîmç terrain sprite vai krâsa atkarîbâ no mçroga
+    private void drawCombinedTerrain(Graphics g, int[] chunkLoc, int chunkSize, int[] colorComponents){
+        //te iekrâso visu chunk, ja zoom neatïauj katru rûtiòu
+
+        int cellCount = (int)Math.pow(DataBase.mapCellCount, 2);
+        g.setColor(new Color(
+                colorComponents[0]/cellCount,
+                colorComponents[1]/cellCount,
+                colorComponents[2]/cellCount));
+
+        g.fillRect(chunkLoc[0], chunkLoc[1], chunkSize, chunkSize);
     }
 
-    private void drawCellGrid(Graphics g, double[] cellLoc, double size, Color krasa, double merogs){
-        //te jâzîmç râmis un info analoìiski kâ chunkiem
+    private void drawTerrain(Graphics g, Dati dati, MapCell cell, double[] cellLoc, double size, double merogs){
 
-        if(merogs >= 0.3){
-            g.setColor(krasa);
+        if(merogs >= 2){ //sprite
+            g.drawImage(dati.grafikasDati.images.get(MapCell.terrainPresets.get(cell.terrainType).spriteName),
+                    (int)cellLoc[0], (int)cellLoc[1], (int)size, (int)size,
+                    null);
+
+        } else { //colored rectangle
+            g.setColor(MapCell.terrainPresets.get(cell.terrainType).defaultColor);
+            g.fillRect((int)cellLoc[0], (int)cellLoc[1], (int)Math.ceil(size), (int)Math.ceil(size));
+        }
+
+    }
+
+    private void drawCellInfo(Graphics g, MapCell cell, double[] cellLoc, double size, Color krasa, double merogs){
+        //te zîmç cell râmi un info (analoìiski kâ chunkiem)
+        g.setColor(krasa);
+
+        if(merogs >= 0.3){ //grid
             g.drawRect((int)cellLoc[0] + 1, (int)cellLoc[1] + 1,
                     (int)size - 2, (int)size - 2);
         }
 
-//        activeCell = new int[]{ //centrâlâ aktîvâ ðûna - numurs (pagaidâm netiek zîmçta)
-//                (int)Math.floor(1.0 * spectateMapInfo.centerXY[0] / DataBase.mapCellW),
-//                (int)Math.floor(1.0 * spectateMapInfo.centerXY[1] / DataBase.mapCellW)};
-//
-//        visibleCellCount = new int[]{ //netiek lietots - nepareiza formula
-//                (int)(contentsSize[0] / chunkSizeGraphical),
-//                (int)(contentsSize[1] / chunkSizeGraphical)};
+        if(merogs >= 0.9){ //info
+            int[] textOffset = new int[]{3, 0};
+            int textHeight = 15, w = 1;
 
-
-//        if (cellXY[0] == activeCell[0] && cellXY[1] == activeCell[1])
-//            g.setColor(Color.yellow);
-//        else g.setColor(Color.darkGray);
-//
-//        g.drawRect(chunkLoc[0] - 1, chunkLoc[1] - 1,
-//                (int)spectateMapInfo.chunkSizeGraphical - 2, (int)spectateMapInfo.chunkSizeGraphical - 2);
-//
-//        int[] textOffset = new int[]{3, 0};
-//        int textHeight = 15, w = 1;
-//
-//        if(spectateMapInfo.chunkSizeGraphical >= 45){
-//            g.drawString(chunkXY[0] + ", " + chunkXY[1],
-//                    chunkLoc[0] + textOffset[0],
-//                    chunkLoc[1] + textOffset[1] + textHeight * w);
-//            w++;
-//        }
-//
-//        if(spectateMapInfo.chunkSizeGraphical >= 75){
-//            List<Integer> chunkXYlist = new ArrayList<>();
-//            chunkXYlist.add(chunkXY[0]);
-//            chunkXYlist.add(chunkXY[1]);
-//            MapChunk chunk = DataBase.laukums.get(chunkXYlist);
-//
-//            g.drawString("players: " + chunk.cilvekiList.size(),
-//                    chunkLoc[0] + textOffset[0],
-//                    chunkLoc[1] + textOffset[1] + textHeight * w);
-//            w++;
-//
-//            g.drawString("loot: " + chunk.lietas.size(),
-//                    chunkLoc[0] + textOffset[0],
-//                    chunkLoc[1] + textOffset[1] + textHeight * w);
-//            //w++;
-//        }
+            g.drawString("" + cell.terrainType,
+                    (int)(cellLoc[0] + textOffset[0]),
+                    (int)(cellLoc[1] + textOffset[1] + textHeight * w));
+            //w++;
+        }
 
     }
 

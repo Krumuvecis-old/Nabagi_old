@@ -47,7 +47,11 @@ public class GrafikasDati {
                 {"sprites/cilveks.png", "cilveks"},
                 {"sprites/zelts.png", "zelts"},
                 {"sprites/Banans.png", "banana"},
-                {"sprites/Zvaigzne.png", "zvaigzne"}
+
+                {"sprites/terrain/dirt.png", "terrainDirt"},
+                {"sprites/terrain/grass.png", "terrainGrass"},
+                {"sprites/terrain/sand.png", "terrainSand"},
+                {"sprites/terrain/stone.png", "terrainStone"}
         };
         FileHandler.loadSprites(images, imageNames, imageLocation);
     }

@@ -23,6 +23,8 @@ public class Initializator {
     }
 
     private static void initializeLaukums() {
+        MapCell.TerrainInfo.generateTerrainPresets();
+
         int x, y;
         for (x = 0; x < DataBase.mapChunkCountX; x++){
             for (y = 0; y < DataBase.mapChunkCountY; y++){
@@ -33,7 +35,11 @@ public class Initializator {
             }
         }
 
-        //te varçtu arî ìenerçt terrain utml
+        terrainGenerator();
+    }
+
+    private static void terrainGenerator(){
+        //te varçtu ìenerçt sâkuma terrain, lai nebûtu visiem ienâda vçrtîba
     }
 
     private static void initializeKomandas(){
