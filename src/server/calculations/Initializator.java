@@ -8,6 +8,7 @@ import server.dataBase.DataBase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Initializator {
     public static void main(String versija){
@@ -39,7 +40,31 @@ public class Initializator {
     }
 
     private static void terrainGenerator(){
-        //te varçtu ìenerçt sâkuma terrain, lai nebûtu visiem ienâda vçrtîba
+        //te ìenerç sâkuma terrain, lai nebûtu visiem vienâda vçrtîba
+
+        List<Integer> chunkXY = new ArrayList<>();
+        chunkXY.add(0);
+        chunkXY.add(0);
+
+        for (chunkXY.set(0, 0); chunkXY.get(0) < DataBase.mapChunkCountX; chunkXY.set(0, chunkXY.get(0) + 1)){
+            for (chunkXY.set(1, 0); chunkXY.get(1) < DataBase.mapChunkCountY; chunkXY.set(1, chunkXY.get(1) + 1)){
+
+                List<Integer> cellXY = new ArrayList<>();
+                cellXY.add(0);
+                cellXY.add(0);
+
+                for (cellXY.set(0, 0); cellXY.get(0) < DataBase.mapCellCount; cellXY.set(0, cellXY.get(0) + 1)){
+                    for (cellXY.set(1, 0); cellXY.get(1) < DataBase.mapCellCount; cellXY.set(1, cellXY.get(1) + 1)){
+                        MapCell cell = DataBase.laukums.get(chunkXY).mapCells.get(cellXY);
+
+                        Random r = new Random();
+                        if (r.nextDouble() < 0.1) cell.terrainType = 3; //akmeòi
+                        else if(r.nextDouble() < 0.3) cell.terrainType = 2; //smiltis
+
+                    }
+                }
+            }
+        }
     }
 
     private static void initializeKomandas(){

@@ -25,27 +25,31 @@ public class MapCell {
         public static void generateTerrainPresets(){
             terrainPresets = new HashMap<>();
             terrainPresets.put(terrainPresets.size(), new TerrainInfo(
-                    "terrainDirt", new Color(100,60,30)));
+                    "terrainDirt", new Color(130,80,60)));
             terrainPresets.put(terrainPresets.size(), new TerrainInfo(
                     "terrainGrass", new Color(60,100,20)));
             terrainPresets.put(terrainPresets.size(), new TerrainInfo(
                     "terrainSand", new Color(130,110,40)));
             terrainPresets.put(terrainPresets.size(), new TerrainInfo(
-                    "terrainStone", new Color(90,90,110)));
+                    "terrainStone", new Color(90,90,90)));
         }
     }
 
     public MapCell(){
-        double terrainChance = 0.05;
-        Random r = new Random();
-
-        if (r.nextDouble()<terrainChance){
-            terrainType = 1;
-        } else terrainType = 0;
+        terrainType = 0;
     }
 
     public void updateValues(){
-        //te varçs uztaisît, ka terrain maina vçrtîbas
+        //te terrain maina vçrtîbas
+
+        double terrainChangeChance = 0.0005;
+        Random r = new Random();
+
+        if(r.nextDouble() < terrainChangeChance){
+            if(terrainType == 0) terrainType = 1; //izaug zâle
+            else if(terrainType == 1) terrainType = 0; //novîst zâle
+        }
+
     }
 
 

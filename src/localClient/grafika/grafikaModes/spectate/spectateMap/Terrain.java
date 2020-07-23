@@ -27,7 +27,8 @@ public class Terrain {
 
         boolean detailedCells = false;
         int[] colorComponents = new int[]{0,0,0};
-        if(spectateMapInfo.merogs >= 0.3) detailedCells = true;
+        double cellSizeGraphical = DataBase.mapCellW * spectateMapInfo.merogs;
+        if(cellSizeGraphical >= 3) detailedCells = true;
 
         for(cellXY.set(0, 0); cellXY.get(0)<DataBase.mapCellCount; cellXY.set(0, cellXY.get(0) + 1)){
             for(cellXY.set(1, 0); cellXY.get(1)<DataBase.mapCellCount; cellXY.set(1, cellXY.get(1) + 1)){
@@ -35,14 +36,13 @@ public class Terrain {
                 MapCell cell = DataBase.laukums.get(_chunkXY).mapCells.get(cellXY);
 
                 if(detailedCells) {
-                    double size = DataBase.mapCellW * spectateMapInfo.merogs;
                     double[] loc = new double[]{
-                            chunkLoc[0] + cellXY.get(0) * size,
-                            chunkLoc[1] + cellXY.get(1) * size};
+                            chunkLoc[0] + cellXY.get(0) * cellSizeGraphical,
+                            chunkLoc[1] + cellXY.get(1) * cellSizeGraphical};
 
 
-                    drawTerrain(g, dati, cell, loc, size, spectateMapInfo.merogs);
-                    if(spectateMapInfo.cellGrid) drawCellInfo(g, cell, loc, size, new Color(70,80,70), spectateMapInfo.merogs);
+                    drawTerrain(g, dati, cell, loc, cellSizeGraphical);
+                    if(spectateMapInfo.cellGrid) drawCellInfo(g, cell, loc, cellSizeGraphical, new Color(70,80,70));
                 }
                 else {
                     Color cellColor = MapCell.terrainPresets.get(cell.terrainType).defaultColor;
@@ -69,11 +69,11 @@ public class Terrain {
         g.fillRect(chunkLoc[0], chunkLoc[1], chunkSize, chunkSize);
     }
 
-    private void drawTerrain(Graphics g, Dati dati, MapCell cell, double[] cellLoc, double size, double merogs){
+    private void drawTerrain(Graphics g, Dati dati, MapCell cell, double[] cellLoc, double size){
 
-        if(merogs >= 2){ //sprite
+        if(size >= 10){ //sprite
             g.drawImage(dati.grafikasDati.images.get(MapCell.terrainPresets.get(cell.terrainType).spriteName),
-                    (int)cellLoc[0], (int)cellLoc[1], (int)size, (int)size,
+                    (int)cellLoc[0], (int)cellLoc[1], (int)Math.ceil(size), (int)Math.ceil(size),
                     null);
 
         } else { //colored rectangle
@@ -83,16 +83,18 @@ public class Terrain {
 
     }
 
-    private void drawCellInfo(Graphics g, MapCell cell, double[] cellLoc, double size, Color krasa, double merogs){
+    private void drawCellInfo(Graphics g, MapCell cell, double[] cellLoc, double size, Color krasa){
         //te zîmç cell râmi un info (analoìiski kâ chunkiem)
-        g.setColor(krasa);
 
-        if(merogs >= 0.3){ //grid
+
+        if(size >= 7){ //grid
+            g.setColor(krasa);
             g.drawRect((int)cellLoc[0] + 1, (int)cellLoc[1] + 1,
                     (int)size - 2, (int)size - 2);
         }
 
-        if(merogs >= 0.9){ //info
+        if(size >= 20){ //info
+            g.setColor(Color.white);
             int[] textOffset = new int[]{3, 0};
             int textHeight = 15, w = 1;
 

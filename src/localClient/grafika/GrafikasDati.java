@@ -45,8 +45,9 @@ public class GrafikasDati {
                 {"panelBackground.png", "panelBackground"},
 
                 {"sprites/cilveks.png", "cilveks"},
-                {"sprites/zelts.png", "zelts"},
-                {"sprites/Banans.png", "banana"},
+                {"sprites/Zvaigzne.png", "zvaigzne"},
+                {"sprites/items/zelts.png", "zelts"},
+                {"sprites/items/Banans.png", "banana"},
 
                 {"sprites/terrain/dirt.png", "terrainDirt"},
                 {"sprites/terrain/grass.png", "terrainGrass"},

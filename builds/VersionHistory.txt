@@ -32,7 +32,7 @@ versija 0.12 (planned)
 	        add minimap (bigMap?) to playerView window
 
         new features
-            add changing terrain and trees
+            add terrain functionality and trees
                 relevant calculations
                 graphical display and develop tablo
             item degradability
@@ -51,7 +51,7 @@ versija 0.11 (in progress) - june/july 2020
         separated database from calculations
         map improvements
             map divided into map chunks for faster computing and bigger map support
-            map chunks divided into smaller map cells for terrain (planned feature)
+            map chunks divided into smaller map cells for terrain
             map wrapping around edges
         items improved
             item presets added
@@ -87,7 +87,6 @@ versija 0.11 (in progress) - june/july 2020
                 sidePanels better tablo & button layout
                 map:
                     player rank indicators (e.g. crown for king)
-                    mapCell info and sprite/color
 
 versija 0.10 - may/june 2020
 	added key/mouse listener
