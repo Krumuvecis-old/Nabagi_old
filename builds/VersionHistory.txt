@@ -1,16 +1,12 @@
 versija X (planned)
-	switch coordinates (and maybe angles and such) to integers/float for faster computing
-	add savefiles for settings presets
-	improve user interface
-	add buildings
-	add more resources and crafting
-	improve trading
-	improve AI and add pathfinding
-	implement ranks
+    switch coordinates (and maybe angles and such) to integers/float for faster computing
+	improve savefiles
+	    for settings presets
+	    for player/map instances
+	improve user interface even more
+	    keyboard/mouse debounce
 	add territories for teams
-	add savefiles for singleplayer instances
 	add sounds (upon death and actions, volume depending on distance) and background music (like: Windows96-Transient Feeling)
-	add sprites for graphics
 	add natural disasters and global terrain
 	web support
 		webpage with singleplayer in free domain
@@ -26,11 +22,26 @@ versija X (planned)
 versija 0.12 (planned)
 
     planned:
-        add changing terrain and trees
 
-        fix multithreading for playerView
-	    singleplayer character control (planned)
-	    add minimap (bigMap?) to playerView window
+        improve serverUI
+        clientThread structural improvements
+            fix multithreading
+            create lobby and playerView
+	        singleplayer character control (planned)
+	            fix input debounce
+	        add minimap (bigMap?) to playerView window
+
+        new features
+            add changing terrain and trees
+                relevant calculations
+                graphical display and develop tablo
+            item degradability
+            add more resources and crafting?
+            add buildings?
+
+        improve player ranks
+        improve AI and add pathfinding
+        improve trading
 
 
 versija 0.11 (in progress) - june/july 2020
@@ -40,17 +51,43 @@ versija 0.11 (in progress) - june/july 2020
         separated database from calculations
         map improvements
             map divided into map chunks for faster computing and bigger map support
-            map chunks divided into smaller map cells for terrain
+            map chunks divided into smaller map cells for terrain (planned feature)
             map wrapping around edges
-        item presets added
-        player AI separated (not finished)
+        items improved
+            item presets added
+            better calculations
+        player AI and actions separated and improved (not finished)
+        teams improved
+            more ranks
+            team relations (planned)
+            better calculations
         and many more...
-    better graphics engine (not finished)
-        added layout
-        added sprites
-        savable settings (not finished)
-        clientUI has graphics modes (not finished)
+    better graphics engine for client UI (not finished)
+        layout and panel system with graphics modes
+        graphical sprites for better illustration
+        savable settings (not finished - low functionality)
+        (too many improvements to name them all)
     and many more...
+
+    things left to finish in this version:
+        finish calculations
+            cilvçku sadursmes
+                ar citiem cilvçkiem
+                ar lietâm
+            AI
+                critical actions
+                R2 - close
+                R1 - far
+                misc actions
+                maybe more?
+            komandas
+            and many more...
+        finish singlethreaded clientUI
+            spectate mode
+                sidePanels better tablo & button layout
+                map:
+                    player rank indicators (e.g. crown for king)
+                    mapCell info and sprite/color
 
 versija 0.10 - may/june 2020
 	added key/mouse listener
