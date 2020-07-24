@@ -15,23 +15,51 @@ public class MapCell {
         public String spriteName;
         public Color defaultColor;
 
-        public TerrainInfo(String _spriteName, Color _defaultColor){
+        public HashMap<String, ItemGenInfo> lootGeneratorInfo;
+
+        public static class ItemGenInfo {
+            public double genKoef, genMin, genMax; //ìenerçðanas koeficienti
+            ItemGenInfo(double _genKoef, double _genMin, double _genMax){
+                genKoef = _genKoef;
+                genMin = _genMin;
+                genMax = _genMax;
+            }
+        }
+
+        public TerrainInfo(String _spriteName, Color _defaultColor, HashMap<String, ItemGenInfo> _lootGeneratorInfo){
             spriteName = _spriteName;
             defaultColor = _defaultColor;
+
+            lootGeneratorInfo = _lootGeneratorInfo;
 
             terrainPresets.put(terrainPresets.size(), this);
         }
 
         public static void generateTerrainPresets(){
             terrainPresets = new HashMap<>();
+            HashMap<String, ItemGenInfo> _lootGeneratorInfo;
+
+            //dirt
+            _lootGeneratorInfo = new HashMap<>();
             terrainPresets.put(terrainPresets.size(), new TerrainInfo(
-                    "terrainDirt", new Color(130,80,60)));
+                    "terrainDirt", new Color(130,80,60), _lootGeneratorInfo));
+
+            //grass
+            _lootGeneratorInfo = new HashMap<>();
+            _lootGeneratorInfo.put("Paika", new ItemGenInfo(0.05, 0.5, 3));
             terrainPresets.put(terrainPresets.size(), new TerrainInfo(
-                    "terrainGrass", new Color(60,100,20)));
+                    "terrainGrass", new Color(60,100,20), _lootGeneratorInfo));
+
+            //sand
+            _lootGeneratorInfo = new HashMap<>();
             terrainPresets.put(terrainPresets.size(), new TerrainInfo(
-                    "terrainSand", new Color(130,110,40)));
+                    "terrainSand", new Color(130,110,40), _lootGeneratorInfo));
+
+            //stone
+            _lootGeneratorInfo = new HashMap<>();
+            _lootGeneratorInfo.put("Zelts", new ItemGenInfo(0.02, 1,5));
             terrainPresets.put(terrainPresets.size(), new TerrainInfo(
-                    "terrainStone", new Color(90,90,90)));
+                    "terrainStone", new Color(90,90,90), _lootGeneratorInfo));
         }
     }
 
@@ -42,15 +70,30 @@ public class MapCell {
     public void updateValues(){
         //te terrain maina vçrtîbas
 
-        double terrainChangeChance = 0.0005;
         Random r = new Random();
 
-        if(r.nextDouble() < terrainChangeChance){
-            if(terrainType == 0) terrainType = 1; //izaug zâle
-            else if(terrainType == 1) terrainType = 0; //novîst zâle
+        switch (terrainType) {
+            case 0-> { //dubïi
+                double terrainChangeChance = 0.0002;
+                if(r.nextDouble() < terrainChangeChance){
+                    terrainType = 1; //izaug zâle
+                }
+            }
+            case 1 -> { //zâle
+                double terrainChangeChance = 0.0001;
+                if(r.nextDouble() < terrainChangeChance){
+                    terrainType = 1; //novîst zâle
+                }
+            }
+            case 2 -> {
+                //smiltis
+            }
+            case 3 -> {
+                //akmens
+            }
+
+            default -> {}
         }
-
     }
-
 
 }

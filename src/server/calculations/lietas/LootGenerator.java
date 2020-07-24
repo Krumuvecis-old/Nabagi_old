@@ -1,49 +1,78 @@
 package server.calculations.lietas;
 
 import server.calculations.FizikasKonstantes;
+import server.calculations.MapCell;
 import server.dataBase.DataBase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
 public class LootGenerator {
 
-    protected static void main(){ //iziet cauri katram lietu tipam
-        for (String i : LietuTips.lietuTipi.keySet()) {
-            checkItemGeneration(i);
+    static void main(){
+
+        //iziet cauri visiem chunkiem
+
+        List<Integer> chunkXY = new ArrayList<>();
+        chunkXY.add(0);
+        chunkXY.add(0);
+
+        for (chunkXY.set(0, 0); chunkXY.get(0) < DataBase.mapChunkCountX; chunkXY.set(0, chunkXY.get(0) + 1)){
+            for (chunkXY.set(1, 0); chunkXY.get(1) < DataBase.mapChunkCountY; chunkXY.set(1, chunkXY.get(1) + 1)){
+
+                //iziet cauri visâm rûtiòâm
+
+                List<Integer> cellXY = new ArrayList<>();
+                cellXY.add(0);
+                cellXY.add(0);
+
+                for (cellXY.set(0, 0); cellXY.get(0) < DataBase.mapCellCount; cellXY.set(0, cellXY.get(0) + 1)){
+                    for (cellXY.set(1, 0); cellXY.get(1) < DataBase.mapCellCount; cellXY.set(1, cellXY.get(1) + 1)){
+
+                        MapCell cell = DataBase.laukums.get(chunkXY).mapCells.get(cellXY);
+
+                        checkItemTypes(
+                                chunkXY,
+                                new int[]{
+                                        cellXY.get(0) * DataBase.mapCellW,
+                                        cellXY.get(1) * DataBase.mapCellW},
+                                cell);
+                    }
+                }
+            }
         }
     }
 
-    private static void checkItemGeneration(String tips){
+    private static void checkItemTypes(List<Integer> chunkXY, int[] cellLoc, MapCell cell){
+        HashMap<String, MapCell.TerrainInfo.ItemGenInfo> genInfo = MapCell.terrainPresets.get(cell.terrainType).lootGeneratorInfo;
+        for(String tips : genInfo.keySet()){
+            checkItemGeneration(chunkXY, cellLoc, genInfo.get(tips), tips);
+        }
+    }
+
+    private static void checkItemGeneration(List<Integer> chunkXY, int[] cellLoc,
+                                            MapCell.TerrainInfo.ItemGenInfo genRates, String tips){
         //ìenerç katru tipu atseviðíi
 
-        double genRate = LietuTips.lietuTipi.get(tips).genKoef * FizikasKonstantes.overallGenRate;
-        Random r=new Random();
+        double genRate = genRates.genKoef * FizikasKonstantes.overallGenRate;
+        Random r = new Random();
 
-        int reizes = (int)Math.floor(genRate);
-        if (r.nextDouble() < (genRate - reizes)) reizes++;
+        if (r.nextDouble() < genRate) {
+            double[] xy = new double[]{
+                    cellLoc[0] + r.nextDouble() * DataBase.mapCellW,
+                    cellLoc[1] + r.nextDouble() * DataBase.mapCellW};
 
-        for (int i=0; i<reizes; i++) {
-            List<Integer> chunkXY = new ArrayList<>();
-            chunkXY.add(r.nextInt(DataBase.mapChunkCountX)); //x
-            chunkXY.add(r.nextInt(DataBase.mapChunkCountY)); //y
+            double minimums = genRates.genMin, maksimums = genRates.genMax,
+                    daudzums = minimums + (maksimums - minimums) * r.nextDouble();
 
-            createLoot(tips, chunkXY);
+            createLoot(chunkXY, xy, tips, daudzums);
         }
-
     }
 
-    private static void createLoot(String tips, List<Integer> chunkXY) { //uztaisa un iemet laukumâ vienu lietu
-        Random r = new Random();
-        double x = r.nextDouble() * DataBase.mapChunkW,
-                y = r.nextDouble() * DataBase.mapChunkW;
-
-        double minimums = LietuTips.lietuTipi.get(tips).genMin,
-                maksimums = LietuTips.lietuTipi.get(tips).genMax,
-                daudzums = minimums + (maksimums-minimums) * r.nextDouble();
-
-        Lieta lieta = new Lieta(tips, daudzums, x, y); //uztaisa lietu
+    private static void createLoot(List<Integer> chunkXY, double[] xy, String tips, double daudzums) {
+        Lieta lieta = new Lieta(tips, daudzums, xy[0], xy[1]); //uztaisa lietu
         lieta.drop(chunkXY); //iemet laukumâ
     }
 
