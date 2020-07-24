@@ -80,9 +80,9 @@ public class MapCell {
                 }
             }
             case 1 -> { //zâle
-                double terrainChangeChance = 0.0001;
+                double terrainChangeChance = 0.00002;
                 if(r.nextDouble() < terrainChangeChance){
-                    terrainType = 1; //novîst zâle
+                    terrainType = 0; //novîst zâle
                 }
             }
             case 2 -> {
