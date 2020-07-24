@@ -1,0 +1,1 @@
+Šim buildam jāatrodas paralēli src mapei
