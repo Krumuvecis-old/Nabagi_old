@@ -1,0 +1,10 @@
+ðis ir header
+ðo tekstu nenolasîs
+READSEPARATOR
+ekranaPlatums : 1340
+ekranaAugstums : 710
+palette : 0
+READSEPARATOR
+ðis ir footer
+arî ðo tekstu nenolasîs
+
