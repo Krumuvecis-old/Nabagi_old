@@ -1,14 +1,12 @@
 package server.dataBase;
 
 import server.calculations.laukums.Laukums;
-import server.calculations.laukums.MapChunk;
 import server.calculations.cilveki.Cilveks;
 import server.calculations.komandas.Komanda;
 
-import java.awt.*;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
+
 
 public class DataBase {
     public static String versija;

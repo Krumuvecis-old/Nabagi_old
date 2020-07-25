@@ -2,13 +2,7 @@ package server.calculations;
 
 import server.calculations.cilveki.CilvekuManager;
 import server.calculations.komandas.KomanduApskats;
-import server.calculations.laukums.Laukums;
 import server.calculations.laukums.LaukumsManager;
-import server.calculations.lietas.LietuApskats;
-import server.dataBase.DataBase;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CalculationsThread implements Runnable {
 	private static final String threadName = "CalculationsThread",
@@ -32,6 +26,7 @@ public class CalculationsThread implements Runnable {
 
 			calculationTimeCalculator.time(false);
 			try{
+				//noinspection BusyWait
 				Thread.sleep(calculationTimeCalculator.sleepT());
 			}catch (Exception e){
 				e.printStackTrace();
@@ -42,17 +37,12 @@ public class CalculationsThread implements Runnable {
 
 	private static void galvenaisCikls(){
 
-		LaukumsManager.main(); //kartes un reljefa cikli - viss kas saistîts ar reljefu un laukuma izmaiòâm (arî loot generator)
-		LietuApskats.main(); //viss kas saistîts ar pa zemi izmçtâtajâm lietâm
+		LaukumsManager.main(); //kartes, reljefs un loot
 		KomanduApskats.main(); //viss kas saistîts ar komandâm
 		CilvekuManager.main(); //viss kas saistîts ar cilvçkiem
 
 		//kaut kur jâievieto arî hipotçtisks çku apskats?
 
 	}
-
-
-
-
 
 }
