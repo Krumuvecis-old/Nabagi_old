@@ -39,6 +39,7 @@ public class Initializator {
             }
 
             terrainGenerator();
+            System.out.println("CalculationsThread: Terrain generated - laukums initialized.");
         }
 
         private static void terrainGenerator(){

@@ -47,7 +47,7 @@ public abstract class DrawManager {
         public boolean playerSelected, playerDead;
         public String selectedPlayerName;
 
-        public boolean chunkGrid = true, cellGrid = false, mapWrap = false,
+        public boolean chunkGrid = false, cellGrid = false, mapWrap = false,
                 drawPlayerInfo = false, drawRedzesloki = false,
                 drawLootInfo = true;
 

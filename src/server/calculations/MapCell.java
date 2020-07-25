@@ -46,7 +46,7 @@ public class MapCell {
 
             //grass
             _lootGeneratorInfo = new HashMap<>();
-            _lootGeneratorInfo.put("Paika", new ItemGenInfo(0.05, 0.5, 3));
+            _lootGeneratorInfo.put("Paika", new ItemGenInfo(0.01, 0.5, 3));
             terrainPresets.put(terrainPresets.size(), new TerrainInfo(
                     "terrainGrass", new Color(60,100,20), _lootGeneratorInfo));
 
@@ -57,7 +57,7 @@ public class MapCell {
 
             //stone
             _lootGeneratorInfo = new HashMap<>();
-            _lootGeneratorInfo.put("Zelts", new ItemGenInfo(0.02, 1,5));
+            _lootGeneratorInfo.put("Zelts", new ItemGenInfo(0.005, 1,5));
             terrainPresets.put(terrainPresets.size(), new TerrainInfo(
                     "terrainStone", new Color(90,90,90), _lootGeneratorInfo));
         }
