@@ -1,7 +1,6 @@
-package server.calculations;
+package server.calculations.laukums;
 
 import server.calculations.lietas.Lieta;
-import server.dataBase.DataBase;
 
 import java.util.*;
 
@@ -20,7 +19,7 @@ public class MapChunk {
 
     private void generateMapCells(){
         mapCells = new HashMap<>();
-        int mapCellCount = DataBase.mapCellCount;
+        int mapCellCount = Laukums.mapCellCount;
 
         int x, y;
         for (x = 0; x < mapCellCount; x++){

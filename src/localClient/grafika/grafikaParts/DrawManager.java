@@ -2,6 +2,7 @@ package localClient.grafika.grafikaParts;
 
 import localClient.ClientThread;
 import localClient.ColorPalette;
+import server.calculations.laukums.Laukums;
 import server.dataBase.DataBase;
 
 import java.awt.*;
@@ -54,8 +55,8 @@ public abstract class DrawManager {
         public SpectateMapInfo(){
             zoomFactor = minZoom;
             centerXY = new int[]{
-                    DataBase.laukumaPlatumsSum / 2,
-                    DataBase.laukumaAugstumsSum / 2};
+                    Laukums.laukumaPlatumsSum / 2,
+                    Laukums.laukumaAugstumsSum / 2};
             playerSelected = false;
             playerDead = false;
         }
@@ -67,12 +68,12 @@ public abstract class DrawManager {
 
         private void updateMerogs(int[] contentsSize){
             merogsMin = Math.min(
-                    1.0 * contentsSize[0] / DataBase.laukumaPlatumsSum,
-                    1.0 * contentsSize[1] / DataBase.laukumaAugstumsSum);
+                    1.0 * contentsSize[0] / Laukums.laukumaPlatumsSum,
+                    1.0 * contentsSize[1] / Laukums.laukumaAugstumsSum);
 
             merogs = merogsMin * zoomFactor;
 
-            chunkSizeGraphical = DataBase.mapChunkW * merogs;
+            chunkSizeGraphical = Laukums.mapChunkW * merogs;
         }
 
         private void updatePlayerXY(){
@@ -80,9 +81,9 @@ public abstract class DrawManager {
                 if(DataBase.cilvekuList.containsKey(selectedPlayerName)){
                     centerXY = new int[]{
                             (int)(DataBase.cilvekuList.get(selectedPlayerName).xyz.x +
-                                    DataBase.cilvekuList.get(selectedPlayerName).xyz.chunkXY.get(0) * DataBase.mapChunkW),
+                                    DataBase.cilvekuList.get(selectedPlayerName).xyz.chunkXY.get(0) * Laukums.mapChunkW),
                             (int)(DataBase.cilvekuList.get(selectedPlayerName).xyz.y +
-                                    DataBase.cilvekuList.get(selectedPlayerName).xyz.chunkXY.get(1) * DataBase.mapChunkW)};
+                                    DataBase.cilvekuList.get(selectedPlayerName).xyz.chunkXY.get(1) * Laukums.mapChunkW)};
                 } else {
                     playerDead = true;
                 }

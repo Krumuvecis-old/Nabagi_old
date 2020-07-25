@@ -2,6 +2,7 @@ package localClient.grafika.grafikaModes.spectate.spectateMap;
 
 import localClient.Dati;
 import localClient.grafika.grafikaParts.DrawManager;
+import server.calculations.laukums.Laukums;
 import server.calculations.lietas.Lieta;
 import server.calculations.lietas.LietuTips;
 import server.dataBase.DataBase;
@@ -20,8 +21,8 @@ public class Loot {
         List<Integer> chunkXYlist = new ArrayList<>();
         chunkXYlist.add(chunkXY[0]);
         chunkXYlist.add(chunkXY[1]);
-        for(int i = 0; i < DataBase.laukums.get(chunkXYlist).lietas.size(); i++){
-            Lieta lieta = DataBase.laukums.get(chunkXYlist).lietas.get(i);
+        for(int i = 0; i < DataBase.laukums.mapChunks.get(chunkXYlist).lietas.size(); i++){
+            Lieta lieta = DataBase.laukums.mapChunks.get(chunkXYlist).lietas.get(i);
 
             double[] xy = new double[]{
                     chunkLoc[0] + lieta.x * spectateMapInfo.merogs,

@@ -6,10 +6,8 @@ import localClient.grafika.grafikaParts.DrawManager;
 import localClient.grafika.grafikaParts.InputActions;
 import localClient.grafika.grafikaParts.SampleLayout;
 import server.calculations.CalculationsThread;
+import server.calculations.laukums.Laukums;
 import server.dataBase.DataBase;
-
-import java.util.Comparator;
-import java.util.Random;
 
 public class SpectateInput extends InputActions {
 
@@ -21,7 +19,7 @@ public class SpectateInput extends InputActions {
         double viewChangeFactor = 0.018; //kustîbas âtrums pa karti ar keyboard pogâm
         int viewChangeRate = (int)Math.max(
                 1,
-                Math.min(DataBase.laukumaPlatumsSum, DataBase.laukumaAugstumsSum) / spectateMapInfo.zoomFactor * viewChangeFactor);
+                Math.min(Laukums.laukumaPlatumsSum, Laukums.laukumaAugstumsSum) / spectateMapInfo.zoomFactor * viewChangeFactor);
 
         if (!spectateMapInfo.playerSelected) {
             switch (numurs) { //numurs - klaviatûrâ nospiestâs pogas numurs
@@ -43,24 +41,24 @@ public class SpectateInput extends InputActions {
     private void normalizeXY(DrawManager.SpectateMapInfo spectateMapInfo){
         if(spectateMapInfo.mapWrap){ //wrapping map
             if(spectateMapInfo.centerXY[0] < 0)
-                spectateMapInfo.centerXY[0] += DataBase.laukumaPlatumsSum; //west
-            else if(spectateMapInfo.centerXY[0] >= DataBase.laukumaPlatumsSum)
-                spectateMapInfo.centerXY[0] -= DataBase.laukumaPlatumsSum; //east
+                spectateMapInfo.centerXY[0] += Laukums.laukumaPlatumsSum; //west
+            else if(spectateMapInfo.centerXY[0] >= Laukums.laukumaPlatumsSum)
+                spectateMapInfo.centerXY[0] -= Laukums.laukumaPlatumsSum; //east
 
             if(spectateMapInfo.centerXY[1] < 0)
-                spectateMapInfo.centerXY[1] += DataBase.laukumaAugstumsSum; //north
-            else if(spectateMapInfo.centerXY[1] >= DataBase.laukumaAugstumsSum)
-                spectateMapInfo.centerXY[1] -= DataBase.laukumaAugstumsSum; //south
+                spectateMapInfo.centerXY[1] += Laukums.laukumaAugstumsSum; //north
+            else if(spectateMapInfo.centerXY[1] >= Laukums.laukumaAugstumsSum)
+                spectateMapInfo.centerXY[1] -= Laukums.laukumaAugstumsSum; //south
         } else{ //limited map
             if(spectateMapInfo.centerXY[0] < 0)
                 spectateMapInfo.centerXY[0] = 0; //west
-            else if(spectateMapInfo.centerXY[0] >= DataBase.laukumaPlatumsSum)
-                spectateMapInfo.centerXY[0] = DataBase.laukumaPlatumsSum - 1; //east
+            else if(spectateMapInfo.centerXY[0] >= Laukums.laukumaPlatumsSum)
+                spectateMapInfo.centerXY[0] = Laukums.laukumaPlatumsSum - 1; //east
 
             if(spectateMapInfo.centerXY[1] < 0)
                 spectateMapInfo.centerXY[1] = 0; //north
-            else if(spectateMapInfo.centerXY[1] >= DataBase.laukumaAugstumsSum)
-                spectateMapInfo.centerXY[1] = DataBase.laukumaAugstumsSum - 1; //south
+            else if(spectateMapInfo.centerXY[1] >= Laukums.laukumaAugstumsSum)
+                spectateMapInfo.centerXY[1] = Laukums.laukumaAugstumsSum - 1; //south
         }
     }
 

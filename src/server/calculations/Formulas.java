@@ -1,6 +1,6 @@
 package server.calculations;
 
-import server.dataBase.DataBase;
+import server.calculations.laukums.Laukums;
 
 import java.awt.Color;
 import java.util.Random;
@@ -8,7 +8,7 @@ import java.util.Random;
 public class Formulas {
 	
 	public static double lenkaNoteiksana(double x1, double y1, double x2, double y2, int[] dChunkXY) {
-		int chunkPlatums = DataBase.mapChunkW;
+		int chunkPlatums = Laukums.mapChunkW;
 		double x2Temp = x2 + dChunkXY[0] * chunkPlatums,
 				y2Temp = y2 + dChunkXY[1] * chunkPlatums;
 

@@ -2,6 +2,7 @@ package localClient.grafika.grafikaModes.develop;
 
 import localClient.Dati;
 import server.calculations.cilveki.Cilveks;
+import server.calculations.laukums.Laukums;
 import server.dataBase.DataBase;
 
 import java.awt.*;
@@ -126,8 +127,8 @@ public class Tablo1 extends DevelopCenterPanel.Tablo {
         int[] chunkXY = new int[]{cilveks.xyz.chunkXY.get(0), cilveks.xyz.chunkXY.get(1)},
                 xy = new int[]{(int)cilveks.xyz.x, (int)cilveks.xyz.y},
                 xySum = new int[]{
-                        (int)(cilveks.xyz.x + cilveks.xyz.chunkXY.get(0) * DataBase.mapChunkW),
-                        (int)(cilveks.xyz.y + cilveks.xyz.chunkXY.get(1) * DataBase.mapChunkW)};
+                        (int)(cilveks.xyz.x + cilveks.xyz.chunkXY.get(0) * Laukums.mapChunkW),
+                        (int)(cilveks.xyz.y + cilveks.xyz.chunkXY.get(1) * Laukums.mapChunkW)};
 
         String text1 = "chunk: [ " + chunkXY[0] + " / " + chunkXY[1] + " ]",
                 text2 = "xy: [ " + xy[0] + " / " + xy[1] + " ]",

@@ -6,6 +6,7 @@ import java.util.Random;
 
 import server.calculations.cilveki.ai.CilvekuAI;
 import server.calculations.komandas.KomanduKonstantes;
+import server.calculations.laukums.Laukums;
 import server.dataBase.DataBase;
 
 
@@ -82,14 +83,14 @@ public class CilvekuManager {
 		for(int i=0; i<skaits; i++) {
 			String vards = CilvekuKonstantes.vardsDefault + (Cilveks.maxCilveks + 1);
 
-			double x = DataBase.mapChunkW * r.nextDouble(),
-					y = DataBase.mapChunkW * r.nextDouble(),
+			double x = Laukums.mapChunkW * r.nextDouble(),
+					y = Laukums.mapChunkW * r.nextDouble(),
 					v = 0,
 					fi = 360 * r.nextDouble();
 
 			List<Integer> chunkXY = new ArrayList<>();
-			chunkXY.add(r.nextInt(DataBase.mapChunkCountX)); //x
-			chunkXY.add(r.nextInt(DataBase.mapChunkCountY)); //y
+			chunkXY.add(r.nextInt(Laukums.mapChunkCountX)); //x
+			chunkXY.add(r.nextInt(Laukums.mapChunkCountY)); //y
 
 			Koord xyz = new Koord(x, y, v, fi, chunkXY);
 

@@ -3,7 +3,7 @@ package localClient.grafika.grafikaModes.playerView.playerViewVecais.centerPanel
 public class Map {
 
 //    private ArrayList<Komanda> komandasList = server.calculations.CalculationsThread.komandasList;
-//    private ArrayList<ArrayList<server.calculations.MapChunk>> laukums = server.calculations.CalculationsThread.laukums;
+//    private ArrayList<ArrayList<server.calculations.laukums.MapChunk>> laukums = server.calculations.CalculationsThread.laukums;
 //
 //    private Terrain drawTerrain = new Terrain();
 //    private Loot drawLoot = new Loot();

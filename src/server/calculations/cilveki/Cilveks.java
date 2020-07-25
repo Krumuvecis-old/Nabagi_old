@@ -1,5 +1,6 @@
 package server.calculations.cilveki;
 
+import server.calculations.laukums.Laukums;
 import server.calculations.lietas.Lieta;
 import server.dataBase.DataBase;
 
@@ -14,7 +15,7 @@ public class Cilveks extends CilvekaParametri {
 				   double _brunas, double _stiprums, double _gataviba, double _drosme,
 				   String _komanda){
 		xyz = _xyz;
-		DataBase.laukums.get(xyz.chunkXY).cilvekiList.add(vards); //pievieno spçlçtâju arî laukumam
+		DataBase.laukums.mapChunks.get(xyz.chunkXY).cilvekiList.add(vards); //pievieno spçlçtâju arî laukumam
 		vmax = _vmax;
 		omega = _omega;
 

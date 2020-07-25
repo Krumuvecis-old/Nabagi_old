@@ -1,7 +1,7 @@
 package localClient.grafika.grafikaModes.playerView.playerViewVecais.centerPanel.map;
 
 import localClient.grafika.grafikaModes.playerView.playerViewVecais.PlayerThread;
-import server.dataBase.DataBase;
+import server.calculations.laukums.Laukums;
 
 import java.awt.*;
 
@@ -23,10 +23,10 @@ class Terrain {
 
     private void drawFons(Graphics g, int x0, int y0, int kartePlatums) {
 
-        g.setColor(DataBase.malasKrasa); //laukuma mala
+        g.setColor(Laukums.malasKrasa); //laukuma mala
         g.fillRect(x0, y0, kartePlatums, kartePlatums);
 
-        g.setColor(DataBase.laukumaKrasa); //laukums
+        g.setColor(Laukums.laukumaKrasa); //laukums
         g.fillRect(x0, y0, kartePlatums, kartePlatums);
         g.setColor(Color.black); //laukuma kontûra
         g.drawRect(x0, y0, kartePlatums, kartePlatums);

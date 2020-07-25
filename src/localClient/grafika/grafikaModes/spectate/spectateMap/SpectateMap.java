@@ -2,7 +2,8 @@ package localClient.grafika.grafikaModes.spectate.spectateMap;
 
 import localClient.Dati;
 import localClient.grafika.grafikaParts.DrawManager;
-import server.calculations.MapChunk;
+import server.calculations.laukums.Laukums;
+import server.calculations.laukums.MapChunk;
 import server.dataBase.DataBase;
 
 import java.awt.*;
@@ -50,7 +51,7 @@ public class SpectateMap {
     private void drawLaukumaFons(Graphics g, DrawManager.SpectateMapInfo spectateMapInfo,
                                  int[] drawCenterXY, int[] contentsXY, int[] contentsSize){
         //uzzîmç laukumu
-        g.setColor(DataBase.laukumaKrasa);
+        g.setColor(Laukums.laukumaKrasa);
 
         if(spectateMapInfo.mapWrap) g.fillRect( //viss contents
                 contentsXY[0], contentsXY[1],
@@ -58,8 +59,8 @@ public class SpectateMap {
         else g.fillRect( //tikai 1 laukums
                 (int)(contentsXY[0] + drawCenterXY[0] - spectateMapInfo.centerXY[0] * spectateMapInfo.merogs),
                 (int)(contentsXY[1] + drawCenterXY[1] - spectateMapInfo.centerXY[1] * spectateMapInfo.merogs),
-                (int)(DataBase.laukumaPlatumsSum * spectateMapInfo.merogs),
-                (int)(DataBase.laukumaAugstumsSum * spectateMapInfo.merogs));
+                (int)(Laukums.laukumaPlatumsSum * spectateMapInfo.merogs),
+                (int)(Laukums.laukumaAugstumsSum * spectateMapInfo.merogs));
     }
 
 
@@ -80,20 +81,20 @@ public class SpectateMap {
             visibleEndPoint = new int[]{ //redzamîbas bottom-right stûris ekrânâ
                     (int)Math.min(
                             contentsSize[0],
-                            drawCenterXY[0] + (DataBase.laukumaPlatumsSum - spectateMapInfo.centerXY[0]) * spectateMapInfo.merogs),
+                            drawCenterXY[0] + (Laukums.laukumaPlatumsSum - spectateMapInfo.centerXY[0]) * spectateMapInfo.merogs),
                     (int)Math.min(
                             contentsSize[1],
-                            drawCenterXY[1] + (DataBase.laukumaAugstumsSum - spectateMapInfo.centerXY[1]) * spectateMapInfo.merogs)};
+                            drawCenterXY[1] + (Laukums.laukumaAugstumsSum - spectateMapInfo.centerXY[1]) * spectateMapInfo.merogs)};
         }
 
         int[] activeChunk = new int[]{ //centrâlais aktîvais chunk - numurs
-                        (int)Math.floor(1.0 * spectateMapInfo.centerXY[0] / DataBase.mapChunkW),
-                        (int)Math.floor(1.0 * spectateMapInfo.centerXY[1] / DataBase.mapChunkW)},
+                        (int)Math.floor(1.0 * spectateMapInfo.centerXY[0] / Laukums.mapChunkW),
+                        (int)Math.floor(1.0 * spectateMapInfo.centerXY[1] / Laukums.mapChunkW)},
 
                 visibleChunkOffset =  new int[]{ //graphical offset inside chunk
-                        (int)((spectateMapInfo.centerXY[0] - Math.floor(1.0 * spectateMapInfo.centerXY[0] / DataBase.mapChunkW) * DataBase.mapChunkW)
+                        (int)((spectateMapInfo.centerXY[0] - Math.floor(1.0 * spectateMapInfo.centerXY[0] / Laukums.mapChunkW) * Laukums.mapChunkW)
                                 * spectateMapInfo.merogs),
-                        (int)((spectateMapInfo.centerXY[1] - Math.floor(1.0 * spectateMapInfo.centerXY[1] / DataBase.mapChunkW) * DataBase.mapChunkW)
+                        (int)((spectateMapInfo.centerXY[1] - Math.floor(1.0 * spectateMapInfo.centerXY[1] / Laukums.mapChunkW) * Laukums.mapChunkW)
                                 * spectateMapInfo.merogs)},
 
                 visibleChunkCountBefore =  new int[]{
@@ -131,11 +132,11 @@ public class SpectateMap {
 
                 int[] chunkXY = new int[]{_chunkXY[0], _chunkXY[1]};
 
-                while (chunkXY[0] < 0) chunkXY[0] += DataBase.mapChunkCountX;
-                while (chunkXY[0] >= DataBase.mapChunkCountX) chunkXY[0] -= DataBase.mapChunkCountX;
+                while (chunkXY[0] < 0) chunkXY[0] += Laukums.mapChunkCountX;
+                while (chunkXY[0] >= Laukums.mapChunkCountX) chunkXY[0] -= Laukums.mapChunkCountX;
 
-                while (chunkXY[1] < 0) chunkXY[1] += DataBase.mapChunkCountY;
-                while (chunkXY[1] >= DataBase.mapChunkCountY) chunkXY[1] -= DataBase.mapChunkCountY;
+                while (chunkXY[1] < 0) chunkXY[1] += Laukums.mapChunkCountY;
+                while (chunkXY[1] >= Laukums.mapChunkCountY) chunkXY[1] -= Laukums.mapChunkCountY;
 
                 int[] chunkLoc = new int[]{
                         (int)(contentsXY[0] + drawCenterXY[0] + (_chunkXY[0] - activeChunk[0]) * spectateMapInfo.chunkSizeGraphical - visibleChunkOffset[0] + 1),
@@ -156,11 +157,11 @@ public class SpectateMap {
 
                 int[] chunkXY = new int[]{_chunkXY[0], _chunkXY[1]};
 
-                while (chunkXY[0] < 0) chunkXY[0] += DataBase.mapChunkCountX;
-                while (chunkXY[0] >= DataBase.mapChunkCountX) chunkXY[0] -= DataBase.mapChunkCountX;
+                while (chunkXY[0] < 0) chunkXY[0] += Laukums.mapChunkCountX;
+                while (chunkXY[0] >= Laukums.mapChunkCountX) chunkXY[0] -= Laukums.mapChunkCountX;
 
-                while (chunkXY[1] < 0) chunkXY[1] += DataBase.mapChunkCountY;
-                while (chunkXY[1] >= DataBase.mapChunkCountY) chunkXY[1] -= DataBase.mapChunkCountY;
+                while (chunkXY[1] < 0) chunkXY[1] += Laukums.mapChunkCountY;
+                while (chunkXY[1] >= Laukums.mapChunkCountY) chunkXY[1] -= Laukums.mapChunkCountY;
 
                 int[] chunkLoc = new int[]{
                         (int)(contentsXY[0] + drawCenterXY[0] + (_chunkXY[0] - activeChunk[0]) * spectateMapInfo.chunkSizeGraphical - visibleChunkOffset[0] + 1),
@@ -214,7 +215,7 @@ public class SpectateMap {
             List<Integer> chunkXYlist = new ArrayList<>();
             chunkXYlist.add(chunkXY[0]);
             chunkXYlist.add(chunkXY[1]);
-            MapChunk chunk = DataBase.laukums.get(chunkXYlist);
+            MapChunk chunk = DataBase.laukums.mapChunks.get(chunkXYlist);
 
             g.drawString("players: " + chunk.cilvekiList.size(),
                     chunkLoc[0] + textOffset[0],
@@ -235,8 +236,8 @@ public class SpectateMap {
         g.drawRect(
                 (int)(contentsXY[0] + drawCenterXY[0] - spectateMapInfo.centerXY[0] * spectateMapInfo.merogs),
                 (int)(contentsXY[1] + drawCenterXY[1] - spectateMapInfo.centerXY[1] * spectateMapInfo.merogs),
-                (int)(DataBase.laukumaPlatumsSum * spectateMapInfo.merogs),
-                (int)(DataBase.laukumaAugstumsSum * spectateMapInfo.merogs));
+                (int)(Laukums.laukumaPlatumsSum * spectateMapInfo.merogs),
+                (int)(Laukums.laukumaAugstumsSum * spectateMapInfo.merogs));
     }
 
     private void drawCrosshairs(Graphics g, Color krasa, int[] XY, int[] centerXY){

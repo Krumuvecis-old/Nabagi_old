@@ -2,7 +2,8 @@ package localClient.grafika.grafikaModes.spectate.spectateMap;
 
 import localClient.Dati;
 import localClient.grafika.grafikaParts.DrawManager;
-import server.calculations.MapCell;
+import server.calculations.laukums.Laukums;
+import server.calculations.laukums.MapCell;
 import server.dataBase.DataBase;
 
 import java.awt.*;
@@ -27,13 +28,13 @@ public class Terrain {
 
         boolean detailedCells = false;
         int[] colorComponents = new int[]{0,0,0};
-        double cellSizeGraphical = DataBase.mapCellW * spectateMapInfo.merogs;
+        double cellSizeGraphical = Laukums.mapCellW * spectateMapInfo.merogs;
         if(cellSizeGraphical >= 3) detailedCells = true;
 
-        for(cellXY.set(0, 0); cellXY.get(0)<DataBase.mapCellCount; cellXY.set(0, cellXY.get(0) + 1)){
-            for(cellXY.set(1, 0); cellXY.get(1)<DataBase.mapCellCount; cellXY.set(1, cellXY.get(1) + 1)){
+        for(cellXY.set(0, 0); cellXY.get(0)< Laukums.mapCellCount; cellXY.set(0, cellXY.get(0) + 1)){
+            for(cellXY.set(1, 0); cellXY.get(1)< Laukums.mapCellCount; cellXY.set(1, cellXY.get(1) + 1)){
 
-                MapCell cell = DataBase.laukums.get(_chunkXY).mapCells.get(cellXY);
+                MapCell cell = DataBase.laukums.mapChunks.get(_chunkXY).mapCells.get(cellXY);
 
                 if(detailedCells) {
                     double[] loc = new double[]{
@@ -60,7 +61,7 @@ public class Terrain {
     private void drawCombinedTerrain(Graphics g, int[] chunkLoc, int chunkSize, int[] colorComponents){
         //te iekrâso visu chunk, ja zoom neatïauj katru rûtiòu
 
-        int cellCount = (int)Math.pow(DataBase.mapCellCount, 2);
+        int cellCount = (int)Math.pow(Laukums.mapCellCount, 2);
         g.setColor(new Color(
                 colorComponents[0]/cellCount,
                 colorComponents[1]/cellCount,

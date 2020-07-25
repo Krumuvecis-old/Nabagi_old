@@ -1,5 +1,6 @@
 package server.calculations.cilveki;
 
+import server.calculations.laukums.Laukums;
 import server.calculations.lietas.Lieta;
 import server.dataBase.DataBase;
 
@@ -17,7 +18,7 @@ class Naave {
 
     private static void naave(String vards){
         dropLoot(vards);
-        DataBase.laukums.get(DataBase.cilvekuList.get(vards).xyz.chunkXY).cilvekiList.remove(vards);
+        DataBase.laukums.mapChunks.get(DataBase.cilvekuList.get(vards).xyz.chunkXY).cilvekiList.remove(vards);
         DataBase.cilvekuList.remove(vards);
     }
 
@@ -34,9 +35,9 @@ class Naave {
             //pagaidâm lietu nomet tikai savâ chunkâ ----- !!!!!
             //
 
-            lieta.x = Math.max(0, Math.min(DataBase.mapChunkW,
+            lieta.x = Math.max(0, Math.min(Laukums.mapChunkW,
                     cilveks.xyz.x + lootDropDistance*(r.nextDouble()-0.5)*2 ));
-            lieta.y = Math.max(0, Math.min(DataBase.mapChunkW,
+            lieta.y = Math.max(0, Math.min(Laukums.mapChunkW,
                     cilveks.xyz.y + lootDropDistance*(r.nextDouble()-0.5)*2 ));
 
             lieta.drop(cilveks.xyz.chunkXY);

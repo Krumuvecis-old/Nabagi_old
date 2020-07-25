@@ -3,11 +3,10 @@ package localClient.grafika.grafikaModes.spectate;
 import localClient.ClientThread;
 import localClient.Dati;
 import localClient.grafika.Button;
-import localClient.grafika.GrafikasDati;
 import localClient.grafika.grafikaParts.DrawManager;
 import localClient.grafika.grafikaParts.PanelL;
 import localClient.grafika.grafikaParts.SampleLayout;
-import server.dataBase.DataBase;
+import server.calculations.laukums.Laukums;
 
 import java.awt.*;
 import java.text.DecimalFormat;
@@ -70,7 +69,7 @@ public class SpectatePanelL extends PanelL {
 
         g.drawString("Laukuma kopçjais izmçrs (x & y): ",
                 xy[0], xy[1] + w * textHeight); w++;
-        g.drawString("[ " + DataBase.laukumaPlatumsSum + " - " + DataBase.laukumaAugstumsSum + " ]",
+        g.drawString("[ " + Laukums.laukumaPlatumsSum + " - " + Laukums.laukumaAugstumsSum + " ]",
                 xy[0], xy[1] + w * textHeight); w++;
 
         g.drawString("Grafikas paneïa izmçrs (px)",
@@ -84,7 +83,7 @@ public class SpectatePanelL extends PanelL {
 
         g.drawString("Laukuma grafiskais izmçrs (x & y): ",
                 xy[0], xy[1] + w * textHeight); w++;
-        g.drawString("[ " + (int)(DataBase.laukumaPlatumsSum * spectateMapInfo.merogs) + " - " + (int)(DataBase.laukumaAugstumsSum * spectateMapInfo.merogs) + " ]",
+        g.drawString("[ " + (int)(Laukums.laukumaPlatumsSum * spectateMapInfo.merogs) + " - " + (int)(Laukums.laukumaAugstumsSum * spectateMapInfo.merogs) + " ]",
                 xy[0], xy[1] + w * textHeight); w++;
 
         g.drawString("Zoom factor: " + (new DecimalFormat("#.##").format(spectateMapInfo.zoomFactor)) + ", " +
@@ -94,19 +93,19 @@ public class SpectatePanelL extends PanelL {
         g.drawString("Center XY: " + spectateMapInfo.centerXY[0] + " , " +spectateMapInfo.centerXY[1],
                 xy[0], xy[1] + w * textHeight); w++;
 
-        g.drawString("Cell size: " + DataBase.mapCellW + " , " +
+        g.drawString("Cell size: " + Laukums.mapCellW + " , " +
                         "graphical:" + (new DecimalFormat("#.##").format(
-                                DataBase.mapCellW * spectateMapInfo.merogs)),
+                                Laukums.mapCellW * spectateMapInfo.merogs)),
                 xy[0], xy[1] + w * textHeight); w++;
-        g.drawString("Chunk size: " + DataBase.mapChunkW + " , " +
+        g.drawString("Chunk size: " + Laukums.mapChunkW + " , " +
                         "graphical:" + (new DecimalFormat("#.##").format(
-                                DataBase.mapChunkW * spectateMapInfo.merogs)),
+                                Laukums.mapChunkW * spectateMapInfo.merogs)),
                 xy[0], xy[1] + w * textHeight); w++;
-        g.drawString("Cell count in chunk: " + DataBase.mapCellCount,
+        g.drawString("Cell count in chunk: " + Laukums.mapCellCount,
                 xy[0], xy[1] + w * textHeight); w++;
         g.drawString("Overall cell count: " +
-                        "[ " + DataBase.mapCellCount * DataBase.mapChunkCountX + " - " +
-                        DataBase.mapCellCount * DataBase.mapChunkCountY + " ]",
+                        "[ " + Laukums.mapCellCount * Laukums.mapChunkCountX + " - " +
+                        Laukums.mapCellCount * Laukums.mapChunkCountY + " ]",
                 xy[0], xy[1] + w * textHeight); w++;
 
 		return w;

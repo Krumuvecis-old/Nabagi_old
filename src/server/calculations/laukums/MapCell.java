@@ -1,4 +1,4 @@
-package server.calculations;
+package server.calculations.laukums;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -39,27 +39,28 @@ public class MapCell {
             terrainPresets = new HashMap<>();
             HashMap<String, ItemGenInfo> _lootGeneratorInfo;
 
-            //dirt
+            //0 - dirt
             _lootGeneratorInfo = new HashMap<>();
-            terrainPresets.put(terrainPresets.size(), new TerrainInfo(
-                    "terrainDirt", new Color(130,80,60), _lootGeneratorInfo));
+            generateSingleTerrainPreset("terrainDirt", new Color(130,80,60), _lootGeneratorInfo);
 
-            //grass
+            //1 - grass
             _lootGeneratorInfo = new HashMap<>();
             _lootGeneratorInfo.put("Paika", new ItemGenInfo(0.01, 0.5, 3));
-            terrainPresets.put(terrainPresets.size(), new TerrainInfo(
-                    "terrainGrass", new Color(60,100,20), _lootGeneratorInfo));
+            generateSingleTerrainPreset("terrainGrass", new Color(60,100,20), _lootGeneratorInfo);
 
-            //sand
+            //2 - sand
             _lootGeneratorInfo = new HashMap<>();
-            terrainPresets.put(terrainPresets.size(), new TerrainInfo(
-                    "terrainSand", new Color(130,110,40), _lootGeneratorInfo));
+            generateSingleTerrainPreset("terrainSand", new Color(130,110,40), _lootGeneratorInfo);
 
-            //stone
+            //3 - stone
             _lootGeneratorInfo = new HashMap<>();
-            _lootGeneratorInfo.put("Zelts", new ItemGenInfo(0.005, 1,5));
+            _lootGeneratorInfo.put("Zelts", new ItemGenInfo(0.001, 1,5));
+            generateSingleTerrainPreset("terrainStone", new Color(90,90,90), _lootGeneratorInfo);
+        }
+
+        private static void generateSingleTerrainPreset(String _spriteName, Color _krasa, HashMap<String, ItemGenInfo> _lootGeneratorInfo){
             terrainPresets.put(terrainPresets.size(), new TerrainInfo(
-                    "terrainStone", new Color(90,90,90), _lootGeneratorInfo));
+                    _spriteName, _krasa, _lootGeneratorInfo));
         }
     }
 

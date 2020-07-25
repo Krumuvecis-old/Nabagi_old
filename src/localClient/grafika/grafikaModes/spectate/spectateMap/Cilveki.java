@@ -5,6 +5,7 @@ import localClient.grafika.GrafikasDati;
 import localClient.grafika.grafikaParts.DrawManager;
 import server.calculations.Formulas;
 import server.calculations.cilveki.Cilveks;
+import server.calculations.laukums.Laukums;
 import server.dataBase.DataBase;
 
 import java.awt.*;
@@ -22,7 +23,7 @@ class Cilveki {
         List<Integer> _chunkXY = new ArrayList<>();
         _chunkXY.add(chunkXY[0]);
         _chunkXY.add(chunkXY[1]);
-        for(String vards : DataBase.laukums.get(_chunkXY).cilvekiList)
+        for(String vards : DataBase.laukums.mapChunks.get(_chunkXY).cilvekiList)
             drawCilveks(g, dati, spectateMapInfo, vards, chunkLoc);
     }
 

@@ -1,6 +1,6 @@
 package localClient.grafika.grafikaModes.playerView.playerViewVecais.centerPanel.map;
 
-import server.calculations.MapChunk;
+import server.calculations.laukums.MapChunk;
 import localClient.grafika.grafikaModes.playerView.playerViewVecais.PlayerThread;
 
 import java.awt.*;

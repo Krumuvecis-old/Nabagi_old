@@ -1,5 +1,6 @@
 package server.calculations.cilveki;
 
+import server.calculations.laukums.Laukums;
 import server.dataBase.DataBase;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ class Kustiba {
 	private static void maluParbaude(String vards) { //situâcijas pie laukuma malâm
 		Cilveks cilveks = DataBase.cilvekuList.get(vards);
 
-		int platums = DataBase.mapChunkW,
+		int platums = Laukums.mapChunkW,
 				chunkX = cilveks.xyz.chunkXY.get(0), //playera momentânais chunks
 				chunkY = cilveks.xyz.chunkXY.get(1);
 
@@ -45,34 +46,34 @@ class Kustiba {
 		if (cilveks.xyz.x < 0 ) { //rietumi
 			cilveks.xyz.x += platums;
 			chunkX--;
-			if (chunkX < 0) chunkX += DataBase.mapChunkCountX;
+			if (chunkX < 0) chunkX += Laukums.mapChunkCountX;
 		}
 		if (cilveks.xyz.y < 0 ) { //ziemeïi
 			cilveks.xyz.y += platums;
 			chunkY--;
-			if (chunkY < 0) chunkY += DataBase.mapChunkCountY;
+			if (chunkY < 0) chunkY += Laukums.mapChunkCountY;
 		}
 		if (cilveks.xyz.x >= platums) { //austrumi
 			cilveks.xyz.x -= platums;
 			chunkX++;
-			if (chunkX >= DataBase.mapChunkCountX) chunkX -= DataBase.mapChunkCountX;
+			if (chunkX >= Laukums.mapChunkCountX) chunkX -= Laukums.mapChunkCountX;
 		}
 		if (cilveks.xyz.y >= platums) { //dienvidi
 			cilveks.xyz.y -= platums;
 			chunkY++;
-			if (chunkY >= DataBase.mapChunkCountY) chunkY -= DataBase.mapChunkCountY;
+			if (chunkY >= Laukums.mapChunkCountY) chunkY -= Laukums.mapChunkCountY;
 		}
 
 		if(chunkX != chunk0.get(0) || chunkY != chunk0.get(1)){
 			cilveks.xyz.chunkXY.set(0, chunkX);
 			cilveks.xyz.chunkXY.set(1, chunkY);
 
-			DataBase.laukums.get(chunk0).cilvekiList.remove(vards); //jâizòem no vienas tabulas
+			DataBase.laukums.mapChunks.get(chunk0).cilvekiList.remove(vards); //jâizòem no vienas tabulas
 
 			List<Integer> chunkXY = new ArrayList<>();
 			chunkXY.add(chunkX);
 			chunkXY.add(chunkY);
-			DataBase.laukums.get(chunkXY).cilvekiList.add(vards); //jâieliek otrâ tabulâ
+			DataBase.laukums.mapChunks.get(chunkXY).cilvekiList.add(vards); //jâieliek otrâ tabulâ
 		}
 
 	}
