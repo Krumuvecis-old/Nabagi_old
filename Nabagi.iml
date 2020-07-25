@@ -7,6 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/.settings" />
+      <excludeFolder url="file://$MODULE_DIR$/export" />
       <excludeFolder url="file://$MODULE_DIR$/resources" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
